@@ -145,13 +145,13 @@ export default function ModelMatchUp() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="absolute top-4 right-4 h-6 w-6 p-0 rounded-full bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800"
+                      className="absolute top-4 right-4 h-6 w-6 p-0 rounded-full bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:hover:bg-amber-800/30"
                     >
-                      <HelpCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <HelpCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-80">
-                    <p className="text-sm">{useCase.helpTip}</p>
+                  <PopoverContent className="w-80 bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+                    <p className="text-sm text-amber-900 dark:text-amber-100">{useCase.helpTip}</p>
                   </PopoverContent>
                 </Popover>
               </div>

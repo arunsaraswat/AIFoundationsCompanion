@@ -4,6 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
+import ModelMatchUp from "./ModelMatchUp";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -142,6 +143,12 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           </div>
         );
       
+      case 'component':
+        if (exercise.component === 'ModelMatchUp') {
+          return <ModelMatchUp />;
+        }
+        return null;
+
       default:
         return null;
     }

@@ -1,0 +1,57 @@
+## GOAL
+Rebuild Exercise 5: “Model Match-Up” from Lesson 2.1 (AI Technical Foundations) as a single-screen, card-based UI that helps learners classify AI use cases and identify inputs/outputs.
+
+## UI DESIGN
+Display 10 AI use cases in card format on a responsive grid layout. Each card includes:
+- **Use Case Title**
+- **Tag Picker:** Select one or more tags from “AI”, “ML”, “DL”
+  - Tags appear as styled toggle pills
+  - Multi-select is allowed
+- **Text Input:** “What kind of input does this use?”
+- **Text Input:** “What kind of output does this produce?”
+- **Help Icon:** When clicked, opens a popover or modal with a helpful tip for that use case
+- State is saved to localStorage and restored on refresh
+
+## FUNCTIONAL REQUIREMENTS
+- All state is stored in localStorage
+- Inputs and tags are auto-saved on change
+- Help icon reveals a contextual tip based on course content
+
+## USE CASE CARDS
+Use the following 10 cards and include the provided help tip for each:
+
+1. **Netflix Recommendations**
+   - Help Tip: Think about how past behavior influences future suggestions. This is a classic pattern-learning use case (ML) where the more you interact, the more the model adapts.
+
+2. **Facial Recognition**
+   - Help Tip: Deep Learning thrives on image data. This system learns to match patterns in facial features from large datasets of labeled images.
+
+3. **ChatGPT / LLMs**
+   - Help Tip: LLMs use embeddings, transformers, and self-attention to generate text. This is deep learning—multiple layers interpreting complex language patterns.
+
+4. **Google Translate**
+   - Help Tip: This uses ML and DL under the hood, especially for context-aware translations. Think about the sequence of tokens and meaning representations.
+
+5. **Autonomous Vehicles**
+   - Help Tip: This is deep learning in action: it takes in real-time sensor inputs and outputs decisions like steering or braking. Pattern recognition at speed.
+
+6. **Fraud Detection in Banking**
+   - Help Tip: Machine Learning systems here learn from millions of transactions to spot abnormal behavior. You may not need images—just lots of labeled behavior data.
+
+7. **AI Art Generation (e.g., DALL·E)**
+   - Help Tip: This is generative DL. A text input leads to a totally new image output, combining vision and language models.
+
+8. **Smart Home Voice Assistant**
+   - Help Tip: This blends ML for intent recognition and sometimes DL for speech processing. It uses your voice as input, actions or answers as output.
+
+9. **Medical Imaging Diagnostics**
+   - Help Tip: A prime DL use case—models learn from thousands of X-rays or scans to predict diagnoses. High-volume, high-accuracy image classification.
+
+10. **Real-Time Language Captioning**
+   - Help Tip: DL models process audio inputs and convert them into text in real time. Consider the data type (sound) and required speed.
+
+## STYLING
+- Tailwind CSS for layout, spacing, and themes
+- Light/dark mode toggle (stored in localStorage)
+- Cards are modern, rounded, responsive, and styled cleanly
+- Help icon: `?` badge in top-right of each card, opens a popover/modal on click

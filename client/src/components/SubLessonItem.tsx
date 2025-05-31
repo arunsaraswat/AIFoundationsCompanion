@@ -24,35 +24,33 @@ export default function SubLessonItem({ subLesson, lessonId }: SubLessonItemProp
   return (
     <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger className="w-full">
-          <div className="flex items-center space-x-3 p-3 hover:bg-blue-100/50 dark:hover:bg-blue-900/30 rounded-lg transition-colors duration-200">
-            <Checkbox
-              id={subLesson.id}
-              checked={subLesson.completed}
-              onCheckedChange={handleCheckedChange}
-              className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-              onClick={(e) => e.stopPropagation()}
-            />
+        <div className="flex items-center space-x-3 p-3 hover:bg-blue-100/50 dark:hover:bg-blue-900/30 rounded-lg transition-colors duration-200">
+          <Checkbox
+            id={subLesson.id}
+            checked={subLesson.completed}
+            onCheckedChange={handleCheckedChange}
+            className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+          />
+          <CollapsibleTrigger className="flex-1 text-left">
             <Label
               htmlFor={subLesson.id}
-              className="text-sm text-foreground flex-1 text-left"
-              onClick={(e) => e.stopPropagation()}
+              className="text-sm text-foreground font-bold cursor-pointer"
             >
               {subLesson.title}
             </Label>
-            
-            {hasExercises && (
-              <div className="flex items-center space-x-1 text-sm text-muted-foreground">
-                <BookOpen size={14} />
-                <span>Exercises</span>
-                <ChevronDown 
-                  size={14} 
-                  className={`transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`}
-                />
-              </div>
-            )}
-          </div>
-        </CollapsibleTrigger>
+          </CollapsibleTrigger>
+          
+          {hasExercises && (
+            <CollapsibleTrigger className="flex items-center space-x-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <BookOpen size={14} />
+              <span>Exercises</span>
+              <ChevronDown 
+                size={14} 
+                className={`transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`}
+              />
+            </CollapsibleTrigger>
+          )}
+        </div>
 
         {hasExercises && (
           <CollapsibleContent className="px-3 pb-3">

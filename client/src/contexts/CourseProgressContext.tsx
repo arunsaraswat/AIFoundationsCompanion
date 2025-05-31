@@ -10,12 +10,13 @@ export interface SubLesson {
 
 export interface Exercise {
   id: string;
-  type: 'text' | 'textarea' | 'radio' | 'checkbox' | 'multi-step';
+  type: 'text' | 'textarea' | 'radio' | 'checkbox' | 'multi-step' | 'radio-with-text';
   label: string;
   description?: string;
   options?: string[];
   steps?: Exercise[];
   answer?: string | string[];
+  followUpAnswer?: string;
 }
 
 export interface Lesson {
@@ -28,6 +29,7 @@ interface CourseProgressContextType {
   lessons: Lesson[];
   updateSubLessonStatus: (lessonId: number, subLessonId: string, completed: boolean) => void;
   updateExerciseAnswer: (lessonId: number, subLessonId: string, exerciseId: string, answer: string | string[]) => void;
+  updateFollowUpAnswer: (lessonId: number, subLessonId: string, exerciseId: string, answer: string) => void;
   updateStepAnswer: (lessonId: number, subLessonId: string, exerciseId: string, stepId: string, answer: string) => void;
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   getLessonProgress: (lessonId: number) => { completed: number; total: number; isCompleted: boolean };
@@ -56,7 +58,7 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "1.1.2",
-            type: "radio",
+            type: "radio-with-text",
             label: "Exercise 1: EDGE Reaction Line-Up",
             description: "Go stand by the sign that's had the biggest impact on their role or industry. In your group, discuss: \"Why did you pick this one?\" \"Where have you seen it in action?\"",
             options: [
@@ -65,7 +67,8 @@ const initialLessons: Lesson[] = [
               "Generative - New tools are helping create things we used to do manually",
               "Emergent - Stuff is happening that we didn't plan for—and don't fully understand yet"
             ],
-            answer: ""
+            answer: "",
+            followUpAnswer: ""
           },
           {
             id: "1.1.3",
@@ -220,6 +223,30 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
     );
   };
 
+  const updateFollowUpAnswer = (lessonId: number, subLessonId: string, exerciseId: string, answer: string) => {
+    setLessons(prev =>
+      prev.map(lesson =>
+        lesson.id === lessonId
+          ? {
+              ...lesson,
+              subLessons: lesson.subLessons.map(subLesson =>
+                subLesson.id === subLessonId
+                  ? {
+                      ...subLesson,
+                      exercises: subLesson.exercises?.map(exercise =>
+                        exercise.id === exerciseId
+                          ? { ...exercise, followUpAnswer: answer }
+                          : exercise
+                      )
+                    }
+                  : subLesson
+              ),
+            }
+          : lesson
+      )
+    );
+  };
+
   const updateStepAnswer = (lessonId: number, subLessonId: string, exerciseId: string, stepId: string, answer: string) => {
     setLessons(prev =>
       prev.map(lesson =>
@@ -295,6 +322,7 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
         lessons,
         updateSubLessonStatus,
         updateExerciseAnswer,
+        updateFollowUpAnswer,
         updateStepAnswer,
         getOverallProgress,
         getLessonProgress,

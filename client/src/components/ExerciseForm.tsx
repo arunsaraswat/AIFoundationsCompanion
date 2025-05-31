@@ -12,10 +12,14 @@ interface ExerciseFormProps {
 }
 
 export default function ExerciseForm({ exercise, lessonId, subLessonId }: ExerciseFormProps) {
-  const { updateExerciseAnswer, updateStepAnswer } = useCourseProgress();
+  const { updateExerciseAnswer, updateFollowUpAnswer, updateStepAnswer } = useCourseProgress();
 
   const handleAnswerChange = (value: string) => {
     updateExerciseAnswer(lessonId, subLessonId, exercise.id, value);
+  };
+
+  const handleFollowUpAnswerChange = (value: string) => {
+    updateFollowUpAnswer(lessonId, subLessonId, exercise.id, value);
   };
 
   const handleStepAnswerChange = (stepId: string, value: string) => {
@@ -64,6 +68,45 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               </div>
             ))}
           </RadioGroup>
+        );
+
+      case 'radio-with-text':
+        return (
+          <div className="mt-2 space-y-4">
+            <RadioGroup
+              value={exercise.answer as string || ''}
+              onValueChange={handleAnswerChange}
+              className="space-y-3"
+            >
+              {exercise.options?.map((option, index) => (
+                <div key={index} className="flex items-start space-x-2">
+                  <RadioGroupItem value={option} id={`${exercise.id}-${index}`} className="mt-1" />
+                  <Label 
+                    htmlFor={`${exercise.id}-${index}`} 
+                    className="text-sm leading-relaxed cursor-pointer flex-1"
+                  >
+                    {option}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+            
+            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <Label className="text-sm font-medium text-foreground mb-2 block">
+                Discussion Questions:
+              </Label>
+              <p className="text-xs text-muted-foreground mb-3">
+                "Why did you pick this one?" "Where have you seen it in action?"
+              </p>
+              <Textarea
+                value={exercise.followUpAnswer || ''}
+                onChange={(e) => handleFollowUpAnswerChange(e.target.value)}
+                placeholder="Share your thoughts and examples..."
+                className="min-h-[100px]"
+                rows={4}
+              />
+            </div>
+          </div>
         );
 
       case 'multi-step':

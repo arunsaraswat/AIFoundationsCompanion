@@ -12,10 +12,14 @@ interface ExerciseFormProps {
 }
 
 export default function ExerciseForm({ exercise, lessonId, subLessonId }: ExerciseFormProps) {
-  const { updateExerciseAnswer } = useCourseProgress();
+  const { updateExerciseAnswer, updateStepAnswer } = useCourseProgress();
 
   const handleAnswerChange = (value: string) => {
     updateExerciseAnswer(lessonId, subLessonId, exercise.id, value);
+  };
+
+  const handleStepAnswerChange = (stepId: string, value: string) => {
+    updateStepAnswer(lessonId, subLessonId, exercise.id, stepId, value);
   };
 
   const renderFormField = () => {
@@ -60,6 +64,37 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               </div>
             ))}
           </RadioGroup>
+        );
+
+      case 'multi-step':
+        return (
+          <div className="mt-2 space-y-4">
+            {exercise.steps?.map((step, index) => (
+              <div key={step.id} className="border-l-4 border-blue-200 dark:border-blue-700 pl-4 py-2">
+                <h4 className="font-medium text-sm text-foreground mb-2">{step.label}</h4>
+                {step.description && (
+                  <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+                    {step.description}
+                  </p>
+                )}
+                {step.type === 'textarea' ? (
+                  <Textarea
+                    value={step.answer as string || ''}
+                    onChange={(e) => handleStepAnswerChange(step.id, e.target.value)}
+                    placeholder="Enter your response..."
+                    className="min-h-[80px]"
+                    rows={3}
+                  />
+                ) : (
+                  <Input
+                    value={step.answer as string || ''}
+                    onChange={(e) => handleStepAnswerChange(step.id, e.target.value)}
+                    placeholder="Enter your answer..."
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         );
       
       default:

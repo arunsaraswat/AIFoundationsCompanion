@@ -10,10 +10,11 @@ export interface SubLesson {
 
 export interface Exercise {
   id: string;
-  type: 'text' | 'textarea' | 'radio' | 'checkbox';
+  type: 'text' | 'textarea' | 'radio' | 'checkbox' | 'multi-step';
   label: string;
   description?: string;
   options?: string[];
+  steps?: Exercise[];
   answer?: string | string[];
 }
 
@@ -27,6 +28,7 @@ interface CourseProgressContextType {
   lessons: Lesson[];
   updateSubLessonStatus: (lessonId: number, subLessonId: string, completed: boolean) => void;
   updateExerciseAnswer: (lessonId: number, subLessonId: string, exerciseId: string, answer: string | string[]) => void;
+  updateStepAnswer: (lessonId: number, subLessonId: string, exerciseId: string, stepId: string, answer: string) => void;
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   getLessonProgress: (lessonId: number) => { completed: number; total: number; isCompleted: boolean };
   exportData: () => string;
@@ -88,16 +90,25 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "1.2.2",
-            type: "textarea",
-            label: "Exercise 3: What AI-Native Means to Me - Step 1: Individual Reflection",
-            description: "Each person answers: \"What does it look like to relentlessly embed AI in my work?\" \"What's one example of how my org could structurally bake in AI?\" Write 1 sticky note per definition (Professional & Org) for your domain.",
-            answer: ""
-          },
-          {
-            id: "1.2.3",
-            type: "textarea",
-            label: "Exercise 3: What AI-Native Means to Me - Step 2: Find the Patterns",
-            description: "In your group, affinity group your organizational sticky notes and identify and share patterns you see across your organizations.",
+            type: "multi-step",
+            label: "Exercise 3: What AI-Native Means to Me",
+            description: "Multi-step activity: Translate the Definition (Individual then Affinity Group)",
+            steps: [
+              {
+                id: "1.2.2.1",
+                type: "textarea",
+                label: "Step 1: Individual Reflection",
+                description: "Each person answers: \"What does it look like to relentlessly embed AI in my work?\" \"What's one example of how my org could structurally bake in AI?\" Write 1 sticky note per definition (Professional & Org) for your domain.",
+                answer: ""
+              },
+              {
+                id: "1.2.2.2", 
+                type: "textarea",
+                label: "Step 2: Find the Patterns",
+                description: "In your group, affinity group your organizational sticky notes and identify and share patterns you see across your organizations.",
+                answer: ""
+              }
+            ],
             answer: ""
           },
           {
@@ -209,6 +220,37 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
     );
   };
 
+  const updateStepAnswer = (lessonId: number, subLessonId: string, exerciseId: string, stepId: string, answer: string) => {
+    setLessons(prev =>
+      prev.map(lesson =>
+        lesson.id === lessonId
+          ? {
+              ...lesson,
+              subLessons: lesson.subLessons.map(subLesson =>
+                subLesson.id === subLessonId
+                  ? {
+                      ...subLesson,
+                      exercises: subLesson.exercises?.map(exercise =>
+                        exercise.id === exerciseId
+                          ? {
+                              ...exercise,
+                              steps: exercise.steps?.map(step =>
+                                step.id === stepId
+                                  ? { ...step, answer }
+                                  : step
+                              )
+                            }
+                          : exercise
+                      )
+                    }
+                  : subLesson
+              ),
+            }
+          : lesson
+      )
+    );
+  };
+
   const getOverallProgress = () => {
     const total = lessons.reduce((acc, lesson) => acc + lesson.subLessons.length, 0);
     const completed = lessons.reduce(
@@ -253,6 +295,7 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
         lessons,
         updateSubLessonStatus,
         updateExerciseAnswer,
+        updateStepAnswer,
         getOverallProgress,
         getLessonProgress,
         exportData,

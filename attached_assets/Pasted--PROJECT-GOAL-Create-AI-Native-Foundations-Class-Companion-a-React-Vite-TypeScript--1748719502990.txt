@@ -1,0 +1,66 @@
+## 📚 PROJECT GOAL
+Create **“AI Native Foundations — Class Companion”**, a React (Vite + TypeScript + Tailwind) application that instructors and learners use during the course.  
+**All state lives in `localStorage`; there is no backend/database.**  
+A minimal Node.js + Express server only serves the production bundle.
+
+## 🔖 FUNCTIONAL SPEC
+
+1. **Layout & Branding**
+   - Two-pane layout: a fixed 240 px left sidebar and a flexible right pane.
+   - Sidebar header: “AI Native Foundations” plus a monochrome SVG logo stub.
+   - **Sidebar menu items (top → bottom)**
+     1. **Course Progress** (active route `/`)
+     2. *(room for future page items, but still within this single course)*
+     ---
+     3. **Export → JSON** – downloads `ai-native-foundations-state.json`.
+     4. **Import ← JSON** – file-picker → overwrite state → UI refresh.
+     5. **Export as PDF** – captures current view to `ai-native-foundations.pdf`.
+     6. **🌗 Light / Dark Toggle** – instant theme switch; preference saved to `localStorage`.
+
+2. **Course Progress Page**
+   - Header: “Overall Progress” + animated horizontal progress bar.
+   - Six **LessonAccordion** sections (`Lesson 1` … `Lesson 6`), each with three **SubLessonItem** checkboxes (`N.1`, `N.2`, `N.3`).
+   - Completing sub-lessons updates lesson status (✅) and the overall bar in real time.
+
+3. **State Management & Persistence**
+   - **CourseProgressContext**:
+     ```ts
+     {
+       lessons: {
+         id: number;
+         title: string;
+         subLessons: { id: string; title: string; completed: boolean }[];
+       }[];
+       theme: 'light' | 'dark';
+     }
+     ```
+   - Serialize to `localStorage` on every change; rehydrate on load.
+   - Helper utils in `/utils/storage.ts` and `/utils/fileIO.ts` handle JSON export/import.
+   - **PDF export** via `html2pdf.js` (or `jsPDF + html2canvas`) capturing `#root`.
+
+4. **Styling, UI, and Theming**
+   - Tailwind with the **`class="dark"` strategy**; toggle adds/removes `dark` on `<html>`.
+   - Modern, minimalist palette:
+     - Light: #FFFFFF background, neutral-900 text, indigo accent.
+     - Dark: #0F172A background, slate-100 text, indigo-400 accent.
+   - Smooth transitions (`@apply transition-colors duration-300`) when toggling theme.
+   - Headless UI Disclosure or Radix Accordion for collapsibles.
+   - Sidebar utilities anchored to bottom with subtle separators.
+
+5. **Routing**
+   - React Router DOM v6:  
+     `/` → `<CourseProgressPage />`  
+     *(Outlet reserved for any extra single-course pages)*
+
+6. **Server (Express)**
+   - Static file host only (port 4000); no API endpoints.
+
+7. **Dev Workflow**
+   ```json
+   {
+     "dev": "concurrently \"npm:dev:react\" \"npm:dev:server\"",
+     "dev:react": "vite",
+     "dev:server": "nodemon server/index.js",
+     "build": "vite build",
+     "serve": "node server/index.js"
+   }

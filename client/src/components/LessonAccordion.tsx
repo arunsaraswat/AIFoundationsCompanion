@@ -35,20 +35,20 @@ export default function LessonAccordion({ lesson }: LessonAccordionProps) {
 
   return (
     <Card className="shadow-sm transition-colors duration-300">
-      <div className="px-6 py-4">
-        <div className="flex items-center space-x-4 mb-4">
+      <div className="px-6 py-6">
+        <div className="flex items-center space-x-4 mb-6">
           {getStatusIcon()}
           <div className="text-left">
-            <h3 className="text-lg font-medium text-foreground">
+            <h2 className="text-2xl font-semibold text-foreground">
               Lesson {lesson.id}: {lesson.title}
-            </h3>
-            <p className="text-sm text-muted-foreground">
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
               {progress.completed} of {progress.total} sub-lessons completed
             </p>
           </div>
         </div>
         
-        <div className="space-y-3">
+        <div className="ml-10 space-y-3">
           {lesson.subLessons.map((subLesson) => (
             <SubLessonItem
               key={subLesson.id}

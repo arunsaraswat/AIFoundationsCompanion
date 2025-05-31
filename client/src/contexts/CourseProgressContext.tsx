@@ -5,6 +5,16 @@ export interface SubLesson {
   id: string;
   title: string;
   completed: boolean;
+  exercises?: Exercise[];
+}
+
+export interface Exercise {
+  id: string;
+  type: 'text' | 'textarea' | 'radio' | 'checkbox';
+  label: string;
+  description?: string;
+  options?: string[];
+  answer?: string | string[];
 }
 
 export interface Lesson {
@@ -16,6 +26,7 @@ export interface Lesson {
 interface CourseProgressContextType {
   lessons: Lesson[];
   updateSubLessonStatus: (lessonId: number, subLessonId: string, completed: boolean) => void;
+  updateExerciseAnswer: (lessonId: number, subLessonId: string, exerciseId: string, answer: string | string[]) => void;
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   getLessonProgress: (lessonId: number) => { completed: number; total: number; isCompleted: boolean };
   exportData: () => string;
@@ -29,8 +40,75 @@ const initialLessons: Lesson[] = [
     id: 1,
     title: "EDGE+ AI-Native Foundations",
     subLessons: [
-      { id: "1.1", title: "Welcome & Orientation", completed: false },
-      { id: "1.2", title: "Introduction to AI-Native", completed: false },
+      { 
+        id: "1.1", 
+        title: "Welcome & Orientation", 
+        completed: false,
+        exercises: [
+          {
+            id: "1.1.1",
+            type: "textarea",
+            label: "Fast Pass - \"What Kind of Change Are You Feeling?\"",
+            description: "Go around table with introductions. Share: Name, role, location. Complete: \"Ever since ChatGPT went viral, the world is...\" Optional prompts for EDGE forces",
+            answer: ""
+          },
+          {
+            id: "1.1.2",
+            type: "radio",
+            label: "Exercise 1: EDGE Reaction Line-Up",
+            description: "Go stand by the sign that's had the biggest impact on their role or industry. In your group, discuss: \"Why did you pick this one?\" \"Where have you seen it in action?\"",
+            options: [
+              "Exponential - Things are speeding up way faster than expected",
+              "Disruptive - Our old ways of doing things are suddenly not working",
+              "Generative - New tools are helping create things we used to do manually",
+              "Emergent - Stuff is happening that we didn't plan for—and don't fully understand yet"
+            ],
+            answer: ""
+          },
+          {
+            id: "1.1.3",
+            type: "textarea",
+            label: "Exercise 2: Looking Ahead",
+            description: "Individual reflection: \"One question I hope this course answers...\" Write down or share in chat",
+            answer: ""
+          }
+        ]
+      },
+      { 
+        id: "1.2", 
+        title: "Introduction to AI-Native", 
+        completed: false,
+        exercises: [
+          {
+            id: "1.2.1",
+            type: "textarea",
+            label: "Discussion 2: What Comes to Mind?",
+            description: "Pair discussion about \"AI-Native\" phrase. First thoughts and feelings. No wrong answers",
+            answer: ""
+          },
+          {
+            id: "1.2.2",
+            type: "textarea",
+            label: "Exercise 3: What AI-Native Means to Me - Step 1: Individual Reflection",
+            description: "Each person answers: \"What does it look like to relentlessly embed AI in my work?\" \"What's one example of how my org could structurally bake in AI?\" Write 1 sticky note per definition (Professional & Org) for your domain.",
+            answer: ""
+          },
+          {
+            id: "1.2.3",
+            type: "textarea",
+            label: "Exercise 3: What AI-Native Means to Me - Step 2: Find the Patterns",
+            description: "In your group, affinity group your organizational sticky notes and identify and share patterns you see across your organizations.",
+            answer: ""
+          },
+          {
+            id: "1.2.4",
+            type: "text",
+            label: "Exercise 4: One Word Check-In",
+            description: "Write one word about AI-Native feelings. Hold up sticky note. 2-3 volunteers share reasoning",
+            answer: ""
+          }
+        ]
+      },
     ],
   },
   {
@@ -107,6 +185,30 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
     );
   };
 
+  const updateExerciseAnswer = (lessonId: number, subLessonId: string, exerciseId: string, answer: string | string[]) => {
+    setLessons(prev =>
+      prev.map(lesson =>
+        lesson.id === lessonId
+          ? {
+              ...lesson,
+              subLessons: lesson.subLessons.map(subLesson =>
+                subLesson.id === subLessonId
+                  ? {
+                      ...subLesson,
+                      exercises: subLesson.exercises?.map(exercise =>
+                        exercise.id === exerciseId
+                          ? { ...exercise, answer }
+                          : exercise
+                      )
+                    }
+                  : subLesson
+              ),
+            }
+          : lesson
+      )
+    );
+  };
+
   const getOverallProgress = () => {
     const total = lessons.reduce((acc, lesson) => acc + lesson.subLessons.length, 0);
     const completed = lessons.reduce(
@@ -150,6 +252,7 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
       value={{
         lessons,
         updateSubLessonStatus,
+        updateExerciseAnswer,
         getOverallProgress,
         getLessonProgress,
         exportData,

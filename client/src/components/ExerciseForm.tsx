@@ -93,11 +93,13 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             
             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
               <Label className="text-sm font-medium text-foreground mb-2 block">
-                Discussion Questions:
+                {exercise.followUpLabel || "Follow-up:"}
               </Label>
-              <p className="text-xs text-muted-foreground mb-3">
-                "Why did you pick this one?" "Where have you seen it in action?"
-              </p>
+              {exercise.followUpDescription && (
+                <p className="text-xs text-muted-foreground mb-3">
+                  {exercise.followUpDescription}
+                </p>
+              )}
               <Textarea
                 value={exercise.followUpAnswer || ''}
                 onChange={(e) => handleFollowUpAnswerChange(e.target.value)}

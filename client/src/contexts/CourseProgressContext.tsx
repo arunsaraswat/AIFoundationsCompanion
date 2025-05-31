@@ -17,6 +17,8 @@ export interface Exercise {
   steps?: Exercise[];
   answer?: string | string[];
   followUpAnswer?: string;
+  followUpLabel?: string;
+  followUpDescription?: string;
 }
 
 export interface Lesson {
@@ -60,7 +62,7 @@ const initialLessons: Lesson[] = [
             id: "1.1.2",
             type: "radio-with-text",
             label: "Exercise 1: EDGE Reaction Line-Up",
-            description: "Go stand by the sign that's had the biggest impact on their role or industry. In your group, discuss: \"Why did you pick this one?\" \"Where have you seen it in action?\"",
+            description: "Go stand by the sign that's had the biggest impact on their role or industry.",
             options: [
               "Exponential - Things are speeding up way faster than expected",
               "Disruptive - Our old ways of doing things are suddenly not working",
@@ -68,7 +70,9 @@ const initialLessons: Lesson[] = [
               "Emergent - Stuff is happening that we didn't plan for—and don't fully understand yet"
             ],
             answer: "",
-            followUpAnswer: ""
+            followUpAnswer: "",
+            followUpLabel: "Discussion Questions:",
+            followUpDescription: "\"Why did you pick this one?\" \"Where have you seen it in action?\""
           },
           {
             id: "1.1.3",

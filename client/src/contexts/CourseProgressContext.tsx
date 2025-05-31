@@ -147,9 +147,70 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "2.1.2",
-            type: "text",
-            label: "Exercise 5: \"Model Match-Up\" (AI Basics) - Interactive Version",
-            description: "Complete the interactive drag-and-drop exercise to classify AI use cases and analyze their inputs/outputs.",
+            type: "multi-step",
+            label: "Exercise 5: \"Model Match-Up\" (AI Basics)",
+            description: "Sort real-world use cases into AI/ML/DL categories and define their inputs/outputs.",
+            steps: [
+              {
+                id: "2.1.2.1",
+                type: "radio",
+                label: "Netflix suggestions - What category does this belong to?",
+                options: ["AI only", "ML only", "DL only", "AI & ML", "ML & DL", "AI, ML & DL"],
+                answer: ""
+              },
+              {
+                id: "2.1.2.2",
+                type: "text",
+                label: "Netflix suggestions - What kind of input does this use?",
+                description: "e.g., user data, images, past behaviors",
+                answer: ""
+              },
+              {
+                id: "2.1.2.3",
+                type: "text",
+                label: "Netflix suggestions - What kind of output does this produce?",
+                description: "e.g., suggestions, alerts, actions",
+                answer: ""
+              },
+              {
+                id: "2.1.2.4",
+                type: "radio",
+                label: "Facial recognition - What category does this belong to?",
+                options: ["AI only", "ML only", "DL only", "AI & ML", "ML & DL", "AI, ML & DL"],
+                answer: ""
+              },
+              {
+                id: "2.1.2.5",
+                type: "text",
+                label: "Facial recognition - What kind of input does this use?",
+                answer: ""
+              },
+              {
+                id: "2.1.2.6",
+                type: "text",
+                label: "Facial recognition - What kind of output does this produce?",
+                answer: ""
+              },
+              {
+                id: "2.1.2.7",
+                type: "radio",
+                label: "ChatGPT - What category does this belong to?",
+                options: ["AI only", "ML only", "DL only", "AI & ML", "ML & DL", "AI, ML & DL"],
+                answer: ""
+              },
+              {
+                id: "2.1.2.8",
+                type: "text",
+                label: "ChatGPT - What kind of input does this use?",
+                answer: ""
+              },
+              {
+                id: "2.1.2.9",
+                type: "text",
+                label: "ChatGPT - What kind of output does this produce?",
+                answer: ""
+              }
+            ],
             answer: ""
           },
           {

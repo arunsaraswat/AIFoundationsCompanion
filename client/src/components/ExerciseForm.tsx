@@ -2,10 +2,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
-import { Link } from "wouter";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
 
 interface ExerciseFormProps {
@@ -32,37 +29,6 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
   const renderFormField = () => {
     switch (exercise.type) {
       case 'text':
-        // Special handling for interactive Model Match-Up exercise
-        if (exercise.id === "2.1.2") {
-          return (
-            <div className="mt-2 space-y-4">
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                <p className="text-sm text-blue-800 dark:text-blue-200 mb-3">
-                  This exercise has been converted to an interactive drag-and-drop experience!
-                </p>
-                <Link href="/model-matchup">
-                  <Button className="w-full">
-                    <ExternalLink size={16} className="mr-2" />
-                    Launch Interactive Exercise
-                  </Button>
-                </Link>
-              </div>
-              <div>
-                <Label className="text-sm font-medium">
-                  Notes from the interactive exercise (optional):
-                </Label>
-                <Textarea
-                  value={exercise.answer as string || ''}
-                  onChange={(e) => handleAnswerChange(e.target.value)}
-                  placeholder="Record any insights or notes from completing the interactive exercise..."
-                  className="mt-2"
-                  rows={3}
-                />
-              </div>
-            </div>
-          );
-        }
-        
         return (
           <Input
             value={exercise.answer as string || ''}

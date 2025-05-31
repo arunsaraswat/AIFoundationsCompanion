@@ -5,17 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CourseProgressProvider } from "./contexts/CourseProgressContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { ExerciseProvider } from "./contexts/ExerciseContext";
 import Layout from "./components/Layout";
 import CourseProgress from "./pages/CourseProgress";
-import ModelMatchUp from "./pages/ModelMatchUp";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={CourseProgress} />
-      <Route path="/model-matchup" component={ModelMatchUp} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -27,12 +24,10 @@ function App() {
       <TooltipProvider>
         <ThemeProvider>
           <CourseProgressProvider>
-            <ExerciseProvider>
-              <Layout>
-                <Toaster />
-                <Router />
-              </Layout>
-            </ExerciseProvider>
+            <Layout>
+              <Toaster />
+              <Router />
+            </Layout>
           </CourseProgressProvider>
         </ThemeProvider>
       </TooltipProvider>

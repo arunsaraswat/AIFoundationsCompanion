@@ -5,8 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CourseProgressProvider } from "./contexts/CourseProgressContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { ExerciseProvider } from "./contexts/ExerciseContext";
 import Layout from "./components/Layout";
 import CourseProgress from "./pages/CourseProgress";
+import ModelMatchUp from "./pages/ModelMatchUp";
 import NotFound from "@/pages/not-found";
 
 function Router() {

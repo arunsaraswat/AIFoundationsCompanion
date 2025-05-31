@@ -1,8 +1,9 @@
-import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun } from "lucide-react";
+import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun, RefreshCw } from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
 import { exportToPDF, downloadJSON, uploadJSON } from "../utils/fileIO";
+import { clearCourseData } from "../utils/storage";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -28,6 +29,13 @@ export default function Sidebar() {
 
   const handleExportPDF = () => {
     exportToPDF("ai-native-foundations.pdf");
+  };
+
+  const handleClearData = () => {
+    if (confirm("Are you sure you want to clear all progress data? This action cannot be undone.")) {
+      clearCourseData();
+      window.location.reload();
+    }
   };
 
   return (
@@ -120,6 +128,18 @@ export default function Sidebar() {
               Light Mode
             </>
           )}
+        </Button>
+        
+        <Separator className="my-2" />
+        
+        <Button
+          variant="ghost"
+          size="sm"
+          className="w-full justify-start text-sm text-destructive hover:text-destructive"
+          onClick={handleClearData}
+        >
+          <RefreshCw className="mr-3" size={16} />
+          Clear All Data
         </Button>
       </div>
     </div>

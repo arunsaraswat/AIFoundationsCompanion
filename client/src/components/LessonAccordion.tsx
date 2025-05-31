@@ -1,5 +1,4 @@
 import { Check } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
 import SubLessonItem from "./SubLessonItem";
 
@@ -34,30 +33,28 @@ export default function LessonAccordion({ lesson }: LessonAccordionProps) {
   };
 
   return (
-    <Card className="shadow-sm transition-colors duration-300">
-      <div className="px-6 py-6">
-        <div className="flex items-center space-x-4 mb-6">
-          {getStatusIcon()}
-          <div className="text-left">
-            <h2 className="text-2xl font-semibold text-foreground">
-              Lesson {lesson.id}: {lesson.title}
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              {progress.completed} of {progress.total} sub-lessons completed
-            </p>
-          </div>
-        </div>
-        
-        <div className="ml-10 space-y-3">
-          {lesson.subLessons.map((subLesson) => (
-            <SubLessonItem
-              key={subLesson.id}
-              subLesson={subLesson}
-              lessonId={lesson.id}
-            />
-          ))}
+    <div className="py-6">
+      <div className="flex items-center space-x-4 mb-6">
+        {getStatusIcon()}
+        <div className="text-left">
+          <h2 className="text-2xl font-semibold text-foreground">
+            Lesson {lesson.id}: {lesson.title}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            {progress.completed} of {progress.total} sub-lessons completed
+          </p>
         </div>
       </div>
-    </Card>
+      
+      <div className="ml-10 space-y-3">
+        {lesson.subLessons.map((subLesson) => (
+          <SubLessonItem
+            key={subLesson.id}
+            subLesson={subLesson}
+            lessonId={lesson.id}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

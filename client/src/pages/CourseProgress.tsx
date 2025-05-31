@@ -10,9 +10,14 @@ export default function CourseProgress() {
     <div className="max-w-4xl mx-auto p-8">
       <ProgressBar {...overallProgress} />
       
-      <div className="space-y-4">
-        {lessons.map((lesson) => (
-          <LessonAccordion key={lesson.id} lesson={lesson} />
+      <div className="space-y-0">
+        {lessons.map((lesson, index) => (
+          <div key={lesson.id}>
+            <LessonAccordion lesson={lesson} />
+            {index < lessons.length - 1 && (
+              <hr className="border-t border-gray-200 dark:border-gray-700" />
+            )}
+          </div>
         ))}
       </div>
     </div>

@@ -15,6 +15,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={CourseProgress} />
+      <Route path="/model-matchup" component={ModelMatchUp} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -26,10 +27,12 @@ function App() {
       <TooltipProvider>
         <ThemeProvider>
           <CourseProgressProvider>
-            <Layout>
-              <Toaster />
-              <Router />
-            </Layout>
+            <ExerciseProvider>
+              <Layout>
+                <Toaster />
+                <Router />
+              </Layout>
+            </ExerciseProvider>
           </CourseProgressProvider>
         </ThemeProvider>
       </TooltipProvider>

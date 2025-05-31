@@ -133,7 +133,105 @@ const initialLessons: Lesson[] = [
     id: 2,
     title: "AI Technical Foundations",
     subLessons: [
-      { id: "2.1", title: "2.1 AI Basics", completed: false },
+      { 
+        id: "2.1", 
+        title: "2.1 AI Basics", 
+        completed: false,
+        exercises: [
+          {
+            id: "2.1.1",
+            type: "textarea",
+            label: "Discussion 3: \"Explain It to Someone's Grandparent\"",
+            description: "Pair up and explain AI, ML, DL to each other. Take 1-2 minutes each person. Make it simple and clear. Flag confusing or technical terms.",
+            answer: ""
+          },
+          {
+            id: "2.1.2",
+            type: "multi-step",
+            label: "Exercise 5: \"Model Match-Up\" (AI Basics)",
+            description: "Sort real-world use cases into AI/ML/DL categories and define their inputs/outputs.",
+            steps: [
+              {
+                id: "2.1.2.1",
+                type: "radio",
+                label: "Netflix suggestions - What category does this belong to?",
+                options: ["AI only", "ML only", "DL only", "AI & ML", "ML & DL", "AI, ML & DL"],
+                answer: ""
+              },
+              {
+                id: "2.1.2.2",
+                type: "text",
+                label: "Netflix suggestions - What kind of input does this use?",
+                description: "e.g., user data, images, past behaviors",
+                answer: ""
+              },
+              {
+                id: "2.1.2.3",
+                type: "text",
+                label: "Netflix suggestions - What kind of output does this produce?",
+                description: "e.g., suggestions, alerts, actions",
+                answer: ""
+              },
+              {
+                id: "2.1.2.4",
+                type: "radio",
+                label: "Facial recognition - What category does this belong to?",
+                options: ["AI only", "ML only", "DL only", "AI & ML", "ML & DL", "AI, ML & DL"],
+                answer: ""
+              },
+              {
+                id: "2.1.2.5",
+                type: "text",
+                label: "Facial recognition - What kind of input does this use?",
+                answer: ""
+              },
+              {
+                id: "2.1.2.6",
+                type: "text",
+                label: "Facial recognition - What kind of output does this produce?",
+                answer: ""
+              },
+              {
+                id: "2.1.2.7",
+                type: "radio",
+                label: "ChatGPT - What category does this belong to?",
+                options: ["AI only", "ML only", "DL only", "AI & ML", "ML & DL", "AI, ML & DL"],
+                answer: ""
+              },
+              {
+                id: "2.1.2.8",
+                type: "text",
+                label: "ChatGPT - What kind of input does this use?",
+                answer: ""
+              },
+              {
+                id: "2.1.2.9",
+                type: "text",
+                label: "ChatGPT - What kind of output does this produce?",
+                answer: ""
+              }
+            ],
+            answer: ""
+          },
+          {
+            id: "2.1.3",
+            type: "radio-with-text",
+            label: "Exercise 6: \"What Changed Your Mind?\" (AI Basics)",
+            description: "Reflect on what you would explain differently about AI concepts after the exercises.",
+            options: [
+              "I would explain AI concepts much more simply",
+              "I would focus more on real-world examples",
+              "I would emphasize the differences between AI/ML/DL more clearly",
+              "I would address common misconceptions first",
+              "I wouldn't change my approach much"
+            ],
+            answer: "",
+            followUpAnswer: "",
+            followUpLabel: "Table Synthesis:",
+            followUpDescription: "What collective insight would you share about explaining AI concepts?"
+          }
+        ]
+      },
       { id: "2.2", title: "2.2 Data", completed: false },
       { id: "2.3", title: "2.3 LLMs – The Mind Behind the Curtain", completed: false },
       { id: "2.4", title: "2.4 Prompting + Safe Use", completed: false },

@@ -80,18 +80,16 @@ export default function ModelMatchUp() {
 
   // Load data from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("modelMatchUpData");
-    if (saved) {
-      setUseCases(JSON.parse(saved));
-    } else {
-      // Initialize with empty data
-      setUseCases(USE_CASES_DATA.map(uc => ({
-        ...uc,
-        selectedTags: [],
-        input: "",
-        output: ""
-      })));
-    }
+    // Clear old data and force fresh data with new help tips
+    localStorage.removeItem("modelMatchUpData");
+    
+    // Initialize with fresh data
+    setUseCases(USE_CASES_DATA.map(uc => ({
+      ...uc,
+      selectedTags: [],
+      input: "",
+      output: ""
+    })));
   }, []);
 
   // Save to localStorage whenever data changes

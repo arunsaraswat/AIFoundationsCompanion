@@ -24,52 +24,52 @@ const USE_CASES_DATA = [
   {
     id: "netflix",
     title: "Netflix Recommendations",
-    helpTip: "Think about how past behavior influences future suggestions. This is a classic pattern-learning use case (ML) where the more you interact, the more the model adapts."
+    helpTip: "What patterns might a system look for if it's trying to predict what you'll enjoy next? What kind of behavior could be useful?"
   },
   {
     id: "facial",
     title: "Facial Recognition",
-    helpTip: "Deep Learning thrives on image data. This system learns to match patterns in facial features from large datasets of labeled images."
+    helpTip: "Consider how a system might learn to tell people apart just by looking. What kind of data would it need—and what makes this task complex?"
   },
   {
     id: "chatgpt",
     title: "ChatGPT / LLMs",
-    helpTip: "LLMs use embeddings, transformers, and self-attention to generate text. This is deep learning—multiple layers interpreting complex language patterns."
+    helpTip: "How might a machine know what word should come next in a sentence? What clues would it rely on from earlier in the conversation?"
   },
   {
     id: "translate",
     title: "Google Translate",
-    helpTip: "This uses ML and DL under the hood, especially for context-aware translations. Think about the sequence of tokens and meaning representations."
+    helpTip: "If you're trying to go from one language to another, what challenges come up in keeping meaning, tone, and grammar aligned?"
   },
   {
     id: "autonomous",
     title: "Autonomous Vehicles",
-    helpTip: "This is deep learning in action: it takes in real-time sensor inputs and outputs decisions like steering or braking. Pattern recognition at speed."
+    helpTip: "What kinds of decisions need to happen in real time to drive safely? Think about how fast things change on the road—and what's required to keep up."
   },
   {
     id: "fraud",
     title: "Fraud Detection in Banking",
-    helpTip: "Machine Learning systems here learn from millions of transactions to spot abnormal behavior. You may not need images—just lots of labeled behavior data."
+    helpTip: "What signs might tip off a system that something is suspicious? How could past examples help it know when something looks 'off'?"
   },
   {
     id: "aiart",
     title: "AI Art Generation (e.g., DALL·E)",
-    helpTip: "This is generative DL. A text input leads to a totally new image output, combining vision and language models."
+    helpTip: "Imagine describing a scene and having a picture appear. What do you think the system has to understand about both words and visuals to do that?"
   },
   {
     id: "voice",
     title: "Smart Home Voice Assistant",
-    helpTip: "This blends ML for intent recognition and sometimes DL for speech processing. It uses your voice as input, actions or answers as output."
+    helpTip: "If you're talking to a system, what has to happen before it can act? Think about the path from sound to understanding to response."
   },
   {
     id: "medical",
     title: "Medical Imaging Diagnostics",
-    helpTip: "A prime DL use case—models learn from thousands of X-rays or scans to predict diagnoses. High-volume, high-accuracy image classification."
+    helpTip: "If you're reviewing an X-ray or scan, what patterns are you looking for—and how might a machine learn to recognize them?"
   },
   {
     id: "captioning",
     title: "Real-Time Language Captioning",
-    helpTip: "DL models process audio inputs and convert them into text in real time. Consider the data type (sound) and required speed."
+    helpTip: "How could a system turn live speech into accurate written words fast enough to keep up? What makes this challenging?"
   }
 ];
 
@@ -136,7 +136,7 @@ export default function ModelMatchUp() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {useCases.map((useCase) => (
           <Card key={useCase.id} className="relative h-full">
             <CardHeader className="pb-4">

@@ -154,6 +154,11 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
     }
   };
 
+  // For component types, render without Card wrapper
+  if (exercise.type === 'component') {
+    return renderFormField();
+  }
+
   return (
     <Card className="mb-4">
       <CardHeader className="pb-3">

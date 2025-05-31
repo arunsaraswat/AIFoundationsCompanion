@@ -1,5 +1,4 @@
-import { ChevronDown, Check } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
 import SubLessonItem from "./SubLessonItem";
@@ -36,35 +35,29 @@ export default function LessonAccordion({ lesson }: LessonAccordionProps) {
 
   return (
     <Card className="shadow-sm transition-colors duration-300">
-      <Accordion type="single" collapsible>
-        <AccordionItem value={`lesson-${lesson.id}`} className="border-none">
-          <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-accent/50 rounded-xl transition-colors duration-200">
-            <div className="flex items-center space-x-4">
-              {getStatusIcon()}
-              <div className="text-left">
-                <h3 className="text-lg font-medium text-foreground">
-                  Lesson {lesson.id}: {lesson.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {progress.completed} of {progress.total} sub-lessons completed
-                </p>
-              </div>
-            </div>
-          </AccordionTrigger>
-          
-          <AccordionContent className="px-6 pb-4">
-            <div className="space-y-3">
-              {lesson.subLessons.map((subLesson) => (
-                <SubLessonItem
-                  key={subLesson.id}
-                  subLesson={subLesson}
-                  lessonId={lesson.id}
-                />
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <div className="px-6 py-4">
+        <div className="flex items-center space-x-4 mb-4">
+          {getStatusIcon()}
+          <div className="text-left">
+            <h3 className="text-lg font-medium text-foreground">
+              Lesson {lesson.id}: {lesson.title}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {progress.completed} of {progress.total} sub-lessons completed
+            </p>
+          </div>
+        </div>
+        
+        <div className="space-y-3">
+          {lesson.subLessons.map((subLesson) => (
+            <SubLessonItem
+              key={subLesson.id}
+              subLesson={subLesson}
+              lessonId={lesson.id}
+            />
+          ))}
+        </div>
+      </div>
     </Card>
   );
 }

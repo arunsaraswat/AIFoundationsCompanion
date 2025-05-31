@@ -42,7 +42,7 @@ const initialLessons: Lesson[] = [
     subLessons: [
       { 
         id: "1.1", 
-        title: "Welcome & Orientation", 
+        title: "1.1 Welcome & Orientation", 
         completed: false,
         exercises: [
           {
@@ -76,7 +76,7 @@ const initialLessons: Lesson[] = [
       },
       { 
         id: "1.2", 
-        title: "Introduction to AI-Native", 
+        title: "1.2 Introduction to AI-Native", 
         completed: false,
         exercises: [
           {
@@ -115,45 +115,45 @@ const initialLessons: Lesson[] = [
     id: 2,
     title: "AI Technical Foundations",
     subLessons: [
-      { id: "2.1", title: "AI Basics", completed: false },
-      { id: "2.2", title: "Data", completed: false },
-      { id: "2.3", title: "LLMs – The Mind Behind the Curtain", completed: false },
-      { id: "2.4", title: "Prompting + Safe Use", completed: false },
-      { id: "2.5", title: "RAG", completed: false },
-      { id: "2.6", title: "Agentic Workflow Primer", completed: false },
-      { id: "2.7", title: "Frontiers in AI", completed: false },
+      { id: "2.1", title: "2.1 AI Basics", completed: false },
+      { id: "2.2", title: "2.2 Data", completed: false },
+      { id: "2.3", title: "2.3 LLMs – The Mind Behind the Curtain", completed: false },
+      { id: "2.4", title: "2.4 Prompting + Safe Use", completed: false },
+      { id: "2.5", title: "2.5 RAG", completed: false },
+      { id: "2.6", title: "2.6 Agentic Workflow Primer", completed: false },
+      { id: "2.7", title: "2.7 Frontiers in AI", completed: false },
     ],
   },
   {
     id: 3,
     title: "The AI-Native Operating Model",
     subLessons: [
-      { id: "3.1", title: "The AI-Native Operating Model — A Playbook for Getting Real Value from AI", completed: false },
+      { id: "3.1", title: "3.1 The AI-Native Operating Model — A Playbook for Getting Real Value from AI", completed: false },
     ],
   },
   {
     id: 4,
     title: "Workflow Redesign + Implementation",
     subLessons: [
-      { id: "4.1", title: "Workflow Baseline Lab & Redesign with AI Step", completed: false },
-      { id: "4.2", title: "Operate & Reinforce", completed: false },
-      { id: "4.3", title: "Document & Share", completed: false },
+      { id: "4.1", title: "4.1 Workflow Baseline Lab & Redesign with AI Step", completed: false },
+      { id: "4.2", title: "4.2 Operate & Reinforce", completed: false },
+      { id: "4.3", title: "4.3 Document & Share", completed: false },
     ],
   },
   {
     id: 5,
     title: "Opportunity Assessment + Roadmapping",
     subLessons: [
-      { id: "5.1", title: "AI Opportunity Jumpstart", completed: false },
-      { id: "5.2", title: "30-60-90 Roadmap", completed: false },
+      { id: "5.1", title: "5.1 AI Opportunity Jumpstart", completed: false },
+      { id: "5.2", title: "5.2 30-60-90 Roadmap", completed: false },
     ],
   },
   {
     id: 6,
     title: "Advocacy + Influence",
     subLessons: [
-      { id: "6.1", title: "Pitch Crafting", completed: false },
-      { id: "6.2", title: "Pitch Rehearsal + Marketplace", completed: false },
+      { id: "6.1", title: "6.1 Pitch Crafting", completed: false },
+      { id: "6.2", title: "6.2 Pitch Rehearsal + Marketplace", completed: false },
     ],
   },
 ];

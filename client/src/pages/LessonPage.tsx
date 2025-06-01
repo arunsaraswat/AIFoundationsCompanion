@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
 import ExerciseForm from "../components/ExerciseForm";
-import { Check, Clock } from "lucide-react";
+import { Check, Clock, ChevronDown, ChevronRight } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface LessonPageProps {
   lessonId: number;
@@ -9,6 +11,7 @@ interface LessonPageProps {
 export default function LessonPage({ lessonId }: LessonPageProps) {
   const { lessons, getLessonProgress } = useCourseProgress();
   const lesson = lessons.find(l => l.id === lessonId);
+  const [openSubLessons, setOpenSubLessons] = useState<string[]>([]);
   
   if (!lesson) {
     return (
@@ -20,6 +23,14 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
   }
 
   const progress = getLessonProgress(lesson.id);
+
+  const toggleSubLesson = (subLessonId: string) => {
+    setOpenSubLessons(prev => 
+      prev.includes(subLessonId) 
+        ? prev.filter(id => id !== subLessonId)
+        : [...prev, subLessonId]
+    );
+  };
 
   const getSubLessonIcon = (subLessonId: string) => {
     const subLesson = lesson.subLessons.find(sl => sl.id === subLessonId);
@@ -55,30 +66,49 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
         </div>
       </div>
 
-      <div className="space-y-8">
-        {lesson.subLessons.map((subLesson) => (
-          <div key={subLesson.id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-6">
-            <div className="flex items-center space-x-3 mb-4">
-              {getSubLessonIcon(subLesson.id)}
-              <h2 className="text-xl font-semibold text-foreground">
-                {subLesson.title}
-              </h2>
-            </div>
-            
-            {subLesson.exercises && subLesson.exercises.length > 0 && (
-              <div className="ml-8 space-y-4">
-                {subLesson.exercises.map((exercise) => (
-                  <ExerciseForm
-                    key={exercise.id}
-                    exercise={exercise}
-                    lessonId={lesson.id}
-                    subLessonId={subLesson.id}
-                  />
-                ))}
+      <div className="space-y-4">
+        {lesson.subLessons.map((subLesson) => {
+          const isOpen = openSubLessons.includes(subLesson.id);
+          
+          return (
+            <Collapsible 
+              key={subLesson.id} 
+              open={isOpen} 
+              onOpenChange={() => toggleSubLesson(subLesson.id)}
+            >
+              <div className="bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    {getSubLessonIcon(subLesson.id)}
+                    <h2 className="text-lg font-semibold text-foreground text-left">
+                      {subLesson.title}
+                    </h2>
+                  </div>
+                  {isOpen ? (
+                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  )}
+                </CollapsibleTrigger>
+                
+                <CollapsibleContent>
+                  {subLesson.exercises && subLesson.exercises.length > 0 && (
+                    <div className="px-4 pb-4 space-y-4">
+                      {subLesson.exercises.map((exercise) => (
+                        <ExerciseForm
+                          key={exercise.id}
+                          exercise={exercise}
+                          lessonId={lesson.id}
+                          subLessonId={subLesson.id}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </CollapsibleContent>
               </div>
-            )}
-          </div>
-        ))}
+            </Collapsible>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun, RefreshCw } from "lucide-react";
+import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun, RefreshCw, Zap, Brain, Cog, Users, TrendingUp, Target } from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
@@ -78,6 +78,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/1">
+                  <Zap className="mr-3" size={16} />
                   Lesson 1: EDGE + AI-Native Foundations
                 </a>
               </Button>
@@ -88,6 +89,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/2">
+                  <Brain className="mr-3" size={16} />
                   Lesson 2: AI Technical Foundations
                 </a>
               </Button>
@@ -98,6 +100,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/3">
+                  <Cog className="mr-3" size={16} />
                   Lesson 3: The AI-Native Operating Model
                 </a>
               </Button>
@@ -108,6 +111,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/4">
+                  <Users className="mr-3" size={16} />
                   Lesson 4: AI-Native in Practice
                 </a>
               </Button>
@@ -118,6 +122,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/5">
+                  <TrendingUp className="mr-3" size={16} />
                   Lesson 5: Change Management
                 </a>
               </Button>
@@ -128,6 +133,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/6">
+                  <Target className="mr-3" size={16} />
                   Lesson 6: Taking Action
                 </a>
               </Button>

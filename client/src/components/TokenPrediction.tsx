@@ -74,16 +74,16 @@ export default function TokenPrediction() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-xl font-semibold">Exercise 9: Be the Model – Token-by-Token Prediction</CardTitle>
-          <p className="text-muted-foreground">
+    <div className="space-y-4">
+      <Card className="mb-4">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base font-medium">Exercise 9: Be the Model – Token-by-Token Prediction</CardTitle>
+          <p className="text-sm leading-relaxed text-muted-foreground">
             Experience how language models predict text one token at a time. 
             Continue the sentence by predicting what word comes next.
           </p>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="pt-0 space-y-6">
           {/* Current Sentence Display - Terminal Style */}
           <div className="bg-black p-6 rounded-lg border-2 border-green-500/30 font-mono">
             <Label className="text-xs font-medium text-green-400 uppercase tracking-wider">Current Sentence:</Label>

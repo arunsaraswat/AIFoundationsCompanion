@@ -91,7 +91,7 @@ export default function TokenPrediction() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: "Finish the sentence with 6-8 tokens, then return the completed sentence - The CEO stormed in... The meeting was"
+          prompt: "Finish the sentence with 6-8 words, then return the completed sentence - The CEO stormed in... The meeting was"
         }),
       });
 

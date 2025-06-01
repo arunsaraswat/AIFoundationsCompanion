@@ -174,55 +174,45 @@ export default function TokenPrediction() {
             ))}
           </div>
 
-          {/* Completion and Comparison */}
-          {state.isComplete && (
-            <div className="space-y-4">
-              <Separator />
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Your Sentence</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="leading-relaxed">{state.currentSentence}</p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">AI Model's Sentence</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {!state.aiCompletion && !state.isLoadingAI && (
-                        <Button 
-                          onClick={fetchAICompletion}
-                          variant="outline"
-                          className="w-full"
-                        >
-                          Get AI Completion
-                        </Button>
-                      )}
-                      {state.isLoadingAI && (
-                        <div className="flex items-center justify-center p-4">
-                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                          <span className="ml-2 text-muted-foreground">Getting AI response...</span>
-                        </div>
-                      )}
-                      {state.aiCompletion && (
-                        <p className="leading-relaxed">{state.aiCompletion}</p>
-                      )}
+          {/* AI Completion Section */}
+          <div className="space-y-4">
+            <Separator />
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">AI Model Response</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {!state.aiCompletion && !state.isLoadingAI && (
+                    <Button 
+                      onClick={fetchAICompletion}
+                      variant="outline"
+                      className="w-full"
+                    >
+                      Get AI Completion
+                    </Button>
+                  )}
+                  {state.isLoadingAI && (
+                    <div className="flex items-center justify-center p-4">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                      <span className="ml-2 text-muted-foreground">Getting AI response...</span>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
+                  )}
+                  {state.aiCompletion && (
+                    <p className="leading-relaxed">{state.aiCompletion}</p>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-              <div className="flex justify-center">
-                <Button onClick={handleReset} variant="outline">
-                  Try Again
-                </Button>
-              </div>
+          {/* Reset button for completed exercises */}
+          {state.isComplete && (
+            <div className="flex justify-center">
+              <Button onClick={handleReset} variant="outline">
+                Try Again
+              </Button>
             </div>
           )}
 

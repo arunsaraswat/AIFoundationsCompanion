@@ -30,4 +30,5 @@ export function clearCourseData(): void {
   // Clear exercise-specific data
   localStorage.removeItem("modelMatchUpData");
   localStorage.removeItem("modelMatchUpTask2");
+  localStorage.removeItem("modelMatchUpTask3");
 }

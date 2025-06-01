@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import {
   Popover,
   PopoverContent,
@@ -115,7 +116,9 @@ export default function ModelMatchUpPage() {
       ...uc,
       selectedTags: [],
       input: "",
-      output: ""
+      output: "",
+      dataRisks: "",
+      dataAssumptions: ""
     })));
   };
 
@@ -286,6 +289,39 @@ export default function ModelMatchUpPage() {
                       placeholder="e.g., suggestions, alerts, actions"
                       className="mt-1"
                     />
+                  </div>
+                </>
+              )}
+
+              {/* Task 3: Bad Data Risk Assessment */}
+              {task3Complete && (
+                <>
+                  <Separator className="my-4" />
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor={`${useCase.id}-risks`} className="text-sm font-medium">
+                        What 'bad data' risks do you see here?
+                      </Label>
+                      <Input
+                        id={`${useCase.id}-risks`}
+                        value={useCase.dataRisks}
+                        onChange={(e) => updateUseCase(useCase.id, { dataRisks: e.target.value })}
+                        placeholder="e.g., skewed inputs, noisy training data, missing labels"
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor={`${useCase.id}-assumptions`} className="text-sm font-medium">
+                        What assumptions is this model making?
+                      </Label>
+                      <Input
+                        id={`${useCase.id}-assumptions`}
+                        value={useCase.dataAssumptions}
+                        onChange={(e) => updateUseCase(useCase.id, { dataAssumptions: e.target.value })}
+                        placeholder="e.g., about the user, context, or data quality"
+                        className="mt-1"
+                      />
+                    </div>
                   </div>
                 </>
               )}

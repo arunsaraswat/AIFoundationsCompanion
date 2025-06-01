@@ -372,7 +372,8 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
     // Include all exercise-specific data
     const exerciseData = {
       modelMatchUpData: localStorage.getItem("modelMatchUpData"),
-      modelMatchUpTask2: localStorage.getItem("modelMatchUpTask2")
+      modelMatchUpTask2: localStorage.getItem("modelMatchUpTask2"),
+      modelMatchUpTask3: localStorage.getItem("modelMatchUpTask3")
     };
     
     return JSON.stringify({ 
@@ -400,6 +401,9 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
         }
         if (parsed.exerciseData.modelMatchUpTask2) {
           localStorage.setItem("modelMatchUpTask2", parsed.exerciseData.modelMatchUpTask2);
+        }
+        if (parsed.exerciseData.modelMatchUpTask3) {
+          localStorage.setItem("modelMatchUpTask3", parsed.exerciseData.modelMatchUpTask3);
         }
       }
     } catch (error) {

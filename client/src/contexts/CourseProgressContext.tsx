@@ -183,14 +183,14 @@ const initialLessons: Lesson[] = [
             id: "discussion-4",
             type: "textarea",
             label: "Discussion 4: \"Data as a Design Decision\"",
-            description: "Scenario: Global music playlist generator. Discuss impact of English-only data. Consider age demographic limitations."
+            description: "Objective: Explore how the quality, scope, and inclusivity of data profoundly shape the performance and fairness of AI systems — and how every design decision is also a data decision.\n\nScenario: You're designing an AI-powered global music playlist generator. The system recommends personalized playlists to users based on their listening history, preferences, and behaviors.\n\nDesign Constraints (intentionally flawed):\n• Your training data comes exclusively from English-language music sources.\n• The user sample skews heavily toward people aged 20–30 in North America."
           },
           {
             id: "exercise-7",
-            type: "component",
+            type: "link",
             label: "Exercise 7: \"Bad Data Risk Assessment\"",
             description: "Task 3: Mark any 'bad data' risk point on the card (e.g., skewed inputs, noisy training data, missing labels). Facilitator circulates, prompting questions: 'Would this still work if it had half the data?' 'What assumptions is this model making about the user or context?'",
-            component: "ModelMatchUp"
+            link: "/model-match-up"
           },
           {
             id: "exercise-8",

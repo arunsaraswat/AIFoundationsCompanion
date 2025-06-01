@@ -39,7 +39,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-60 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300">
+    <div className="w-72 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300">
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center space-x-3">
@@ -79,7 +79,7 @@ export default function Sidebar() {
               >
                 <a href="/lesson/1">
                   <Zap className="mr-3" size={16} />
-                  Lesson 1: EDGE + AI-Native Foundations
+                  <span className="truncate">Lesson 1: EDGE + AI-Native</span>
                 </a>
               </Button>
               
@@ -90,7 +90,7 @@ export default function Sidebar() {
               >
                 <a href="/lesson/2">
                   <Brain className="mr-3" size={16} />
-                  Lesson 2: AI Technical Foundations
+                  <span className="truncate">Lesson 2: AI Technical</span>
                 </a>
               </Button>
               
@@ -101,7 +101,7 @@ export default function Sidebar() {
               >
                 <a href="/lesson/3">
                   <Cog className="mr-3" size={16} />
-                  Lesson 3: The AI-Native Operating Model
+                  <span className="truncate">Lesson 3: Operating Model</span>
                 </a>
               </Button>
               
@@ -112,7 +112,7 @@ export default function Sidebar() {
               >
                 <a href="/lesson/4">
                   <Users className="mr-3" size={16} />
-                  Lesson 4: AI-Native in Practice
+                  <span className="truncate">Lesson 4: In Practice</span>
                 </a>
               </Button>
               
@@ -123,7 +123,7 @@ export default function Sidebar() {
               >
                 <a href="/lesson/5">
                   <TrendingUp className="mr-3" size={16} />
-                  Lesson 5: Change Management
+                  <span className="truncate">Lesson 5: Change Mgmt</span>
                 </a>
               </Button>
               
@@ -134,7 +134,7 @@ export default function Sidebar() {
               >
                 <a href="/lesson/6">
                   <Target className="mr-3" size={16} />
-                  Lesson 6: Taking Action
+                  <span className="truncate">Lesson 6: Taking Action</span>
                 </a>
               </Button>
             </div>

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface TokenPredictionState {
   userTokens: string[];
@@ -13,6 +14,7 @@ interface TokenPredictionState {
   targetTokens: number;
   aiCompletion: string;
   isLoadingAI: boolean;
+  showAISection: boolean;
 }
 
 const STARTER_PROMPT = "The CEO stormed in... The meeting was";
@@ -36,7 +38,8 @@ export default function TokenPrediction() {
       isComplete: false,
       targetTokens: MAX_TOKENS,
       aiCompletion: "",
-      isLoadingAI: false
+      isLoadingAI: false,
+      showAISection: false
     };
   });
 
@@ -69,8 +72,13 @@ export default function TokenPrediction() {
       isComplete: false,
       targetTokens: MAX_TOKENS,
       aiCompletion: "",
-      isLoadingAI: false
+      isLoadingAI: false,
+      showAISection: false
     });
+  };
+
+  const toggleAISection = (checked: boolean) => {
+    setState(prev => ({ ...prev, showAISection: checked, aiCompletion: checked ? prev.aiCompletion : "" }));
   };
 
   const fetchAICompletion = async () => {
@@ -159,70 +167,40 @@ export default function TokenPrediction() {
             </div>
           )}
 
-          {/* Progress Indicator */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Progress:</span>
-            {Array.from({ length: state.targetTokens }, (_, i) => (
-              <div
-                key={i}
-                className={`w-3 h-3 rounded-full ${
-                  i < state.userTokens.length 
-                    ? 'bg-blue-500' 
-                    : 'bg-gray-200 dark:bg-gray-700'
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* AI Completion Section */}
-          <div className="space-y-4">
-            <Separator />
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">AI Model Response</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button 
-                    onClick={fetchAICompletion}
-                    variant="outline"
-                    className="w-full"
-                    disabled={state.isLoadingAI}
-                  >
-                    {state.isLoadingAI ? "Getting AI Response..." : state.aiCompletion ? "Get Another AI Response" : "Get AI Completion"}
-                  </Button>
-                  
-                  {state.isLoadingAI && (
-                    <div className="flex items-center justify-center p-4">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                      <span className="ml-2 text-muted-foreground">Processing...</span>
-                    </div>
-                  )}
-                  
-                  {state.aiCompletion && (
-                    <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed">
-                      <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
-                        &gt; AI MODEL OUTPUT
-                      </div>
-                      <div className="whitespace-pre-wrap">
-                        {state.aiCompletion}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Reset button for completed exercises */}
-          {state.isComplete && (
-            <div className="flex justify-center">
-              <Button onClick={handleReset} variant="outline">
-                Try Again
-              </Button>
+          {/* Progress Indicator and Completion Checkbox */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Progress:</span>
+              {Array.from({ length: state.targetTokens }, (_, i) => (
+                <div
+                  key={i}
+                  className={`w-3 h-3 rounded-full ${
+                    i < state.userTokens.length 
+                      ? 'bg-blue-500' 
+                      : 'bg-gray-200 dark:bg-gray-700'
+                  }`}
+                />
+              ))}
             </div>
-          )}
+            
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id="sentence-complete"
+                checked={state.showAISection}
+                onCheckedChange={toggleAISection}
+              />
+              <Label 
+                htmlFor="sentence-complete" 
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Sentence is complete?
+              </Label>
+            </div>
+          </div>
+
+
+
+
 
           {/* Token History */}
           {state.userTokens.length > 0 && (
@@ -240,6 +218,56 @@ export default function TokenPrediction() {
               </div>
             </div>
           )}
+
+          {/* AI Completion Section */}
+          {state.showAISection && (
+            <div className="space-y-4">
+              <Separator />
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">AI Model Response</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <Button 
+                      onClick={fetchAICompletion}
+                      variant="outline"
+                      className="w-full"
+                      disabled={state.isLoadingAI}
+                    >
+                      {state.isLoadingAI ? "Getting AI Response..." : state.aiCompletion ? "Get Another AI Response" : "Get AI Completion"}
+                    </Button>
+                    
+                    {state.isLoadingAI && (
+                      <div className="flex items-center justify-center p-4">
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                        <span className="ml-2 text-muted-foreground">Processing...</span>
+                      </div>
+                    )}
+                    
+                    {state.aiCompletion && (
+                      <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed">
+                        <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
+                          &gt; AI MODEL OUTPUT
+                        </div>
+                        <div className="whitespace-pre-wrap">
+                          {state.aiCompletion}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Reset Exercise Button */}
+          <div className="flex justify-center">
+            <Button onClick={handleReset} variant="destructive" size="sm">
+              Reset Exercise
+            </Button>
+          </div>
         </CardContent>
       </Card>
 

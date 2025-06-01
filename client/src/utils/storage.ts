@@ -24,5 +24,10 @@ export function loadCourseData(): Lesson[] | null {
 }
 
 export function clearCourseData(): void {
+  // Clear main course data
   localStorage.removeItem(STORAGE_KEY);
+  
+  // Clear exercise-specific data
+  localStorage.removeItem("modelMatchUpData");
+  localStorage.removeItem("modelMatchUpTask2");
 }

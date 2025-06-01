@@ -344,16 +344,38 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
   };
 
   const exportData = () => {
-    return JSON.stringify({ lessons }, null, 2);
+    // Include all exercise-specific data
+    const exerciseData = {
+      modelMatchUpData: localStorage.getItem("modelMatchUpData"),
+      modelMatchUpTask2: localStorage.getItem("modelMatchUpTask2")
+    };
+    
+    return JSON.stringify({ 
+      lessons, 
+      exerciseData 
+    }, null, 2);
   };
 
   const importData = (data: string) => {
     try {
       const parsed = JSON.parse(data);
+      
+      // Import lesson data
       if (parsed.lessons && Array.isArray(parsed.lessons)) {
         setLessons(parsed.lessons);
+        saveCourseData(parsed.lessons);
       } else {
         throw new Error("Invalid data format");
+      }
+      
+      // Import exercise-specific data
+      if (parsed.exerciseData) {
+        if (parsed.exerciseData.modelMatchUpData) {
+          localStorage.setItem("modelMatchUpData", parsed.exerciseData.modelMatchUpData);
+        }
+        if (parsed.exerciseData.modelMatchUpTask2) {
+          localStorage.setItem("modelMatchUpTask2", parsed.exerciseData.modelMatchUpTask2);
+        }
       }
     } catch (error) {
       throw new Error("Failed to import data: Invalid JSON format");

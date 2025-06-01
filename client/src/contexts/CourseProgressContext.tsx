@@ -183,7 +183,7 @@ const initialLessons: Lesson[] = [
             id: "discussion-4",
             type: "textarea",
             label: "Discussion 4: \"Data as a Design Decision\"",
-            description: "Objective: Explore how the quality, scope, and inclusivity of data profoundly shape the performance and fairness of AI systems — and how every design decision is also a data decision.\n\nScenario: You're designing an AI-powered global music playlist generator. The system recommends personalized playlists to users based on their listening history, preferences, and behaviors.\n\nDesign Constraints (intentionally flawed):\n• Your training data comes exclusively from English-language music sources.\n• The user sample skews heavily toward people aged 20–30 in North America."
+            description: "<b>Objective</b>: Explore how the quality, scope, and inclusivity of data profoundly shape the performance and fairness of AI systems — and how every design decision is also a data decision. Scenario: You're designing an AI-powered global music playlist generator. The system recommends personalized playlists to users based on their listening history, preferences, and behaviors. Design Constraints: • Your training data comes exclusively from English-language music sources. • The user sample skews heavily toward people aged 20–30 in North America."
           },
           {
             id: "exercise-7",

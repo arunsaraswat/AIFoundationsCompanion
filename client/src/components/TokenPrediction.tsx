@@ -11,6 +11,8 @@ interface TokenPredictionState {
   currentToken: string;
   isComplete: boolean;
   targetTokens: number;
+  aiCompletion: string;
+  isLoadingAI: boolean;
 }
 
 const STARTER_PROMPT = "The CEO stormed in... The meeting was";
@@ -32,7 +34,9 @@ export default function TokenPrediction() {
       currentSentence: STARTER_PROMPT,
       currentToken: "",
       isComplete: false,
-      targetTokens: MAX_TOKENS
+      targetTokens: MAX_TOKENS,
+      aiCompletion: "",
+      isLoadingAI: false
     };
   });
 
@@ -63,8 +67,44 @@ export default function TokenPrediction() {
       currentSentence: STARTER_PROMPT,
       currentToken: "",
       isComplete: false,
-      targetTokens: MAX_TOKENS
+      targetTokens: MAX_TOKENS,
+      aiCompletion: "",
+      isLoadingAI: false
     });
+  };
+
+  const fetchAICompletion = async () => {
+    setState(prev => ({ ...prev, isLoadingAI: true }));
+    
+    try {
+      const response = await fetch('/api/openrouter-completion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: "Finish the sentence with 6-8 tokens - The CEO stormed in... The meeting was "
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI completion');
+      }
+
+      const data = await response.json();
+      setState(prev => ({ 
+        ...prev, 
+        aiCompletion: data.completion,
+        isLoadingAI: false 
+      }));
+    } catch (error) {
+      console.error('Error fetching AI completion:', error);
+      setState(prev => ({ 
+        ...prev, 
+        aiCompletion: "Error: Could not get AI response",
+        isLoadingAI: false 
+      }));
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -151,10 +191,29 @@ export default function TokenPrediction() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Model's Sentence</CardTitle>
+                    <CardTitle className="text-lg">AI Model's Sentence</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="leading-relaxed">{MODEL_COMPLETION}</p>
+                    <div className="space-y-3">
+                      {!state.aiCompletion && !state.isLoadingAI && (
+                        <Button 
+                          onClick={fetchAICompletion}
+                          variant="outline"
+                          className="w-full"
+                        >
+                          Get AI Completion
+                        </Button>
+                      )}
+                      {state.isLoadingAI && (
+                        <div className="flex items-center justify-center p-4">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                          <span className="ml-2 text-muted-foreground">Getting AI response...</span>
+                        </div>
+                      )}
+                      {state.aiCompletion && (
+                        <p className="leading-relaxed">{state.aiCompletion}</p>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               </div>

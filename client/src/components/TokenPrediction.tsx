@@ -77,7 +77,7 @@ export default function TokenPrediction() {
     <div className="max-w-4xl mx-auto space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Be the Model – Token-by-Token Prediction</CardTitle>
+          <CardTitle className="text-xl font-semibold">Exercise 9: Be the Model – Token-by-Token Prediction</CardTitle>
           <p className="text-muted-foreground">
             Experience how language models predict text one token at a time. 
             Continue the sentence by predicting what word comes next.

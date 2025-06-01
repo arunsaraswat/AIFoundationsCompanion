@@ -190,7 +190,7 @@ const initialLessons: Lesson[] = [
             type: "link",
             label: "Exercise 7: \"Bad Data Risk Assessment\"",
             description: "Task 3: Mark any 'bad data' risk point on the card (e.g., skewed inputs, noisy training data, missing labels). Facilitator circulates, prompting questions: 'Would this still work if it had half the data?' 'What assumptions is this model making about the user or context?'",
-            link: "/model-match-up"
+            link: "/exercise/model-match-up"
           },
           {
             id: "exercise-8",

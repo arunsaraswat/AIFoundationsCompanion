@@ -20,7 +20,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "openai/o1-mini",
+          model: "openai/gpt-4o-mini",
           messages: [
             {
               role: "user",

@@ -64,16 +64,75 @@ export default function Sidebar() {
             >
               <a href="/">
                 <BarChart3 className="mr-3" size={16} />
-                Course Progress
+                Dashboard
               </a>
             </Button>
           </li>
-          <li className="opacity-50">
-            <div className="flex items-center px-4 py-2 text-sm text-muted-foreground">
-              <div className="w-4 h-4 mr-3 rounded border-2 border-dashed border-muted-foreground/50" />
-              Future Page
+          
+          <div className="py-2">
+            <div className="text-xs font-medium text-muted-foreground mb-2">Lessons</div>
+            <div className="space-y-1">
+              <Button
+                variant={location === "/lesson/1" ? "default" : "ghost"}
+                className="w-full justify-start text-sm"
+                asChild
+              >
+                <a href="/lesson/1">
+                  Lesson 1: EDGE + AI-Native Foundations
+                </a>
+              </Button>
+              
+              <Button
+                variant={location === "/lesson/2" ? "default" : "ghost"}
+                className="w-full justify-start text-sm"
+                asChild
+              >
+                <a href="/lesson/2">
+                  Lesson 2: AI Technical Foundations
+                </a>
+              </Button>
+              
+              <Button
+                variant={location === "/lesson/3" ? "default" : "ghost"}
+                className="w-full justify-start text-sm"
+                asChild
+              >
+                <a href="/lesson/3">
+                  Lesson 3: The AI-Native Operating Model
+                </a>
+              </Button>
+              
+              <Button
+                variant={location === "/lesson/4" ? "default" : "ghost"}
+                className="w-full justify-start text-sm"
+                asChild
+              >
+                <a href="/lesson/4">
+                  Lesson 4: AI-Native in Practice
+                </a>
+              </Button>
+              
+              <Button
+                variant={location === "/lesson/5" ? "default" : "ghost"}
+                className="w-full justify-start text-sm"
+                asChild
+              >
+                <a href="/lesson/5">
+                  Lesson 5: Change Management
+                </a>
+              </Button>
+              
+              <Button
+                variant={location === "/lesson/6" ? "default" : "ghost"}
+                className="w-full justify-start text-sm"
+                asChild
+              >
+                <a href="/lesson/6">
+                  Lesson 6: Taking Action
+                </a>
+              </Button>
             </div>
-          </li>
+          </div>
         </ul>
       </nav>
 

@@ -6,13 +6,17 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CourseProgressProvider } from "./contexts/CourseProgressContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
-import CourseProgress from "./pages/CourseProgress";
+import Dashboard from "./pages/Dashboard";
+import LessonPage from "./pages/LessonPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={CourseProgress} />
+      <Route path="/" component={Dashboard} />
+      <Route path="/lesson/:id">
+        {(params) => <LessonPage lessonId={parseInt(params.id)} />}
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );

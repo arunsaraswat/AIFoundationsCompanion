@@ -84,12 +84,12 @@ export default function TokenPrediction() {
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Current Sentence Display */}
-          <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
-            <Label className="text-sm font-medium text-muted-foreground">Current Sentence:</Label>
-            <p className="text-lg mt-2 leading-relaxed">
+          {/* Current Sentence Display - Terminal Style */}
+          <div className="bg-black p-6 rounded-lg border-2 border-green-500/30 font-mono">
+            <Label className="text-xs font-medium text-green-400 uppercase tracking-wider">Current Sentence:</Label>
+            <p className="text-green-400 mt-3 leading-relaxed text-lg">
               {state.currentSentence}
-              {!state.isComplete && <span className="animate-pulse">|</span>}
+              {!state.isComplete && <span className="animate-pulse bg-green-400 text-black ml-1 inline-block w-3 h-6 align-text-bottom">█</span>}
             </p>
           </div>
 

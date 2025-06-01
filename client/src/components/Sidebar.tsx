@@ -74,67 +74,67 @@ export default function Sidebar() {
             <div className="space-y-1">
               <Button
                 variant={location === "/lesson/1" ? "default" : "ghost"}
-                className="w-full justify-start text-sm"
+                className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/1">
-                  <Zap className="mr-3" size={16} />
-                  <span className="truncate">Lesson 1: EDGE + AI-Native</span>
+                <a href="/lesson/1" className="flex items-start">
+                  <Zap className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <span className="text-left leading-tight">Lesson 1: EDGE + AI-Native Foundations</span>
                 </a>
               </Button>
               
               <Button
                 variant={location === "/lesson/2" ? "default" : "ghost"}
-                className="w-full justify-start text-sm"
+                className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/2">
-                  <Brain className="mr-3" size={16} />
-                  <span className="truncate">Lesson 2: AI Technical</span>
+                <a href="/lesson/2" className="flex items-start">
+                  <Brain className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <span className="text-left leading-tight">Lesson 2: AI Technical Foundations</span>
                 </a>
               </Button>
               
               <Button
                 variant={location === "/lesson/3" ? "default" : "ghost"}
-                className="w-full justify-start text-sm"
+                className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/3">
-                  <Cog className="mr-3" size={16} />
-                  <span className="truncate">Lesson 3: Operating Model</span>
+                <a href="/lesson/3" className="flex items-start">
+                  <Cog className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <span className="text-left leading-tight">Lesson 3: The AI-Native Operating Model</span>
                 </a>
               </Button>
               
               <Button
                 variant={location === "/lesson/4" ? "default" : "ghost"}
-                className="w-full justify-start text-sm"
+                className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/4">
-                  <Users className="mr-3" size={16} />
-                  <span className="truncate">Lesson 4: In Practice</span>
+                <a href="/lesson/4" className="flex items-start">
+                  <Users className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <span className="text-left leading-tight">Lesson 4: AI-Native in Practice</span>
                 </a>
               </Button>
               
               <Button
                 variant={location === "/lesson/5" ? "default" : "ghost"}
-                className="w-full justify-start text-sm"
+                className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/5">
-                  <TrendingUp className="mr-3" size={16} />
-                  <span className="truncate">Lesson 5: Change Mgmt</span>
+                <a href="/lesson/5" className="flex items-start">
+                  <TrendingUp className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <span className="text-left leading-tight">Lesson 5: Change Management</span>
                 </a>
               </Button>
               
               <Button
                 variant={location === "/lesson/6" ? "default" : "ghost"}
-                className="w-full justify-start text-sm"
+                className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/6">
-                  <Target className="mr-3" size={16} />
-                  <span className="truncate">Lesson 6: Taking Action</span>
+                <a href="/lesson/6" className="flex items-start">
+                  <Target className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <span className="text-left leading-tight">Lesson 6: Taking Action</span>
                 </a>
               </Button>
             </div>

@@ -83,7 +83,7 @@ export default function TokenPrediction() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: "Finish the sentence with 6-8 tokens - The CEO stormed in... The meeting was "
+          prompt: "Finish the sentence with 6-8 tokens, then return the completed sentence - The CEO stormed in... The meeting was"
         }),
       });
 
@@ -184,23 +184,31 @@ export default function TokenPrediction() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {!state.aiCompletion && !state.isLoadingAI && (
-                    <Button 
-                      onClick={fetchAICompletion}
-                      variant="outline"
-                      className="w-full"
-                    >
-                      Get AI Completion
-                    </Button>
-                  )}
+                  <Button 
+                    onClick={fetchAICompletion}
+                    variant="outline"
+                    className="w-full"
+                    disabled={state.isLoadingAI}
+                  >
+                    {state.isLoadingAI ? "Getting AI Response..." : state.aiCompletion ? "Get Another AI Response" : "Get AI Completion"}
+                  </Button>
+                  
                   {state.isLoadingAI && (
                     <div className="flex items-center justify-center p-4">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                      <span className="ml-2 text-muted-foreground">Getting AI response...</span>
+                      <span className="ml-2 text-muted-foreground">Processing...</span>
                     </div>
                   )}
+                  
                   {state.aiCompletion && (
-                    <p className="leading-relaxed">{state.aiCompletion}</p>
+                    <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed">
+                      <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
+                        &gt; AI MODEL OUTPUT
+                      </div>
+                      <div className="whitespace-pre-wrap">
+                        {state.aiCompletion}
+                      </div>
+                    </div>
                   )}
                 </div>
               </CardContent>

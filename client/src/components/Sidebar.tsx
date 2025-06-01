@@ -1,4 +1,4 @@
-import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun, RefreshCw, Zap, Brain, Cog, Users, TrendingUp, Target } from "lucide-react";
+import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun, RefreshCw, Globe, Brain, Cog, Users, TrendingUp, Target } from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
@@ -78,7 +78,7 @@ export default function Sidebar() {
                 asChild
               >
                 <a href="/lesson/1" className="flex items-start min-w-0">
-                  <Zap className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                  <Globe className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 1: EDGE + AI-Native Foundations</span>
                 </a>
               </Button>

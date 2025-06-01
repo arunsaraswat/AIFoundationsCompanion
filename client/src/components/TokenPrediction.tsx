@@ -89,7 +89,7 @@ export default function TokenPrediction() {
             <Label className="text-xs font-medium text-green-400 uppercase tracking-wider">Current Sentence:</Label>
             <p className="text-green-400 mt-3 leading-relaxed text-lg">
               {state.currentSentence}
-              {!state.isComplete && <span className="animate-pulse bg-green-400 text-black ml-1 inline-block w-3 h-6 align-text-bottom">█</span>}
+              {!state.isComplete && <span className="animate-pulse text-green-400 ml-1">_</span>}
             </p>
           </div>
 

@@ -39,7 +39,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-72 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300">
+    <div className="w-80 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300">
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center space-x-3">
@@ -77,9 +77,9 @@ export default function Sidebar() {
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/1" className="flex items-start">
+                <a href="/lesson/1" className="flex items-start min-w-0">
                   <Zap className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight">Lesson 1: EDGE + AI-Native Foundations</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 1: EDGE + AI-Native Foundations</span>
                 </a>
               </Button>
               
@@ -88,9 +88,9 @@ export default function Sidebar() {
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/2" className="flex items-start">
+                <a href="/lesson/2" className="flex items-start min-w-0">
                   <Brain className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight">Lesson 2: AI Technical Foundations</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 2: AI Technical Foundations</span>
                 </a>
               </Button>
               
@@ -99,9 +99,9 @@ export default function Sidebar() {
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/3" className="flex items-start">
+                <a href="/lesson/3" className="flex items-start min-w-0">
                   <Cog className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight">Lesson 3: The AI-Native Operating Model</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 3: The AI-Native Operating Model</span>
                 </a>
               </Button>
               
@@ -110,9 +110,9 @@ export default function Sidebar() {
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/4" className="flex items-start">
+                <a href="/lesson/4" className="flex items-start min-w-0">
                   <Users className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight">Lesson 4: AI-Native in Practice</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 4: AI-Native in Practice</span>
                 </a>
               </Button>
               
@@ -121,9 +121,9 @@ export default function Sidebar() {
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/5" className="flex items-start">
+                <a href="/lesson/5" className="flex items-start min-w-0">
                   <TrendingUp className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight">Lesson 5: Change Management</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 5: Change Management</span>
                 </a>
               </Button>
               
@@ -132,9 +132,9 @@ export default function Sidebar() {
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >
-                <a href="/lesson/6" className="flex items-start">
+                <a href="/lesson/6" className="flex items-start min-w-0">
                   <Target className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight">Lesson 6: Taking Action</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 6: Taking Action</span>
                 </a>
               </Button>
             </div>

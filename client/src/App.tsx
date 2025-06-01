@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import LessonPage from "./pages/LessonPage";
+import ModelMatchUpPage from "./pages/ModelMatchUpPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/lesson/:id">
         {(params) => <LessonPage lessonId={parseInt(params.id)} />}
       </Route>
+      <Route path="/exercise/model-match-up" component={ModelMatchUpPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -10,7 +10,7 @@ export interface SubLesson {
 
 export interface Exercise {
   id: string;
-  type: 'text' | 'textarea' | 'radio' | 'checkbox' | 'multi-step' | 'radio-with-text' | 'component';
+  type: 'text' | 'textarea' | 'radio' | 'checkbox' | 'multi-step' | 'radio-with-text' | 'component' | 'link';
   label: string;
   description?: string;
   options?: string[];
@@ -20,6 +20,7 @@ export interface Exercise {
   followUpLabel?: string;
   followUpDescription?: string;
   component?: string;
+  link?: string;
 }
 
 export interface Lesson {
@@ -148,10 +149,10 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "2.1.2",
-            type: "component",
+            type: "link",
             label: "Exercise 5: \"Model Match-Up\" (AI Basics)",
             description: "Interactive card-based exercise to sort real-world use cases into AI/ML/DL categories and define their inputs/outputs.",
-            component: "ModelMatchUp",
+            link: "/exercise/model-match-up",
             answer: ""
           },
           {

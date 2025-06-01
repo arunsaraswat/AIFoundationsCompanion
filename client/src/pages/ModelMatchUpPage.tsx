@@ -19,6 +19,8 @@ interface UseCase {
   selectedTags: string[];
   input: string;
   output: string;
+  dataRisks: string;
+  dataAssumptions: string;
 }
 
 const USE_CASES_DATA = [
@@ -80,11 +82,13 @@ export default function ModelMatchUpPage() {
   const [useCases, setUseCases] = useState<UseCase[]>([]);
   const [task1Complete, setTask1Complete] = useState(true);
   const [task2Complete, setTask2Complete] = useState(false);
+  const [task3Complete, setTask3Complete] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem("modelMatchUpData");
     const savedTask2State = localStorage.getItem("modelMatchUpTask2");
+    const savedTask3State = localStorage.getItem("modelMatchUpTask3");
     
     if (saved) {
       try {
@@ -99,6 +103,10 @@ export default function ModelMatchUpPage() {
 
     if (savedTask2State) {
       setTask2Complete(JSON.parse(savedTask2State));
+    }
+
+    if (savedTask3State) {
+      setTask3Complete(JSON.parse(savedTask3State));
     }
   }, []);
 
@@ -122,6 +130,11 @@ export default function ModelMatchUpPage() {
   useEffect(() => {
     localStorage.setItem("modelMatchUpTask2", JSON.stringify(task2Complete));
   }, [task2Complete]);
+
+  // Save task 3 state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("modelMatchUpTask3", JSON.stringify(task3Complete));
+  }, [task3Complete]);
 
   const updateUseCase = (id: string, updates: Partial<UseCase>) => {
     setUseCases(prev => prev.map(uc => 
@@ -185,6 +198,18 @@ export default function ModelMatchUpPage() {
             <div>
               <h3 className="font-medium text-foreground">Task 2: Input/Output Analysis</h3>
               <p className="text-sm text-muted-foreground">Define what kind of inputs and outputs each system uses</p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3">
+            <Checkbox 
+              checked={task3Complete}
+              onCheckedChange={(checked) => setTask3Complete(checked as boolean)}
+              className="flex-shrink-0"
+            />
+            <div>
+              <h3 className="font-medium text-foreground">Task 3: Bad Data Risk Assessment</h3>
+              <p className="text-sm text-muted-foreground">Mark any 'bad data' risk points and assess data quality concerns</p>
             </div>
           </div>
         </div>

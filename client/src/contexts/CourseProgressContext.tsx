@@ -174,7 +174,32 @@ const initialLessons: Lesson[] = [
           }
         ]
       },
-      { id: "2.2", title: "2.2 Data", completed: false },
+      { 
+        id: "2.2", 
+        title: "2.2 Data", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-4",
+            type: "textarea",
+            label: "Discussion 4: \"Data as a Design Decision\"",
+            description: "Scenario: Global music playlist generator. Discuss impact of English-only data. Consider age demographic limitations."
+          },
+          {
+            id: "exercise-7",
+            type: "component",
+            label: "Exercise 7: \"Bad Data Risk Assessment\"",
+            description: "Task 3: Mark any 'bad data' risk point on the card (e.g., skewed inputs, noisy training data, missing labels). Facilitator circulates, prompting questions: 'Would this still work if it had half the data?' 'What assumptions is this model making about the user or context?'",
+            component: "ModelMatchUp"
+          },
+          {
+            id: "exercise-8",
+            type: "textarea",
+            label: "Exercise 8: \"Where Bad Data Hurts Most\"",
+            description: "Individual reflection on your work. Identify 2-3 high-impact bad data areas. Record answers in workbook."
+          }
+        ]
+      },
       { id: "2.3", title: "2.3 LLMs – The Mind Behind the Curtain", completed: false },
       { id: "2.4", title: "2.4 Prompting + Safe Use", completed: false },
       { id: "2.5", title: "2.5 RAG", completed: false },

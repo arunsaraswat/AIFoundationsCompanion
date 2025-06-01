@@ -31,4 +31,5 @@ export function clearCourseData(): void {
   localStorage.removeItem("modelMatchUpData");
   localStorage.removeItem("modelMatchUpTask2");
   localStorage.removeItem("modelMatchUpTask3");
+  localStorage.removeItem("tokenPredictionState");
 }

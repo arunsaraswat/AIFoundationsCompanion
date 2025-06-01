@@ -200,7 +200,53 @@ const initialLessons: Lesson[] = [
           }
         ]
       },
-      { id: "2.3", title: "2.3 LLMs – The Mind Behind the Curtain", completed: false },
+      { 
+        id: "2.3", 
+        title: "2.3 LLMs – The Mind Behind the Curtain", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-5",
+            type: "text",
+            label: "Discussion 5: \"What's Hard About Language for Machines?\"",
+            description: "What's something humans do with language that machines struggle to replicate?",
+            answer: ""
+          },
+          {
+            id: "exercise-9",
+            type: "component",
+            label: "Exercise 9: Be the Model – Token-by-Token Prediction",
+            description: "Experience how language models predict text one token at a time.",
+            component: "TokenPrediction"
+          },
+          {
+            id: "exercise-10",
+            type: "multi-step",
+            label: "Exercise 10: Why Context Is Everything",
+            description: "Reflect on the token prediction exercise and what it reveals about language understanding.",
+            steps: [
+              {
+                id: "helped-hurt",
+                type: "textarea",
+                label: "What helped or hurt your predictions?",
+                answer: ""
+              },
+              {
+                id: "assumptions",
+                type: "textarea", 
+                label: "What assumptions did you make about tone, style, or purpose?",
+                answer: ""
+              },
+              {
+                id: "misunderstanding",
+                type: "textarea",
+                label: "What could go wrong if the model misunderstood your intent?",
+                answer: ""
+              }
+            ]
+          }
+        ]
+      },
       { id: "2.4", title: "2.4 Prompting + Safe Use", completed: false },
       { id: "2.5", title: "2.5 RAG", completed: false },
       { id: "2.6", title: "2.6 Agentic Workflow Primer", completed: false },
@@ -373,7 +419,8 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
     const exerciseData = {
       modelMatchUpData: localStorage.getItem("modelMatchUpData"),
       modelMatchUpTask2: localStorage.getItem("modelMatchUpTask2"),
-      modelMatchUpTask3: localStorage.getItem("modelMatchUpTask3")
+      modelMatchUpTask3: localStorage.getItem("modelMatchUpTask3"),
+      tokenPredictionState: localStorage.getItem("tokenPredictionState")
     };
     
     return JSON.stringify({ 
@@ -404,6 +451,9 @@ export function CourseProgressProvider({ children }: { children: React.ReactNode
         }
         if (parsed.exerciseData.modelMatchUpTask3) {
           localStorage.setItem("modelMatchUpTask3", parsed.exerciseData.modelMatchUpTask3);
+        }
+        if (parsed.exerciseData.tokenPredictionState) {
+          localStorage.setItem("tokenPredictionState", parsed.exerciseData.tokenPredictionState);
         }
       }
     } catch (error) {

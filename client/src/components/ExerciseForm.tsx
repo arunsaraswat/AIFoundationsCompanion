@@ -5,6 +5,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
 import ModelMatchUp from "./ModelMatchUp";
+import TokenPrediction from "./TokenPrediction";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -30,11 +31,14 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
   const renderFormField = () => {
     switch (exercise.type) {
       case 'text':
+        const textPlaceholder = exercise.id === 'discussion-5' 
+          ? "e.g., sarcasm, tone, emotion, indirect meaning…"
+          : "Enter your answer...";
         return (
           <Input
             value={exercise.answer as string || ''}
             onChange={(e) => handleAnswerChange(e.target.value)}
-            placeholder="Enter your answer..."
+            placeholder={textPlaceholder}
             className="mt-2"
           />
         );
@@ -146,6 +150,9 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
       case 'component':
         if (exercise.component === 'ModelMatchUp') {
           return <ModelMatchUp />;
+        }
+        if (exercise.component === 'TokenPrediction') {
+          return <TokenPrediction />;
         }
         return null;
 

@@ -3,13 +3,14 @@ import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContex
 import ExerciseForm from "../components/ExerciseForm";
 import { Check, Clock, ChevronDown, ChevronRight } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface LessonPageProps {
   lessonId: number;
 }
 
 export default function LessonPage({ lessonId }: LessonPageProps) {
-  const { lessons, getLessonProgress } = useCourseProgress();
+  const { lessons, getLessonProgress, updateSubLessonStatus } = useCourseProgress();
   const lesson = lessons.find(l => l.id === lessonId);
   const [openSubLessons, setOpenSubLessons] = useState<string[]>([]);
   
@@ -32,22 +33,7 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
     );
   };
 
-  const getSubLessonIcon = (subLessonId: string) => {
-    const subLesson = lesson.subLessons.find(sl => sl.id === subLessonId);
-    if (subLesson?.completed) {
-      return (
-        <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/20 flex items-center justify-center">
-          <Check className="text-emerald-600 dark:text-emerald-400" size={12} />
-        </div>
-      );
-    } else {
-      return (
-        <div className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-          <Clock className="text-gray-400 dark:text-gray-500" size={12} />
-        </div>
-      );
-    }
-  };
+
 
   return (
     <div className="max-w-4xl mx-auto p-8">
@@ -77,19 +63,29 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
               onOpenChange={() => toggleSubLesson(subLesson.id)}
             >
               <div className="bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    {getSubLessonIcon(subLesson.id)}
-                    <h2 className="text-lg font-semibold text-foreground text-left">
-                      {subLesson.title}
-                    </h2>
+                <div className="p-4 flex items-center justify-between">
+                  <div className="flex items-center space-x-3 flex-1">
+                    <Checkbox
+                      checked={subLesson.completed}
+                      onCheckedChange={(checked) => 
+                        updateSubLessonStatus(lesson.id, subLesson.id, checked as boolean)
+                      }
+                      className="flex-shrink-0"
+                    />
+                    <CollapsibleTrigger className="flex items-center space-x-3 flex-1 text-left hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded px-2 py-1">
+                      <h2 className="text-lg font-semibold text-foreground">
+                        {subLesson.title}
+                      </h2>
+                    </CollapsibleTrigger>
                   </div>
-                  {isOpen ? (
-                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                  ) : (
-                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                  )}
-                </CollapsibleTrigger>
+                  <CollapsibleTrigger className="p-1 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded">
+                    {isOpen ? (
+                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    ) : (
+                      <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                    )}
+                  </CollapsibleTrigger>
+                </div>
                 
                 <CollapsibleContent>
                   {subLesson.exercises && subLesson.exercises.length > 0 && (

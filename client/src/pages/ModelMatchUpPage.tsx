@@ -84,6 +84,8 @@ export default function ModelMatchUpPage() {
   // Load data from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem("modelMatchUpData");
+    const savedTask2State = localStorage.getItem("modelMatchUpTask2");
+    
     if (saved) {
       try {
         setUseCases(JSON.parse(saved));
@@ -93,6 +95,10 @@ export default function ModelMatchUpPage() {
       }
     } else {
       initializeFreshData();
+    }
+
+    if (savedTask2State) {
+      setTask2Complete(JSON.parse(savedTask2State));
     }
   }, []);
 
@@ -111,6 +117,11 @@ export default function ModelMatchUpPage() {
       localStorage.setItem("modelMatchUpData", JSON.stringify(useCases));
     }
   }, [useCases]);
+
+  // Save task 2 state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("modelMatchUpTask2", JSON.stringify(task2Complete));
+  }, [task2Complete]);
 
   const updateUseCase = (id: string, updates: Partial<UseCase>) => {
     setUseCases(prev => prev.map(uc => 

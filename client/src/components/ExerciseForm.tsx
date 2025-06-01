@@ -32,7 +32,7 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
     switch (exercise.type) {
       case 'text':
         const textPlaceholder = exercise.id === 'discussion-5' 
-          ? "e.g., sarcasm, tone, emotion, indirect meaning…"
+          ? "Enter your response..."
           : "Enter your answer...";
         return (
           <Input

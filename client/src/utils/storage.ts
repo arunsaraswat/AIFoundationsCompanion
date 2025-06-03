@@ -43,4 +43,9 @@ export function clearCourseData(): void {
       localStorage.removeItem(key);
     }
   });
+
+  // Call global reset function for TokenPrediction component if it exists
+  if (typeof (window as any).resetTokenPrediction === 'function') {
+    (window as any).resetTokenPrediction();
+  }
 }

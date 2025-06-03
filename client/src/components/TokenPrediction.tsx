@@ -60,6 +60,7 @@ export default function TokenPrediction() {
   useEffect(() => {
     const handleStorageChange = () => {
       const saved = localStorage.getItem("tokenPredictionState");
+      const savedAI = localStorage.getItem("tokenPredictionAI");
       
       if (!saved) {
         // Data was cleared, reset component
@@ -76,12 +77,43 @@ export default function TokenPrediction() {
       }
     };
 
+    // Check for data clearing periodically (since storage events don't fire in same tab)
+    const checkForClearing = () => {
+      const saved = localStorage.getItem("tokenPredictionState");
+      const savedAI = localStorage.getItem("tokenPredictionAI");
+      
+      if (!saved && state.userTokens.length > 0) {
+        // Data was cleared, reset component
+        setState({
+          userTokens: [],
+          currentSentence: STARTER_PROMPT,
+          currentToken: "",
+          isComplete: false,
+          targetTokens: MAX_TOKENS,
+          aiCompletion: "",
+          isLoadingAI: false,
+          showAISection: false,
+        });
+      }
+      
+      if (!savedAI && state.aiCompletion) {
+        // AI data was cleared, clear AI response
+        setState(prev => ({
+          ...prev,
+          aiCompletion: "",
+          isLoadingAI: false,
+        }));
+      }
+    };
+
+    const interval = setInterval(checkForClearing, 500);
     window.addEventListener('storage', handleStorageChange);
     
     return () => {
+      clearInterval(interval);
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, []);
+  }, [state.userTokens.length, state.aiCompletion]);
 
   const handleSubmitToken = () => {
     if (!state.currentToken.trim()) return;

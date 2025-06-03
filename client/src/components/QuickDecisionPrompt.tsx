@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
 
 interface QuickDecisionPromptProps {
@@ -15,6 +16,11 @@ interface QuickDecisionPromptProps {
 interface DecisionFields {
   role: string;
   issue: string;
+}
+
+interface AIResponseState {
+  aiResponse: string;
+  isLoadingAI: boolean;
 }
 
 export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId, stepId }: QuickDecisionPromptProps) {
@@ -36,6 +42,10 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
   });
 
   const [showFormattedPrompt, setShowFormattedPrompt] = useState(false);
+  const [aiState, setAIState] = useState<AIResponseState>({
+    aiResponse: "",
+    isLoadingAI: false
+  });
 
   const updateField = (field: keyof DecisionFields, value: string) => {
     const newFields = { ...fields, [field]: value };
@@ -49,6 +59,40 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
 
     updateStepAnswer(lessonId, subLessonId, exerciseId, stepId, formattedPrompt);
     setShowFormattedPrompt(true);
+  };
+
+  const fetchAIResponse = async () => {
+    const prompt = `I'm a ${fields.role}. I need to make a decision about ${fields.issue}. What are 3 options I should consider, and what are the trade-offs of each from my point of view?`;
+    
+    setAIState(prev => ({ ...prev, isLoadingAI: true }));
+    
+    try {
+      const response = await fetch('/api/openrouter-completion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: prompt
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI response');
+      }
+
+      const data = await response.json();
+      setAIState({ 
+        aiResponse: data.completion,
+        isLoadingAI: false 
+      });
+    } catch (error) {
+      console.error('Error fetching AI response:', error);
+      setAIState({ 
+        aiResponse: "Error: Could not get AI response",
+        isLoadingAI: false 
+      });
+    }
   };
 
   const isComplete = fields.role.trim() !== "" && fields.issue.trim() !== "";
@@ -100,6 +144,48 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {showFormattedPrompt && (
+        <div className="space-y-4">
+          <Separator />
+          
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">AI Model Response</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <Button 
+                  onClick={fetchAIResponse}
+                  variant="outline"
+                  className="w-full"
+                  disabled={aiState.isLoadingAI}
+                >
+                  {aiState.isLoadingAI ? "Getting AI Response..." : aiState.aiResponse ? "Get Another AI Response" : "Get AI Response"}
+                </Button>
+                
+                {aiState.isLoadingAI && (
+                  <div className="flex items-center justify-center p-4">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                    <span className="ml-2 text-muted-foreground">Processing...</span>
+                  </div>
+                )}
+                
+                {aiState.aiResponse && (
+                  <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed">
+                    <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
+                      &gt; AI MODEL OUTPUT
+                    </div>
+                    <div className="whitespace-pre-wrap">
+                      {aiState.aiResponse}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       )}
     </div>
   );

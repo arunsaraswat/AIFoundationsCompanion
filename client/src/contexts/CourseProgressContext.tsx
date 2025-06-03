@@ -247,7 +247,106 @@ const initialLessons: Lesson[] = [
           }
         ]
       },
-      { id: "2.4", title: "2.4 Prompting + Safe Use", completed: false },
+      { 
+        id: "2.4", 
+        title: "2.4 Prompting + Safe Use", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-6",
+            type: "textarea",
+            label: "Discussion 6: \"Prompt Autopsy\"",
+            description: "Pairs share prompt wins and fails. Discuss what made the difference. Capture on board as \"Wins\" and \"Fails\".",
+            answer: ""
+          },
+          {
+            id: "exercise-11",
+            type: "multi-step",
+            label: "Exercise 11: \"Decision Support Prompt Lab\"",
+            description: "Multi-step activity to create and test decision support prompts",
+            steps: [
+              {
+                id: "step-1",
+                type: "textarea",
+                label: "Step 1: Quick Decision Prompt (2-3 min)",
+                description: "Write your own quick decision prompt using this format: \"I'm a [your role]. I need to make a decision about [brief issue]. What are 3 options I should consider, and what are the trade-offs of each from my point of view?\"",
+                answer: ""
+              },
+              {
+                id: "step-2a",
+                type: "multi-step",
+                label: "Step 2a: Fill in the Anatomy of a Problem (3 min)",
+                description: "Now add real context. Fill in each of these:",
+                steps: [
+                  {
+                    id: "role",
+                    type: "text",
+                    label: "Role: [your role]",
+                    answer: ""
+                  },
+                  {
+                    id: "who-involved",
+                    type: "text", 
+                    label: "Who is involved?",
+                    answer: ""
+                  },
+                  {
+                    id: "challenge",
+                    type: "text",
+                    label: "What is the challenge or decision?",
+                    answer: ""
+                  },
+                  {
+                    id: "where-happening",
+                    type: "text",
+                    label: "Where is it happening (team, system, etc.)?",
+                    answer: ""
+                  },
+                  {
+                    id: "when-happening",
+                    type: "text",
+                    label: "When is this happening or when is a decision needed?",
+                    answer: ""
+                  },
+                  {
+                    id: "why-matters",
+                    type: "text",
+                    label: "Why does this matter (what's at stake)?",
+                    answer: ""
+                  },
+                  {
+                    id: "output-format",
+                    type: "text",
+                    label: "Preferred output format (pros/cons, table, ranked options, recommendation, etc.)",
+                    answer: ""
+                  }
+                ]
+              },
+              {
+                id: "step-2b",
+                type: "textarea",
+                label: "Step 2b: GPT Prompt – Turn It into a RISE Prompt",
+                description: "Copy-Paste This Prompt into GPT: \"Using the information below, generate a clear and effective prompt using the RISE format. Don't lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation.\" Then paste your anatomy from Step 2a.",
+                answer: ""
+              },
+              {
+                id: "step-3",
+                type: "textarea",
+                label: "Step 3: Model Testing",
+                description: "Test Your Optimized RISE Prompt in Two Models: GPT-4 (ChatGPT) and compare outputs based on: Clarity (Which one was clearer and easier to understand?), Relevance (Which response fit your real situation better?), Usefulness (Which gave more practical or insightful solutions?), Tone & Confidence (Which sounded more trustworthy or professional in delivery?)",
+                answer: ""
+              }
+            ]
+          },
+          {
+            id: "exercise-12",
+            type: "textarea",
+            label: "Exercise 12: \"Next Time I Prompt...\"",
+            description: "Solo reflection: What will you do differently? Table share improvements. Group capture under \"Smarter Prompts = ___\"",
+            answer: ""
+          }
+        ]
+      },
       { id: "2.5", title: "2.5 RAG", completed: false },
       { id: "2.6", title: "2.6 Agentic Workflow Primer", completed: false },
       { id: "2.7", title: "2.7 Frontiers in AI", completed: false },

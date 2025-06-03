@@ -7,6 +7,7 @@ import { useCourseProgress, type Exercise } from "../contexts/CourseProgressCont
 import ModelMatchUp from "./ModelMatchUp";
 import TokenPrediction from "./TokenPrediction";
 import PromptAnatomy from "./PromptAnatomy";
+import QuickDecisionPrompt from "./QuickDecisionPrompt";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -128,8 +129,16 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     {step.description}
                   </p>
                 )}
-                {/* Special handling for Step 2a anatomy component */}
-                {step.id === 'step-2a' && exercise.id === 'exercise-11' ? (
+                {/* Special handling for Step 1 quick decision prompt */}
+                {step.id === 'step-1' && exercise.id === 'exercise-11' ? (
+                  <QuickDecisionPrompt 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : /* Special handling for Step 2a anatomy component */
+                step.id === 'step-2a' && exercise.id === 'exercise-11' ? (
                   <PromptAnatomy 
                     lessonId={lessonId}
                     subLessonId={subLessonId}

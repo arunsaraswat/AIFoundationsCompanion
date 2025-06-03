@@ -42,9 +42,20 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
   });
 
   const [showFormattedPrompt, setShowFormattedPrompt] = useState(false);
-  const [aiState, setAIState] = useState<AIResponseState>({
-    aiResponse: "",
-    isLoadingAI: false
+  const [aiState, setAIState] = useState<AIResponseState>(() => {
+    // Try to load saved AI response
+    const saved = localStorage.getItem(`quickDecisionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // Fall back to empty state
+      }
+    }
+    return {
+      aiResponse: "",
+      isLoadingAI: false
+    };
   });
 
   // Listen for storage changes to reset component when data is cleared
@@ -58,6 +69,8 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
         setFields({ role: "", issue: "" });
         setShowFormattedPrompt(false);
         setAIState({ aiResponse: "", isLoadingAI: false });
+        // Also clear AI response localStorage
+        localStorage.removeItem(`quickDecisionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
       }
     };
 
@@ -100,10 +113,13 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
       }
 
       const data = await response.json();
-      setAIState({ 
+      const newAIState = { 
         aiResponse: data.completion,
         isLoadingAI: false 
-      });
+      };
+      setAIState(newAIState);
+      // Save AI response to localStorage
+      localStorage.setItem(`quickDecisionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(newAIState));
     } catch (error) {
       console.error('Error fetching AI response:', error);
       setAIState({ 

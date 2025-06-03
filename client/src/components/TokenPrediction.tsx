@@ -25,9 +25,16 @@ const MAX_TOKENS = 8;
 export default function TokenPrediction() {
   const [state, setState] = useState<TokenPredictionState>(() => {
     const saved = localStorage.getItem("tokenPredictionState");
+    const savedAI = localStorage.getItem("tokenPredictionAI");
+    
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsedState = JSON.parse(saved);
+        // Load saved AI response if it exists
+        if (savedAI) {
+          parsedState.aiCompletion = savedAI;
+        }
+        return parsedState;
       } catch {
         // Fall back to initial state
       }
@@ -38,7 +45,7 @@ export default function TokenPrediction() {
       currentToken: "",
       isComplete: false,
       targetTokens: MAX_TOKENS,
-      aiCompletion: "",
+      aiCompletion: savedAI || "",
       isLoadingAI: false,
       showAISection: false,
     };
@@ -111,6 +118,8 @@ export default function TokenPrediction() {
         aiCompletion: data.completion,
         isLoadingAI: false,
       }));
+      // Save AI response to localStorage
+      localStorage.setItem("tokenPredictionAI", data.completion);
     } catch (error) {
       console.error("Error fetching AI completion:", error);
       setState((prev) => ({

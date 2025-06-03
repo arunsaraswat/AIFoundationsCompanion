@@ -56,6 +56,33 @@ export default function TokenPrediction() {
     localStorage.setItem("tokenPredictionState", JSON.stringify(state));
   }, [state]);
 
+  // Listen for storage changes to reset component when data is cleared
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const saved = localStorage.getItem("tokenPredictionState");
+      
+      if (!saved) {
+        // Data was cleared, reset component
+        setState({
+          userTokens: [],
+          currentSentence: STARTER_PROMPT,
+          currentToken: "",
+          isComplete: false,
+          targetTokens: MAX_TOKENS,
+          aiCompletion: "",
+          isLoadingAI: false,
+          showAISection: false,
+        });
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
   const handleSubmitToken = () => {
     if (!state.currentToken.trim()) return;
 

@@ -33,10 +33,11 @@ export function clearCourseData(): void {
   localStorage.removeItem("modelMatchUpTask3");
   localStorage.removeItem("tokenPredictionState");
   
-  // Clear all prompt anatomy, quick decision prompt, and AI response data
+  // Clear all prompt anatomy, quick decision prompt, checkbox state, and AI response data
   Object.keys(localStorage).forEach(key => {
     if (key.startsWith("promptAnatomy_") || 
         key.startsWith("quickDecisionPrompt_") || 
+        key.startsWith("quickDecisionCheckbox_") ||
         key.startsWith("quickDecisionAI_") ||
         key.startsWith("tokenPredictionAI_")) {
       localStorage.removeItem(key);

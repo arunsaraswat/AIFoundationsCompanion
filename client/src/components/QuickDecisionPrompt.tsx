@@ -42,7 +42,11 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
     };
   });
 
-  const [showFormattedPrompt, setShowFormattedPrompt] = useState(false);
+  const [showFormattedPrompt, setShowFormattedPrompt] = useState(() => {
+    // Load saved checkbox state
+    const saved = localStorage.getItem(`quickDecisionCheckbox_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
+    return saved === 'true';
+  });
   const [aiState, setAIState] = useState<AIResponseState>(() => {
     // Try to load saved AI response
     const saved = localStorage.getItem(`quickDecisionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
@@ -70,8 +74,9 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
         setFields({ role: "", issue: "" });
         setShowFormattedPrompt(false);
         setAIState({ aiResponse: "", isLoadingAI: false });
-        // Also clear AI response localStorage
+        // Also clear AI response and checkbox localStorage
         localStorage.removeItem(`quickDecisionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
+        localStorage.removeItem(`quickDecisionCheckbox_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
       }
     };
 
@@ -124,6 +129,11 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
   };
 
   const isComplete = fields.role.trim() !== "" && fields.issue.trim() !== "";
+
+  // Save checkbox state to localStorage
+  useEffect(() => {
+    localStorage.setItem(`quickDecisionCheckbox_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, showFormattedPrompt.toString());
+  }, [showFormattedPrompt, lessonId, subLessonId, exerciseId, stepId]);
 
   // Save the formatted prompt when checkbox is checked
   useEffect(() => {

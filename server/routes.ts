@@ -27,7 +27,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               content: prompt
             }
           ],
-          max_tokens: 50
+          max_tokens: 500
         }),
       });
 

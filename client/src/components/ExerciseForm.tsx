@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
 import ModelMatchUp from "./ModelMatchUp";
 import TokenPrediction from "./TokenPrediction";
+import PromptAnatomy from "./PromptAnatomy";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -127,7 +128,29 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     {step.description}
                   </p>
                 )}
-                {step.type === 'textarea' ? (
+                {/* Special handling for Step 2a anatomy component */}
+                {step.id === 'step-2a' && exercise.id === 'exercise-11' ? (
+                  <PromptAnatomy 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : step.type === 'multi-step' ? (
+                  <div className="ml-4 space-y-3">
+                    {step.steps?.map((subStep) => (
+                      <div key={subStep.id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-3 py-1">
+                        <Label className="text-xs font-medium text-foreground mb-1 block">{subStep.label}</Label>
+                        <Input
+                          value={subStep.answer as string || ''}
+                          onChange={(e) => handleStepAnswerChange(subStep.id, e.target.value)}
+                          placeholder="Enter your answer..."
+                          className="text-xs"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : step.type === 'textarea' ? (
                   <Textarea
                     value={step.answer as string || ''}
                     onChange={(e) => handleStepAnswerChange(step.id, e.target.value)}

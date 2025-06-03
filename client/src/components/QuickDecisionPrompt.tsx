@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
 
 interface QuickDecisionPromptProps {
@@ -85,13 +86,6 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
     localStorage.setItem(`quickDecisionPrompt_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(newFields));
   };
 
-  const handleDone = () => {
-    const formattedPrompt = `I'm a ${fields.role}. I need to make a decision about ${fields.issue}. What are 3 options I should consider, and what are the trade-offs of each from my point of view?`;
-
-    updateStepAnswer(lessonId, subLessonId, exerciseId, stepId, formattedPrompt);
-    setShowFormattedPrompt(true);
-  };
-
   const fetchAIResponse = async () => {
     const prompt = `I'm a ${fields.role}. I need to make a decision about ${fields.issue}. What are 3 options I should consider, and what are the trade-offs of each from my point of view?`;
     
@@ -131,6 +125,14 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
 
   const isComplete = fields.role.trim() !== "" && fields.issue.trim() !== "";
 
+  // Save the formatted prompt when checkbox is checked
+  useEffect(() => {
+    if (showFormattedPrompt && isComplete) {
+      const formattedPrompt = `I'm a ${fields.role}. I need to make a decision about ${fields.issue}. What are 3 options I should consider, and what are the trade-offs of each from my point of view?`;
+      updateStepAnswer(lessonId, subLessonId, exerciseId, stepId, formattedPrompt);
+    }
+  }, [showFormattedPrompt, isComplete, fields, lessonId, subLessonId, exerciseId, stepId, updateStepAnswer]);
+
   return (
     <div className="space-y-4">
       <div className="grid gap-4">
@@ -157,14 +159,16 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
         </div>
       </div>
 
-      <div className="flex justify-center">
-        <Button 
-          onClick={handleDone}
+      <div className="flex items-center space-x-2">
+        <Checkbox 
+          id="show-formatted"
+          checked={showFormattedPrompt}
+          onCheckedChange={(checked) => setShowFormattedPrompt(!!checked)}
           disabled={!isComplete}
-          className="w-full max-w-xs"
-        >
+        />
+        <Label htmlFor="show-formatted" className="text-sm font-medium cursor-pointer">
           Done - Show Formatted Prompt
-        </Button>
+        </Label>
       </div>
 
       {showFormattedPrompt && (

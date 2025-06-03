@@ -191,12 +191,16 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
                 )}
                 
                 {aiState.aiResponse && (
-                  <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed max-h-96 overflow-y-auto">
-                    <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
-                      &gt; AI MODEL OUTPUT
+                  <div className="bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm max-h-80 overflow-hidden">
+                    <div className="p-4 pb-2">
+                      <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
+                        &gt; AI MODEL OUTPUT
+                      </div>
                     </div>
-                    <div className="whitespace-pre-wrap">
-                      {aiState.aiResponse}
+                    <div className="px-4 pb-4 max-h-64 overflow-y-auto">
+                      <div className="whitespace-pre-wrap leading-relaxed">
+                        {aiState.aiResponse}
+                      </div>
                     </div>
                   </div>
                 )}

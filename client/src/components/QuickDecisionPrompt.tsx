@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,6 +46,24 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
     aiResponse: "",
     isLoadingAI: false
   });
+
+  // Listen for storage changes to reset component when data is cleared
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storageKey = `quickDecisionPrompt_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`;
+      const saved = localStorage.getItem(storageKey);
+      
+      if (!saved) {
+        // Data was cleared, reset component
+        setFields({ role: "", issue: "" });
+        setShowFormattedPrompt(false);
+        setAIState({ aiResponse: "", isLoadingAI: false });
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [lessonId, subLessonId, exerciseId, stepId]);
 
   const updateField = (field: keyof DecisionFields, value: string) => {
     const newFields = { ...fields, [field]: value };
@@ -173,7 +191,7 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
                 )}
                 
                 {aiState.aiResponse && (
-                  <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed">
+                  <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed max-h-96 overflow-y-auto">
                     <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
                       &gt; AI MODEL OUTPUT
                     </div>

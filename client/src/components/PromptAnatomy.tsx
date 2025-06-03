@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,6 +46,31 @@ export default function PromptAnatomy({ lessonId, subLessonId, exerciseId, stepI
   });
 
   const [showFormattedPrompt, setShowFormattedPrompt] = useState(false);
+
+  // Listen for storage changes to reset component when data is cleared
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storageKey = `promptAnatomy_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`;
+      const saved = localStorage.getItem(storageKey);
+      
+      if (!saved) {
+        // Data was cleared, reset component
+        setFields({
+          role: "",
+          whoInvolved: "",
+          challenge: "",
+          whereHappening: "",
+          whenHappening: "",
+          whyMatters: "",
+          outputFormat: ""
+        });
+        setShowFormattedPrompt(false);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [lessonId, subLessonId, exerciseId, stepId]);
 
   const updateField = (field: keyof AnatomyFields, value: string) => {
     const newFields = { ...fields, [field]: value };
@@ -166,7 +191,7 @@ Output format: ${fields.outputFormat}`;
             <CardTitle className="text-lg">Your Formatted Prompt Anatomy</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg font-mono text-sm whitespace-pre-line">
+            <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg font-mono text-sm whitespace-pre-line max-h-96 overflow-y-auto">
               <strong>Role:</strong> {fields.role}
               {"\n"}<strong>Who is involved:</strong> {fields.whoInvolved}
               {"\n"}<strong>Challenge/Decision:</strong> {fields.challenge}

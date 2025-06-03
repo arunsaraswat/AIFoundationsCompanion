@@ -268,7 +268,7 @@ export default function TokenPrediction() {
                     )}
 
                     {state.aiCompletion && (
-                      <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed">
+                      <div className="p-4 bg-amber-950 text-amber-300 rounded-lg border border-amber-700 font-mono text-sm leading-relaxed max-h-96 overflow-y-auto">
                         <div className="text-amber-400 text-xs mb-2 font-bold tracking-wider">
                           &gt; AI MODEL OUTPUT
                         </div>

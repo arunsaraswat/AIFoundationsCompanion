@@ -181,14 +181,14 @@ Output format: ${fields.outputFormat}`;
           disabled={!isComplete}
           className="w-full max-w-xs"
         >
-          Done - Show Formatted Prompt
+          Done - Show Context
         </Button>
       </div>
 
       {showFormattedPrompt && (
         <Card className="mt-4">
           <CardHeader>
-            <CardTitle className="text-lg">Your Formatted Prompt Anatomy</CardTitle>
+            <CardTitle className="text-lg">Your Context</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg font-mono text-sm whitespace-pre-line max-h-96 overflow-y-auto">

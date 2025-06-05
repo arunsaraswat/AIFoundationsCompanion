@@ -326,7 +326,7 @@ const initialLessons: Lesson[] = [
                 id: "step-2b",
                 type: "textarea",
                 label: "Step 2b: GPT Prompt – Turn It into a RISE Prompt",
-                description: "Copy-Paste This Prompt into GPT: \"Using the information below, generate a clear and effective prompt using the RISE format. Don't lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation.\" Then paste your anatomy from Step 2a.",
+                description: "Copy-Paste This Prompt into GPT: \"Using the information below, generate a clear and effective prompt using the RISE format. Don't lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation.\" Then paste your context from Step 2a.",
                 answer: ""
               },
               {

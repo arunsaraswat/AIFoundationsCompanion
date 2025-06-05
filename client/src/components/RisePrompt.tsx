@@ -71,7 +71,7 @@ export default function RisePrompt({ lessonId, subLessonId, exerciseId, stepId }
 
   // Get context from Step 2a
   const getContextFromStep2a = () => {
-    const contextKey = `promptAnatomy_${lessonId}_${subLessonId}_${exerciseId}_2a`;
+    const contextKey = `promptAnatomy_${lessonId}_${subLessonId}_${exerciseId}_step-2a`;
     const saved = localStorage.getItem(contextKey);
     if (saved) {
       try {
@@ -99,7 +99,7 @@ Output format: ${fields.outputFormat}`;
 
   const isComplete = true; // Always complete since we have predefined text
   const context = getContextFromStep2a();
-  const fullPrompt = context ? `${gptPromptText}\n\n---\n\n${context}` : gptPromptText;
+  const fullPrompt = context ? `${gptPromptText}\n\n---\n\n${context}` : `${gptPromptText}\n\n--- (No context from Step 2a found)`;
 
   const fetchAIResponse = async () => {
     

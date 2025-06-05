@@ -347,7 +347,63 @@ const initialLessons: Lesson[] = [
           }
         ]
       },
-      { id: "2.5", title: "2.5 RAG", completed: false },
+      { 
+        id: "2.5", 
+        title: "2.5 RAG", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-7",
+            type: "textarea",
+            label: "Discussion 7: \"Can ChatGPT Answer This?\"",
+            description: "Consider company-specific prompts. Discuss: Can ChatGPT answer well without help? Set up need for RAG",
+            answer: ""
+          },
+          {
+            id: "exercise-13",
+            type: "multi-step",
+            label: "Exercise 13: \"GPT vs RAG on Employee Handbook\"",
+            description: "Multi-step activity comparing GPT responses with and without RAG",
+            steps: [
+              {
+                id: "step-1",
+                type: "textarea",
+                label: "Step 1: Ask GPT (without RAG)",
+                description: "Prompt: \"What is the parental leave policy at The Venue Network?\" Observe the output: Does it confidently guess? Is it vague, overly generic, or inaccurate?",
+                answer: ""
+              },
+              {
+                id: "step-2",
+                type: "textarea", 
+                label: "Step 2: Ask the same question in a RAG-enabled environment",
+                description: "Load the employee handbook (RAG mode). Ask: \"What is the parental leave policy at The Venue Network?\"",
+                answer: ""
+              },
+              {
+                id: "step-3",
+                type: "textarea",
+                label: "Step 3: Compare",
+                description: "Which version gave actual policy details? Did either include source references or cite page numbers? Which answer would you rely on if you were making a decision as an employee or manager?",
+                answer: ""
+              },
+              {
+                id: "test-questions",
+                type: "textarea",
+                label: "Test Questions from the Handbook",
+                description: "(These are designed to trip up a vanilla model unless it's paired with the handbook.) What benefits does The Venue Network provide after 90 days of employment? How much PTO can be carried over at the end of the fiscal year? What is the bereavement leave policy for a domestic partner's child? What are the rules around ending employment with unused PTO? Under what conditions will COBRA benefits be offered to former employees?",
+                answer: ""
+              }
+            ]
+          },
+          {
+            id: "exercise-14",
+            type: "textarea",
+            label: "Exercise 14: \"What Data Do You Need to RAG?\"",
+            description: "Solo reflection: What content would create value if connected to AI? Table share RAG-worthy data. Group capture examples",
+            answer: ""
+          }
+        ]
+      },
       { id: "2.6", title: "2.6 Agentic Workflow Primer", completed: false },
       { id: "2.7", title: "2.7 Frontiers in AI", completed: false },
     ],

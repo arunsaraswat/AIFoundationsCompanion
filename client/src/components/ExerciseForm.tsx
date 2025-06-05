@@ -9,6 +9,7 @@ import TokenPrediction from "./TokenPrediction";
 import PromptAnatomy from "./PromptAnatomy";
 import QuickDecisionPrompt from "./QuickDecisionPrompt";
 import RisePrompt from "./RisePrompt";
+import RagStep1 from "./RagStep1";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -149,6 +150,14 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                 ) : /* Special handling for Step 2b RISE prompt component */
                 step.id === 'step-2b' && exercise.id === 'exercise-11' ? (
                   <RisePrompt 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : /* Special handling for Exercise 13 Step 1 RAG testing */
+                step.id === 'step-1' && exercise.id === 'exercise-13' ? (
+                  <RagStep1 
                     lessonId={lessonId}
                     subLessonId={subLessonId}
                     exerciseId={exercise.id}

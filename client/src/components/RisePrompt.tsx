@@ -22,11 +22,8 @@ interface AIResponseState {
 export default function RisePrompt({ lessonId, subLessonId, exerciseId, stepId }: RisePromptProps) {
   const { updateStepAnswer } = useCourseProgress();
   
-  const [userPrompt, setUserPrompt] = useState(() => {
-    // Try to load saved user prompt
-    const saved = localStorage.getItem(`risePrompt_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
-    return saved || "";
-  });
+  // Predefined GPT prompt text
+  const gptPromptText = "Using the information below, generate a clear and effective prompt using the RISE format. Don't lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation.";
 
   const [showFullPrompt, setShowFullPrompt] = useState(() => {
     // Load saved checkbox state
@@ -53,17 +50,15 @@ export default function RisePrompt({ lessonId, subLessonId, exerciseId, stepId }
   // Listen for storage changes to reset component when data is cleared
   useEffect(() => {
     const handleStorageChange = () => {
-      const storageKey = `risePrompt_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`;
+      const storageKey = `risePromptCheckbox_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`;
       const saved = localStorage.getItem(storageKey);
       
       if (!saved) {
         // Data was cleared, reset component
-        setUserPrompt("");
         setShowFullPrompt(false);
         setAIState({ aiResponse: "", isLoadingAI: false });
-        // Also clear AI response and checkbox localStorage
+        // Also clear AI response localStorage
         localStorage.removeItem(`risePromptAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
-        localStorage.removeItem(`risePromptCheckbox_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
       }
     };
 
@@ -95,20 +90,16 @@ Output format: ${fields.outputFormat}`;
     return "";
   };
 
-  const updateUserPrompt = (value: string) => {
-    setUserPrompt(value);
-    // Save to localStorage
-    localStorage.setItem(`risePrompt_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, value);
-  };
+
 
   // Save checkbox state to localStorage
   useEffect(() => {
     localStorage.setItem(`risePromptCheckbox_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, showFullPrompt.toString());
   }, [showFullPrompt, lessonId, subLessonId, exerciseId, stepId]);
 
-  const isComplete = userPrompt.trim() !== "";
+  const isComplete = true; // Always complete since we have predefined text
   const context = getContextFromStep2a();
-  const fullPrompt = context ? `${userPrompt}\n\n---\n\n${context}` : userPrompt;
+  const fullPrompt = context ? `${gptPromptText}\n\n---\n\n${context}` : gptPromptText;
 
   const fetchAIResponse = async () => {
     
@@ -155,26 +146,14 @@ Output format: ${fields.outputFormat}`;
 
   return (
     <div className="space-y-4">
-      <div>
-        <Label htmlFor="userPrompt">Enter your response...</Label>
-        <Textarea
-          id="userPrompt"
-          value={userPrompt}
-          onChange={(e) => updateUserPrompt(e.target.value)}
-          placeholder="Using the information below, generate a clear and effective prompt using the RISE format. Don't lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation."
-          className="mt-1 min-h-32"
-        />
-      </div>
-
       <div className="flex items-center space-x-2">
         <Checkbox 
           id="show-full-prompt"
           checked={showFullPrompt}
           onCheckedChange={(checked) => setShowFullPrompt(!!checked)}
-          disabled={!isComplete}
         />
         <Label htmlFor="show-full-prompt" className="text-sm font-medium cursor-pointer">
-          Done - Show Full Prompt
+          Show Full Prompt
         </Label>
       </div>
 

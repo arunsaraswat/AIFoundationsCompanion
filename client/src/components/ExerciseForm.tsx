@@ -8,6 +8,7 @@ import ModelMatchUp from "./ModelMatchUp";
 import TokenPrediction from "./TokenPrediction";
 import PromptAnatomy from "./PromptAnatomy";
 import QuickDecisionPrompt from "./QuickDecisionPrompt";
+import RisePrompt from "./RisePrompt";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -140,6 +141,14 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                 ) : /* Special handling for Step 2a anatomy component */
                 step.id === 'step-2a' && exercise.id === 'exercise-11' ? (
                   <PromptAnatomy 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : /* Special handling for Step 2b RISE prompt component */
+                step.id === 'step-2b' && exercise.id === 'exercise-11' ? (
+                  <RisePrompt 
                     lessonId={lessonId}
                     subLessonId={subLessonId}
                     exerciseId={exercise.id}

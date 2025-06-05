@@ -47,6 +47,22 @@ export default function RisePrompt({ lessonId, subLessonId, exerciseId, stepId }
     };
   });
 
+  const [riseExecutionState, setRiseExecutionState] = useState<AIResponseState>(() => {
+    // Try to load saved RISE execution response
+    const saved = localStorage.getItem(`riseExecutionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // Fall back to empty state
+      }
+    }
+    return {
+      aiResponse: "",
+      isLoadingAI: false
+    };
+  });
+
   // Listen for storage changes to reset component when data is cleared
   useEffect(() => {
     const handleStorageChange = () => {
@@ -57,8 +73,10 @@ export default function RisePrompt({ lessonId, subLessonId, exerciseId, stepId }
         // Data was cleared, reset component
         setShowFullPrompt(false);
         setAIState({ aiResponse: "", isLoadingAI: false });
+        setRiseExecutionState({ aiResponse: "", isLoadingAI: false });
         // Also clear AI response localStorage
         localStorage.removeItem(`risePromptAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
+        localStorage.removeItem(`riseExecutionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
       }
     };
 
@@ -132,6 +150,45 @@ Output format: ${fields.outputFormat}`;
       console.error('Error fetching AI response:', error);
       setAIState({ 
         aiResponse: "Error: Could not get AI response",
+        isLoadingAI: false 
+      });
+    }
+  };
+
+  const executeRisePrompt = async () => {
+    if (!aiState.aiResponse) {
+      return; // Need a generated RISE prompt first
+    }
+    
+    setRiseExecutionState(prev => ({ ...prev, isLoadingAI: true }));
+    
+    try {
+      const response = await fetch('/api/openrouter-completion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: aiState.aiResponse
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to execute RISE prompt');
+      }
+
+      const data = await response.json();
+      const newRiseState = { 
+        aiResponse: data.completion,
+        isLoadingAI: false 
+      };
+      setRiseExecutionState(newRiseState);
+      // Save RISE execution response to localStorage
+      localStorage.setItem(`riseExecutionAI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(newRiseState));
+    } catch (error) {
+      console.error('Error executing RISE prompt:', error);
+      setRiseExecutionState({ 
+        aiResponse: "Error: Could not execute RISE prompt",
         isLoadingAI: false 
       });
     }
@@ -213,6 +270,50 @@ Output format: ${fields.outputFormat}`;
               )}
             </CardContent>
           </Card>
+
+          {/* Execute Generated RISE Prompt Section */}
+          {aiState.aiResponse && !aiState.isLoadingAI && (
+            <Card className="mt-4">
+              <CardHeader>
+                <CardTitle className="text-lg">Execute Generated RISE Prompt</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {!riseExecutionState.aiResponse && !riseExecutionState.isLoadingAI && (
+                  <Button 
+                    onClick={executeRisePrompt}
+                    className="w-full"
+                    variant="secondary"
+                  >
+                    Send RISE Prompt to AI Model
+                  </Button>
+                )}
+                
+                {riseExecutionState.isLoadingAI && (
+                  <div className="text-center py-4">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                    <p className="text-sm text-gray-600 mt-2">Executing RISE prompt...</p>
+                  </div>
+                )}
+                
+                {riseExecutionState.aiResponse && !riseExecutionState.isLoadingAI && (
+                  <div>
+                    <Button 
+                      onClick={executeRisePrompt}
+                      variant="outline"
+                      className="w-full mb-4"
+                    >
+                      Execute RISE Prompt Again
+                    </Button>
+                    
+                    <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap max-h-96 overflow-y-auto">
+                      <div className="text-amber-400 mb-2">&gt; RISE PROMPT EXECUTION OUTPUT</div>
+                      {riseExecutionState.aiResponse}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </div>
       )}
     </div>

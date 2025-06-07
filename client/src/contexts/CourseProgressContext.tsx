@@ -404,7 +404,49 @@ const initialLessons: Lesson[] = [
           }
         ]
       },
-      { id: "2.6", title: "2.6 Agentic Workflow Primer", completed: false },
+      { 
+        id: "2.6", 
+        title: "2.6 Agentic Workflow Primer", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-8",
+            type: "textarea",
+            label: "Discussion 8: \"If You Had a Team of You...\"",
+            description: "Table discussion: Clone yourself into 3 AI assistants. What would you assign them? Think beyond simple automation",
+            answer: ""
+          },
+          {
+            id: "exercise-15",
+            type: "multi-step",
+            label: "Exercise 15: \"Design Your Agent Assistant\"",
+            description: "Multi-step activity: Build a Human + 1 Agent Workflow (16-18 min)",
+            steps: [
+              {
+                id: "step-1",
+                type: "component",
+                label: "Step 1: Build a Human + 1 Agent Workflow (16-18 min)",
+                description: "Choose a real task or workflow you own and design an AI assistant to help with it.",
+                component: "AgentDesignStep1"
+              },
+              {
+                id: "step-2",
+                type: "component",
+                label: "Step 2: Prompt GPT to Imagine Scaling It (5-7 min)",
+                description: "Explore how your single-agent design could evolve into a multi-agent workflow.",
+                component: "AgentDesignStep2"
+              }
+            ]
+          },
+          {
+            id: "exercise-16",
+            type: "textarea",
+            label: "Exercise 16: \"If This Worked Perfectly...\"",
+            description: "Solo reflection: How would your week change? Gallery walk: Share examples per group. Debrief speed gains, risk reduction, team impact",
+            answer: ""
+          }
+        ]
+      },
       { id: "2.7", title: "2.7 Frontiers in AI", completed: false },
     ],
   },

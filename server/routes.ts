@@ -197,6 +197,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // AI query endpoint for general AI assistance
+  app.post("/api/ai/query", async (req, res) => {
+    try {
+      const { prompt, context } = req.body;
+      
+      if (!prompt) {
+        return res.status(400).json({ error: "Prompt is required" });
+      }
+
+      // Use OpenRouter as the default AI service
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-4o-mini",
+          messages: [
+            {
+              role: "system",
+              content: context ? `You are helping with ${context}. Provide practical, actionable advice.` : "You are a helpful AI assistant providing practical advice."
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          max_tokens: 1000,
+          temperature: 0.7
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`OpenRouter API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const aiResponse = data.choices[0]?.message?.content || "No response received";
+      
+      res.json({ response: aiResponse });
+    } catch (error) {
+      console.error("AI query error:", error);
+      res.status(500).json({ error: "Failed to get AI response" });
+    }
+  });
+
   // put application routes here
   // prefix all routes with /api
 

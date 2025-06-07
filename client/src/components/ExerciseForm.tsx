@@ -12,6 +12,8 @@ import RisePrompt from "./RisePrompt";
 import RagStep1 from "./RagStep1";
 import RagStep2 from "./RagStep2";
 import RagTestQuestions from "./RagTestQuestions";
+import AgentDesignStep1 from "./AgentDesignStep1";
+import AgentDesignStep2 from "./AgentDesignStep2";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -176,6 +178,22 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                 ) : /* Special handling for Exercise 13 Test Questions */
                 step.id === 'test-questions' && exercise.id === 'exercise-13' ? (
                   <RagTestQuestions 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : /* Special handling for Exercise 15 Step 1 Agent Design */
+                step.id === 'step-1' && exercise.id === 'exercise-15' ? (
+                  <AgentDesignStep1 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : /* Special handling for Exercise 15 Step 2 Agent Scaling */
+                step.id === 'step-2' && exercise.id === 'exercise-15' ? (
+                  <AgentDesignStep2 
                     lessonId={lessonId}
                     subLessonId={subLessonId}
                     exerciseId={exercise.id}

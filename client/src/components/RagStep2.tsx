@@ -12,8 +12,19 @@ interface RagStep2Props {
   stepId: string;
 }
 
+interface Source {
+  type: string;
+  text: string;
+  filename?: string;
+  quote?: string;
+  file_id?: string;
+  start_index?: number;
+  end_index?: number;
+}
+
 interface AIResponseState {
   aiResponse: string;
+  sources: Source[];
   isLoadingAI: boolean;
 }
 
@@ -42,6 +53,7 @@ export default function RagStep2({ lessonId, subLessonId, exerciseId, stepId }: 
     }
     return {
       aiResponse: "",
+      sources: [],
       isLoadingAI: false
     };
   });
@@ -55,7 +67,7 @@ export default function RagStep2({ lessonId, subLessonId, exerciseId, stepId }: 
       if (!saved) {
         // Data was cleared, reset component
         setUserObservations("");
-        setAIState({ aiResponse: "", isLoadingAI: false });
+        setAIState({ aiResponse: "", sources: [], isLoadingAI: false });
         // Also clear AI response localStorage
         localStorage.removeItem(`ragStep2AI_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`);
       }
@@ -90,6 +102,7 @@ export default function RagStep2({ lessonId, subLessonId, exerciseId, stepId }: 
       const data = await response.json();
       const newAIState = { 
         aiResponse: data.completion,
+        sources: data.sources || [],
         isLoadingAI: false 
       };
       setAIState(newAIState);
@@ -99,6 +112,7 @@ export default function RagStep2({ lessonId, subLessonId, exerciseId, stepId }: 
       console.error('Error fetching RAG response:', error);
       setAIState({ 
         aiResponse: "Error: Could not get RAG response. Please ensure the OpenAI API key is configured.",
+        sources: [],
         isLoadingAI: false 
       });
     }
@@ -157,6 +171,39 @@ export default function RagStep2({ lessonId, subLessonId, exerciseId, stepId }: 
                   <div className="text-amber-400 mb-2">&gt; AI MODEL OUTPUT (WITH RAG)</div>
                   {aiState.aiResponse}
                 </div>
+                
+                {aiState.sources && aiState.sources.length > 0 && (
+                  <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                    <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">📚 Sources Referenced:</h4>
+                    <div className="space-y-2">
+                      {aiState.sources.map((source, index) => (
+                        <div key={index} className="text-sm text-blue-800 dark:text-blue-200 border-l-2 border-blue-300 dark:border-blue-700 pl-3">
+                          {source.type === "file_citation" && (
+                            <div>
+                              <div className="font-medium">{source.filename}</div>
+                              {source.quote && (
+                                <div className="text-xs italic mt-1 text-blue-600 dark:text-blue-300">
+                                  "{source.quote}"
+                                </div>
+                              )}
+                              <div className="text-xs text-blue-500 dark:text-blue-400 mt-1">
+                                Citation: {source.text}
+                              </div>
+                            </div>
+                          )}
+                          {source.type === "file_path" && (
+                            <div>
+                              <div className="font-medium">File: {source.text}</div>
+                              <div className="text-xs text-blue-500 dark:text-blue-400">
+                                ID: {source.file_id}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

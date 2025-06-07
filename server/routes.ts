@@ -155,8 +155,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const completion = assistantMessage.content[0].text.value;
+      const annotations = assistantMessage.content[0].text.annotations || [];
       
-      res.json({ completion });
+      // Process annotations to get source details
+      const sources = [];
+      for (const annotation of annotations) {
+        if (annotation.type === "file_citation") {
+          // Get file details
+          const fileResponse = await fetch(`https://api.openai.com/v1/files/${annotation.file_citation.file_id}`, {
+            headers: {
+              "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+            }
+          });
+          
+          if (fileResponse.ok) {
+            const fileData = await fileResponse.json();
+            sources.push({
+              type: "file_citation",
+              text: annotation.text,
+              filename: fileData.filename,
+              quote: annotation.file_citation.quote || "",
+              start_index: annotation.start_index,
+              end_index: annotation.end_index
+            });
+          }
+        } else if (annotation.type === "file_path") {
+          sources.push({
+            type: "file_path", 
+            text: annotation.text,
+            file_id: annotation.file_path.file_id,
+            start_index: annotation.start_index,
+            end_index: annotation.end_index
+          });
+        }
+      }
+      
+      res.json({ completion, sources });
     } catch (error) {
       console.error("OpenAI Assistant error:", error);
       res.status(500).json({ error: "Failed to get completion from OpenAI Assistant" });

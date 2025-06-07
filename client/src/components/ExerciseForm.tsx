@@ -10,6 +10,7 @@ import PromptAnatomy from "./PromptAnatomy";
 import QuickDecisionPrompt from "./QuickDecisionPrompt";
 import RisePrompt from "./RisePrompt";
 import RagStep1 from "./RagStep1";
+import RagStep2 from "./RagStep2";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -158,6 +159,14 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                 ) : /* Special handling for Exercise 13 Step 1 RAG testing */
                 step.id === 'step-1' && exercise.id === 'exercise-13' ? (
                   <RagStep1 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
+                ) : /* Special handling for Exercise 13 Step 2 RAG comparison */
+                step.id === 'step-2' && exercise.id === 'exercise-13' ? (
+                  <RagStep2 
                     lessonId={lessonId}
                     subLessonId={subLessonId}
                     exerciseId={exercise.id}

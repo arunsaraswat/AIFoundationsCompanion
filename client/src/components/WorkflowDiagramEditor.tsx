@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import ReactFlow, {
   Node,
   Edge,
@@ -9,8 +9,6 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   Connection,
-  BackgroundVariant,
-  ReactFlowInstance,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Button } from '@/components/ui/button';
@@ -51,50 +49,44 @@ const defaultNodes: Node[] = [
 
 const defaultEdges: Edge[] = [];
 
-// Storage key for diagram persistence
-const STORAGE_KEY_DIAGRAM = 'workflow-diagram-data';
+const STORAGE_KEY = 'workflow-diagram';
 
-// Load saved diagram from localStorage
-const loadSavedDiagram = () => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY_DIAGRAM);
-    return saved ? JSON.parse(saved) : null;
-  } catch {
-    return null;
-  }
-};
+export default function WorkflowDiagramEditor({ onDiagramChange }: WorkflowDiagramEditorProps) {
+  // Load initial state only once
+  const getInitialState = useCallback(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const data = JSON.parse(saved);
+        return {
+          nodes: data.nodes || defaultNodes,
+          edges: data.edges || defaultEdges,
+          nodeId: data.nodeId || 2
+        };
+      }
+    } catch (error) {
+      console.error('Failed to load saved diagram:', error);
+    }
+    return {
+      nodes: defaultNodes,
+      edges: defaultEdges,
+      nodeId: 2
+    };
+  }, []);
 
-// Save diagram to localStorage
-const saveDiagramToStorage = (nodes: Node[], edges: Edge[], nodeId: number) => {
-  try {
-    const diagramData = { nodes, edges, nodeId };
-    localStorage.setItem(STORAGE_KEY_DIAGRAM, JSON.stringify(diagramData));
-    return true;
-  } catch {
-    return false;
-  }
-};
-
-export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: propInitialNodes, initialEdges: propInitialEdges }: WorkflowDiagramEditorProps) {
-  // Initialize with provided props or try to load saved diagram
-  const savedDiagram = loadSavedDiagram();
-  const initialNodes = propInitialNodes || (savedDiagram?.nodes) || defaultNodes;
-  const initialEdges = propInitialEdges || (savedDiagram?.edges) || defaultEdges;
-  const initialNodeId = savedDiagram?.nodeId || 2;
-  
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [nodeId, setNodeId] = useState(initialNodeId);
+  const [initialState] = useState(getInitialState);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialState.nodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialState.edges);
+  const [nodeId, setNodeId] = useState(initialState.nodeId);
   const [selectedNodeType, setSelectedNodeType] = useState<keyof typeof nodeTypes>('agent');
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
   const [editingNodeLabel, setEditingNodeLabel] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
 
+  // Only call onDiagramChange if provided
   useEffect(() => {
-    if (onDiagramChange) {
-      onDiagramChange(nodes, edges);
-    }
+    onDiagramChange?.(nodes, edges);
   }, [nodes, edges, onDiagramChange]);
 
   const onConnect = useCallback(
@@ -135,9 +127,9 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
             : node
         )
       );
+      setEditingNodeId(null);
+      setEditingNodeLabel('');
     }
-    setEditingNodeId(null);
-    setEditingNodeLabel('');
   }, [editingNodeId, editingNodeLabel, setNodes]);
 
   const cancelEditingNode = useCallback(() => {
@@ -145,21 +137,15 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
     setEditingNodeLabel('');
   }, []);
 
-  const onEdgesDelete = useCallback(
-    (edgesToDelete: Edge[]) => {
-      setEdges((eds) => eds.filter((e) => !edgesToDelete.some((ed) => ed.id === e.id)));
-    },
-    [setEdges]
-  );
+  const onEdgesDelete = useCallback((edgesToDelete: Edge[]) => {
+    setEdges((eds) => eds.filter((e) => !edgesToDelete.find((ed) => ed.id === e.id)));
+  }, [setEdges]);
 
   const addNode = useCallback(() => {
     const newNode: Node = {
       id: nodeId.toString(),
       type: 'default',
-      position: {
-        x: Math.random() * 400 + 100,
-        y: Math.random() * 300 + 100,
-      },
+      position: { x: Math.random() * 300 + 100, y: Math.random() * 300 + 100 },
       data: { label: `${nodeTypes[selectedNodeType]} ${nodeId}` },
       style: { 
         backgroundColor: nodeColors[selectedNodeType], 
@@ -171,7 +157,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
     };
 
     setNodes((nds) => [...nds, newNode]);
-    setNodeId((id: number) => id + 1);
+    setNodeId((id) => id + 1);
   }, [nodeId, selectedNodeType, setNodes]);
 
   const clearDiagram = useCallback(() => {
@@ -179,36 +165,31 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
     setEdges([]);
     setNodeId(1);
     setSaveStatus('idle');
-    // Clear localStorage as well
-    localStorage.removeItem(STORAGE_KEY_DIAGRAM);
+    localStorage.removeItem(STORAGE_KEY);
   }, [setNodes, setEdges]);
 
   const saveDiagram = useCallback(() => {
     setSaveStatus('saving');
-    const success = saveDiagramToStorage(nodes, edges, nodeId);
-    if (success) {
+    try {
+      const data = { nodes, edges, nodeId };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       setSaveStatus('saved');
       setTimeout(() => setSaveStatus('idle'), 2000);
-    } else {
+    } catch (error) {
+      console.error('Failed to save diagram:', error);
       setSaveStatus('idle');
     }
   }, [nodes, edges, nodeId]);
 
   const exportDiagram = useCallback(() => {
-    const diagramData = {
-      nodes,
-      edges,
-      nodeId
-    };
-    const dataStr = JSON.stringify(diagramData, null, 2);
+    const data = { nodes, edges, nodeId };
+    const dataStr = JSON.stringify(data, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
-    const exportFileDefaultName = 'workflow-diagram.json';
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
-    linkElement.click();
+    const link = document.createElement('a');
+    link.setAttribute('href', dataUri);
+    link.setAttribute('download', 'workflow-diagram.json');
+    link.click();
   }, [nodes, edges, nodeId]);
 
   const importDiagram = useCallback(() => {
@@ -221,12 +202,15 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
         const reader = new FileReader();
         reader.onload = (event) => {
           try {
-            const diagramData = JSON.parse(event.target?.result as string);
-            setNodes(diagramData.nodes || []);
-            setEdges(diagramData.edges || []);
-            setNodeId(diagramData.nodeId || 1);
+            const data = JSON.parse(event.target?.result as string);
+            if (data.nodes && data.edges) {
+              setNodes(data.nodes);
+              setEdges(data.edges);
+              setNodeId(data.nodeId || data.nodes.length + 1);
+              setSelectedNode(null);
+            }
           } catch (error) {
-            console.error('Error importing diagram:', error);
+            console.error('Failed to import diagram:', error);
           }
         };
         reader.readAsText(file);
@@ -236,7 +220,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
   }, [setNodes, setEdges]);
 
   return (
-    <Card className="w-full h-[600px]">
+    <Card className="w-full">
       <CardHeader className="pb-4">
         <CardTitle className="text-lg">Workflow Diagram Editor</CardTitle>
         <div className="flex flex-wrap gap-2 items-center">
@@ -302,7 +286,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
             <Label htmlFor="node-label" className="text-sm font-medium">
               Edit Node Label
             </Label>
-            <div className="flex gap-2 mt-1">
+            <div className="flex gap-2 mt-2">
               <Input
                 id="node-label"
                 value={editingNodeLabel}

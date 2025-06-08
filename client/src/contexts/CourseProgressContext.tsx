@@ -505,14 +505,7 @@ const initialLessons: Lesson[] = [
                 id: "define-application",
                 type: "textarea",
                 label: "Define How You'll Apply It",
-                description: "What would it look like if you started modeling this success factor in how you work or lead right now?",
-                answer: ""
-              },
-              {
-                id: "examples",
-                type: "textarea",
-                label: "Examples",
-                description: "Examples: • Upskill Relentlessly → Block 1 hour/month for hands-on AI learning and share notes with team • Tell the Full Story → Start adding use-case evidence to every AI recommendation • Embed AI into the Everyday → Automate 1 report or feedback loop using a simple GenAI tool",
+                description: "What would it look like if you started modeling this success factor in how you work or lead right now?\n\nExamples: • Upskill Relentlessly → Block 1 hour/month for hands-on AI learning and share notes with team • Tell the Full Story → Start adding use-case evidence to every AI recommendation • Embed AI into the Everyday → Automate 1 report or feedback loop using a simple GenAI tool",
                 answer: ""
               },
               {

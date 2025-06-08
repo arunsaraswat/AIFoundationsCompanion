@@ -311,7 +311,7 @@ export default function WorkflowDiagramEditor({ }: WorkflowDiagramEditorProps) {
           </div>
         )}
       </CardHeader>
-      <CardContent className="p-0 h-[500px]">
+      <CardContent className="p-0 h-[750px]">
         <ReactFlow
           nodes={nodes}
           edges={edges}

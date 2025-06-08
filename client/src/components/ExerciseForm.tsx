@@ -109,9 +109,10 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                 {exercise.followUpLabel || "Follow-up:"}
               </Label>
               {exercise.followUpDescription && (
-                <p className="text-xs text-muted-foreground mb-3">
-                  {exercise.followUpDescription}
-                </p>
+                <p 
+                  className="text-xs text-muted-foreground mb-3"
+                  dangerouslySetInnerHTML={{ __html: exercise.followUpDescription }}
+                />
               )}
               <Textarea
                 value={exercise.followUpAnswer || ''}
@@ -131,9 +132,10 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               <div key={step.id} className="border-l-4 border-blue-200 dark:border-blue-700 pl-4 py-2">
                 <h4 className="font-medium text-sm text-foreground mb-2">{step.label}</h4>
                 {step.description && (
-                  <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                    {step.description}
-                  </p>
+                  <p 
+                    className="text-xs text-muted-foreground mb-3 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: step.description }}
+                  />
                 )}
                 {/* Special handling for Step 1 quick decision prompt */}
                 {step.id === 'step-1' && exercise.id === 'exercise-11' ? (
@@ -269,9 +271,10 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-medium">{exercise.label}</CardTitle>
         {exercise.description && (
-          <CardDescription className="text-sm leading-relaxed">
-            {exercise.description}
-          </CardDescription>
+          <CardDescription 
+            className="text-sm leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: exercise.description }}
+          />
         )}
       </CardHeader>
       <CardContent className="pt-0">

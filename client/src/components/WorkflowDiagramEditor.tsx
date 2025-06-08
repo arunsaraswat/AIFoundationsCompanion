@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, Download, Upload, Trash2, Edit3, X } from 'lucide-react';
+import { Plus, Download, Upload, Trash2, Edit3, X, Save } from 'lucide-react';
 
 interface WorkflowDiagramEditorProps {
   onDiagramChange?: (nodes: Node[], edges: Edge[]) => void;
@@ -38,7 +38,7 @@ const nodeColors = {
   data: '#8B5CF6'
 };
 
-const initialNodes: Node[] = [
+const defaultNodes: Node[] = [
   {
     id: '1',
     type: 'default',
@@ -48,16 +48,58 @@ const initialNodes: Node[] = [
   }
 ];
 
-const initialEdges: Edge[] = [];
+const defaultEdges: Edge[] = [];
+
+// Storage keys for persistence
+const STORAGE_KEY_NODES = 'workflow-diagram-nodes';
+const STORAGE_KEY_EDGES = 'workflow-diagram-edges';
+const STORAGE_KEY_NODE_ID = 'workflow-diagram-node-id';
+
+// Load from localStorage with fallback
+const loadFromStorage = (key: string, fallback: any) => {
+  try {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
+// Save to localStorage
+const saveToStorage = (key: string, data: any) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch {
+    // Silently fail if localStorage is not available
+  }
+};
 
 export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: propInitialNodes, initialEdges: propInitialEdges }: WorkflowDiagramEditorProps) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(propInitialNodes || initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(propInitialEdges || initialEdges);
-  const [nodeId, setNodeId] = useState(2);
+  // Load persisted state or use provided initial values
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    propInitialNodes || loadFromStorage(STORAGE_KEY_NODES, defaultNodes)
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    propInitialEdges || loadFromStorage(STORAGE_KEY_EDGES, defaultEdges)
+  );
+  const [nodeId, setNodeId] = useState(loadFromStorage(STORAGE_KEY_NODE_ID, 2));
   const [selectedNodeType, setSelectedNodeType] = useState<keyof typeof nodeTypes>('agent');
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
   const [editingNodeLabel, setEditingNodeLabel] = useState('');
+
+  // Save to localStorage whenever nodes or edges change
+  useEffect(() => {
+    saveToStorage(STORAGE_KEY_NODES, nodes);
+  }, [nodes]);
+
+  useEffect(() => {
+    saveToStorage(STORAGE_KEY_EDGES, edges);
+  }, [edges]);
+
+  useEffect(() => {
+    saveToStorage(STORAGE_KEY_NODE_ID, nodeId);
+  }, [nodeId]);
 
   useEffect(() => {
     if (onDiagramChange) {
@@ -139,13 +181,17 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
     };
 
     setNodes((nds) => [...nds, newNode]);
-    setNodeId((id) => id + 1);
+    setNodeId((id: number) => id + 1);
   }, [nodeId, selectedNodeType, setNodes]);
 
   const clearDiagram = useCallback(() => {
     setNodes([]);
     setEdges([]);
     setNodeId(1);
+    // Clear localStorage as well
+    localStorage.removeItem(STORAGE_KEY_NODES);
+    localStorage.removeItem(STORAGE_KEY_EDGES);
+    localStorage.removeItem(STORAGE_KEY_NODE_ID);
   }, [setNodes, setEdges]);
 
   const exportDiagram = useCallback(() => {
@@ -237,6 +283,10 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
             <Upload className="w-4 h-4 mr-1" />
             Import
           </Button>
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Save className="w-3 h-3" />
+            Auto-saved
+          </div>
         </div>
         
         {editingNodeId && (

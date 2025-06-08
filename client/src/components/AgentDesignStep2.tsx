@@ -61,18 +61,23 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
       const parsedData = JSON.parse(savedData);
       setFields(parsedData.fields || {});
       setAiState(parsedData.aiState || { aiResponse: "", isLoadingAI: false });
+      setDiagramState(parsedData.diagramState || { nodes: [], edges: [] });
       setIsCompleted(parsedData.isCompleted || false);
     }
   }, [lessonId, subLessonId, exerciseId, stepId]);
 
-  // Save data to localStorage whenever fields or AI state change
+  // Save data to localStorage whenever fields, AI state, or diagram change
   useEffect(() => {
-    const dataToSave = { fields, aiState, isCompleted };
+    const dataToSave = { fields, aiState, diagramState, isCompleted };
     localStorage.setItem(`agentDesignStep2_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(dataToSave));
-  }, [fields, aiState, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
+  }, [fields, aiState, diagramState, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
 
   const handleFieldChange = (field: keyof ScalingFields, value: string) => {
     setFields(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleDiagramChange = (nodes: Node[], edges: Edge[]) => {
+    setDiagramState({ nodes, edges });
   };
 
   const handleAIQuery = async () => {
@@ -228,14 +233,30 @@ Please provide specific, actionable suggestions for agent orchestration (e.g., p
 
       <Card>
         <CardHeader>
-          <CardTitle>Optional: Visual Sketch</CardTitle>
+          <CardTitle>Visual Workflow Diagram</CardTitle>
           <CardDescription>
-            Add to the sketch or describe it verbally to peers
+            Create a visual diagram of your multi-agent workflow. Add agents, processes, and connections.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <WorkflowDiagramEditor 
+            onDiagramChange={handleDiagramChange}
+            initialNodes={diagramState.nodes}
+            initialEdges={diagramState.edges}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Optional: Diagram Description</CardTitle>
+          <CardDescription>
+            Describe your workflow diagram or share additional thoughts with peers
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Textarea
-            placeholder="Describe your multi-agent workflow visually - how would you sketch the flow between agents? What would the diagram look like?"
+            placeholder="Describe your multi-agent workflow diagram - explain the flow between agents, decision points, and key interactions..."
             value={fields.sketchDescription}
             onChange={(e) => handleFieldChange("sketchDescription", e.target.value)}
             className="min-h-[80px]"

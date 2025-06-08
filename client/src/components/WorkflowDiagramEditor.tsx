@@ -97,18 +97,24 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
   const [isLoaded, setIsLoaded] = useState(false);
   const reactFlowInstance = useRef<ReactFlowInstance | null>(null);
 
-  // Save to localStorage whenever nodes or edges change
+  // Save to localStorage whenever nodes or edges change (but only after initial load)
   useEffect(() => {
-    saveToStorage(STORAGE_KEY_NODES, nodes);
-  }, [nodes]);
+    if (isLoaded) {
+      saveToStorage(STORAGE_KEY_NODES, nodes);
+    }
+  }, [nodes, isLoaded]);
 
   useEffect(() => {
-    saveToStorage(STORAGE_KEY_EDGES, edges);
-  }, [edges]);
+    if (isLoaded) {
+      saveToStorage(STORAGE_KEY_EDGES, edges);
+    }
+  }, [edges, isLoaded]);
 
   useEffect(() => {
-    saveToStorage(STORAGE_KEY_NODE_ID, nodeId);
-  }, [nodeId]);
+    if (isLoaded) {
+      saveToStorage(STORAGE_KEY_NODE_ID, nodeId);
+    }
+  }, [nodeId, isLoaded]);
 
   useEffect(() => {
     if (onDiagramChange) {
@@ -126,11 +132,11 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
     reactFlowInstance.current = instance;
     // Fit view after a small delay to ensure nodes are rendered
     setTimeout(() => {
-      if (nodes.length > 0) {
+      if (instance.getNodes().length > 0) {
         instance.fitView({ padding: 0.2 });
       }
     }, 200);
-  }, [nodes]);
+  }, []);
 
   // Fit view when component loads with existing nodes from localStorage
   useEffect(() => {
@@ -360,7 +366,6 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
       </CardHeader>
       <CardContent className="p-0 h-[500px]">
         <ReactFlow
-          key={`reactflow-${nodes.length}-${edges.length}`}
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}

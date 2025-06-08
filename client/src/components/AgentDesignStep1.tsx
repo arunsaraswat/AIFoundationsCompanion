@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { useCourseProgress } from "@/contexts/CourseProgressContext";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, AlertCircle, Lightbulb, Bot, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface AgentDesignStep1Props {
   lessonId: number;
@@ -194,8 +196,10 @@ Make your suggestions practical and actionable for this specific workflow.`;
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-sm text-blue-800 dark:text-blue-200 whitespace-pre-wrap leading-relaxed">
-                {aiState.aiResponse}
+              <div className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed prose prose-sm max-w-none prose-blue dark:prose-invert">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {aiState.aiResponse}
+                </ReactMarkdown>
               </div>
             </CardContent>
           </Card>

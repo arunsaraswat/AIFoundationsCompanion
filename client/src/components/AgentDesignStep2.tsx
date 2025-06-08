@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { useCourseProgress } from "@/contexts/CourseProgressContext";
 import { CheckCircle, AlertCircle, Bot, Users, ArrowRight, Lightbulb } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface AgentDesignStep2Props {
   lessonId: number;
@@ -176,8 +178,10 @@ Please provide specific, actionable suggestions for agent orchestration (e.g., p
                 <Lightbulb className="h-4 w-4 mr-2" />
                 AI Suggestions for Multi-Agent Design
               </h4>
-              <div className="text-sm text-blue-700 dark:text-blue-300 whitespace-pre-wrap">
-                {aiState.aiResponse}
+              <div className="text-sm text-blue-700 dark:text-blue-300 prose prose-sm max-w-none prose-blue dark:prose-invert">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {aiState.aiResponse}
+                </ReactMarkdown>
               </div>
             </div>
           )}

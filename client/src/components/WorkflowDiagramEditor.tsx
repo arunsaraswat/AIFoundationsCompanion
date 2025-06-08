@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, Download, Upload, Trash2, Edit3, X, Save } from 'lucide-react';
+import { Plus, Download, Upload, Trash2, Edit3, X, Save, Check } from 'lucide-react';
 
 interface WorkflowDiagramEditorProps {
   onDiagramChange?: (nodes: Node[], edges: Edge[]) => void;
@@ -51,101 +51,51 @@ const defaultNodes: Node[] = [
 
 const defaultEdges: Edge[] = [];
 
-// Storage keys for persistence
-const STORAGE_KEY_NODES = 'workflow-diagram-nodes';
-const STORAGE_KEY_EDGES = 'workflow-diagram-edges';
-const STORAGE_KEY_NODE_ID = 'workflow-diagram-node-id';
+// Storage key for diagram persistence
+const STORAGE_KEY_DIAGRAM = 'workflow-diagram-data';
 
-// Load from localStorage with fallback
-const loadFromStorage = (key: string, fallback: any) => {
+// Load saved diagram from localStorage
+const loadSavedDiagram = () => {
   try {
-    const stored = localStorage.getItem(key);
-    const result = stored ? JSON.parse(stored) : fallback;
-    console.log(`Loading from ${key}:`, result);
-    return result;
-  } catch (error) {
-    console.error(`Error loading from ${key}:`, error);
-    return fallback;
+    const saved = localStorage.getItem(STORAGE_KEY_DIAGRAM);
+    return saved ? JSON.parse(saved) : null;
+  } catch {
+    return null;
   }
 };
 
-// Save to localStorage
-const saveToStorage = (key: string, data: any) => {
+// Save diagram to localStorage
+const saveDiagramToStorage = (nodes: Node[], edges: Edge[], nodeId: number) => {
   try {
-    localStorage.setItem(key, JSON.stringify(data));
-    console.log(`Saved to ${key}:`, data);
-  } catch (error) {
-    console.error(`Error saving to ${key}:`, error);
+    const diagramData = { nodes, edges, nodeId };
+    localStorage.setItem(STORAGE_KEY_DIAGRAM, JSON.stringify(diagramData));
+    return true;
+  } catch {
+    return false;
   }
 };
 
 export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: propInitialNodes, initialEdges: propInitialEdges }: WorkflowDiagramEditorProps) {
-  // Load persisted state or use provided initial values
-  const loadedNodes = propInitialNodes || loadFromStorage(STORAGE_KEY_NODES, defaultNodes);
-  const loadedEdges = propInitialEdges || loadFromStorage(STORAGE_KEY_EDGES, defaultEdges);
+  // Initialize with provided props or try to load saved diagram
+  const savedDiagram = loadSavedDiagram();
+  const initialNodes = propInitialNodes || (savedDiagram?.nodes) || defaultNodes;
+  const initialEdges = propInitialEdges || (savedDiagram?.edges) || defaultEdges;
+  const initialNodeId = savedDiagram?.nodeId || 2;
   
-  console.log('Initializing with nodes:', loadedNodes);
-  console.log('Initializing with edges:', loadedEdges);
-  
-  const [nodes, setNodes, onNodesChange] = useNodesState(loadedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(loadedEdges);
-  const [nodeId, setNodeId] = useState(loadFromStorage(STORAGE_KEY_NODE_ID, 2));
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodeId, setNodeId] = useState(initialNodeId);
   const [selectedNodeType, setSelectedNodeType] = useState<keyof typeof nodeTypes>('agent');
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
   const [editingNodeLabel, setEditingNodeLabel] = useState('');
-  const [isLoaded, setIsLoaded] = useState(false);
-  const reactFlowInstance = useRef<ReactFlowInstance | null>(null);
-
-  // Save to localStorage whenever nodes or edges change (but only after initial load)
-  useEffect(() => {
-    if (isLoaded) {
-      saveToStorage(STORAGE_KEY_NODES, nodes);
-    }
-  }, [nodes, isLoaded]);
-
-  useEffect(() => {
-    if (isLoaded) {
-      saveToStorage(STORAGE_KEY_EDGES, edges);
-    }
-  }, [edges, isLoaded]);
-
-  useEffect(() => {
-    if (isLoaded) {
-      saveToStorage(STORAGE_KEY_NODE_ID, nodeId);
-    }
-  }, [nodeId, isLoaded]);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
 
   useEffect(() => {
     if (onDiagramChange) {
       onDiagramChange(nodes, edges);
     }
   }, [nodes, edges, onDiagramChange]);
-
-  // Mark as loaded on first render
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  // Initialize ReactFlow instance and fit view when nodes are loaded
-  const onInit = useCallback((instance: ReactFlowInstance) => {
-    reactFlowInstance.current = instance;
-    // Fit view after a small delay to ensure nodes are rendered
-    setTimeout(() => {
-      if (instance.getNodes().length > 0) {
-        instance.fitView({ padding: 0.2 });
-      }
-    }, 200);
-  }, []);
-
-  // Fit view when component loads with existing nodes from localStorage
-  useEffect(() => {
-    if (isLoaded && reactFlowInstance.current && nodes.length > 0) {
-      setTimeout(() => {
-        reactFlowInstance.current?.fitView({ padding: 0.2 });
-      }, 300);
-    }
-  }, [isLoaded, nodes.length]);
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
@@ -228,11 +178,21 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
     setNodes([]);
     setEdges([]);
     setNodeId(1);
+    setSaveStatus('idle');
     // Clear localStorage as well
-    localStorage.removeItem(STORAGE_KEY_NODES);
-    localStorage.removeItem(STORAGE_KEY_EDGES);
-    localStorage.removeItem(STORAGE_KEY_NODE_ID);
+    localStorage.removeItem(STORAGE_KEY_DIAGRAM);
   }, [setNodes, setEdges]);
+
+  const saveDiagram = useCallback(() => {
+    setSaveStatus('saving');
+    const success = saveDiagramToStorage(nodes, edges, nodeId);
+    if (success) {
+      setSaveStatus('saved');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    } else {
+      setSaveStatus('idle');
+    }
+  }, [nodes, edges, nodeId]);
 
   const exportDiagram = useCallback(() => {
     const diagramData = {
@@ -323,10 +283,18 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
             <Upload className="w-4 h-4 mr-1" />
             Import
           </Button>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Save className="w-3 h-3" />
-            Auto-saved
-          </div>
+          <Button 
+            onClick={saveDiagram} 
+            size="sm" 
+            variant="outline"
+            disabled={saveStatus === 'saving'}
+            className={saveStatus === 'saved' ? 'border-green-500 text-green-600' : ''}
+          >
+            {saveStatus === 'saving' && <Save className="w-4 h-4 mr-1 animate-spin" />}
+            {saveStatus === 'saved' && <Check className="w-4 h-4 mr-1" />}
+            {saveStatus === 'idle' && <Save className="w-4 h-4 mr-1" />}
+            {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved' : 'Save'}
+          </Button>
         </div>
         
         {editingNodeId && (
@@ -374,7 +342,6 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
           onNodeClick={onNodeClick}
           onPaneClick={onPaneClick}
           onEdgesDelete={onEdgesDelete}
-          onInit={onInit}
           deleteKeyCode={["Backspace", "Delete"]}
           fitView
           className="bg-gray-50 dark:bg-gray-900"

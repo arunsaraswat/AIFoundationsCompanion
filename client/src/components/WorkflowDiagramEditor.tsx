@@ -53,7 +53,7 @@ const STORAGE_KEY = 'workflow-diagram';
 
 export default function WorkflowDiagramEditor({ onDiagramChange }: WorkflowDiagramEditorProps) {
   // Load initial state only once
-  const getInitialState = useCallback(() => {
+  const [initialState] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -72,9 +72,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange }: WorkflowDiagr
       edges: defaultEdges,
       nodeId: 2
     };
-  }, []);
-
-  const [initialState] = useState(getInitialState);
+  });
   const [nodes, setNodes, onNodesChange] = useNodesState(initialState.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialState.edges);
   const [nodeId, setNodeId] = useState(initialState.nodeId);
@@ -157,7 +155,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange }: WorkflowDiagr
     };
 
     setNodes((nds) => [...nds, newNode]);
-    setNodeId((id) => id + 1);
+    setNodeId((id: number) => id + 1);
   }, [nodeId, selectedNodeType, setNodes]);
 
   const clearDiagram = useCallback(() => {

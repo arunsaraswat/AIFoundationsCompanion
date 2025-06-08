@@ -53,6 +53,7 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
   });
 
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Load saved data from localStorage
   useEffect(() => {
@@ -64,13 +65,16 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
       setDiagramState(parsedData.diagramState || { nodes: [], edges: [] });
       setIsCompleted(parsedData.isCompleted || false);
     }
+    setIsLoaded(true);
   }, [lessonId, subLessonId, exerciseId, stepId]);
 
-  // Save data to localStorage whenever fields, AI state, or diagram change
+  // Save data to localStorage whenever fields, AI state, or diagram change (but only after initial load)
   useEffect(() => {
-    const dataToSave = { fields, aiState, diagramState, isCompleted };
-    localStorage.setItem(`agentDesignStep2_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(dataToSave));
-  }, [fields, aiState, diagramState, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
+    if (isLoaded) {
+      const dataToSave = { fields, aiState, diagramState, isCompleted };
+      localStorage.setItem(`agentDesignStep2_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(dataToSave));
+    }
+  }, [fields, aiState, diagramState, isCompleted, lessonId, subLessonId, exerciseId, stepId, isLoaded]);
 
   const handleFieldChange = (field: keyof ScalingFields, value: string) => {
     setFields(prev => ({ ...prev, [field]: value }));

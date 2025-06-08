@@ -78,23 +78,51 @@ export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, st
     setAiState(prev => ({ ...prev, isLoadingAI: true }));
 
     try {
-      const prompt = `I want to design an AI assistant that helps me with ${fields.taskOrWorkflow}. I'll provide details, and I want you to help define the agent's job, inputs, tools, and output.
+      // Build comprehensive prompt with all user details
+      let prompt = `I want to design an AI assistant that helps me with: ${fields.taskOrWorkflow}
 
-Please provide specific guidance on:
-1. What the agent's role should be
-2. What inputs the agent would need
-3. What tools or systems it should access
-4. What the expected output format should be
-5. How to measure success
+Here are the details I've provided so far:`;
 
-Make your suggestions practical and actionable for this specific workflow.`;
+      if (fields.goal.trim()) {
+        prompt += `\n\nGoal: ${fields.goal}`;
+      }
+      
+      if (fields.yourPart.trim()) {
+        prompt += `\n\nMy part in the workflow: ${fields.yourPart}`;
+      }
+      
+      if (fields.agentPart.trim()) {
+        prompt += `\n\nWhat I want the agent to handle: ${fields.agentPart}`;
+      }
+      
+      if (fields.systemsInfo.trim()) {
+        prompt += `\n\nSystems/info the agent needs: ${fields.systemsInfo}`;
+      }
+      
+      if (fields.successLooks.trim()) {
+        prompt += `\n\nWhat success looks like: ${fields.successLooks}`;
+      }
+      
+      if (fields.improvement.trim()) {
+        prompt += `\n\nPotential improvements: ${fields.improvement}`;
+      }
+
+      prompt += `\n\nBased on these details, please provide enhanced, specific guidance on:
+1. **Agent Role Definition** - Refine the agent's responsibilities based on my inputs
+2. **Required Inputs** - What specific data/information the agent needs to be effective
+3. **Tools & Systems** - Recommended integrations and access requirements
+4. **Output Format** - Ideal structure and format for the agent's deliverables
+5. **Success Metrics** - How to measure and improve the agent's performance
+6. **Implementation Tips** - Practical next steps for building this workflow
+
+Make your suggestions concrete and actionable for this specific use case.`;
 
       const response = await fetch('/api/ai/query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           prompt,
-          context: "agent design workflow"
+          context: "comprehensive agent design workflow"
         })
       });
 
@@ -115,7 +143,7 @@ Make your suggestions practical and actionable for this specific workflow.`;
   };
 
   const handleComplete = () => {
-    const summary = `Task: ${fields.taskOrWorkflow}\nGoal: ${fields.goal}\nYour part: ${fields.yourPart}\nAgent part: ${fields.agentPart}`;
+    const summary = `Task: ${fields.taskOrWorkflow}\nGoal: ${fields.goal}\nYour part: ${fields.yourPart}\nAgent part: ${fields.agentPart}\nSystems/Info needed: ${fields.systemsInfo}\nSuccess looks like: ${fields.successLooks}\nImprovements: ${fields.improvement}`;
     updateStepAnswer(lessonId, subLessonId, exerciseId, stepId, summary);
     setIsCompleted(true);
   };
@@ -331,6 +359,9 @@ Make your suggestions practical and actionable for this specific workflow.`;
             <p><strong>Goal:</strong> {fields.goal}</p>
             <p><strong>Your role:</strong> {fields.yourPart}</p>
             <p><strong>Agent's role:</strong> {fields.agentPart}</p>
+            <p><strong>Systems/Info needed:</strong> {fields.systemsInfo}</p>
+            <p><strong>Success looks like:</strong> {fields.successLooks}</p>
+            <p><strong>Improvements:</strong> {fields.improvement}</p>
           </div>
         </div>
       )}

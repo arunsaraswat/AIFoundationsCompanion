@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import WorkflowDiagramEditor from "./WorkflowDiagramEditor";
-import type { Node, Edge } from 'reactflow';
 
 interface AgentDesignStep2Props {
   lessonId: number;
@@ -24,10 +23,7 @@ interface ScalingFields {
   sketchDescription: string;
 }
 
-interface DiagramState {
-  nodes: Node[];
-  edges: Edge[];
-}
+
 
 interface AIResponseState {
   aiResponse: string;
@@ -59,27 +55,24 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
       const parsedData = JSON.parse(savedData);
       setFields(parsedData.fields || {});
       setAiState(parsedData.aiState || { aiResponse: "", isLoadingAI: false });
-      setDiagramState(parsedData.diagramState || { nodes: [], edges: [] });
       setIsCompleted(parsedData.isCompleted || false);
     }
     setIsLoaded(true);
   }, [lessonId, subLessonId, exerciseId, stepId]);
 
-  // Save data to localStorage whenever fields, AI state, or diagram change (but only after initial load)
+  // Save data to localStorage whenever fields or AI state change (but only after initial load)
   useEffect(() => {
     if (isLoaded) {
-      const dataToSave = { fields, aiState, diagramState, isCompleted };
+      const dataToSave = { fields, aiState, isCompleted };
       localStorage.setItem(`agentDesignStep2_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(dataToSave));
     }
-  }, [fields, aiState, diagramState, isCompleted, lessonId, subLessonId, exerciseId, stepId, isLoaded]);
+  }, [fields, aiState, isCompleted, lessonId, subLessonId, exerciseId, stepId, isLoaded]);
 
   const handleFieldChange = (field: keyof ScalingFields, value: string) => {
     setFields(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleDiagramChange = useCallback((nodes: Node[], edges: Edge[]) => {
-    setDiagramState({ nodes, edges });
-  }, []);
+
 
   const handleAIQuery = async () => {
     if (!fields.multiAgentEvolution.trim()) return;

@@ -467,7 +467,104 @@ const initialLessons: Lesson[] = [
     id: 3,
     title: "The AI-Native Operating Model",
     subLessons: [
-      { id: "3.1", title: "3.1 The AI-Native Operating Model — A Playbook for Getting Real Value from AI", completed: false },
+      { 
+        id: "3.1", 
+        title: "3.1 The AI-Native Operating Model — A Playbook for Getting Real Value from AI", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-10",
+            type: "textarea",
+            label: "Discussion 10: Current State Check (5 min)",
+            description: "Table discussion: \"How are we actually using AI?\" Be honest about reality vs aspiration. Optional whiteboard capture",
+            answer: ""
+          },
+          {
+            id: "exercise-19",
+            type: "multi-step",
+            label: "Exercise 19: Success Factor Application (15 min)",
+            description: "Multi-step activity to apply AI-Native Success Factors",
+            steps: [
+              {
+                id: "pick-factor",
+                type: "radio",
+                label: "Pick a Success Factor",
+                description: "Review the 7 AI-Native Success Factors. Which one feels most within your control to start living out in your day-to-day work?",
+                options: [
+                  "Upskill Relentlessly", 
+                  "Tell the Full Story", 
+                  "Embed AI into the Everyday",
+                  "Leadership Buy-in",
+                  "Experimentation Culture",
+                  "Cross-functional Collaboration", 
+                  "Continuous Learning Mindset"
+                ],
+                answer: ""
+              },
+              {
+                id: "define-application",
+                type: "textarea",
+                label: "Define How You'll Apply It",
+                description: "What would it look like if you started modeling this success factor in how you work or lead right now?",
+                answer: ""
+              },
+              {
+                id: "examples",
+                type: "textarea",
+                label: "Examples",
+                description: "Examples: • Upskill Relentlessly → Block 1 hour/month for hands-on AI learning and share notes with team • Tell the Full Story → Start adding use-case evidence to every AI recommendation • Embed AI into the Everyday → Automate 1 report or feedback loop using a simple GenAI tool",
+                answer: ""
+              },
+              {
+                id: "micro-plan",
+                type: "multi-step",
+                label: "Create a Micro-Plan",
+                description: "What's your first move? Who needs to know? How will you track if it's working?",
+                steps: [
+                  {
+                    id: "action",
+                    type: "text",
+                    label: "Action (What I'll do)",
+                    answer: ""
+                  },
+                  {
+                    id: "start-date",
+                    type: "text",
+                    label: "Start Date",
+                    answer: ""
+                  },
+                  {
+                    id: "who-helps",
+                    type: "text",
+                    label: "Who It Helps",
+                    answer: ""
+                  },
+                  {
+                    id: "success-looks",
+                    type: "text",
+                    label: "What Success Looks Like",
+                    answer: ""
+                  }
+                ]
+              },
+              {
+                id: "share-plan",
+                type: "textarea",
+                label: "Share Your Plan with your table",
+                description: "Invite a few volunteers to share theirs",
+                answer: ""
+              }
+            ]
+          },
+          {
+            id: "exercise-20",
+            type: "textarea",
+            label: "Exercise 20: Room Debrief (5 min)",
+            description: "2-3 volunteers share with group. Share chosen Success Factor and specific move. Listen for creative applications and insights",
+            answer: ""
+          }
+        ]
+      },
     ],
   },
   {

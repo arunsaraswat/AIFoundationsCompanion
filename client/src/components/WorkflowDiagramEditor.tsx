@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import ReactFlow, {
   Node,
   Edge,
@@ -10,6 +10,7 @@ import ReactFlow, {
   useEdgesState,
   Connection,
   BackgroundVariant,
+  ReactFlowInstance,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Button } from '@/components/ui/button';
@@ -87,6 +88,8 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
   const [editingNodeLabel, setEditingNodeLabel] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
+  const reactFlowInstance = useRef<ReactFlowInstance | null>(null);
 
   // Save to localStorage whenever nodes or edges change
   useEffect(() => {
@@ -106,6 +109,31 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
       onDiagramChange(nodes, edges);
     }
   }, [nodes, edges, onDiagramChange]);
+
+  // Mark as loaded on first render
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  // Initialize ReactFlow instance and fit view when nodes are loaded
+  const onInit = useCallback((instance: ReactFlowInstance) => {
+    reactFlowInstance.current = instance;
+    // Fit view after a small delay to ensure nodes are rendered
+    setTimeout(() => {
+      if (nodes.length > 0) {
+        instance.fitView({ padding: 0.2 });
+      }
+    }, 200);
+  }, [nodes]);
+
+  // Fit view when component loads with existing nodes from localStorage
+  useEffect(() => {
+    if (isLoaded && reactFlowInstance.current && nodes.length > 0) {
+      setTimeout(() => {
+        reactFlowInstance.current?.fitView({ padding: 0.2 });
+      }, 300);
+    }
+  }, [isLoaded, nodes.length]);
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
@@ -326,6 +354,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
       </CardHeader>
       <CardContent className="p-0 h-[500px]">
         <ReactFlow
+          key={`reactflow-${nodes.length}-${edges.length}`}
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
@@ -334,6 +363,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
           onNodeClick={onNodeClick}
           onPaneClick={onPaneClick}
           onEdgesDelete={onEdgesDelete}
+          onInit={onInit}
           deleteKeyCode={["Backspace", "Delete"]}
           fitView
           className="bg-gray-50 dark:bg-gray-900"

@@ -60,8 +60,11 @@ const STORAGE_KEY_NODE_ID = 'workflow-diagram-node-id';
 const loadFromStorage = (key: string, fallback: any) => {
   try {
     const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : fallback;
-  } catch {
+    const result = stored ? JSON.parse(stored) : fallback;
+    console.log(`Loading from ${key}:`, result);
+    return result;
+  } catch (error) {
+    console.error(`Error loading from ${key}:`, error);
     return fallback;
   }
 };
@@ -70,19 +73,22 @@ const loadFromStorage = (key: string, fallback: any) => {
 const saveToStorage = (key: string, data: any) => {
   try {
     localStorage.setItem(key, JSON.stringify(data));
-  } catch {
-    // Silently fail if localStorage is not available
+    console.log(`Saved to ${key}:`, data);
+  } catch (error) {
+    console.error(`Error saving to ${key}:`, error);
   }
 };
 
 export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: propInitialNodes, initialEdges: propInitialEdges }: WorkflowDiagramEditorProps) {
   // Load persisted state or use provided initial values
-  const [nodes, setNodes, onNodesChange] = useNodesState(
-    propInitialNodes || loadFromStorage(STORAGE_KEY_NODES, defaultNodes)
-  );
-  const [edges, setEdges, onEdgesChange] = useEdgesState(
-    propInitialEdges || loadFromStorage(STORAGE_KEY_EDGES, defaultEdges)
-  );
+  const loadedNodes = propInitialNodes || loadFromStorage(STORAGE_KEY_NODES, defaultNodes);
+  const loadedEdges = propInitialEdges || loadFromStorage(STORAGE_KEY_EDGES, defaultEdges);
+  
+  console.log('Initializing with nodes:', loadedNodes);
+  console.log('Initializing with edges:', loadedEdges);
+  
+  const [nodes, setNodes, onNodesChange] = useNodesState(loadedNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(loadedEdges);
   const [nodeId, setNodeId] = useState(loadFromStorage(STORAGE_KEY_NODE_ID, 2));
   const [selectedNodeType, setSelectedNodeType] = useState<keyof typeof nodeTypes>('agent');
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);

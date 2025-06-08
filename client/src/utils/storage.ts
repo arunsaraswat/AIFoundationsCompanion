@@ -61,4 +61,7 @@ export function clearCourseData(): void {
   if (typeof (window as any).resetTokenPrediction === 'function') {
     (window as any).resetTokenPrediction();
   }
+
+  // Dispatch custom event to notify components about data clearing
+  window.dispatchEvent(new CustomEvent('clearAllData'));
 }

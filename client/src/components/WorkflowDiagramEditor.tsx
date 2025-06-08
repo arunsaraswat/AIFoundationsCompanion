@@ -82,6 +82,24 @@ export default function WorkflowDiagramEditor({ }: WorkflowDiagramEditorProps) {
   const [editingNodeLabel, setEditingNodeLabel] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
 
+  // Listen for clearAllData event and reset the diagram
+  useEffect(() => {
+    const handleClearAllData = () => {
+      setNodes(defaultNodes);
+      setEdges(defaultEdges);
+      setNodeId(2);
+      setSelectedNode(null);
+      setEditingNodeId(null);
+      setEditingNodeLabel('');
+    };
+
+    window.addEventListener('clearAllData', handleClearAllData);
+    
+    return () => {
+      window.removeEventListener('clearAllData', handleClearAllData);
+    };
+  }, [setNodes, setEdges]);
+
   // Removed onDiagramChange callback to prevent infinite loops
 
   const onConnect = useCallback(

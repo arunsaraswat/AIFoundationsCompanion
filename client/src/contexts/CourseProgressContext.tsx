@@ -433,7 +433,34 @@ const initialLessons: Lesson[] = [
           }
         ]
       },
-      { id: "2.7", title: "2.7 Frontiers in AI", completed: false },
+      { 
+        id: "2.7", 
+        title: "2.7 Frontiers in AI", 
+        completed: false,
+        exercises: [
+          {
+            id: "discussion-9",
+            type: "textarea",
+            label: "Discussion 9: \"What's Coming That You Can't Stop Thinking About?\"",
+            description: "Share AI hopes that feel \"not quite real\". Capture under \"Frontier Desires\"",
+            answer: ""
+          },
+          {
+            id: "exercise-17",
+            type: "textarea",
+            label: "Exercise 17: \"Postcard from the Future\"",
+            description: "At your table, imagine a moment in the future—any year you choose. On a flipchart, write a postcard-style message beginning with: \"The year is [____] and here's what AI is doing in our world...\" That could be: • Helping you onboard teammates before they're hired • Designing your product strategy while you sleep • Making wild mistakes you now laugh about • Or... quietly running everything in the background. Be as practical or ambitious as you want—what's changed in your workflows, your company, or even your industry? Keep it short, fun, and bold. Then post your \"future postcard\" on the wall. Optional share-out: One volunteer reads a favorite line.",
+            answer: ""
+          },
+          {
+            id: "exercise-18",
+            type: "textarea",
+            label: "Exercise 18: \"From Vision to Value\"",
+            description: "Room discussion: How do organizations turn vision into value?",
+            answer: ""
+          }
+        ]
+      },
     ],
   },
   {

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCourseProgress } from "@/contexts/CourseProgressContext";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, AlertCircle, Lightbulb } from "lucide-react";
+import { CheckCircle, AlertCircle, Lightbulb, Bot, Loader2 } from "lucide-react";
 
 interface AgentDesignStep1Props {
   lessonId: number;
@@ -25,6 +25,11 @@ interface AgentDesignFields {
   improvement: string;
 }
 
+interface AIResponseState {
+  aiResponse: string;
+  isLoadingAI: boolean;
+}
+
 export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, stepId }: AgentDesignStep1Props) {
   const { updateStepAnswer } = useCourseProgress();
   const [fields, setFields] = useState<AgentDesignFields>({
@@ -37,6 +42,11 @@ export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, st
     improvement: ""
   });
 
+  const [aiState, setAiState] = useState<AIResponseState>({
+    aiResponse: "",
+    isLoadingAI: false
+  });
+
   const [isCompleted, setIsCompleted] = useState(false);
 
   // Load saved data from localStorage
@@ -45,18 +55,61 @@ export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, st
     if (savedData) {
       const parsedData = JSON.parse(savedData);
       setFields(parsedData.fields || {});
+      setAiState(parsedData.aiState || { aiResponse: "", isLoadingAI: false });
       setIsCompleted(parsedData.isCompleted || false);
     }
   }, [lessonId, subLessonId, exerciseId, stepId]);
 
-  // Save data to localStorage whenever fields change
+  // Save data to localStorage whenever fields or AI state change
   useEffect(() => {
-    const dataToSave = { fields, isCompleted };
+    const dataToSave = { fields, aiState, isCompleted };
     localStorage.setItem(`agentDesignStep1_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(dataToSave));
-  }, [fields, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
+  }, [fields, aiState, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
 
   const handleFieldChange = (field: keyof AgentDesignFields, value: string) => {
     setFields(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleAIQuery = async () => {
+    if (!fields.taskOrWorkflow.trim()) return;
+
+    setAiState(prev => ({ ...prev, isLoadingAI: true }));
+
+    try {
+      const prompt = `I want to design an AI assistant that helps me with ${fields.taskOrWorkflow}. I'll provide details, and I want you to help define the agent's job, inputs, tools, and output.
+
+Please provide specific guidance on:
+1. What the agent's role should be
+2. What inputs the agent would need
+3. What tools or systems it should access
+4. What the expected output format should be
+5. How to measure success
+
+Make your suggestions practical and actionable for this specific workflow.`;
+
+      const response = await fetch('/api/ai/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt,
+          context: "agent design workflow"
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get AI response');
+      
+      const data = await response.json();
+      setAiState({
+        aiResponse: data.response,
+        isLoadingAI: false
+      });
+    } catch (error) {
+      console.error('AI query error:', error);
+      setAiState({
+        aiResponse: "Unable to get AI suggestions. Please try again or continue with your own ideas.",
+        isLoadingAI: false
+      });
+    }
   };
 
   const handleComplete = () => {
@@ -98,15 +151,55 @@ export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, st
               Describe the real task or workflow you want to design an AI assistant for
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <Textarea
               placeholder="e.g., Onboarding new clients, Summarizing weekly team reports, Handling customer support incidents..."
               value={fields.taskOrWorkflow}
               onChange={(e) => handleFieldChange("taskOrWorkflow", e.target.value)}
               className="min-h-[80px]"
             />
+            
+            <div className="flex justify-end">
+              <Button 
+                onClick={handleAIQuery}
+                disabled={!fields.taskOrWorkflow.trim() || aiState.isLoadingAI}
+                variant="outline"
+                className="min-w-[180px]"
+              >
+                {aiState.isLoadingAI ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Getting AI Suggestions...
+                  </>
+                ) : (
+                  <>
+                    <Bot className="mr-2 h-4 w-4" />
+                    Get AI Design Help
+                  </>
+                )}
+              </Button>
+            </div>
           </CardContent>
         </Card>
+
+        {aiState.aiResponse && (
+          <Card className="border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center text-blue-800 dark:text-blue-200">
+                <Bot className="mr-2 h-5 w-5" />
+                AI Agent Design Suggestions
+              </CardTitle>
+              <CardDescription className="text-blue-700 dark:text-blue-300">
+                Use these suggestions to help fill out the sections below
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-sm text-blue-800 dark:text-blue-200 whitespace-pre-wrap leading-relaxed">
+                {aiState.aiResponse}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="grid md:grid-cols-2 gap-6">
           <Card>

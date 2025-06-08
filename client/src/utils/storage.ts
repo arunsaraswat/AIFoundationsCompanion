@@ -52,7 +52,7 @@ export function clearCourseData(): void {
         key.startsWith("ragTestQuestionsAI_") ||
         key.startsWith("agentDesignStep1_") ||
         key.startsWith("agentDesignStep2_") ||
-        key === "workflowDiagram") {
+        key === "workflow-diagram") {
       localStorage.removeItem(key);
     }
   });

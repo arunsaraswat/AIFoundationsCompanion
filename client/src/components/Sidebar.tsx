@@ -84,7 +84,7 @@ export default function Sidebar() {
               </Button>
               
               <Button
-                variant={location === "/lesson/2" ? "default" : "ghost"}
+                variant={location === "/lesson/2" || location === "/exercise/agent-design" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >

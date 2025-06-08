@@ -51,7 +51,7 @@ const defaultEdges: Edge[] = [];
 
 const STORAGE_KEY = 'workflow-diagram';
 
-export default function WorkflowDiagramEditor({ onDiagramChange }: WorkflowDiagramEditorProps) {
+export default function WorkflowDiagramEditor({ }: WorkflowDiagramEditorProps) {
   // Load initial state only once
   const [initialState] = useState(() => {
     try {
@@ -82,10 +82,7 @@ export default function WorkflowDiagramEditor({ onDiagramChange }: WorkflowDiagr
   const [editingNodeLabel, setEditingNodeLabel] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
 
-  // Only call onDiagramChange if provided
-  useEffect(() => {
-    onDiagramChange?.(nodes, edges);
-  }, [nodes, edges, onDiagramChange]);
+  // Removed onDiagramChange callback to prevent infinite loops
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -47,10 +47,7 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
     isLoadingAI: false
   });
 
-  const [diagramState, setDiagramState] = useState<DiagramState>({
-    nodes: [],
-    edges: []
-  });
+
 
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -80,9 +77,9 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
     setFields(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleDiagramChange = (nodes: Node[], edges: Edge[]) => {
+  const handleDiagramChange = useCallback((nodes: Node[], edges: Edge[]) => {
     setDiagramState({ nodes, edges });
-  };
+  }, []);
 
   const handleAIQuery = async () => {
     if (!fields.multiAgentEvolution.trim()) return;
@@ -243,11 +240,7 @@ Please provide specific, actionable suggestions for agent orchestration (e.g., p
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <WorkflowDiagramEditor 
-            onDiagramChange={handleDiagramChange}
-            initialNodes={diagramState.nodes}
-            initialEdges={diagramState.edges}
-          />
+          <WorkflowDiagramEditor />
         </CardContent>
       </Card>
 

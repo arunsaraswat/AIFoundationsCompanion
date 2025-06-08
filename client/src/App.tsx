@@ -9,6 +9,7 @@ import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import LessonPage from "./pages/LessonPage";
 import ModelMatchUpPage from "./pages/ModelMatchUpPage";
+import AgentDesignPage from "./pages/AgentDesignPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
         {(params) => <LessonPage lessonId={parseInt(params.id)} />}
       </Route>
       <Route path="/exercise/model-match-up" component={ModelMatchUpPage} />
+      <Route path="/exercise/agent-design" component={AgentDesignPage} />
       <Route component={NotFound} />
     </Switch>
   );

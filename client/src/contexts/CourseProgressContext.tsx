@@ -418,25 +418,11 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "exercise-15",
-            type: "multi-step",
+            type: "link",
             label: "Exercise 15: \"Design Your Agent Assistant\"",
             description: "Multi-step activity: Build a Human + 1 Agent Workflow (16-18 min)",
-            steps: [
-              {
-                id: "step-1",
-                type: "component",
-                label: "Step 1: Build a Human + 1 Agent Workflow (16-18 min)",
-                description: "Choose a real task or workflow you own and design an AI assistant to help with it.",
-                component: "AgentDesignStep1"
-              },
-              {
-                id: "step-2",
-                type: "component",
-                label: "Step 2: Prompt GPT to Imagine Scaling It (5-7 min)",
-                description: "Explore how your single-agent design could evolve into a multi-agent workflow.",
-                component: "AgentDesignStep2"
-              }
-            ]
+            link: "/exercise/agent-design",
+            answer: ""
           },
           {
             id: "exercise-16",

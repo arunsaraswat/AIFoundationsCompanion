@@ -14,7 +14,9 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Download, Upload, Trash2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Plus, Download, Upload, Trash2, Edit3, X } from 'lucide-react';
 
 interface WorkflowDiagramEditorProps {
   onDiagramChange?: (nodes: Node[], edges: Edge[]) => void;
@@ -53,6 +55,9 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
   const [edges, setEdges, onEdgesChange] = useEdgesState(propInitialEdges || initialEdges);
   const [nodeId, setNodeId] = useState(2);
   const [selectedNodeType, setSelectedNodeType] = useState<keyof typeof nodeTypes>('agent');
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
+  const [editingNodeLabel, setEditingNodeLabel] = useState('');
 
   useEffect(() => {
     if (onDiagramChange) {
@@ -62,6 +67,56 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  );
+
+  const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
+    setSelectedNode(node);
+  }, []);
+
+  const onPaneClick = useCallback(() => {
+    setSelectedNode(null);
+    setEditingNodeId(null);
+  }, []);
+
+  const deleteSelectedNode = useCallback(() => {
+    if (selectedNode) {
+      setNodes((nds) => nds.filter((n) => n.id !== selectedNode.id));
+      setEdges((eds) => eds.filter((e) => e.source !== selectedNode.id && e.target !== selectedNode.id));
+      setSelectedNode(null);
+    }
+  }, [selectedNode, setNodes, setEdges]);
+
+  const startEditingNode = useCallback(() => {
+    if (selectedNode) {
+      setEditingNodeId(selectedNode.id);
+      setEditingNodeLabel(selectedNode.data.label);
+    }
+  }, [selectedNode]);
+
+  const saveNodeLabel = useCallback(() => {
+    if (editingNodeId && editingNodeLabel.trim()) {
+      setNodes((nds) =>
+        nds.map((node) =>
+          node.id === editingNodeId
+            ? { ...node, data: { ...node.data, label: editingNodeLabel.trim() } }
+            : node
+        )
+      );
+    }
+    setEditingNodeId(null);
+    setEditingNodeLabel('');
+  }, [editingNodeId, editingNodeLabel, setNodes]);
+
+  const cancelEditingNode = useCallback(() => {
+    setEditingNodeId(null);
+    setEditingNodeLabel('');
+  }, []);
+
+  const onEdgesDelete = useCallback(
+    (edgesToDelete: Edge[]) => {
+      setEdges((eds) => eds.filter((e) => !edgesToDelete.some((ed) => ed.id === e.id)));
+    },
     [setEdges]
   );
 
@@ -158,9 +213,21 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
             <Plus className="w-4 h-4 mr-1" />
             Add Node
           </Button>
+          {selectedNode && (
+            <>
+              <Button onClick={startEditingNode} size="sm" variant="outline">
+                <Edit3 className="w-4 h-4 mr-1" />
+                Rename
+              </Button>
+              <Button onClick={deleteSelectedNode} size="sm" variant="outline">
+                <Trash2 className="w-4 h-4 mr-1" />
+                Delete Node
+              </Button>
+            </>
+          )}
           <Button onClick={clearDiagram} size="sm" variant="outline">
             <Trash2 className="w-4 h-4 mr-1" />
-            Clear
+            Clear All
           </Button>
           <Button onClick={exportDiagram} size="sm" variant="outline">
             <Download className="w-4 h-4 mr-1" />
@@ -171,6 +238,41 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
             Import
           </Button>
         </div>
+        
+        {editingNodeId && (
+          <div className="mt-3 p-3 border rounded-lg bg-gray-50 dark:bg-gray-800">
+            <Label htmlFor="node-label" className="text-sm font-medium">
+              Edit Node Label
+            </Label>
+            <div className="flex gap-2 mt-1">
+              <Input
+                id="node-label"
+                value={editingNodeLabel}
+                onChange={(e) => setEditingNodeLabel(e.target.value)}
+                placeholder="Enter node label"
+                className="flex-1"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') saveNodeLabel();
+                  if (e.key === 'Escape') cancelEditingNode();
+                }}
+                autoFocus
+              />
+              <Button onClick={saveNodeLabel} size="sm">
+                Save
+              </Button>
+              <Button onClick={cancelEditingNode} size="sm" variant="outline">
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {selectedNode && (
+          <div className="mt-2 text-sm text-muted-foreground">
+            Selected: <span className="font-medium">{selectedNode.data.label}</span>
+            <span className="ml-2">• Click node to select • Press Delete to remove edges</span>
+          </div>
+        )}
       </CardHeader>
       <CardContent className="p-0 h-[500px]">
         <ReactFlow
@@ -179,6 +281,10 @@ export default function WorkflowDiagramEditor({ onDiagramChange, initialNodes: p
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          onNodeClick={onNodeClick}
+          onPaneClick={onPaneClick}
+          onEdgesDelete={onEdgesDelete}
+          deleteKeyCode={["Backspace", "Delete"]}
           fitView
           className="bg-gray-50 dark:bg-gray-900"
         >

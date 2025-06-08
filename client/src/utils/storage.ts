@@ -33,7 +33,7 @@ export function clearCourseData(): void {
   localStorage.removeItem("modelMatchUpTask3");
   localStorage.removeItem("tokenPredictionState");
   
-  // Clear all prompt anatomy, quick decision prompt, checkbox state, RISE prompt, RAG exercise, and AI response data
+  // Clear all prompt anatomy, quick decision prompt, checkbox state, RISE prompt, RAG exercise, agent design, and AI response data
   Object.keys(localStorage).forEach(key => {
     if (key.startsWith("promptAnatomy_") || 
         key.startsWith("quickDecisionPrompt_") || 
@@ -49,7 +49,10 @@ export function clearCourseData(): void {
         key.startsWith("ragStep2_") ||
         key.startsWith("ragStep2AI_") ||
         key.startsWith("ragTestQuestions_") ||
-        key.startsWith("ragTestQuestionsAI_")) {
+        key.startsWith("ragTestQuestionsAI_") ||
+        key.startsWith("agentDesignStep1_") ||
+        key.startsWith("agentDesignStep2_") ||
+        key === "workflowDiagram") {
       localStorage.removeItem(key);
     }
   });

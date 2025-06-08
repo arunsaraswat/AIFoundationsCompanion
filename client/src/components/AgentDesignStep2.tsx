@@ -8,6 +8,8 @@ import { CheckCircle, AlertCircle, Bot, Users, ArrowRight, Lightbulb } from "luc
 import { Badge } from "@/components/ui/badge";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import WorkflowDiagramEditor from "./WorkflowDiagramEditor";
+import type { Node, Edge } from 'reactflow';
 
 interface AgentDesignStep2Props {
   lessonId: number;
@@ -20,6 +22,11 @@ interface ScalingFields {
   multiAgentEvolution: string;
   agentOrchestration: string;
   sketchDescription: string;
+}
+
+interface DiagramState {
+  nodes: Node[];
+  edges: Edge[];
 }
 
 interface AIResponseState {
@@ -38,6 +45,11 @@ export default function AgentDesignStep2({ lessonId, subLessonId, exerciseId, st
   const [aiState, setAiState] = useState<AIResponseState>({
     aiResponse: "",
     isLoadingAI: false
+  });
+
+  const [diagramState, setDiagramState] = useState<DiagramState>({
+    nodes: [],
+    edges: []
   });
 
   const [isCompleted, setIsCompleted] = useState(false);

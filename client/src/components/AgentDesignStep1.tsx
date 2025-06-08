@@ -32,6 +32,11 @@ interface AIResponseState {
   isLoadingAI: boolean;
 }
 
+interface AssistantResponseState {
+  assistantResponse: string;
+  isLoadingAssistant: boolean;
+}
+
 export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, stepId }: AgentDesignStep1Props) {
   const { updateStepAnswer } = useCourseProgress();
   const [fields, setFields] = useState<AgentDesignFields>({
@@ -49,6 +54,11 @@ export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, st
     isLoadingAI: false
   });
 
+  const [assistantState, setAssistantState] = useState<AssistantResponseState>({
+    assistantResponse: "",
+    isLoadingAssistant: false
+  });
+
   const [isCompleted, setIsCompleted] = useState(false);
 
   // Load saved data from localStorage
@@ -58,15 +68,16 @@ export default function AgentDesignStep1({ lessonId, subLessonId, exerciseId, st
       const parsedData = JSON.parse(savedData);
       setFields(parsedData.fields || {});
       setAiState(parsedData.aiState || { aiResponse: "", isLoadingAI: false });
+      setAssistantState(parsedData.assistantState || { assistantResponse: "", isLoadingAssistant: false });
       setIsCompleted(parsedData.isCompleted || false);
     }
   }, [lessonId, subLessonId, exerciseId, stepId]);
 
-  // Save data to localStorage whenever fields or AI state change
+  // Save data to localStorage whenever fields or states change
   useEffect(() => {
-    const dataToSave = { fields, aiState, isCompleted };
+    const dataToSave = { fields, aiState, assistantState, isCompleted };
     localStorage.setItem(`agentDesignStep1_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, JSON.stringify(dataToSave));
-  }, [fields, aiState, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
+  }, [fields, aiState, assistantState, isCompleted, lessonId, subLessonId, exerciseId, stepId]);
 
   const handleFieldChange = (field: keyof AgentDesignFields, value: string) => {
     setFields(prev => ({ ...prev, [field]: value }));
@@ -138,6 +149,57 @@ Make your suggestions concrete and actionable for this specific use case.`;
       setAiState({
         aiResponse: "Unable to get AI suggestions. Please try again or continue with your own ideas.",
         isLoadingAI: false
+      });
+    }
+  };
+
+  const handleCreateAssistant = async () => {
+    if (!allFieldsFilled) return;
+
+    setAssistantState(prev => ({ ...prev, isLoadingAssistant: true }));
+
+    try {
+      const prompt = `Create a comprehensive AI assistant prompt that can help with this specific workflow:
+
+**Task:** ${fields.taskOrWorkflow}
+**Goal:** ${fields.goal}
+**Human Role:** ${fields.yourPart}
+**Agent Role:** ${fields.agentPart}
+**Systems/Info Needed:** ${fields.systemsInfo}
+**Success Criteria:** ${fields.successLooks}
+**Improvement Areas:** ${fields.improvement}
+
+Please provide a complete, ready-to-use AI assistant prompt that includes:
+
+1. **System Role & Context** - Clear instructions for the AI assistant's role and expertise
+2. **Input Structure** - What information the human should provide to get optimal results
+3. **Output Format** - Specific format for responses (templates, checklists, structured deliverables)
+4. **Quality Guidelines** - Standards and criteria for high-quality outputs
+5. **Example Interaction** - A sample input/output to demonstrate proper usage
+
+Make this a production-ready prompt that someone could immediately copy and use with ChatGPT, Claude, or similar AI assistants.`;
+
+      const response = await fetch('/api/ai/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt,
+          context: "AI assistant creation"
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to create assistant');
+      
+      const data = await response.json();
+      setAssistantState({
+        assistantResponse: data.response,
+        isLoadingAssistant: false
+      });
+    } catch (error) {
+      console.error('Assistant creation error:', error);
+      setAssistantState({
+        assistantResponse: "Unable to create assistant. Please try again or contact support if the issue persists.",
+        isLoadingAssistant: false
       });
     }
   };
@@ -363,7 +425,48 @@ Make your suggestions concrete and actionable for this specific use case.`;
             <p><strong>Success looks like:</strong> {fields.successLooks}</p>
             <p><strong>Improvements:</strong> {fields.improvement}</p>
           </div>
+          
+          <div className="mt-4 pt-4 border-t border-green-200 dark:border-green-700">
+            <Button 
+              onClick={handleCreateAssistant}
+              disabled={assistantState.isLoadingAssistant}
+              className="w-full"
+            >
+              {assistantState.isLoadingAssistant ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating AI Assistant...
+                </>
+              ) : (
+                <>
+                  <Bot className="mr-2 h-4 w-4" />
+                  Create AI Assistant for This Workflow
+                </>
+              )}
+            </Button>
+          </div>
         </div>
+      )}
+
+      {assistantState.assistantResponse && (
+        <Card className="mt-6 border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-950/20">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center text-purple-800 dark:text-purple-200">
+              <Bot className="mr-2 h-5 w-5" />
+              Your Custom AI Assistant
+            </CardTitle>
+            <CardDescription className="text-purple-700 dark:text-purple-300">
+              Copy this prompt and use it with ChatGPT, Claude, or other AI assistants
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="text-sm text-purple-800 dark:text-purple-200 leading-relaxed prose prose-sm max-w-none prose-purple dark:prose-invert">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {assistantState.assistantResponse}
+              </ReactMarkdown>
+            </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

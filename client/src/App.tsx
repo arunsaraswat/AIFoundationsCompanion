@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import LessonPage from "./pages/LessonPage";
 import ModelMatchUpPage from "./pages/ModelMatchUpPage";
 import AgentDesignPage from "./pages/AgentDesignPage";
+import WorkflowEnhancerPage from "./pages/WorkflowEnhancerPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
       </Route>
       <Route path="/exercise/model-match-up" component={ModelMatchUpPage} />
       <Route path="/exercise/agent-design" component={AgentDesignPage} />
+      <Route path="/exercise/workflow-enhancer" component={WorkflowEnhancerPage} />
       <Route component={NotFound} />
     </Switch>
   );

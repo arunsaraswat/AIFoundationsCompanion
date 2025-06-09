@@ -106,7 +106,7 @@ export default function Sidebar() {
               </Button>
               
               <Button
-                variant={location === "/lesson/4" ? "default" : "ghost"}
+                variant={location === "/lesson/4" || location === "/exercise/workflow-enhancer" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
                 asChild
               >

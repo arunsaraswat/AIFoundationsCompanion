@@ -114,6 +114,7 @@ export default function WorkflowEnhancerPage() {
                 title="AI Workflow Enhancer Tool"
                 allow="fullscreen"
                 loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation"
                 style={{ pointerEvents: 'auto' }}
               />
             ) : (

@@ -1,30 +1,17 @@
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 export default function WorkflowEnhancerPage() {
   const [iframeKey, setIframeKey] = useState(0);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleReload = () => {
-    if (iframeRef.current) {
-      // Clear the src first, then set to new URL
-      iframeRef.current.src = 'about:blank';
-      
-      setTimeout(() => {
-        if (iframeRef.current) {
-          iframeRef.current.src = `https://ai-workflow-enhancer.replit.app/?reload=${Date.now()}`;
-        }
-      }, 50);
-    }
-    
-    // Also update key for React remount
     setIframeKey(prev => prev + 1);
   };
 
   const getIframeSrc = () => {
-    return `https://ai-workflow-enhancer.replit.app/?reload=${Date.now()}&v=${iframeKey}`;
+    return `https://ai-workflow-enhancer.replit.app/?t=${iframeKey}`;
   };
 
   return (
@@ -95,7 +82,6 @@ export default function WorkflowEnhancerPage() {
           
           <div className="relative">
             <iframe
-              ref={iframeRef}
               key={iframeKey}
               src={getIframeSrc()}
               className="w-full h-[800px] border-0"

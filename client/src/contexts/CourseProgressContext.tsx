@@ -94,15 +94,15 @@ const initialLessons: Lesson[] = [
           {
             id: "1.1.1",
             type: "textarea",
-            label: 'Fast Pass - "What Kind of Change Are You Feeling?"',
+            label: "What Kind of Change Are You Feeling?",
             description:
-              'Go around table with introductions. Share: Name, role, location. Complete: "Ever since ChatGPT went viral, the world is..." Optional prompts for EDGE forces',
+              'Go around table with introductions. Share: Name, role, location. Complete: "Ever since ChatGPT went viral, the world is..."',
             answer: "",
           },
           {
             id: "1.1.2",
             type: "radio-with-text",
-            label: "Exercise 1: EDGE Reaction Line-Up",
+            label: "EDGE Reaction Line-Up",
             description:
               "Go stand by the sign that's had the biggest impact on their role or industry.",
             options: [
@@ -120,9 +120,9 @@ const initialLessons: Lesson[] = [
           {
             id: "1.1.3",
             type: "textarea",
-            label: "Exercise 2: Looking Ahead",
+            label: "Journal Entry",
             description:
-              'Individual reflection: "One question I hope this course answers..." Write down or share in chat',
+              'Individual reflection: "One question I hope this course answers..."',
             answer: "",
           },
         ],
@@ -592,7 +592,7 @@ const initialLessons: Lesson[] = [
                 type: "textarea",
                 label: "Define How You'll Apply It",
                 description:
-                  "What would it look like if you started modeling this success factor in how you work or lead right now?\n\nExamples: • Upskill Relentlessly → Block 1 hour/month for hands-on AI learning and share notes with team • Tell the Full Story → Start adding use-case evidence to every AI recommendation • Embed AI into the Everyday → Automate 1 report or feedback loop using a simple GenAI tool",
+                  "What would it look like if you started modeling this success factor in how you work or lead right now?<br/>Examples: <ul><li> - Upskill Relentlessly → Block 1 hour/month for hands-on AI learning and share notes with team<li> - Tell the Full Story → Start adding use-case evidence to every AI recommendation <li> - Embed AI into the Everyday → Automate 1 report or feedback loop using a simple GenAI tool</ul>",
                 answer: "",
               },
               {
@@ -657,6 +657,15 @@ const initialLessons: Lesson[] = [
         id: "4.1",
         title: "4.1 Workflow Baseline Lab & Redesign with AI Step",
         completed: false,
+        exercises: [
+          {
+            id: "exercise-21",
+            type: "textarea",
+            label: "Exercise 21: Make a Sandwich - Workflow Baseline (5 min)",
+            description: "Group Discussion: At your table, take turns explaining how you make your favorite sandwich - step by step in 30 seconds or less.<br><br><strong>Be specific:</strong><br>• \"Open the fridge. Get the bread. Toast it...\"<br>• \"Spread mayo on one side. Stack turkey. Add pickles...\"<br><br>Write down the step-by-step process for making your favorite sandwich:",
+            answer: ""
+          }
+        ]
       },
       { id: "4.2", title: "4.2 Operate & Reinforce", completed: false },
       { id: "4.3", title: "4.3 Document & Share", completed: false },

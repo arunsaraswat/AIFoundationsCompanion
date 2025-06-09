@@ -1,7 +1,15 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { useState } from "react";
 
 export default function WorkflowEnhancerPage() {
+  const [iframeKey, setIframeKey] = useState(0);
+
+  const handleReload = () => {
+    setIframeKey(prev => prev + 1);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -21,6 +29,30 @@ export default function WorkflowEnhancerPage() {
                 </a>
               </Button>
             </div>
+            
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <RotateCcw className="mr-2" size={16} />
+                  Reload Tool
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reload Workflow Tool?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will reload the workflow enhancement tool and reset it to its original state. 
+                    All current progress and data in the tool will be lost and cannot be recovered.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleReload} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                    Reload Tool
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
           
           <div className="mt-4">
@@ -46,6 +78,7 @@ export default function WorkflowEnhancerPage() {
           
           <div className="relative">
             <iframe
+              key={iframeKey}
               src="https://ai-workflow-enhancer.replit.app/"
               className="w-full h-[800px] border-0"
               title="AI Workflow Enhancer Tool"

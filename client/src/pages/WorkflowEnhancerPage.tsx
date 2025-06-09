@@ -8,15 +8,19 @@ export default function WorkflowEnhancerPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleReload = () => {
-    // Force iframe to reload by changing both key and src
-    setIframeKey(prev => prev + 1);
+    if (iframeRef.current) {
+      // Clear the src first, then set to new URL
+      iframeRef.current.src = 'about:blank';
+      
+      setTimeout(() => {
+        if (iframeRef.current) {
+          iframeRef.current.src = `https://ai-workflow-enhancer.replit.app/?reload=${Date.now()}`;
+        }
+      }, 50);
+    }
     
-    // Additional force reload after state update
-    setTimeout(() => {
-      if (iframeRef.current) {
-        iframeRef.current.src = iframeRef.current.src;
-      }
-    }, 100);
+    // Also update key for React remount
+    setIframeKey(prev => prev + 1);
   };
 
   const getIframeSrc = () => {

@@ -1,17 +1,23 @@
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function WorkflowEnhancerPage() {
-  const [showIframe, setShowIframe] = useState(true);
+  const [iframeKey, setIframeKey] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleReload = () => {
-    setShowIframe(false);
-    setTimeout(() => {
-      setShowIframe(true);
-    }, 100);
+    // Force complete iframe recreation with new key
+    setIframeKey(prev => prev + 1);
   };
+
+  useEffect(() => {
+    // Ensure container is isolated from React's reconciliation
+    if (containerRef.current) {
+      containerRef.current.setAttribute('data-react-isolate', 'true');
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -79,23 +85,16 @@ export default function WorkflowEnhancerPage() {
             </p>
           </div>
           
-          <div className="relative">
-            {showIframe ? (
-              <iframe
-                src="https://ai-workflow-enhancer.replit.app/"
-                className="w-full h-[800px] border-0"
-                title="AI Workflow Enhancer Tool"
-                allow="fullscreen"
-                loading="lazy"
-              />
-            ) : (
-              <div className="w-full h-[800px] flex items-center justify-center bg-muted/20">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                  <p className="text-muted-foreground">Reloading tool...</p>
-                </div>
-              </div>
-            )}
+          <div className="relative" ref={containerRef}>
+            <iframe
+              key={iframeKey}
+              src={`https://ai-workflow-enhancer.replit.app/?v=${iframeKey}`}
+              className="w-full h-[800px] border-0"
+              title="AI Workflow Enhancer Tool"
+              allow="fullscreen"
+              loading="lazy"
+              style={{ pointerEvents: 'auto' }}
+            />
           </div>
         </div>
 

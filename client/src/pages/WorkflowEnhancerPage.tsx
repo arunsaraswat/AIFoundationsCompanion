@@ -1,46 +1,9 @@
-import { ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { useState, useRef, useEffect } from "react";
 
 export default function WorkflowEnhancerPage() {
-  const [iframeExists, setIframeExists] = useState(true);
-  const [iframeKey, setIframeKey] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  const handleReload = () => {
-    // First completely remove the iframe
-    setIframeExists(false);
-    
-    // Clear any cached data programmatically if possible
-    if (iframeRef.current) {
-      try {
-        // Try to clear the iframe's content first
-        iframeRef.current.src = 'about:blank';
-      } catch (e) {
-        // Ignore cross-origin errors
-      }
-    }
-    
-    // Force container cleanup
-    if (containerRef.current) {
-      containerRef.current.innerHTML = '';
-    }
-    
-    // After a brief delay, recreate it with new key
-    setTimeout(() => {
-      setIframeKey(prev => prev + 1);
-      setIframeExists(true);
-    }, 500);
-  };
-
-  const getIframeSrc = () => {
-    // Generate completely unique URL with multiple cache-busting parameters
-    const timestamp = Date.now();
-    const randomId = Math.random().toString(36).substring(2, 15);
-    const sessionId = Math.random().toString(36).substring(2, 10);
-    return `https://ai-workflow-enhancer.replit.app/?_=${timestamp}&sid=${sessionId}&rid=${randomId}&nocache=1&clear=1`;
+  const handleOpenTool = () => {
+    window.open('https://ai-workflow-enhancer.replit.app/', '_blank');
   };
 
   return (
@@ -63,29 +26,15 @@ export default function WorkflowEnhancerPage() {
               </Button>
             </div>
             
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="outline" size="sm">
-                  <RotateCcw className="mr-2" size={16} />
-                  Reload Tool
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Reload Workflow Tool?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This will reload the workflow enhancement tool and reset it to its original state. 
-                    All current progress and data in the tool will be lost and cannot be recovered.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleReload} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                    Reload Tool
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <Button
+              onClick={handleOpenTool}
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Open Tool
+            </Button>
           </div>
           
           <div className="mt-4">
@@ -109,28 +58,31 @@ export default function WorkflowEnhancerPage() {
             </p>
           </div>
           
-          <div className="relative" ref={containerRef}>
-            {iframeExists ? (
-              <iframe
-                ref={iframeRef}
-                key={iframeKey}
-                src={getIframeSrc()}
-                className="w-full h-[800px] border-0"
-                title="AI Workflow Enhancer Tool"
-                allow="fullscreen"
-                loading="lazy"
-                sandbox="allow-scripts allow-forms allow-popups allow-modals allow-top-navigation"
-                style={{ pointerEvents: 'auto' }}
-              />
-            ) : (
-              <div className="w-full h-[800px] flex items-center justify-center bg-muted/10 border-2 border-dashed border-muted-foreground/20">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                  <p className="text-lg font-medium text-muted-foreground">Reloading Tool</p>
-                  <p className="text-sm text-muted-foreground/70 mt-1">Creating fresh instance...</p>
+          <div className="relative p-12 text-center">
+            <div className="max-w-lg mx-auto">
+              <div className="mb-8">
+                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                  <ExternalLink className="h-10 w-10 text-white" />
                 </div>
+                <h3 className="text-2xl font-bold text-foreground mb-2">AI Workflow Enhancer</h3>
+                <p className="text-muted-foreground mb-6">
+                  Interactive tool for analyzing and enhancing your workflows with AI integration points.
+                </p>
               </div>
-            )}
+              
+              <Button
+                onClick={handleOpenTool}
+                size="lg"
+                className="flex items-center gap-3 mx-auto px-8 py-3 text-lg"
+              >
+                <ExternalLink className="h-5 w-5" />
+                Launch Workflow Tool
+              </Button>
+              
+              <p className="text-sm text-muted-foreground mt-4">
+                Opens in a new tab for the best experience
+              </p>
+            </div>
           </div>
         </div>
 

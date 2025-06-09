@@ -7,23 +7,35 @@ export default function WorkflowEnhancerPage() {
   const [iframeExists, setIframeExists] = useState(true);
   const [iframeKey, setIframeKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleReload = () => {
     // First completely remove the iframe
     setIframeExists(false);
     
+    // Clear any cached data programmatically if possible
+    if (iframeRef.current) {
+      try {
+        // Try to clear the iframe's content first
+        iframeRef.current.src = 'about:blank';
+      } catch (e) {
+        // Ignore cross-origin errors
+      }
+    }
+    
     // After a brief delay, recreate it with new key
     setTimeout(() => {
       setIframeKey(prev => prev + 1);
       setIframeExists(true);
-    }, 200);
+    }, 300);
   };
 
   const getIframeSrc = () => {
-    // Generate completely unique URL to avoid any caching
+    // Generate completely unique URL with multiple cache-busting parameters
     const timestamp = Date.now();
     const randomId = Math.random().toString(36).substring(2, 15);
-    return `https://ai-workflow-enhancer.replit.app/?reload=${timestamp}&id=${randomId}&fresh=true`;
+    const sessionId = Math.random().toString(36).substring(2, 10);
+    return `https://ai-workflow-enhancer.replit.app/?_=${timestamp}&sid=${sessionId}&rid=${randomId}&nocache=1&clear=1`;
   };
 
   return (
@@ -95,6 +107,7 @@ export default function WorkflowEnhancerPage() {
           <div className="relative" ref={containerRef}>
             {iframeExists ? (
               <iframe
+                ref={iframeRef}
                 key={iframeKey}
                 src={getIframeSrc()}
                 className="w-full h-[800px] border-0"

@@ -1,11 +1,16 @@
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { ExternalLink } from "lucide-react";
+import { useState } from "react";
 
 export default function WorkflowEnhancerPage() {
-  const handleOpenTool = () => {
-    window.open('https://ai-workflow-enhancer.replit.app/', '_blank');
+  const [showIframe, setShowIframe] = useState(true);
+
+  const handleReload = () => {
+    setShowIframe(false);
+    setTimeout(() => {
+      setShowIframe(true);
+    }, 100);
   };
 
   return (
@@ -28,15 +33,29 @@ export default function WorkflowEnhancerPage() {
               </Button>
             </div>
             
-            <Button
-              onClick={handleOpenTool}
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-2"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Open Tool
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <RotateCcw className="mr-2" size={16} />
+                  Reload Tool
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reload Workflow Tool?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will reload the workflow enhancement tool and reset it to its original state. 
+                    All current progress and data in the tool will be lost and cannot be recovered.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleReload} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                    Reload Tool
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
           
           <div className="mt-4">
@@ -60,21 +79,23 @@ export default function WorkflowEnhancerPage() {
             </p>
           </div>
           
-          <div className="relative p-8 text-center">
-            <div className="max-w-md mx-auto">
-              <h3 className="text-lg font-semibold mb-4">External Workflow Tool</h3>
-              <p className="text-muted-foreground mb-6">
-                Click the button below to open the AI Workflow Enhancer in a new tab for the best experience.
-              </p>
-              <Button
-                onClick={handleOpenTool}
-                size="lg"
-                className="flex items-center gap-2 mx-auto"
-              >
-                <ExternalLink className="h-5 w-5" />
-                Launch Workflow Tool
-              </Button>
-            </div>
+          <div className="relative">
+            {showIframe ? (
+              <iframe
+                src="https://ai-workflow-enhancer.replit.app/"
+                className="w-full h-[800px] border-0"
+                title="AI Workflow Enhancer Tool"
+                allow="fullscreen"
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-full h-[800px] flex items-center justify-center bg-muted/20">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                  <p className="text-muted-foreground">Reloading tool...</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

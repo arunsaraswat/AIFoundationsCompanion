@@ -4,27 +4,27 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { useState, useRef, useEffect } from "react";
 
 export default function WorkflowEnhancerPage() {
+  const [iframeExists, setIframeExists] = useState(true);
   const [iframeKey, setIframeKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleReload = () => {
-    // Force complete iframe recreation with new key and clear storage
-    setIframeKey(prev => prev + 1);
+    // First completely remove the iframe
+    setIframeExists(false);
+    
+    // After a brief delay, recreate it with new key
+    setTimeout(() => {
+      setIframeKey(prev => prev + 1);
+      setIframeExists(true);
+    }, 200);
   };
 
   const getIframeSrc = () => {
-    // Add parameters to force fresh session and bypass cache
+    // Generate completely unique URL to avoid any caching
     const timestamp = Date.now();
-    const sessionId = Math.random().toString(36).substring(7);
-    return `https://ai-workflow-enhancer.replit.app/?t=${timestamp}&sid=${sessionId}&nocache=1&clear=storage`;
+    const randomId = Math.random().toString(36).substring(2, 15);
+    return `https://ai-workflow-enhancer.replit.app/?reload=${timestamp}&id=${randomId}&fresh=true`;
   };
-
-  useEffect(() => {
-    // Ensure container is isolated from React's reconciliation
-    if (containerRef.current) {
-      containerRef.current.setAttribute('data-react-isolate', 'true');
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,15 +93,25 @@ export default function WorkflowEnhancerPage() {
           </div>
           
           <div className="relative" ref={containerRef}>
-            <iframe
-              key={iframeKey}
-              src={getIframeSrc()}
-              className="w-full h-[800px] border-0"
-              title="AI Workflow Enhancer Tool"
-              allow="fullscreen"
-              loading="lazy"
-              style={{ pointerEvents: 'auto' }}
-            />
+            {iframeExists ? (
+              <iframe
+                key={iframeKey}
+                src={getIframeSrc()}
+                className="w-full h-[800px] border-0"
+                title="AI Workflow Enhancer Tool"
+                allow="fullscreen"
+                loading="lazy"
+                style={{ pointerEvents: 'auto' }}
+              />
+            ) : (
+              <div className="w-full h-[800px] flex items-center justify-center bg-muted/10 border-2 border-dashed border-muted-foreground/20">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                  <p className="text-lg font-medium text-muted-foreground">Reloading Tool</p>
+                  <p className="text-sm text-muted-foreground/70 mt-1">Creating fresh instance...</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

@@ -23,11 +23,16 @@ export default function WorkflowEnhancerPage() {
       }
     }
     
+    // Force container cleanup
+    if (containerRef.current) {
+      containerRef.current.innerHTML = '';
+    }
+    
     // After a brief delay, recreate it with new key
     setTimeout(() => {
       setIframeKey(prev => prev + 1);
       setIframeExists(true);
-    }, 300);
+    }, 500);
   };
 
   const getIframeSrc = () => {
@@ -114,7 +119,7 @@ export default function WorkflowEnhancerPage() {
                 title="AI Workflow Enhancer Tool"
                 allow="fullscreen"
                 loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation"
+                sandbox="allow-scripts allow-forms allow-popups allow-modals allow-top-navigation"
                 style={{ pointerEvents: 'auto' }}
               />
             ) : (

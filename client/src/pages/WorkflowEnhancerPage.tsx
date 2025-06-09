@@ -8,8 +8,15 @@ export default function WorkflowEnhancerPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleReload = () => {
-    // Force complete iframe recreation with new key
+    // Force complete iframe recreation with new key and clear storage
     setIframeKey(prev => prev + 1);
+  };
+
+  const getIframeSrc = () => {
+    // Add parameters to force fresh session and bypass cache
+    const timestamp = Date.now();
+    const sessionId = Math.random().toString(36).substring(7);
+    return `https://ai-workflow-enhancer.replit.app/?t=${timestamp}&sid=${sessionId}&nocache=1&clear=storage`;
   };
 
   useEffect(() => {
@@ -88,7 +95,7 @@ export default function WorkflowEnhancerPage() {
           <div className="relative" ref={containerRef}>
             <iframe
               key={iframeKey}
-              src={`https://ai-workflow-enhancer.replit.app/?v=${iframeKey}`}
+              src={getIframeSrc()}
               className="w-full h-[800px] border-0"
               title="AI Workflow Enhancer Tool"
               allow="fullscreen"

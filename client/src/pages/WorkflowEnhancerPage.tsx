@@ -1,13 +1,26 @@
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function WorkflowEnhancerPage() {
   const [iframeKey, setIframeKey] = useState(0);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleReload = () => {
+    // Force iframe to reload by changing both key and src
     setIframeKey(prev => prev + 1);
+    
+    // Additional force reload after state update
+    setTimeout(() => {
+      if (iframeRef.current) {
+        iframeRef.current.src = iframeRef.current.src;
+      }
+    }, 100);
+  };
+
+  const getIframeSrc = () => {
+    return `https://ai-workflow-enhancer.replit.app/?reload=${Date.now()}&v=${iframeKey}`;
   };
 
   return (
@@ -78,8 +91,9 @@ export default function WorkflowEnhancerPage() {
           
           <div className="relative">
             <iframe
+              ref={iframeRef}
               key={iframeKey}
-              src="https://ai-workflow-enhancer.replit.app/"
+              src={getIframeSrc()}
               className="w-full h-[800px] border-0"
               title="AI Workflow Enhancer Tool"
               allow="fullscreen"

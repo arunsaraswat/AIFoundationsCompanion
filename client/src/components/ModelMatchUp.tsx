@@ -24,53 +24,63 @@ const USE_CASES_DATA = [
   {
     id: "netflix",
     title: "Netflix Recommendations",
-    helpTip: "What patterns might a system look for if it's trying to predict what you'll enjoy next? What kind of behavior could be useful?"
+    helpTip:
+      "What patterns might a system look for if it's trying to predict what you'll enjoy next? What kind of behavior could be useful?",
   },
   {
     id: "facial",
     title: "Facial Recognition",
-    helpTip: "Consider how a system might learn to tell people apart just by looking. What kind of data would it need—and what makes this task complex?"
+    helpTip:
+      "Consider how a system might learn to tell people apart just by looking. What kind of data would it need—and what makes this task complex?",
   },
   {
     id: "chatgpt",
     title: "ChatGPT / LLMs",
-    helpTip: "How might a machine know what word should come next in a sentence? What clues would it rely on from earlier in the conversation?"
+    helpTip:
+      "How might a machine know what word should come next in a sentence? What clues would it rely on from earlier in the conversation?",
   },
   {
     id: "translate",
     title: "Google Translate",
-    helpTip: "If you're trying to go from one language to another, what challenges come up in keeping meaning, tone, and grammar aligned?"
+    helpTip:
+      "If you're trying to go from one language to another, what challenges come up in keeping meaning, tone, and grammar aligned?",
   },
   {
     id: "autonomous",
     title: "Autonomous Vehicles",
-    helpTip: "What kinds of decisions need to happen in real time to drive safely? Think about how fast things change on the road—and what's required to keep up."
+    helpTip:
+      "What kinds of decisions need to happen in real time to drive safely? Think about how fast things change on the road—and what's required to keep up.",
   },
   {
     id: "fraud",
     title: "Fraud Detection in Banking",
-    helpTip: "What signs might tip off a system that something is suspicious? How could past examples help it know when something looks 'off'?"
+    helpTip:
+      "What signs might tip off a system that something is suspicious? How could past examples help it know when something looks 'off'?",
   },
   {
     id: "aiart",
     title: "AI Art Generation (e.g., DALL·E)",
-    helpTip: "Imagine describing a scene and having a picture appear. What do you think the system has to understand about both words and visuals to do that?"
+    helpTip:
+      "Imagine describing a scene and having a picture appear. What do you think the system has to understand about both words and visuals to do that?",
   },
   {
     id: "voice",
     title: "Smart Home Voice Assistant",
-    helpTip: "If you're talking to a system, what has to happen before it can act? Think about the path from sound to understanding to response."
+    helpTip:
+      "If you're talking to a system, what has to happen before it can act? Think about the path from sound to understanding to response.",
   },
   {
     id: "medical",
     title: "Medical Imaging Diagnostics",
-    helpTip: "If you're reviewing an X-ray or scan, what patterns are you looking for—and how might a machine learn to recognize them?"
+    helpTip:
+      "If you're reviewing an X-ray or scan, what patterns are you looking for—and how might a machine learn to recognize them?",
   },
   {
     id: "captioning",
     title: "Real-Time Language Captioning",
-    helpTip: "How could a system turn live speech into accurate written words fast enough to keep up? What makes this challenging?"
-  }
+    helpTip:
+      "How could a system turn live speech into accurate written words fast enough to keep up? What makes this challenging?",
+  },
 ];
 
 const TAGS = ["AI", "ML", "DL"];
@@ -82,14 +92,16 @@ export default function ModelMatchUp() {
   useEffect(() => {
     // Clear old data and force fresh data with new help tips
     localStorage.removeItem("modelMatchUpData");
-    
+
     // Initialize with fresh data
-    setUseCases(USE_CASES_DATA.map(uc => ({
-      ...uc,
-      selectedTags: [],
-      input: "",
-      output: ""
-    })));
+    setUseCases(
+      USE_CASES_DATA.map((uc) => ({
+        ...uc,
+        selectedTags: [],
+        input: "",
+        output: "",
+      })),
+    );
   }, []);
 
   // Save to localStorage whenever data changes
@@ -100,17 +112,17 @@ export default function ModelMatchUp() {
   }, [useCases]);
 
   const updateUseCase = (id: string, updates: Partial<UseCase>) => {
-    setUseCases(prev => prev.map(uc => 
-      uc.id === id ? { ...uc, ...updates } : uc
-    ));
+    setUseCases((prev) =>
+      prev.map((uc) => (uc.id === id ? { ...uc, ...updates } : uc)),
+    );
   };
 
   const toggleTag = (useCaseId: string, tag: string) => {
-    const useCase = useCases.find(uc => uc.id === useCaseId);
+    const useCase = useCases.find((uc) => uc.id === useCaseId);
     if (!useCase) return;
 
     const newTags = useCase.selectedTags.includes(tag)
-      ? useCase.selectedTags.filter(t => t !== tag)
+      ? useCase.selectedTags.filter((t) => t !== tag)
       : [...useCase.selectedTags, tag];
 
     updateUseCase(useCaseId, { selectedTags: newTags });
@@ -123,13 +135,15 @@ export default function ModelMatchUp() {
           Exercise 5: Model Match-Up
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Sort real-world use cases into AI/ML/DL categories and define their inputs/outputs.
+          Sort real-world use cases into AI/ML/DL categories and define their
+          inputs/outputs.
         </p>
         <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
           <p className="text-sm text-blue-800 dark:text-blue-200">
-            <strong>Instructions:</strong> For each use case, select one or more categories (AI, ML, DL), 
-            then describe what kind of input the system uses and what output it produces. 
-            Click the help icon for hints about each use case.
+            <strong>Instructions:</strong> For each use case, select one or more
+            categories (AI, ML, DL), then describe what kind of input the system
+            uses and what output it produces. Click the help icon for hints
+            about each use case.
           </p>
         </div>
       </div>
@@ -151,12 +165,14 @@ export default function ModelMatchUp() {
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-80 bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
-                    <p className="text-sm text-amber-900 dark:text-amber-100">{useCase.helpTip}</p>
+                    <p className="text-sm text-amber-900 dark:text-amber-100">
+                      {useCase.helpTip}
+                    </p>
                   </PopoverContent>
                 </Popover>
               </div>
             </CardHeader>
-            
+
             <CardContent className="space-y-4">
               {/* Tag Selection */}
               <div>
@@ -167,7 +183,11 @@ export default function ModelMatchUp() {
                   {TAGS.map((tag) => (
                     <Badge
                       key={tag}
-                      variant={useCase.selectedTags.includes(tag) ? "default" : "outline"}
+                      variant={
+                        useCase.selectedTags.includes(tag)
+                          ? "default"
+                          : "outline"
+                      }
                       className="cursor-pointer hover:bg-primary/80"
                       onClick={() => toggleTag(useCase.id, tag)}
                     >
@@ -179,13 +199,18 @@ export default function ModelMatchUp() {
 
               {/* Input Field */}
               <div>
-                <Label htmlFor={`${useCase.id}-input`} className="text-sm font-medium">
+                <Label
+                  htmlFor={`${useCase.id}-input`}
+                  className="text-sm font-medium"
+                >
                   What kind of input does this use?
                 </Label>
                 <Input
                   id={`${useCase.id}-input`}
                   value={useCase.input}
-                  onChange={(e) => updateUseCase(useCase.id, { input: e.target.value })}
+                  onChange={(e) =>
+                    updateUseCase(useCase.id, { input: e.target.value })
+                  }
                   placeholder="e.g., user data, images, past behaviors"
                   className="mt-1"
                 />
@@ -193,13 +218,18 @@ export default function ModelMatchUp() {
 
               {/* Output Field */}
               <div>
-                <Label htmlFor={`${useCase.id}-output`} className="text-sm font-medium">
+                <Label
+                  htmlFor={`${useCase.id}-output`}
+                  className="text-sm font-medium"
+                >
                   What kind of output does this produce?
                 </Label>
                 <Input
                   id={`${useCase.id}-output`}
                   value={useCase.output}
-                  onChange={(e) => updateUseCase(useCase.id, { output: e.target.value })}
+                  onChange={(e) =>
+                    updateUseCase(useCase.id, { output: e.target.value })
+                  }
                   placeholder="e.g., suggestions, alerts, actions"
                   className="mt-1"
                 />
@@ -211,7 +241,8 @@ export default function ModelMatchUp() {
 
       <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
         <p className="text-sm text-muted-foreground">
-          💾 Your progress is automatically saved. You can return to this exercise anytime to continue working.
+          💾 Your progress is automatically saved. You can return to this
+          exercise anytime to continue working.
         </p>
       </div>
     </div>

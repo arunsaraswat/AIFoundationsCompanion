@@ -135,7 +135,7 @@ const initialLessons: Lesson[] = [
           {
             id: "1.2.1",
             type: "textarea",
-            label: "Discussion 2: What Comes to Mind?",
+            label: "What Comes to Mind?",
             description:
               'Pair discussion about "AI-Native" phrase. First thoughts and feelings. No wrong answers',
             answer: "",
@@ -143,16 +143,16 @@ const initialLessons: Lesson[] = [
           {
             id: "1.2.2",
             type: "multi-step",
-            label: "Exercise 3: What AI-Native Means to Me",
+            label: "What AI-Native Means to Me",
             description:
               "Multi-step activity: Translate the Definition (Individual then Affinity Group)",
             steps: [
               {
                 id: "1.2.2.1",
                 type: "textarea",
-                label: "Step 1: Individual Reflection",
+                label: "Individual Activity",
                 description:
-                  'Each person answers: "What does it look like to relentlessly embed AI in my work?" "What\'s one example of how my org could structurally bake in AI?" Write 1 sticky note per definition (Professional & Org) for your domain.',
+                  'Each person answers: "What does it look like to relentlessly embed AI in my work?" "What\'s one example of how my organization could structurally bake in AI?"',
                 answer: "",
               },
               {
@@ -169,9 +169,9 @@ const initialLessons: Lesson[] = [
           {
             id: "1.2.4",
             type: "text",
-            label: "Exercise 4: One Word Check-In",
+            label: "Journal: One Word Check-In",
             description:
-              "Write one word about AI-Native feelings. Hold up sticky note. 2-3 volunteers share reasoning",
+              "Write one word that describes how you now feel about the idea of being AI-Native. 2-3 volunteers share reasoning",
             answer: "",
           },
         ],
@@ -190,24 +190,24 @@ const initialLessons: Lesson[] = [
           {
             id: "2.1.1",
             type: "textarea",
-            label: 'Discussion 3: "Explain It to Someone\'s Grandparent"',
+            label: "Explain It to Someone's Grandparent",
             description:
-              "Pair up and explain AI, ML, DL to each other. Take 1-2 minutes each person. Make it simple and clear. Flag confusing or technical terms.",
+              "Pair up and explain AI. Take 1-2 minutes each person. Make it simple and clear. Flag confusing or technical terms.",
             answer: "",
           },
           {
             id: "2.1.2",
             type: "link",
-            label: 'Exercise 5: "Model Match-Up" (AI Basics)',
+            label: "Model Match-Up",
             description:
-              "Interactive card-based exercise to sort real-world use cases into AI/ML/DL categories and define their inputs/outputs.",
+              "Interactive exercise to sort real-world use cases into AI/ML/DL/Gen AI categories and define their inputs/outputs.",
             link: "/exercise/model-match-up",
             answer: "",
           },
           {
             id: "2.1.3",
             type: "radio-with-text",
-            label: 'Exercise 6: "What Changed Your Mind?" (AI Basics)',
+            label: "Journal: What Changed Your Mind?",
             description:
               "Reflect on what you would explain differently about AI concepts after the exercises.",
             options: [
@@ -662,18 +662,20 @@ const initialLessons: Lesson[] = [
             id: "exercise-21",
             type: "textarea",
             label: "Exercise 21: Make a Sandwich - Workflow Baseline (5 min)",
-            description: "Group Discussion: At your table, take turns explaining how you make your favorite sandwich - step by step in 30 seconds or less.<br><br><strong>Be specific:</strong><br>• \"Open the fridge. Get the bread. Toast it...\"<br>• \"Spread mayo on one side. Stack turkey. Add pickles...\"<br><br>Write down the step-by-step process for making your favorite sandwich:",
-            answer: ""
+            description:
+              'Group Discussion: At your table, take turns explaining how you make your favorite sandwich - step by step in 30 seconds or less.<br><br><strong>Be specific:</strong><br>• "Open the fridge. Get the bread. Toast it..."<br>• "Spread mayo on one side. Stack turkey. Add pickles..."<br><br>Write down the step-by-step process for making your favorite sandwich:',
+            answer: "",
           },
           {
             id: "exercise-22",
             type: "link",
             label: "Exercise 22: AI Workflow Enhancement Tool",
-            description: "Interactive workflow redesign activity using the AI Workflow Enhancer tool to identify and enhance your processes with AI integration points.",
+            description:
+              "Interactive workflow redesign activity using the AI Workflow Enhancer tool to identify and enhance your processes with AI integration points.",
             link: "/exercise/workflow-enhancer",
-            answer: ""
-          }
-        ]
+            answer: "",
+          },
+        ],
       },
       { id: "4.2", title: "4.2 Operate & Reinforce", completed: false },
       { id: "4.3", title: "4.3 Document & Share", completed: false },

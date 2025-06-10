@@ -77,7 +77,7 @@ const USE_CASES_DATA = [
   }
 ];
 
-const TAGS = ["AI", "ML", "DL"];
+const TAGS = ["AI", "ML", "DL", "Gen AI"];
 
 export default function ModelMatchUpPage() {
   const [useCases, setUseCases] = useState<UseCase[]>([]);

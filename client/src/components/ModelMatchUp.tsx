@@ -83,7 +83,7 @@ const USE_CASES_DATA = [
   },
 ];
 
-const TAGS = ["AI", "ML", "DL", "Gen AI"];
+const TAGS = ["AI", "ML", "DL"];
 
 export default function ModelMatchUp() {
   const [useCases, setUseCases] = useState<UseCase[]>([]);
@@ -132,18 +132,18 @@ export default function ModelMatchUp() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-4">
-          Exercise 5: Model Match-Up
+          Model Match-Up
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Sort real-world use cases into AI/ML/DL categories and define their
-          inputs/outputs.
+          Sort real-world use cases into AI/ML/DL/Gen AI categories and define
+          their inputs/outputs.
         </p>
         <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
           <p className="text-sm text-blue-800 dark:text-blue-200">
             <strong>Instructions:</strong> For each use case, select one or more
-            categories (AI, ML, DL), then describe what kind of input the system
-            uses and what output it produces. Click the help icon for hints
-            about each use case.
+            categories (AI, ML, DL, Gen AI), then describe what kind of input
+            the system uses and what output it produces. Click the help icon for
+            hints about each use case.
           </p>
         </div>
       </div>

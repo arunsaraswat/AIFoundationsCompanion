@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
-import ModelMatchUp from "./ModelMatchUp";
+
 import TokenPrediction from "./TokenPrediction";
 import PromptAnatomy from "./PromptAnatomy";
 import QuickDecisionPrompt from "./QuickDecisionPrompt";
@@ -236,9 +236,6 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         );
       
       case 'component':
-        if (exercise.component === 'ModelMatchUp') {
-          return <ModelMatchUp />;
-        }
         if (exercise.component === 'TokenPrediction') {
           return <TokenPrediction />;
         }

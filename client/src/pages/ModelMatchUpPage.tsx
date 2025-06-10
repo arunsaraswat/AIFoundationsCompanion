@@ -170,10 +170,10 @@ export default function ModelMatchUpPage() {
         </Button>
         
         <h1 className="text-3xl font-bold text-foreground mb-4">
-          Exercise 5: Model Match-Up
+          Model Match-Up
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Sort real-world use cases into AI/ML/DL categories and define their inputs/outputs.
+          Sort real-world use cases into AI/ML/DL/Gen AI categories and define their inputs/outputs.
         </p>
       </div>
 
@@ -188,7 +188,7 @@ export default function ModelMatchUpPage() {
             />
             <div>
               <h3 className="font-medium text-foreground">Task 1: Category Classification</h3>
-              <p className="text-sm text-muted-foreground">Sort each use case into AI, ML, or DL categories</p>
+              <p className="text-sm text-muted-foreground">Sort each use case into AI, ML, DL, or Gen AI categories</p>
             </div>
           </div>
           

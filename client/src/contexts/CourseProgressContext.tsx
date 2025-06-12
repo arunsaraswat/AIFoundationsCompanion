@@ -583,7 +583,7 @@ const initialLessons: Lesson[] = [
           {
             id: "discussion-9",
             type: "multi-step",
-            label: "Discussion 9: Where Are We Headed?",
+            label: "Where Are We Headed?",
             description: "Class Discussion (5 min)",
             steps: [
               {

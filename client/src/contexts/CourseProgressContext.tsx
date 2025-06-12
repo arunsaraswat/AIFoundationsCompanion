@@ -469,9 +469,9 @@ const initialLessons: Lesson[] = [
               "Individual Activity (Prepare: 5 min)",
             steps: [
               {
-                id: "step-1",
+                id: "step-1a",
                 type: "text",
-                label: "Step 1: Identify the Role - What kind of teammate is this agent?",
+                label: "What kind of teammate is this agent?",
                 description: "",
                 answer: "",
               },

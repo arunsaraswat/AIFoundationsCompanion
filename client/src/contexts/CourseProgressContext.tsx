@@ -233,76 +233,54 @@ const initialLessons: Lesson[] = [
           {
             id: "discussion-4",
             type: "textarea",
-            label: 'Discussion 4: "Data as a Design Decision"',
+            label: "Data as a Design Decision",
             description:
-              "Objective: Explore how the quality, scope, and inclusivity of data profoundly shape the performance and fairness of AI systems — and how every design decision is also a data decision. \nScenario: You're designing an AI-powered global music playlist generator. The system recommends personalized playlists to users based on their listening history, preferences, and behaviors. \nDesign Constraints: • Your training data comes exclusively from English-language music sources. • The user sample skews heavily toward people aged 20–30 in North America.",
+              "You're building a music playlist generator for a global audience.<br>Questions to Consider: <br> - If your training data only includes English-language songs, what experience will users in Brazil or Korea get? <br> - What happens if all the data comes from people aged 20-30?",
           },
           {
             id: "exercise-7",
             type: "link",
-            label: 'Exercise 7: "Bad Data Risk Assessment"',
+            label: "Bad Data Risk Assessment",
             description:
-              "Task 3: Mark any 'bad data' risk point on the card (e.g., skewed inputs, noisy training data, missing labels). Facilitator circulates, prompting questions: 'Would this still work if it had half the data?' 'What assumptions is this model making about the user or context?'",
+              "Analyze the Real-World Use Cases from 2.1 (Ex. Netflix Recommendations) <br>Answer these two questions:<br> - Would this still work if it had half the data?<br> - What assumptions is this model making about the user or context?",
             link: "/exercise/model-match-up",
           },
           {
             id: "exercise-8",
             type: "textarea",
-            label: 'Exercise 8: "Where Bad Data Hurts Most"',
+            label: "Journal: Where Bad Data Hurts Most",
             description:
-              "Individual reflection on your work. Identify 2-3 high-impact bad data areas. Record answers in workbook.",
+              "Record your answer to the following: Which 2-3 areas would have the biggest impact if you started with bad data given the work you do?",
           },
         ],
       },
       {
         id: "2.3",
-        title: "2.3 LLMs – The Mind Behind the Curtain",
+        title: "2.3 Large Language Models",
         completed: false,
         exercises: [
           {
             id: "discussion-5",
             type: "text",
-            label: 'Discussion 5: "What\'s Hard About Language for Machines?"',
+            label: "Language Challenges for Machines",
             description:
-              "What's something humans do with language that machines struggle to replicate?",
+              "What's something humans do with language when they communicate that's hard for a machine to replicate?",
             answer: "",
           },
           {
             id: "exercise-9",
             type: "component",
-            label: "Exercise 9: Be the Model – Token-by-Token Prediction",
+            label: "Be the Model – Token-by-Token Prediction",
             description:
               "Experience how language models predict text one token at a time.",
             component: "TokenPrediction",
           },
           {
             id: "exercise-10",
-            type: "multi-step",
-            label: "Exercise 10: Why Context Is Everything",
+            type: "textarea",
+            label: "Journal: Why Context Is Everything",
             description:
-              "Reflect on the token prediction exercise and what it reveals about language understanding.",
-            steps: [
-              {
-                id: "helped-hurt",
-                type: "textarea",
-                label: "What helped or hurt your predictions?",
-                answer: "",
-              },
-              {
-                id: "assumptions",
-                type: "textarea",
-                label:
-                  "What assumptions did you make about tone, style, or purpose?",
-                answer: "",
-              },
-              {
-                id: "misunderstanding",
-                type: "textarea",
-                label:
-                  "What could go wrong if the model misunderstood your intent?",
-                answer: "",
-              },
-            ],
+              "What role did your personal experience, background, and knowledge play in how you made predictions?",
           },
         ],
       },
@@ -314,15 +292,15 @@ const initialLessons: Lesson[] = [
           {
             id: "discussion-6",
             type: "textarea",
-            label: 'Discussion 6: "Prompt Autopsy"',
+            label: "Prompt Insights",
             description:
-              'Pairs share prompt wins and fails. Discuss what made the difference. Capture on board as "Wins" and "Fails".',
+              "Have you ever typed something into ChatGPT or another AI tool and been disappointed or impressed by what you got back?",
             answer: "",
           },
           {
             id: "exercise-11",
             type: "multi-step",
-            label: 'Exercise 11: "Decision Support Prompt Lab"',
+            label: "Build a Real Prompt for a Real Decision",
             description:
               "Multi-step activity to create and test decision support prompts",
             steps: [
@@ -389,7 +367,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2b",
                 type: "textarea",
-                label: "Step 2b: GPT Prompt – Turn It into a RISE Prompt",
+                label: "Step 2b: Using a Prompt Framework (RISE) ",
                 description:
                   'Copy-Paste This Prompt into GPT: "Using the information below, generate a clear and effective prompt using the RISE format. Don\'t lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation." Then paste your context from Step 2a.',
                 answer: "",
@@ -397,9 +375,9 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-3",
                 type: "textarea",
-                label: "Step 3: Model Testing",
+                label: "Using a Prompt Framework (RISE) ",
                 description:
-                  "Test Your Optimized RISE Prompt in Two Models: GPT-4 (ChatGPT) and compare outputs based on: Clarity (Which one was clearer and easier to understand?), Relevance (Which response fit your real situation better?), Usefulness (Which gave more practical or insightful solutions?), Tone & Confidence (Which sounded more trustworthy or professional in delivery?)",
+                  "“Using the information below, generate a clear and effective prompt using the RISE format. Don’t lose any important context. The output should have four labeled sections: Role – define the perspective or persona the AI should take; Input – include all relevant background information and context; Steps – specify what the AI should do or how it should approach the task; and Expectation – describe the intended output or desired result.” + <The Prompt You wrote In The Previous Slide>",
                 answer: "",
               },
             ],
@@ -407,9 +385,8 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-12",
             type: "textarea",
-            label: 'Exercise 12: "Next Time I Prompt..."',
-            description:
-              'Solo reflection: What will you do differently? Table share improvements. Group capture under "Smarter Prompts = ___"',
+            label: "Next Time I Prompt...",
+            description: "Journal: What will you do differently?",
             answer: "",
           },
         ],
@@ -422,15 +399,15 @@ const initialLessons: Lesson[] = [
           {
             id: "discussion-7",
             type: "textarea",
-            label: 'Discussion 7: "Can ChatGPT Answer This?"',
+            label: "Can ChatGPT Answer This?",
             description:
-              "Consider company-specific prompts. Discuss: Can ChatGPT answer well without help? Set up need for RAG",
+              "How well do you think ChatGPT can answer these, without help? <br> - What's our internal PTO policy? <br> - What is the difference between LLM and RAG? <br> - Who leads cybersecurity here?",
             answer: "",
           },
           {
             id: "exercise-13",
             type: "multi-step",
-            label: 'Exercise 13: "GPT vs RAG on Employee Handbook"',
+            label: "GPT vs RAG on Employee Handbook",
             description:
               "Multi-step activity comparing GPT responses with and without RAG",
             steps: [
@@ -439,32 +416,24 @@ const initialLessons: Lesson[] = [
                 type: "textarea",
                 label: "Step 1: Ask GPT (without RAG)",
                 description:
-                  'Prompt: "What is the parental leave policy at The Venue Network?" Observe the output: Does it confidently guess? Is it vague, overly generic, or inaccurate?',
+                  'Prompt: "I work at the Venue Network inc. Do I have to get supervisor approval for PTO? Only tell me what you know for certain and where I can find it in the employee handbook."',
                 answer: "",
               },
               {
                 id: "step-2",
                 type: "textarea",
                 label:
-                  "Step 2: Ask the same question in a RAG-enabled environment",
+                  "Step 2: Ask the same question in a RAG-enabled GPT which has access to the employee handbook.",
                 description:
-                  'Load the employee handbook (RAG mode). Ask: "What is the parental leave policy at The Venue Network?"',
+                  "Use the same prompt in Step 1 with a GPT that has the Venue Network, Inc. employee handbook RAG-enabled",
                 answer: "",
               },
               {
                 id: "step-3",
                 type: "textarea",
-                label: "Step 3: Compare",
+                label: "Step 3: Discuss the differences",
                 description:
                   "Which version gave actual policy details? Did either include source references or cite page numbers? Which answer would you rely on if you were making a decision as an employee or manager?",
-                answer: "",
-              },
-              {
-                id: "test-questions",
-                type: "textarea",
-                label: "Test Questions from the Handbook",
-                description:
-                  "(These are designed to trip up a vanilla model unless it's paired with the handbook.) What benefits does The Venue Network provide after 90 days of employment? How much PTO can be carried over at the end of the fiscal year? What is the bereavement leave policy for a domestic partner's child? What are the rules around ending employment with unused PTO? Under what conditions will COBRA benefits be offered to former employees?",
                 answer: "",
               },
             ],
@@ -472,9 +441,9 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-14",
             type: "textarea",
-            label: 'Exercise 14: "What Data Do You Need to RAG?"',
+            label: "Journal: What Data Do You Need to RAG?",
             description:
-              "Solo reflection: What content would create value if connected to AI? Table share RAG-worthy data. Group capture examples",
+              "What's one area in your organization where RAG could create the most value?",
             answer: "",
           },
         ],
@@ -487,26 +456,113 @@ const initialLessons: Lesson[] = [
           {
             id: "discussion-8",
             type: "textarea",
-            label: 'Discussion 8: "If You Had a Team of You..."',
+            label: "If You Could Clone Yourself",
             description:
-              "Table discussion: Clone yourself into 3 AI assistants. What would you assign them? Think beyond simple automation",
+              "Can you think of a time in a film or TV series when a helpful AI or robot really supported someone in a meaningful way?",
             answer: "",
           },
           {
             id: "exercise-15",
-            type: "link",
-            label: 'Exercise 15: "Design Your Agent Assistant"',
+            type: "multi-step",
+            label: 'Exercise 15: "Design Your AI Assistant"',
             description:
-              "Multi-step activity: Build a Human + 1 Agent Workflow (16-18 min)",
-            link: "/exercise/agent-design",
-            answer: "",
+              "Individual Activity: Build a Human + 1 Agent Workflow (16-18 min)",
+            steps: [
+              {
+                id: "step-1",
+                type: "multi-step",
+                label: "Step 1: Identify the Role",
+                description: "Define what kind of teammate this agent will be",
+                steps: [
+                  {
+                    id: "step-1a",
+                    type: "textarea",
+                    label: "What kind of teammate is this agent?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-1b",
+                    type: "textarea",
+                    label: "What problem space will it 'live' in (e.g., backlog grooming, meeting prep, stakeholder reporting)?",
+                    description: "",
+                    answer: "",
+                  },
+                ],
+              },
+              {
+                id: "step-2",
+                type: "multi-step",
+                label: "Step 2: Design the Agent's \"Brain\"",
+                description: "Define the core functionality and decision-making process",
+                steps: [
+                  {
+                    id: "step-2a",
+                    type: "textarea",
+                    label: "Goal: What decision or goal will it be responsible for?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-2b",
+                    type: "textarea",
+                    label: "Inputs: What info does it need to operate?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-2c",
+                    type: "textarea",
+                    label: "Process Logic: What kind of reasoning or automation does it apply?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-2d",
+                    type: "textarea",
+                    label: "Outputs: What does it produce or decide?",
+                    description: "",
+                    answer: "",
+                  },
+                ],
+              },
+              {
+                id: "step-3",
+                type: "multi-step",
+                label: "Step 3: Plan for Autonomy",
+                description: "Define boundaries and human oversight requirements",
+                steps: [
+                  {
+                    id: "step-3a",
+                    type: "textarea",
+                    label: "What decisions can it make on its own?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-3b",
+                    type: "textarea",
+                    label: "Where should it ask for human input or feedback?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-3c",
+                    type: "textarea",
+                    label: "What boundaries should be in place?",
+                    description: "",
+                    answer: "",
+                  },
+                ],
+              },
+            ],
           },
           {
             id: "exercise-16",
             type: "textarea",
-            label: 'Exercise 16: "If This Worked Perfectly..."',
+            label: "Journal: If This Worked Perfectly...",
             description:
-              "Solo reflection: How would your week change? Gallery walk: Share examples per group. Debrief speed gains, risk reduction, team impact",
+              "On a scale of 1-5, how ready is your organization for agentic workflows? <br> - 1 = Not at all ready (major barriers) <br> - 3 = Somewhat ready (mixed picture) <br> - 5 = Very ready (already moving this direction) <br>What's your biggest barrier to adoption? <br>What's one small step you could take to prepare?",
             answer: "",
           },
         ],

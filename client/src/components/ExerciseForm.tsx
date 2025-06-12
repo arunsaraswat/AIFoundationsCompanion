@@ -191,14 +191,40 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     {step.steps?.map((subStep) => (
                       <div key={subStep.id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-3 py-1">
                         <Label className="text-xs font-medium text-foreground mb-1 block">{subStep.label}</Label>
-                        <Input
-                          value={subStep.answer as string || ''}
-                          onChange={(e) => handleStepAnswerChange(subStep.id, e.target.value)}
-                          placeholder="Enter your answer..."
-                          className="text-xs"
-                        />
+                        {subStep.type === 'link' ? (
+                          <div className="p-2 border border-primary/20 rounded bg-primary/5">
+                            <a 
+                              href={subStep.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-3 py-1 bg-primary text-primary-foreground rounded text-xs hover:bg-primary/90 transition-colors"
+                            >
+                              <FileText className="h-3 w-3" />
+                              {subStep.label}
+                            </a>
+                          </div>
+                        ) : (
+                          <Input
+                            value={subStep.answer as string || ''}
+                            onChange={(e) => handleStepAnswerChange(subStep.id, e.target.value)}
+                            placeholder="Enter your answer..."
+                            className="text-xs"
+                          />
+                        )}
                       </div>
                     ))}
+                  </div>
+                ) : step.type === 'link' ? (
+                  <div className="p-4 border border-primary/20 rounded-lg bg-primary/5">
+                    <a 
+                      href={step.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                    >
+                      <FileText className="h-4 w-4" />
+                      {step.label}
+                    </a>
                   </div>
                 ) : step.type === 'textarea' ? (
                   <Textarea

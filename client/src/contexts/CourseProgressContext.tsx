@@ -582,12 +582,25 @@ const initialLessons: Lesson[] = [
         exercises: [
           {
             id: "discussion-9",
-            type: "textarea",
-            label:
-              "Discussion 9: \"What's Coming That You Can't Stop Thinking About?\"",
-            description:
-              'Share AI hopes that feel "not quite real". Capture under "Frontier Desires"',
-            answer: "",
+            type: "multi-step",
+            label: "Discussion 9: Where Are We Headed?",
+            description: "Class Discussion (5 min)",
+            steps: [
+              {
+                id: "phone-past",
+                type: "textarea",
+                label: "Think about your phone: What's something it can do now that felt experimental or futuristic just a few years ago?",
+                description: "",
+                answer: "",
+              },
+              {
+                id: "phone-future",
+                type: "textarea",
+                label: "What do you imagine it might be able to do five years from now?",
+                description: "",
+                answer: "",
+              },
+            ],
           },
           {
             id: "exercise-17",

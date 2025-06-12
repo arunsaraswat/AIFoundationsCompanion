@@ -4,6 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
+import { FileText, ExternalLink } from "lucide-react";
 
 import TokenPrediction from "./TokenPrediction";
 import PromptAnatomy from "./PromptAnatomy";
@@ -226,13 +227,18 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         return null;
 
       case 'link':
+        // Check if it's a PDF file
+        const isPDF = exercise.link?.endsWith('.pdf');
         return (
           <div className="p-4 border border-primary/20 rounded-lg bg-primary/5">
             <a 
               href={exercise.link}
-              className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
             >
-              Start Exercise
+              {isPDF ? <FileText className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
+              {isPDF ? exercise.label : "Start Exercise"}
             </a>
           </div>
         );

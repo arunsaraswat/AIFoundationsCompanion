@@ -429,6 +429,14 @@ const initialLessons: Lesson[] = [
                 answer: "",
               },
               {
+                id: "handbook-link",
+                type: "link",
+                label: "Venue Network, Inc. Employee Policy Manual",
+                description: "Reference document for the RAG exercise",
+                link: "/src/assets/venue-network-employee-handbook.pdf",
+                answer: "",
+              },
+              {
                 id: "step-3",
                 type: "textarea",
                 label: "Step 3: Discuss the differences",

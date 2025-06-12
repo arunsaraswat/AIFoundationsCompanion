@@ -185,22 +185,6 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     exerciseId={exercise.id}
                     stepId={step.id}
                   />
-                ) : /* Special handling for Exercise 15 Step 1 Agent Design */
-                step.id === 'step-1' && exercise.id === 'exercise-15' ? (
-                  <AgentDesignStep1 
-                    lessonId={lessonId}
-                    subLessonId={subLessonId}
-                    exerciseId={exercise.id}
-                    stepId={step.id}
-                  />
-                ) : /* Special handling for Exercise 15 Step 2 Agent Scaling */
-                step.id === 'step-2' && exercise.id === 'exercise-15' ? (
-                  <AgentDesignStep2 
-                    lessonId={lessonId}
-                    subLessonId={subLessonId}
-                    exerciseId={exercise.id}
-                    stepId={step.id}
-                  />
                 ) : step.type === 'multi-step' ? (
                   <div className="ml-4 space-y-3">
                     {step.steps?.map((subStep) => (

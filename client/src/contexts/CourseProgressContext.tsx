@@ -604,11 +604,54 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "exercise-17",
-            type: "textarea",
-            label: 'Exercise 17: "Postcard from the Future"',
-            description:
-              'At your table, imagine a moment in the future—any year you choose. On a flipchart, write a postcard-style message beginning with: "The year is [____] and here\'s what AI is doing in our world..." That could be: • Helping you onboard teammates before they\'re hired • Designing your product strategy while you sleep • Making wild mistakes you now laugh about • Or... quietly running everything in the background. Be as practical or ambitious as you want—what\'s changed in your workflows, your company, or even your industry? Keep it short, fun, and bold. Then post your "future postcard" on the wall. Optional share-out: One volunteer reads a favorite line.',
-            answer: "",
+            type: "multi-step",
+            label: "Extra! Extra! Read All About It! - IRL",
+            description: "Group Activity (5 min)",
+            steps: [
+              {
+                id: "step-1",
+                type: "text",
+                label: "Step 1: Pick any future year — realistic or bold.",
+                description: "",
+                answer: "",
+              },
+              {
+                id: "step-2",
+                type: "text",
+                label: "Step 2: Write a Headline that starts with: The year is [____]... and AI has become our everyday partner in __________.",
+                description: "",
+                answer: "",
+              },
+              {
+                id: "step-3",
+                type: "multi-step",
+                label: "Step 3: Bring Your Story to Life (Visually!)",
+                description: "Under your headline, draw or sketch a simple visual story that shows the world this AI has helped shape. Include:",
+                steps: [
+                  {
+                    id: "step-3a",
+                    type: "textarea",
+                    label: "How has it changed people's lives or work?",
+                    description: "",
+                    answer: "",
+                  },
+                  {
+                    id: "step-3b",
+                    type: "textarea",
+                    label: "Any surprising outcomes, innovations, or new needs that emerged?",
+                    description: "",
+                    answer: "",
+                  },
+                ],
+              },
+              {
+                id: "step-4",
+                type: "textarea",
+                label: "Step 4: Share Out",
+                description: "Each group presents their headline and \"breaking news\" to the room.",
+                answer: "",
+              },
+            ],
           },
           {
             id: "exercise-18",

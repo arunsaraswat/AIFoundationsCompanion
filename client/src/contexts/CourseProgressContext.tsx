@@ -464,7 +464,7 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-15",
             type: "multi-step",
-            label: 'Exercise 15: "Design Your AI Assistant"',
+            label: "Design Your AI Assistant",
             description:
               "Individual Activity (Prepare: 5 min)",
             steps: [

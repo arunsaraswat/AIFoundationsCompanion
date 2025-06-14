@@ -25,21 +25,21 @@ export default function Dashboard() {
   }, 0);
 
   return (
-    <div className="max-w-6xl mx-auto p-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Course Dashboard</h1>
-        <p className="text-lg text-muted-foreground">
+    <div className="max-w-6xl mx-auto p-4 md:p-8">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Course Dashboard</h1>
+        <p className="text-base md:text-lg text-muted-foreground">
           Track your progress through the AI-Native Foundations course
         </p>
       </div>
 
       {/* Overall Progress */}
-      <div className="mb-8">
+      <div className="mb-6 md:mb-8">
         <ProgressBar {...overallProgress} />
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Completed Lessons</CardTitle>
@@ -95,8 +95,8 @@ export default function Dashboard() {
 
       {/* Lesson Overview */}
       <div>
-        <h2 className="text-2xl font-semibold text-foreground mb-6">Lesson Overview</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4 md:mb-6">Lesson Overview</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {lessons.map((lesson) => {
             const progress = getLessonProgress(lesson.id);
             const getStatusBadge = () => {

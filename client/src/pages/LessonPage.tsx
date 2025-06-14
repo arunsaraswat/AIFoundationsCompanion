@@ -16,8 +16,8 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
   
   if (!lesson) {
     return (
-      <div className="max-w-4xl mx-auto p-8">
-        <h1 className="text-3xl font-bold text-foreground mb-4">Lesson Not Found</h1>
+      <div className="max-w-4xl mx-auto p-4 md:p-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Lesson Not Found</h1>
         <p className="text-muted-foreground">The requested lesson could not be found.</p>
       </div>
     );
@@ -36,12 +36,12 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
 
 
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">
+    <div className="max-w-4xl mx-auto p-4 md:p-8">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
           Lesson {lesson.id}: {lesson.title}
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-base md:text-lg text-muted-foreground">
           {progress.completed} of {progress.total} sub-lessons completed
         </p>
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-4">
@@ -63,8 +63,8 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
               onOpenChange={() => toggleSubLesson(subLesson.id)}
             >
               <div className="bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <div className="p-4 flex items-center justify-between">
-                  <div className="flex items-center space-x-3 flex-1">
+                <div className="p-3 md:p-4 flex items-center justify-between">
+                  <div className="flex items-center space-x-3 flex-1 min-w-0">
                     <Checkbox
                       checked={subLesson.completed}
                       onCheckedChange={(checked) => 
@@ -72,13 +72,13 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
                       }
                       className="flex-shrink-0"
                     />
-                    <CollapsibleTrigger className="flex items-center space-x-3 flex-1 text-left hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded px-2 py-1">
-                      <h2 className="text-lg font-semibold text-foreground">
+                    <CollapsibleTrigger className="flex items-center space-x-3 flex-1 text-left hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded px-2 py-1 min-w-0">
+                      <h2 className="text-base md:text-lg font-semibold text-foreground break-words">
                         {subLesson.title}
                       </h2>
                     </CollapsibleTrigger>
                   </div>
-                  <CollapsibleTrigger className="p-1 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded">
+                  <CollapsibleTrigger className="p-1 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors rounded flex-shrink-0 ml-2">
                     {isOpen ? (
                       <ChevronDown className="h-5 w-5 text-muted-foreground" />
                     ) : (
@@ -89,7 +89,7 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
                 
                 <CollapsibleContent>
                   {subLesson.exercises && subLesson.exercises.length > 0 && (
-                    <div className="px-4 pb-4 space-y-4">
+                    <div className="px-3 md:px-4 pb-3 md:pb-4 space-y-4">
                       {subLesson.exercises.map((exercise) => (
                         <ExerciseForm
                           key={exercise.id}

@@ -35,6 +35,26 @@
   --sidebar-ring: 222 84% 5%;
 }
 
+/* Mobile responsive styles */
+@media (max-width: 767px) {
+  /* Ensure mobile content doesn't overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Mobile-first responsive text */
+  .responsive-text {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  /* Ensure proper mobile scrolling */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}
+
 .dark {
   --background: 222 84% 5%;
   --foreground: 210 40% 98%;

@@ -7,7 +7,11 @@ import { clearCourseData } from "../utils/storage";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-export default function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void;
+}
+
+export default function Sidebar({ onNavigate }: SidebarProps = {}) {
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const { exportData, importData } = useCourseProgress();
@@ -38,8 +42,13 @@ export default function Sidebar() {
     }
   };
 
+  const handleNavigation = (href: string) => {
+    window.location.href = href;
+    onNavigate?.();
+  };
+
   return (
-    <div className="w-80 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300">
+    <div className="w-80 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300 h-full overflow-hidden">
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center space-x-3">
@@ -60,12 +69,10 @@ export default function Sidebar() {
             <Button
               variant={location === "/" ? "default" : "ghost"}
               className="w-full justify-start text-sm font-medium"
-              asChild
+              onClick={() => handleNavigation("/")}
             >
-              <a href="/">
-                <BarChart3 className="mr-3" size={16} />
-                Dashboard
-              </a>
+              <BarChart3 className="mr-3" size={16} />
+              Dashboard
             </Button>
           </li>
           
@@ -75,67 +82,67 @@ export default function Sidebar() {
               <Button
                 variant={location === "/lesson/1" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
-                asChild
+                onClick={() => handleNavigation("/lesson/1")}
               >
-                <a href="/lesson/1" className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0">
                   <Globe className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 1: EDGE + AI-Native Foundations</span>
-                </a>
+                </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/2" || location === "/exercise/agent-design" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
-                asChild
+                onClick={() => handleNavigation("/lesson/2")}
               >
-                <a href="/lesson/2" className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0">
                   <Brain className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 2: AI Technical Foundations</span>
-                </a>
+                </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/3" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
-                asChild
+                onClick={() => handleNavigation("/lesson/3")}
               >
-                <a href="/lesson/3" className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0">
                   <Cog className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 3: The AI-Native Operating Model</span>
-                </a>
+                </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/4" || location === "/exercise/workflow-enhancer" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
-                asChild
+                onClick={() => handleNavigation("/lesson/4")}
               >
-                <a href="/lesson/4" className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0">
                   <Users className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 4: AI-Native in Practice</span>
-                </a>
+                </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/5" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
-                asChild
+                onClick={() => handleNavigation("/lesson/5")}
               >
-                <a href="/lesson/5" className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0">
                   <TrendingUp className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 5: Change Management</span>
-                </a>
+                </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/6" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3"
-                asChild
+                onClick={() => handleNavigation("/lesson/6")}
               >
-                <a href="/lesson/6" className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0">
                   <Target className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-tight break-words whitespace-normal">Lesson 6: Taking Action</span>
-                </a>
+                </div>
               </Button>
             </div>
           </div>

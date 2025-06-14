@@ -473,8 +473,7 @@ const initialLessons: Lesson[] = [
             id: "exercise-15",
             type: "multi-step",
             label: "Design Your AI Assistant",
-            description:
-              "Individual Activity (Prepare: 5 min)",
+            description: "Individual Activity (Prepare: 5 min)",
             steps: [
               {
                 id: "step-1",
@@ -492,7 +491,8 @@ const initialLessons: Lesson[] = [
                   {
                     id: "step-1b",
                     type: "text",
-                    label: "What problem space will it 'live' in (e.g., backlog grooming, meeting prep, stakeholder reporting)?",
+                    label:
+                      "What problem space will it 'live' in (e.g., backlog grooming, meeting prep, stakeholder reporting)?",
                     description: "",
                     answer: "",
                   },
@@ -501,13 +501,14 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2",
                 type: "multi-step",
-                label: "Step 2: Design the Agent's \"Brain\"",
+                label: 'Step 2: Design the Agent\'s "Brain"',
                 description: "",
                 steps: [
                   {
                     id: "step-2a",
                     type: "text",
-                    label: "Goal: What decision or goal will it be responsible for?",
+                    label:
+                      "Goal: What decision or goal will it be responsible for?",
                     description: "",
                     answer: "",
                   },
@@ -521,7 +522,8 @@ const initialLessons: Lesson[] = [
                   {
                     id: "step-2c",
                     type: "text",
-                    label: "Process Logic: What kind of reasoning or automation does it apply?",
+                    label:
+                      "Process Logic: What kind of reasoning or automation does it apply?",
                     description: "",
                     answer: "",
                   },
@@ -589,14 +591,16 @@ const initialLessons: Lesson[] = [
               {
                 id: "phone-past",
                 type: "textarea",
-                label: "Think about your phone: What's something it can do now that felt experimental or futuristic just a few years ago?",
+                label:
+                  "Think about your phone: What's something it can do now that felt experimental or futuristic just a few years ago?",
                 description: "",
                 answer: "",
               },
               {
                 id: "phone-future",
                 type: "textarea",
-                label: "What do you imagine it might be able to do five years from now?",
+                label:
+                  "What do you imagine it might be able to do five years from now?",
                 description: "",
                 answer: "",
               },
@@ -618,7 +622,8 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2",
                 type: "text",
-                label: "Step 2: Write a Headline that starts with: The year is [____]... and AI has become our everyday partner in __________.",
+                label:
+                  "Step 2: Write a Headline that starts with: The year is [____]... and AI has become our everyday partner in __________.",
                 description: "",
                 answer: "",
               },
@@ -626,7 +631,8 @@ const initialLessons: Lesson[] = [
                 id: "step-3",
                 type: "multi-step",
                 label: "Step 3: Bring Your Story to Life (Visually!)",
-                description: "Under your headline, draw or sketch a simple visual story that shows the world this AI has helped shape. Include:",
+                description:
+                  "Under your headline, draw or sketch a simple visual story that shows the world this AI has helped shape. Include:",
                 steps: [
                   {
                     id: "step-3a",
@@ -638,7 +644,8 @@ const initialLessons: Lesson[] = [
                   {
                     id: "step-3b",
                     type: "textarea",
-                    label: "Any surprising outcomes, innovations, or new needs that emerged?",
+                    label:
+                      "Any surprising outcomes, innovations, or new needs that emerged?",
                     description: "",
                     answer: "",
                   },
@@ -648,7 +655,8 @@ const initialLessons: Lesson[] = [
                 id: "step-4",
                 type: "textarea",
                 label: "Step 4: Share Out",
-                description: "Each group presents their headline and \"breaking news\" to the room.",
+                description:
+                  'Each group presents their headline and "breaking news" to the room.',
                 answer: "",
               },
             ],
@@ -656,9 +664,9 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-18",
             type: "textarea",
-            label: 'Exercise 18: "From Vision to Value"',
+            label: "Journal: From Vision to Value",
             description:
-              "Room discussion: How do organizations turn vision into value?",
+              "What's one AI capability you want to explore further after this course?",
             answer: "",
           },
         ],

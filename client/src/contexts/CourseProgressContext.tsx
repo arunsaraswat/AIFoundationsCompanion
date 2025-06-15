@@ -540,6 +540,59 @@ const initialLessons: Lesson[] = [
             ],
           },
           {
+            id: "exercise-scale-multi-agent",
+            type: "multi-step",
+            label: "Scale It to Multi-Agent",
+            description: "Prepare: 10 Minutes",
+            steps: [
+              {
+                id: "step-1",
+                type: "textarea",
+                label: "Step 1: Define the Workflow (Group)",
+                description: "As a table, identify high-level steps in planning and booking a vacation based on your group size. Each person claims one step to own.<br><br>Examples: Choose destination, set budget/dates, research accommodations, book travel, coordinate itinerary.",
+                answer: "",
+              },
+              {
+                id: "step-2",
+                type: "multi-step",
+                label: "Step 2: Design Your Step's Agent (Solo)",
+                description: "",
+                steps: [
+                  {
+                    id: "inputs",
+                    type: "text",
+                    label: "Inputs: What does it need to know?",
+                    answer: "",
+                  },
+                  {
+                    id: "process-logic",
+                    type: "text",
+                    label: "Process Logic: How does it work?",
+                    answer: "",
+                  },
+                  {
+                    id: "outputs",
+                    type: "text",
+                    label: "Outputs: What does it produce?",
+                    answer: "",
+                  },
+                  {
+                    id: "boundaries",
+                    type: "text",
+                    label: "Boundaries: What shouldn't it do?",
+                    answer: "",
+                  },
+                  {
+                    id: "name-personality",
+                    type: "text",
+                    label: "Give it a name and personality!",
+                    answer: "",
+                  },
+                ],
+              },
+            ],
+          },
+          {
             id: "exercise-16",
             type: "textarea",
             label: "Journal",

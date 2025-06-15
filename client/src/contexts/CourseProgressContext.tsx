@@ -219,9 +219,9 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-8",
             type: "textarea",
-            label: "Journal: Where Bad Data Hurts Most",
+            label: "Journal",
             description:
-              "Record your answer to the following: Which 2-3 areas would have the biggest impact if you started with bad data given the work you do?",
+              "Think about a recent AI tool you've used (ChatGPT, Netflix recommendations, etc.). What assumptions might that AI be making about you based on limited or biased data? Write down one example where \"garbage in, garbage out\" could impact a decision that matters to you personally or professionally.",
           },
         ],
       },

@@ -142,28 +142,10 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "1.2.2",
-            type: "multi-step",
+            type: "textarea",
             label: "What AI-Native Means to Me",
             description:
-              "Multi-step activity: Translate the Definition (Individual then Affinity Group)",
-            steps: [
-              {
-                id: "1.2.2.1",
-                type: "textarea",
-                label: "Individual Activity",
-                description:
-                  'Each person answers: "What does it look like to relentlessly embed AI in my work?" "What\'s one example of how my organization could structurally bake in AI?"',
-                answer: "",
-              },
-              {
-                id: "1.2.2.2",
-                type: "textarea",
-                label: "Step 2: Find the Patterns",
-                description:
-                  "In your group, affinity group your organizational sticky notes and identify and share patterns you see across your organizations.",
-                answer: "",
-              },
-            ],
+              'Each person answers: "What does it look like to relentlessly embed AI in my work?" "What\'s one example of how my organization could structurally bake in AI?"',
             answer: "",
           },
           {

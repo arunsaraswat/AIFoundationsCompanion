@@ -97,7 +97,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               >
                 <div className="flex items-start min-w-0">
                   <Brain className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 2: AI Technical Foundations</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 2: AI Technical Literacy</span>
                 </div>
               </Button>
               

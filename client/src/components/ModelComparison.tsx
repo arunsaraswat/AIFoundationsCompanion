@@ -66,7 +66,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
               content: risePrompt
             }
           ],
-          model: 'meta-llama/llama-4-maverick:free'
+          model: 'meta-llama/llama-3.3-8b-instruct:free'
         }),
       });
 
@@ -148,7 +148,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Meta: Llama 4 Maverick</CardTitle>
+          <CardTitle className="text-lg">Meta: Llama 3.3 8B Instruct</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Button 
@@ -156,7 +156,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
             disabled={llamaState.isLoadingAI}
             className="w-full"
           >
-            {llamaState.isLoadingAI ? "Running..." : "Run on Meta: Llama 4 Maverick"}
+            {llamaState.isLoadingAI ? "Running..." : "Run on Meta: Llama 3.3 8B Instruct"}
           </Button>
           
           {llamaState.aiResponse && (

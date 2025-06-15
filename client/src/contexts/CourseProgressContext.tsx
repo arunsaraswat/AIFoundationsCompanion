@@ -420,10 +420,10 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-14",
             type: "textarea",
-            label: "Journal: What Data Do You Need to RAG?",
+            label: "Journal",
             description:
-              "What's one area in your organization where RAG could create the most value?",
-            component: "ModelComparison",
+              "Think about the difference between a model that \"knows\" vs. one that \"looks it up.\" In 2 minutes, write about a work scenario where relying on outdated or general AI knowledge could create risk—and how RAG could help solve that.",
+            answer: "",
           },
         ],
       },

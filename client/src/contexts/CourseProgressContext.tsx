@@ -590,6 +590,13 @@ const initialLessons: Lesson[] = [
                   },
                 ],
               },
+              {
+                id: "step-3",
+                type: "textarea",
+                label: "Step 3: Orchestrate the System (Group Discussion)",
+                description: "How will they function as a coordinated system?<br><br>Discuss & Map:<br>• Handoffs: What data gets passed?<br>• Dependencies: What needs to happen when?<br>• Decisions: Where do agents need feedback or loops?<br>• Oversight: Where do humans step in?",
+                answer: "",
+              },
             ],
           },
           {

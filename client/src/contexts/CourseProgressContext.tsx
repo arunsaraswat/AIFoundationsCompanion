@@ -221,7 +221,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Journal",
             description:
-              "Think about a recent AI tool you've used (ChatGPT, Netflix recommendations, etc.). What assumptions might that AI be making about you based on limited or biased data? Write down one example where \"garbage in, garbage out\" could impact a decision that matters to you personally or professionally.",
+              'Think about a recent AI tool you\'ve used (ChatGPT, Netflix recommendations, etc.). What assumptions might that AI be making about you based on limited or biased data? Write down one example where "garbage in, garbage out" could impact a decision that matters to you personally or professionally.',
           },
         ],
       },
@@ -251,7 +251,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Journal: Why Context Is Everything",
             description:
-              "Think back to the \"Be the Model\" activity. What did you notice about how you predicted the next word? In 2 minutes, write about what this taught you about how LLMs work—and how your own assumptions shaped the prediction process.",
+              'Think back to the "Be the Model" activity. What did you notice about how you predicted the next word? In 2 minutes, write about what this taught you about how LLMs work—and how your own assumptions shaped the prediction process.',
           },
         ],
       },
@@ -286,7 +286,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2a",
                 type: "multi-step",
-                label: "Step 2a: Fill in the Anatomy of a Problem (3 min)",
+                label: "Step 2: Fill in the Anatomy of a Problem (3 min)",
                 description: "Now add real context. Fill in each of these:",
                 steps: [
                   {
@@ -338,7 +338,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2b",
                 type: "textarea",
-                label: "Step 2b: Using a Prompt Framework (RISE) ",
+                label: "Step 3: Using a Prompt Framework (RISE) ",
                 description:
                   'Copy-Paste This Prompt into GPT: "Using the information below, generate a clear and effective prompt using the RISE format. Don\'t lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation." Then paste your context from Step 2a.',
                 answer: "",
@@ -346,9 +346,9 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-3",
                 type: "textarea",
-                label: "Using a Prompt Framework (RISE) ",
+                label: "Step 4: Test your prompt in two different models",
                 description:
-                  "“Using the information below, generate a clear and effective prompt using the RISE format. Don’t lose any important context. The output should have four labeled sections: Role – define the perspective or persona the AI should take; Input – include all relevant background information and context; Steps – specify what the AI should do or how it should approach the task; and Expectation – describe the intended output or desired result.” + <The Prompt You wrote In The Previous Slide>",
+                  "“Run the RISE prompt in 2 different models and compare",
                 answer: "",
               },
             ],

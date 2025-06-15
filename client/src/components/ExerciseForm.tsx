@@ -15,6 +15,7 @@ import RagStep2 from "./RagStep2";
 import RagTestQuestions from "./RagTestQuestions";
 import AgentDesignStep1 from "./AgentDesignStep1";
 import AgentDesignStep2 from "./AgentDesignStep2";
+import ModelComparison from "./ModelComparison";
 
 interface ExerciseFormProps {
   exercise: Exercise;

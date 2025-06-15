@@ -251,7 +251,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Journal: Why Context Is Everything",
             description:
-              "What role did your personal experience, background, and knowledge play in how you made predictions?",
+              "Think back to the \"Be the Model\" activity. What did you notice about how you predicted the next word? In 2 minutes, write about what this taught you about how LLMs work—and how your own assumptions shaped the prediction process.",
           },
         ],
       },

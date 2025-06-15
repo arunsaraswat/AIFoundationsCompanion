@@ -150,10 +150,10 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "1.2.4",
-            type: "text",
-            label: "Journal: One Word Check-In",
+            type: "textarea",
+            label: "Journal: AI-First Mindset",
             description:
-              "Write one word that describes how you now feel about the idea of being AI-Native. 2-3 volunteers share reasoning",
+              'Think about a task you completed yesterday. Write about how your approach might change if you automatically asked "How can AI help with this?" before starting. What would shift in your process, timeline, or outcomes?',
             answer: "",
           },
         ],

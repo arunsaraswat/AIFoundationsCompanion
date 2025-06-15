@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface RisePromptProps {
   lessonId: number;
@@ -262,9 +264,13 @@ Output format: ${fields.outputFormat}`;
                     Get Another AI Response
                   </Button>
                   
-                  <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap max-h-96 overflow-y-auto">
+                  <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm max-h-96 overflow-y-auto">
                     <div className="text-amber-400 mb-2">&gt; AI MODEL OUTPUT</div>
-                    {aiState.aiResponse}
+                    <div className="prose prose-sm prose-invert max-w-none">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {aiState.aiResponse}
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 </div>
               )}
@@ -305,9 +311,13 @@ Output format: ${fields.outputFormat}`;
                       Execute RISE Prompt Again
                     </Button>
                     
-                    <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap max-h-96 overflow-y-auto">
+                    <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm max-h-96 overflow-y-auto">
                       <div className="text-amber-400 mb-2">&gt; RISE PROMPT EXECUTION OUTPUT</div>
-                      {riseExecutionState.aiResponse}
+                      <div className="prose prose-sm prose-invert max-w-none">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {riseExecutionState.aiResponse}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   </div>
                 )}

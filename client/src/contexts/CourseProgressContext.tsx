@@ -821,7 +821,7 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-21",
             type: "textarea",
-            label: "Exercise 21: Make a Sandwich - Workflow Baseline (5 min)",
+            label: "Make a Sandwich",
             description:
               'Group Discussion: At your table, take turns explaining how you make your favorite sandwich - step by step in 30 seconds or less.<br><br><strong>Be specific:</strong><br>• "Open the fridge. Get the bread. Toast it..."<br>• "Spread mayo on one side. Stack turkey. Add pickles..."<br><br>Write down the step-by-step process for making your favorite sandwich:',
             component: "ModelComparison",

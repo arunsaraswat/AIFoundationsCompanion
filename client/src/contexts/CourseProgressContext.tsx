@@ -348,7 +348,7 @@ const initialLessons: Lesson[] = [
                 type: "textarea",
                 label: "Step 4: Run your optimized prompt and analyze the results",
                 description:
-                  "“Using the information below, generate a clear and effective prompt using the RISE format. Don’t lose any important context. The output should have four labeled sections: Role – define the perspective or persona the AI should take; Input – include all relevant background information and context; Steps – specify what the AI should do or how it should approach the task; and Expectation – describe the intended output or desired result.” + <The Prompt You wrote In The Previous Slide>",
+                  "Run your optimized prompt and analyze the results",
                 answer: "",
               },
             ],

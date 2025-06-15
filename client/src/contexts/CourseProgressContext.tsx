@@ -348,7 +348,7 @@ const initialLessons: Lesson[] = [
                 type: "component",
                 label: "Step 4: Test your prompt in two different models",
                 description:
-                  "“Run the RISE prompt in 2 different models and compare",
+                  "Run the RISE prompt in 2 different models and compare",
                 component: "ModelComparison",
               },
             ],

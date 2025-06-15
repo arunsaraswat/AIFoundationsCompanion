@@ -28,20 +28,20 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
     isLoadingAI: false,
   });
 
-  // Get the RISE prompt from step 3 (step-2 in the data)
+  // Get the RISE prompt from step 3 (stored in localStorage by RisePrompt component)
   const getRisePrompt = (): string => {
-    const lesson = lessons.find(l => l.id === lessonId);
-    if (!lesson) return "";
-    
-    const subLesson = lesson.subLessons.find(sl => sl.id === subLessonId);
-    if (!subLesson) return "";
-    
-    const exercise = subLesson.exercises?.find(ex => ex.id === exerciseId);
-    if (!exercise || exercise.type !== "multi-step") return "";
-    
-    const step2 = exercise.steps?.find(step => step.id === "step-2");
-    const answer = step2?.answer;
-    return typeof answer === 'string' ? answer : "";
+    // The RisePrompt component stores the AI response in localStorage
+    const risePromptKey = `risePromptAI_${lessonId}_${subLessonId}_${exerciseId}_step-2b`;
+    const saved = localStorage.getItem(risePromptKey);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return parsed.aiResponse || "";
+      } catch {
+        // Fall back to empty string
+      }
+    }
+    return "";
   };
 
   const runLlamaModel = async () => {

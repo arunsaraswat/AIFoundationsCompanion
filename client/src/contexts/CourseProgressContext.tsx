@@ -345,7 +345,7 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "step-3",
-                type: "textarea",
+                type: "component",
                 label: "Step 4: Test your prompt in two different models",
                 description:
                   "“Run the RISE prompt in 2 different models and compare",

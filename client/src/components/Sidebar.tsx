@@ -108,7 +108,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               >
                 <div className="flex items-start min-w-0">
                   <Cog className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 3: The AI-Native Operating Model</span>
+                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 3: The AI-Native Success Factors</span>
                 </div>
               </Button>
               

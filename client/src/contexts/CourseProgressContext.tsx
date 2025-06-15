@@ -356,9 +356,9 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-12",
             type: "textarea",
-            label: "Next Time I Prompt...",
-            description: "Journal: What will you do differently?",
-            component: "ModelComparison",
+            label: "Journal",
+            description: "Think about a time when an AI gave you a response that felt off. In 2 minutes, write what you think went wrong—was it the prompt, the model, or your expectations? How will you approach prompting differently now?",
+            answer: "",
           },
         ],
       },

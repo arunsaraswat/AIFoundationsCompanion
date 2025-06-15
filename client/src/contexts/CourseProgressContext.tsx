@@ -97,7 +97,7 @@ const initialLessons: Lesson[] = [
             label: "What Kind of Change Are You Feeling?",
             description:
               'Go around table with introductions. Share: Name, role, location. Complete: "Ever since ChatGPT went viral, the world is..."',
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "1.1.2",
@@ -111,7 +111,7 @@ const initialLessons: Lesson[] = [
               "Generative - New tools are helping create things we used to do manually",
               "Emergent - Stuff is happening that we didn't plan for—and don't fully understand yet",
             ],
-            answer: "",
+            component: "ModelComparison",
             followUpAnswer: "",
             followUpLabel: "Discussion Questions:",
             followUpDescription:
@@ -123,7 +123,7 @@ const initialLessons: Lesson[] = [
             label: "Journal Entry",
             description:
               "Which of the four EDGE forces—Exponential, Disruptive, Generative, or Emergent—do you feel most personally in your current role? Write about a specific example from your work where you've experienced this force, and describe what it means for how you need to think or act differently going forward.",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -138,7 +138,7 @@ const initialLessons: Lesson[] = [
             label: "What Comes to Mind?",
             description:
               'Pair discussion about "AI-Native" phrase. First thoughts and feelings. No wrong answers',
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "1.2.2",
@@ -146,7 +146,7 @@ const initialLessons: Lesson[] = [
             label: "What AI-Native Means to Me",
             description:
               'Each person answers: "What does it look like to relentlessly embed AI in my work?" "What\'s one example of how my organization could structurally bake in AI?"',
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "1.2.4",
@@ -154,7 +154,7 @@ const initialLessons: Lesson[] = [
             label: "Journal: AI-First Mindset",
             description:
               'Think about a task you completed yesterday. Write about how your approach might change if you automatically asked "How can AI help with this?" before starting. What would shift in your process, timeline, or outcomes?',
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -175,7 +175,7 @@ const initialLessons: Lesson[] = [
             label: "Explain It to Someone's Grandparent",
             description:
               "How would you explain what AI is to someone's grandparent?",
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "2.1.2",
@@ -184,7 +184,7 @@ const initialLessons: Lesson[] = [
             description:
               "Interactive exercise to sort real-world use cases into AI/ML/DL/Gen AI categories and define their inputs/outputs.",
             link: "/exercise/model-match-up",
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "2.1.3",
@@ -192,7 +192,7 @@ const initialLessons: Lesson[] = [
             label: "Journal: What Changed Your Mind?",
             description:
               "Before this session, how would you have explained AI to someone who knew nothing about it? Now write down one key distinction between human and machine intelligence that you'd emphasize differently. What surprised you most about how AI, ML, deep learning, and generative AI relate to each other?",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -236,7 +236,7 @@ const initialLessons: Lesson[] = [
             label: "Language Challenges for Machines",
             description:
               "What's something humans do with language when they communicate that's hard for a machine to replicate?",
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "exercise-9",
@@ -266,7 +266,7 @@ const initialLessons: Lesson[] = [
             label: "Prompt Insights",
             description:
               "Have you ever typed something into ChatGPT or another AI tool and been disappointed or impressed by what you got back?",
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "exercise-11",
@@ -281,7 +281,7 @@ const initialLessons: Lesson[] = [
                 label: "Step 1: Quick Decision Prompt (2-3 min)",
                 description:
                   'Write your own quick decision prompt using this format: "I\'m a [your role]. I need to make a decision about [brief issue]. What are 3 options I should consider, and what are the trade-offs of each from my point of view?"',
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "step-2a",
@@ -293,45 +293,45 @@ const initialLessons: Lesson[] = [
                     id: "role",
                     type: "text",
                     label: "Role: [your role]",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "who-involved",
                     type: "text",
                     label: "Who is involved?",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "challenge",
                     type: "text",
                     label: "What is the challenge or decision?",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "where-happening",
                     type: "text",
                     label: "Where is it happening (team, system, etc.)?",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "when-happening",
                     type: "text",
                     label:
                       "When is this happening or when is a decision needed?",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "why-matters",
                     type: "text",
                     label: "Why does this matter (what's at stake)?",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "output-format",
                     type: "text",
                     label:
                       "Preferred output format (pros/cons, table, ranked options, recommendation, etc.)",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                 ],
               },
@@ -341,7 +341,7 @@ const initialLessons: Lesson[] = [
                 label: "Step 3: Using a Prompt Framework (RISE) ",
                 description:
                   'Copy-Paste This Prompt into GPT: "Using the information below, generate a clear and effective prompt using the RISE format. Don\'t lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation." Then paste your context from Step 2a.',
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "step-3",
@@ -349,7 +349,7 @@ const initialLessons: Lesson[] = [
                 label: "Step 4: Test your prompt in two different models",
                 description:
                   "“Run the RISE prompt in 2 different models and compare",
-                answer: "",
+                component: "ModelComparison",
               },
             ],
           },
@@ -358,7 +358,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Next Time I Prompt...",
             description: "Journal: What will you do differently?",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -373,7 +373,7 @@ const initialLessons: Lesson[] = [
             label: "Can ChatGPT Answer This?",
             description:
               "How well do you think ChatGPT can answer these, without help? <br> - What's our internal PTO policy? <br> - What is the difference between LLM and RAG? <br> - Who leads cybersecurity here?",
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "exercise-13",
@@ -388,7 +388,7 @@ const initialLessons: Lesson[] = [
                 label: "Step 1: Ask GPT (without RAG)",
                 description:
                   'Prompt: "I work at the Venue Network inc. Do I have to get supervisor approval for PTO? Only tell me what you know for certain and where I can find it in the employee handbook."',
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "step-2",
@@ -397,7 +397,7 @@ const initialLessons: Lesson[] = [
                   "Step 2: Ask the same question in a RAG-enabled GPT which has access to the employee handbook.",
                 description:
                   "Use the same prompt in Step 1 with a GPT that has the Venue Network, Inc. employee handbook RAG-enabled",
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "handbook-link",
@@ -405,7 +405,7 @@ const initialLessons: Lesson[] = [
                 label: "Venue Network, Inc. Employee Policy Manual",
                 description: "Reference document for the RAG exercise",
                 link: "/src/assets/venue-network-employee-handbook.pdf",
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "step-3",
@@ -413,7 +413,7 @@ const initialLessons: Lesson[] = [
                 label: "Step 3: Discuss the differences",
                 description:
                   "Which version gave actual policy details? Did either include source references or cite page numbers? Which answer would you rely on if you were making a decision as an employee or manager?",
-                answer: "",
+                component: "ModelComparison",
               },
             ],
           },
@@ -423,7 +423,7 @@ const initialLessons: Lesson[] = [
             label: "Journal: What Data Do You Need to RAG?",
             description:
               "What's one area in your organization where RAG could create the most value?",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -438,7 +438,7 @@ const initialLessons: Lesson[] = [
             label: "If You Could Clone Yourself",
             description:
               "Can you think of a time in a film or TV series when a helpful AI or robot really supported someone in a meaningful way?",
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "exercise-15",
@@ -457,7 +457,7 @@ const initialLessons: Lesson[] = [
                     type: "text",
                     label: "What kind of teammate is this agent?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-1b",
@@ -465,7 +465,7 @@ const initialLessons: Lesson[] = [
                     label:
                       "What problem space will it 'live' in (e.g., backlog grooming, meeting prep, stakeholder reporting)?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                 ],
               },
@@ -481,14 +481,14 @@ const initialLessons: Lesson[] = [
                     label:
                       "Goal: What decision or goal will it be responsible for?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-2b",
                     type: "text",
                     label: "Inputs: What info does it need to operate?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-2c",
@@ -496,14 +496,14 @@ const initialLessons: Lesson[] = [
                     label:
                       "Process Logic: What kind of reasoning or automation does it apply?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-2d",
                     type: "text",
                     label: "Outputs: What does it produce or decide?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                 ],
               },
@@ -518,21 +518,21 @@ const initialLessons: Lesson[] = [
                     type: "text",
                     label: "What decisions can it make on its own?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-3b",
                     type: "text",
                     label: "Where should it ask for human input or feedback?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-3c",
                     type: "text",
                     label: "What boundaries should be in place?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                 ],
               },
@@ -544,7 +544,7 @@ const initialLessons: Lesson[] = [
             label: "Journal: If This Worked Perfectly...",
             description:
               "On a scale of 1-5, how ready is your organization for agentic workflows? <br> - 1 = Not at all ready (major barriers) <br> - 3 = Somewhat ready (mixed picture) <br> - 5 = Very ready (already moving this direction) <br>What's your biggest barrier to adoption? <br>What's one small step you could take to prepare?",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -565,7 +565,7 @@ const initialLessons: Lesson[] = [
                 label:
                   "Think about your phone: What's something it can do now that felt experimental or futuristic just a few years ago?",
                 description: "",
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "phone-future",
@@ -573,7 +573,7 @@ const initialLessons: Lesson[] = [
                 label:
                   "What do you imagine it might be able to do five years from now?",
                 description: "",
-                answer: "",
+                component: "ModelComparison",
               },
             ],
           },
@@ -588,7 +588,7 @@ const initialLessons: Lesson[] = [
                 type: "text",
                 label: "Step 1: Pick any future year — realistic or bold.",
                 description: "",
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "step-2",
@@ -596,7 +596,7 @@ const initialLessons: Lesson[] = [
                 label:
                   "Step 2: Write a Headline that starts with: The year is [____]... and AI has become our everyday partner in __________.",
                 description: "",
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "step-3",
@@ -610,7 +610,7 @@ const initialLessons: Lesson[] = [
                     type: "textarea",
                     label: "How has it changed people's lives or work?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "step-3b",
@@ -618,7 +618,7 @@ const initialLessons: Lesson[] = [
                     label:
                       "Any surprising outcomes, innovations, or new needs that emerged?",
                     description: "",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                 ],
               },
@@ -628,7 +628,7 @@ const initialLessons: Lesson[] = [
                 label: "Step 4: Share Out",
                 description:
                   'Each group presents their headline and "breaking news" to the room.',
-                answer: "",
+                component: "ModelComparison",
               },
             ],
           },
@@ -638,7 +638,7 @@ const initialLessons: Lesson[] = [
             label: "Journal: From Vision to Value",
             description:
               "What's one AI capability you want to explore further after this course?",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -660,7 +660,7 @@ const initialLessons: Lesson[] = [
             label: "Discussion 10: Current State Check (5 min)",
             description:
               'Table discussion: "How are we actually using AI?" Be honest about reality vs aspiration. Optional whiteboard capture',
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "exercise-19",
@@ -684,7 +684,7 @@ const initialLessons: Lesson[] = [
                   "Cross-functional Collaboration",
                   "Continuous Learning Mindset",
                 ],
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "define-application",
@@ -692,7 +692,7 @@ const initialLessons: Lesson[] = [
                 label: "Define How You'll Apply It",
                 description:
                   "What would it look like if you started modeling this success factor in how you work or lead right now?<br/>Examples: <ul><li> - Upskill Relentlessly → Block 1 hour/month for hands-on AI learning and share notes with team<li> - Tell the Full Story → Start adding use-case evidence to every AI recommendation <li> - Embed AI into the Everyday → Automate 1 report or feedback loop using a simple GenAI tool</ul>",
-                answer: "",
+                component: "ModelComparison",
               },
               {
                 id: "micro-plan",
@@ -705,25 +705,25 @@ const initialLessons: Lesson[] = [
                     id: "action",
                     type: "text",
                     label: "Action (What I'll do)",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "start-date",
                     type: "text",
                     label: "Start Date",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "who-helps",
                     type: "text",
                     label: "Who It Helps",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                   {
                     id: "success-looks",
                     type: "text",
                     label: "What Success Looks Like",
-                    answer: "",
+                    component: "ModelComparison",
                   },
                 ],
               },
@@ -732,7 +732,7 @@ const initialLessons: Lesson[] = [
                 type: "textarea",
                 label: "Share Your Plan with your table",
                 description: "Invite a few volunteers to share theirs",
-                answer: "",
+                component: "ModelComparison",
               },
             ],
           },
@@ -742,7 +742,7 @@ const initialLessons: Lesson[] = [
             label: "Exercise 20: Room Debrief (5 min)",
             description:
               "2-3 volunteers share with group. Share chosen Success Factor and specific move. Listen for creative applications and insights",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },
@@ -763,7 +763,7 @@ const initialLessons: Lesson[] = [
             label: "Exercise 21: Make a Sandwich - Workflow Baseline (5 min)",
             description:
               'Group Discussion: At your table, take turns explaining how you make your favorite sandwich - step by step in 30 seconds or less.<br><br><strong>Be specific:</strong><br>• "Open the fridge. Get the bread. Toast it..."<br>• "Spread mayo on one side. Stack turkey. Add pickles..."<br><br>Write down the step-by-step process for making your favorite sandwich:',
-            answer: "",
+            component: "ModelComparison",
           },
           {
             id: "exercise-22",
@@ -772,7 +772,7 @@ const initialLessons: Lesson[] = [
             description:
               "Interactive workflow redesign activity using the AI Workflow Enhancer tool to identify and enhance your processes with AI integration points.",
             link: "/exercise/workflow-enhancer",
-            answer: "",
+            component: "ModelComparison",
           },
         ],
       },

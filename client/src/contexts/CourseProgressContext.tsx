@@ -174,7 +174,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Explain It to Someone's Grandparent",
             description:
-              "Pair up and explain AI. Take 1-2 minutes each person. Make it simple and clear. Flag confusing or technical terms.",
+              "How would you explain what AI is to someone's grandparent?",
             answer: "",
           },
           {

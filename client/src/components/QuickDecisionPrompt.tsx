@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface QuickDecisionPromptProps {
   lessonId: number;
@@ -228,8 +230,10 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
                       </div>
                     </div>
                     <div className="px-4 pb-4 h-64 overflow-y-auto border-t border-amber-800">
-                      <div className="pt-2 whitespace-pre-wrap leading-relaxed">
-                        {aiState.aiResponse}
+                      <div className="pt-2 leading-relaxed prose prose-sm prose-invert max-w-none">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {aiState.aiResponse}
+                        </ReactMarkdown>
                       </div>
                     </div>
                   </div>

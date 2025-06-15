@@ -188,22 +188,11 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "2.1.3",
-            type: "radio-with-text",
+            type: "textarea",
             label: "Journal: What Changed Your Mind?",
             description:
-              "Reflect on what you would explain differently about AI concepts after the exercises.",
-            options: [
-              "I would explain AI concepts much more simply",
-              "I would focus more on real-world examples",
-              "I would emphasize the differences between AI/ML/DL more clearly",
-              "I would address common misconceptions first",
-              "I wouldn't change my approach much",
-            ],
+              "Before this session, how would you have explained AI to someone who knew nothing about it? Now write down one key distinction between human and machine intelligence that you'd emphasize differently. What surprised you most about how AI, ML, deep learning, and generative AI relate to each other?",
             answer: "",
-            followUpAnswer: "",
-            followUpLabel: "Table Synthesis:",
-            followUpDescription:
-              "What collective insight would you share about explaining AI concepts?",
           },
         ],
       },

@@ -815,7 +815,7 @@ const initialLessons: Lesson[] = [
     subLessons: [
       {
         id: "4.1",
-        title: "4.1 Workflow Baseline Lab & Redesign with AI Step",
+        title: "4.1 Workflow Improvement Process",
         completed: false,
         exercises: [
           {

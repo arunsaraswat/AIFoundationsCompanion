@@ -286,7 +286,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2a",
                 type: "multi-step",
-                label: "Step 2: Fill in the Anatomy of a Problem (3 min)",
+                label: "Step 2a: Fill in the Anatomy of a Problem (3 min)",
                 description: "Now add real context. Fill in each of these:",
                 steps: [
                   {
@@ -338,17 +338,17 @@ const initialLessons: Lesson[] = [
               {
                 id: "step-2b",
                 type: "textarea",
-                label: "Step 3: Using a Prompt Framework (RISE) ",
+                label: "Step 2b: Using a Prompt Framework (RISE) ",
                 description:
-                  'Copy-Paste This Prompt into GPT: "Using the information below, generate a clear and effective prompt using the RISE format. Don\'t lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation." Then paste your context from Step 2.',
+                  'Copy-Paste This Prompt into GPT: "Using the information below, generate a clear and effective prompt using the RISE format. Don\'t lose any important context. The output should have 4 labeled sections: Role, Input, Steps, and Expectation." Then paste your context from Step 2a.',
                 answer: "",
               },
               {
                 id: "step-3",
                 type: "textarea",
-                label: "Step 4: Run your optimized prompt and analyze the results",
+                label: "Using a Prompt Framework (RISE) ",
                 description:
-                  "Run your optimized prompt and analyze the results",
+                  "“Using the information below, generate a clear and effective prompt using the RISE format. Don’t lose any important context. The output should have four labeled sections: Role – define the perspective or persona the AI should take; Input – include all relevant background information and context; Steps – specify what the AI should do or how it should approach the task; and Expectation – describe the intended output or desired result.” + <The Prompt You wrote In The Previous Slide>",
                 answer: "",
               },
             ],

@@ -122,7 +122,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Journal Entry",
             description:
-              'Individual reflection: "One question I hope this course answers..."',
+              "Which of the four EDGE forces—Exponential, Disruptive, Generative, or Emergent—do you feel most personally in your current role? Write about a specific example from your work where you've experienced this force, and describe what it means for how you need to think or act differently going forward.",
             answer: "",
           },
         ],

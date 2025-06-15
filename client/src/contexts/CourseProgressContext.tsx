@@ -357,7 +357,8 @@ const initialLessons: Lesson[] = [
             id: "exercise-12",
             type: "textarea",
             label: "Journal",
-            description: "Think about a time when an AI gave you a response that felt off. In 2 minutes, write what you think went wrong—was it the prompt, the model, or your expectations? How will you approach prompting differently now?",
+            description:
+              "Think about a time when an AI gave you a response that felt off. In 2 minutes, write what you think went wrong—was it the prompt, the model, or your expectations? How will you approach prompting differently now?",
             answer: "",
           },
         ],
@@ -422,20 +423,20 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Journal",
             description:
-              "Think about the difference between a model that \"knows\" vs. one that \"looks it up.\" In 2 minutes, write about a work scenario where relying on outdated or general AI knowledge could create risk—and how RAG could help solve that.",
+              'Think about the difference between a model that "knows" vs. one that "looks it up." In 2 minutes, write about a work scenario where relying on outdated or general AI knowledge could create risk—and how RAG could help solve that.',
             answer: "",
           },
         ],
       },
       {
         id: "2.6",
-        title: "2.6 Agentic Workflow Primer",
+        title: "2.6 AI Agents",
         completed: false,
         exercises: [
           {
             id: "discussion-8",
             type: "textarea",
-            label: "If You Could Clone Yourself",
+            label: "Helpful AI or Robot",
             description:
               "Can you think of a time in a film or TV series when a helpful AI or robot really supported someone in a meaningful way?",
             component: "ModelComparison",
@@ -635,10 +636,10 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-18",
             type: "textarea",
-            label: "Journal: From Vision to Value",
+            label: "Journal",
             description:
-              "What's one AI capability you want to explore further after this course?",
-            component: "ModelComparison",
+              "Think about a recent work situation where you felt overwhelmed by repetitive tasks or complex coordination. What would change about how you approach your work if you shifted from being someone who uses AI tools to someone who directs AI agents? Write about this transition—what excites you most, and what concerns would you want to address about maintaining the right balance between human judgment and agent autonomy?",
+            answer: "",
           },
         ],
       },

@@ -153,7 +153,7 @@ export default function TokenPrediction() {
       <Card className="mb-4">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-medium">
-            Exercise 9: Be the Model – Token-by-Token Prediction
+            Be the Model – Token-by-Token Prediction
           </CardTitle>
           <p className="text-sm leading-relaxed text-muted-foreground">
             Experience how language models predict text one token at a time.

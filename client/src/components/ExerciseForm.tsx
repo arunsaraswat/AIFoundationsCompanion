@@ -163,6 +163,14 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     exerciseId={exercise.id}
                     stepId={step.id}
                   />
+                ) : /* Special handling for Step 3 model comparison */
+                step.id === 'step-3' && exercise.id === 'exercise-11' ? (
+                  <ModelComparison 
+                    lessonId={lessonId}
+                    subLessonId={subLessonId}
+                    exerciseId={exercise.id}
+                    stepId={step.id}
+                  />
                 ) : /* Special handling for Exercise 13 Step 1 RAG testing */
                 step.id === 'step-1' && exercise.id === 'exercise-13' ? (
                   <RagStep1 

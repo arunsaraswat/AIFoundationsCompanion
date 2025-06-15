@@ -542,10 +542,10 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-16",
             type: "textarea",
-            label: "Journal: If This Worked Perfectly...",
+            label: "Journal",
             description:
-              "On a scale of 1-5, how ready is your organization for agentic workflows? <br> - 1 = Not at all ready (major barriers) <br> - 3 = Somewhat ready (mixed picture) <br> - 5 = Very ready (already moving this direction) <br>What's your biggest barrier to adoption? <br>What's one small step you could take to prepare?",
-            component: "ModelComparison",
+              "Think about a recent work situation where you felt overwhelmed by repetitive tasks or complex coordination. What would change about how you approach your work if you shifted from being someone who uses AI tools to someone who directs AI agents? Write about this transition—what excites you most, and what concerns would you want to address about maintaining the right balance between human judgment and agent autonomy?",
+            answer: "",
           },
         ],
       },

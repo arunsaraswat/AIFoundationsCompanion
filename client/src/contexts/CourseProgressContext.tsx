@@ -652,21 +652,21 @@ const initialLessons: Lesson[] = [
       {
         id: "3.1",
         title:
-          "3.1 The AI-Native Operating Model — A Playbook for Getting Real Value from AI",
+          "3.1 The AI-Native Success Factors",
         completed: false,
         exercises: [
           {
             id: "discussion-10",
             type: "textarea",
-            label: "Discussion 10: Current State Check (5 min)",
+            label: "How are we actually using AI?",
             description:
-              'Table discussion: "How are we actually using AI?" Be honest about reality vs aspiration. Optional whiteboard capture',
+              'If someone asked your organization today, "How are we actually using AI?"—what would your answer be?',
             component: "ModelComparison",
           },
           {
             id: "exercise-19",
             type: "multi-step",
-            label: "Exercise 19: Success Factor Application (15 min)",
+            label: "Personalizing the Playbook",
             description:
               "Multi-step activity to apply AI-Native Success Factors",
             steps: [
@@ -740,10 +740,10 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-20",
             type: "textarea",
-            label: "Exercise 20: Room Debrief (5 min)",
+            label: "Journal",
             description:
-              "2-3 volunteers share with group. Share chosen Success Factor and specific move. Listen for creative applications and insights",
-            component: "ModelComparison",
+              "Look back at the 7 AI-Native Success Factors and consider your current work environment. Which Success Factor feels like the biggest gap or opportunity in your organization right now? Write about why this particular factor stood out to you and what it would look like if your team or organization truly embodied this factor. What would change in how people work, make decisions, or approach challenges?",
+            answer: "",
           },
         ],
       },

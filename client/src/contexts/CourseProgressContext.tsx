@@ -638,7 +638,7 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "Journal",
             description:
-              "Think about a recent work situation where you felt overwhelmed by repetitive tasks or complex coordination. What would change about how you approach your work if you shifted from being someone who uses AI tools to someone who directs AI agents? Write about this transition—what excites you most, and what concerns would you want to address about maintaining the right balance between human judgment and agent autonomy?",
+              "Consider an AI capability you're currently using or considering for your work. Based on what you learned about the three horizons, honestly assess where this capability sits today: Is it Stable (ready for full reliance), Evolving (worth experimenting with), or Frontier (experimental only)? Write down how this classification should change your approach and expectations when using it.",
             answer: "",
           },
         ],

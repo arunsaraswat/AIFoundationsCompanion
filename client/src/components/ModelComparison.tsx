@@ -146,59 +146,57 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Meta: Llama 4 Maverick</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Button 
-              onClick={runLlamaModel}
-              disabled={llamaState.isLoadingAI}
-              className="w-full"
-            >
-              {llamaState.isLoadingAI ? "Running..." : "Run on Meta: Llama 4 Maverick"}
-            </Button>
-            
-            {llamaState.aiResponse && (
-              <div className="bg-slate-900 text-slate-100 p-4 rounded-lg text-sm max-h-96 overflow-y-auto">
-                <div className="text-slate-400 mb-2">&gt; META LLAMA OUTPUT</div>
-                <div className="prose prose-sm prose-invert max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {llamaState.aiResponse}
-                  </ReactMarkdown>
-                </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Meta: Llama 4 Maverick</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Button 
+            onClick={runLlamaModel}
+            disabled={llamaState.isLoadingAI}
+            className="w-full"
+          >
+            {llamaState.isLoadingAI ? "Running..." : "Run on Meta: Llama 4 Maverick"}
+          </Button>
+          
+          {llamaState.aiResponse && (
+            <div className="bg-slate-900 text-slate-100 p-4 rounded-lg text-sm max-h-96 overflow-y-auto">
+              <div className="text-slate-400 mb-2">&gt; META LLAMA OUTPUT</div>
+              <div className="prose prose-sm prose-invert max-w-none">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {llamaState.aiResponse}
+                </ReactMarkdown>
               </div>
-            )}
-          </CardContent>
-        </Card>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Google: Gemma 3 12B</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Button 
-              onClick={runGemmaModel}
-              disabled={gemmaState.isLoadingAI}
-              className="w-full"
-            >
-              {gemmaState.isLoadingAI ? "Running..." : "Run on Google: Gemma 3 12B"}
-            </Button>
-            
-            {gemmaState.aiResponse && (
-              <div className="bg-blue-900 text-blue-100 p-4 rounded-lg text-sm max-h-96 overflow-y-auto">
-                <div className="text-blue-400 mb-2">&gt; GOOGLE GEMMA OUTPUT</div>
-                <div className="prose prose-sm prose-invert max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {gemmaState.aiResponse}
-                  </ReactMarkdown>
-                </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Google: Gemma 3 12B</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Button 
+            onClick={runGemmaModel}
+            disabled={gemmaState.isLoadingAI}
+            className="w-full"
+          >
+            {gemmaState.isLoadingAI ? "Running..." : "Run on Google: Gemma 3 12B"}
+          </Button>
+          
+          {gemmaState.aiResponse && (
+            <div className="bg-blue-900 text-blue-100 p-4 rounded-lg text-sm max-h-96 overflow-y-auto">
+              <div className="text-blue-400 mb-2">&gt; GOOGLE GEMMA OUTPUT</div>
+              <div className="prose prose-sm prose-invert max-w-none">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {gemmaState.aiResponse}
+                </ReactMarkdown>
               </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
       
       {(llamaState.aiResponse || gemmaState.aiResponse) && (
         <Card>

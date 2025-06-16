@@ -835,6 +835,14 @@ const initialLessons: Lesson[] = [
             link: "/exercise/workflow-enhancer",
             component: "ModelComparison",
           },
+          {
+            id: "exercise-23",
+            type: "textarea",
+            label: "Journal",
+            description:
+              "Think about a work process you perform regularly - perhaps preparing reports, onboarding new team members, or handling customer requests. Before today's exercise, how clearly could you have described every step, decision point, and handoff in that process? Now that you've experienced mapping workflows step-by-step, what surprised you most about the \"invisible\" complexity in work you thought you knew well? Write about one specific insight you gained about the gap between how you thought a process worked versus how it actually works.",
+            answer: "",
+          },
         ],
       },
       { id: "4.2", title: "4.2 Operate & Reinforce", completed: false },

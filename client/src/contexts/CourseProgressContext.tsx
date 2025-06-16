@@ -989,6 +989,21 @@ export function CourseProgressProvider({
     stepId: string,
     answer: string,
   ) => {
+    const updateStepsRecursively = (steps: Exercise[]): Exercise[] => {
+      return steps.map((step) => {
+        if (step.id === stepId) {
+          return { ...step, answer };
+        }
+        if (step.steps) {
+          return {
+            ...step,
+            steps: updateStepsRecursively(step.steps),
+          };
+        }
+        return step;
+      });
+    };
+
     setLessons((prev) =>
       prev.map((lesson) =>
         lesson.id === lessonId
@@ -1002,9 +1017,7 @@ export function CourseProgressProvider({
                         exercise.id === exerciseId
                           ? {
                               ...exercise,
-                              steps: exercise.steps?.map((step) =>
-                                step.id === stepId ? { ...step, answer } : step,
-                              ),
+                              steps: exercise.steps ? updateStepsRecursively(exercise.steps) : exercise.steps,
                             }
                           : exercise,
                       ),

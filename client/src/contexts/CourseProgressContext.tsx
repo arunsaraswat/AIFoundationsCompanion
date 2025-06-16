@@ -549,7 +549,8 @@ const initialLessons: Lesson[] = [
                 id: "step-1",
                 type: "textarea",
                 label: "Step 1: Define the Workflow (Group)",
-                description: "As a table, identify high-level steps in planning and booking a vacation based on your group size. Each person claims one step to own.<br><br>Examples: Choose destination, set budget/dates, research accommodations, book travel, coordinate itinerary.",
+                description:
+                  "As a table, identify high-level steps in planning and booking a vacation based on your group size. Each person claims one step to own.<br><br>Examples: Choose destination, set budget/dates, research accommodations, book travel, coordinate itinerary.",
                 answer: "",
               },
               {
@@ -594,7 +595,8 @@ const initialLessons: Lesson[] = [
                 id: "step-3",
                 type: "textarea",
                 label: "Step 3: Orchestrate the System (Group Discussion)",
-                description: "How will they function as a coordinated system?<br><br>Discuss & Map:<br>• Handoffs: What data gets passed?<br>• Dependencies: What needs to happen when?<br>• Decisions: Where do agents need feedback or loops?<br>• Oversight: Where do humans step in?",
+                description:
+                  "How will they function as a coordinated system?<br><br>Discuss & Map:<br>• Handoffs: What data gets passed?<br>• Dependencies: What needs to happen when?<br>• Decisions: Where do agents need feedback or loops?<br>• Oversight: Where do humans step in?",
                 answer: "",
               },
             ],
@@ -711,8 +713,7 @@ const initialLessons: Lesson[] = [
     subLessons: [
       {
         id: "3.1",
-        title:
-          "3.1 The AI-Native Success Factors",
+        title: "3.1 The AI-Native Success Factors",
         completed: false,
         exercises: [
           {
@@ -845,26 +846,43 @@ const initialLessons: Lesson[] = [
           },
         ],
       },
-      { id: "4.2", title: "4.2 Operate & Reinforce", completed: false },
-      { id: "4.3", title: "4.3 Document & Share", completed: false },
+      {
+        id: "4.2",
+        title: "4.2 Making The Business Case",
+        completed: false,
+        exercises: [
+          {
+            id: "reality-check",
+            type: "checkbox",
+            label: "Reality Check",
+            description: "Group Discussion (5 min): Raise your hands if any of these sound familiar:",
+            options: [
+              "\"Great idea, but who's going to build it?\"",
+              "\"We don't have budget for that\"",
+              "\"Legal will never approve external tools\"",
+              "\"Sounds nice, but prove the ROI first\""
+            ],
+            answer: [],
+          },
+        ],
+      },
+      { id: "4.3", title: "4.3 Transformational Thinking", completed: false },
     ],
   },
   {
     id: 5,
-    title: "Opportunity Assessment + Roadmapping",
+    title: "Roadmap to AI-Native",
     subLessons: [
-      { id: "5.1", title: "5.1 AI Opportunity Jumpstart", completed: false },
-      { id: "5.2", title: "5.2 30-60-90 Roadmap", completed: false },
+      { id: "5.1", title: "5.2 30-60-90 Roadmap", completed: false },
     ],
   },
   {
     id: 6,
-    title: "Advocacy + Influence",
+    title: "The AI-Native Pitch",
     subLessons: [
-      { id: "6.1", title: "6.1 Pitch Crafting", completed: false },
       {
-        id: "6.2",
-        title: "6.2 Pitch Rehearsal + Marketplace",
+        id: "6.1",
+        title: "6.1 Pitch Crafting and Rehearsal",
         completed: false,
       },
     ],

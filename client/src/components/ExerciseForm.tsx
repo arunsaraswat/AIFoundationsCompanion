@@ -2,6 +2,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
 import { FileText, ExternalLink } from "lucide-react";
@@ -83,6 +84,39 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               </div>
             ))}
           </RadioGroup>
+        );
+
+      case 'checkbox':
+        const handleCheckboxChange = (option: string, checked: boolean) => {
+          const currentAnswers = Array.isArray(exercise.answer) ? exercise.answer : [];
+          if (checked) {
+            if (!currentAnswers.includes(option)) {
+              handleAnswerChange([...currentAnswers, option]);
+            }
+          } else {
+            handleAnswerChange(currentAnswers.filter(item => item !== option));
+          }
+        };
+
+        return (
+          <div className="mt-2 space-y-3">
+            {exercise.options?.map((option, index) => (
+              <div key={index} className="flex items-start space-x-2">
+                <Checkbox
+                  id={`${exercise.id}-${index}`}
+                  checked={Array.isArray(exercise.answer) && exercise.answer.includes(option)}
+                  onCheckedChange={(checked) => handleCheckboxChange(option, !!checked)}
+                  className="mt-1"
+                />
+                <Label 
+                  htmlFor={`${exercise.id}-${index}`} 
+                  className="text-sm leading-relaxed cursor-pointer flex-1"
+                >
+                  {option}
+                </Label>
+              </div>
+            ))}
+          </div>
         );
 
       case 'radio-with-text':

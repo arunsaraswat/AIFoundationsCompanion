@@ -48,9 +48,9 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
   };
 
   return (
-    <div className="w-80 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300 h-full overflow-hidden">
+    <div className="w-80 bg-sidebar border-r border-sidebar-border flex flex-col transition-colors duration-300 h-full overflow-y-auto">
       {/* Header */}
-      <div className="p-6 border-b border-sidebar-border">
+      <div className="p-6 border-b border-sidebar-border flex-shrink-0">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <GraduationCap className="text-primary-foreground text-lg" size={20} />
@@ -63,7 +63,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4">
+      <nav className="flex-1 p-4 min-h-0">
         <ul className="space-y-2">
           <li>
             <Button
@@ -150,7 +150,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
       </nav>
 
       {/* Utilities */}
-      <div className="p-4 border-t border-sidebar-border space-y-2">
+      <div className="p-4 border-t border-sidebar-border space-y-2 flex-shrink-0">
         <Button
           variant="ghost"
           size="sm"

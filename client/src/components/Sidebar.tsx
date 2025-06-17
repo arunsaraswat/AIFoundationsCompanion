@@ -68,11 +68,13 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
           <li>
             <Button
               variant={location === "/" ? "default" : "ghost"}
-              className="w-full justify-start text-sm font-medium"
+              className="w-full justify-start text-sm font-medium h-auto py-3 min-h-[48px]"
               onClick={() => handleNavigation("/")}
             >
-              <BarChart3 className="mr-3" size={16} />
-              Dashboard
+              <div className="flex items-center min-w-0 w-full">
+                <BarChart3 className="mr-3 flex-shrink-0" size={16} />
+                <span className="text-left break-words whitespace-normal flex-1">Dashboard</span>
+              </div>
             </Button>
           </li>
           
@@ -150,68 +152,78 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
       </nav>
 
       {/* Utilities */}
-      <div className="p-4 border-t border-sidebar-border space-y-2 flex-shrink-0">
+      <div className="p-4 border-t border-sidebar-border space-y-3 flex-shrink-0">
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start text-sm"
+          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
           onClick={handleExportJSON}
         >
-          <Download className="mr-3" size={16} />
-          Export → JSON
+          <div className="flex items-center min-w-0 w-full">
+            <Download className="mr-3 flex-shrink-0" size={16} />
+            <span className="text-left break-words whitespace-normal flex-1">Export → JSON</span>
+          </div>
         </Button>
         
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start text-sm"
+          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
           onClick={handleImportJSON}
         >
-          <Upload className="mr-3" size={16} />
-          Import ← JSON
+          <div className="flex items-center min-w-0 w-full">
+            <Upload className="mr-3 flex-shrink-0" size={16} />
+            <span className="text-left break-words whitespace-normal flex-1">Import ← JSON</span>
+          </div>
         </Button>
         
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start text-sm"
+          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
           onClick={handleExportPDF}
         >
-          <FileText className="mr-3" size={16} />
-          Export as PDF
+          <div className="flex items-center min-w-0 w-full">
+            <FileText className="mr-3 flex-shrink-0" size={16} />
+            <span className="text-left break-words whitespace-normal flex-1">Export as PDF</span>
+          </div>
         </Button>
         
-        <Separator className="my-2" />
+        <Separator className="my-3" />
         
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start text-sm"
+          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
           onClick={toggleTheme}
         >
-          {theme === "light" ? (
-            <>
-              <Moon className="mr-3" size={16} />
-              Dark Mode
-            </>
-          ) : (
-            <>
-              <Sun className="mr-3" size={16} />
-              Light Mode
-            </>
-          )}
+          <div className="flex items-center min-w-0 w-full">
+            {theme === "light" ? (
+              <>
+                <Moon className="mr-3 flex-shrink-0" size={16} />
+                <span className="text-left break-words whitespace-normal flex-1">Dark Mode</span>
+              </>
+            ) : (
+              <>
+                <Sun className="mr-3 flex-shrink-0" size={16} />
+                <span className="text-left break-words whitespace-normal flex-1">Light Mode</span>
+              </>
+            )}
+          </div>
         </Button>
         
-        <Separator className="my-2" />
+        <Separator className="my-3" />
         
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start text-sm text-destructive hover:text-destructive"
+          className="w-full justify-start text-sm h-auto py-2 min-h-[36px] text-destructive hover:text-destructive"
           onClick={handleClearData}
         >
-          <RefreshCw className="mr-3" size={16} />
-          Clear All Data
+          <div className="flex items-center min-w-0 w-full">
+            <RefreshCw className="mr-3 flex-shrink-0" size={16} />
+            <span className="text-left break-words whitespace-normal flex-1">Clear All Data</span>
+          </div>
         </Button>
       </div>
     </div>

@@ -864,6 +864,14 @@ const initialLessons: Lesson[] = [
             ],
             answer: [],
           },
+          {
+            id: "journal-4-2",
+            type: "textarea",
+            label: "Journal",
+            description:
+              "Think about your current organization and a specific AI use case you'd like to implement. Which organizational type best describes your workplace: high-control, hybrid, or high-autonomy? What concerns or objections would your manager most likely raise about your AI proposal? Write about one specific conversation you could have in the next two weeks and what you'd need to prepare to increase your chances of getting a \"yes.\"",
+            answer: "",
+          },
         ],
       },
       { id: "4.3", title: "4.3 Transformational Thinking", completed: false },

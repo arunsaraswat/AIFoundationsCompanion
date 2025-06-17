@@ -305,14 +305,15 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         return null;
 
       case 'link':
-        // Check if it's a PDF file
+        // Check if it's a PDF file or external URL
         const isPDF = exercise.link?.endsWith('.pdf');
+        const isExternal = exercise.link?.startsWith('http');
         return (
           <div className="p-4 border border-primary/20 rounded-lg bg-primary/5">
             <a 
               href={exercise.link}
-              target={isPDF ? "_blank" : "_self"}
-              rel={isPDF ? "noopener noreferrer" : undefined}
+              target={isPDF || isExternal ? "_blank" : "_self"}
+              rel={isPDF || isExternal ? "noopener noreferrer" : undefined}
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
             >
               {isPDF ? <FileText className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}

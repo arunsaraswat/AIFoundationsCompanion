@@ -830,7 +830,7 @@ const initialLessons: Lesson[] = [
           {
             id: "exercise-22",
             type: "link",
-            label: "Exercise 22: AI Workflow Enhancement Tool",
+            label: "AI Workflow Enhancement Tool",
             description:
               "Interactive workflow redesign activity using the AI Workflow Enhancer tool to identify and enhance your processes with AI integration points.",
             link: "/exercise/workflow-enhancer",
@@ -855,12 +855,13 @@ const initialLessons: Lesson[] = [
             id: "reality-check",
             type: "checkbox",
             label: "Reality Check",
-            description: "Group Discussion (5 min): Raise your hands if any of these sound familiar:",
+            description:
+              "Group Discussion (5 min): Raise your hands if any of these sound familiar:",
             options: [
-              "\"Great idea, but who's going to build it?\"",
-              "\"We don't have budget for that\"",
-              "\"Legal will never approve external tools\"",
-              "\"Sounds nice, but prove the ROI first\""
+              '"Great idea, but who\'s going to build it?"',
+              '"We don\'t have budget for that"',
+              '"Legal will never approve external tools"',
+              '"Sounds nice, but prove the ROI first"',
             ],
             answer: [],
           },
@@ -874,7 +875,21 @@ const initialLessons: Lesson[] = [
           },
         ],
       },
-      { id: "4.3", title: "4.3 Transformational Thinking", completed: false },
+      {
+        id: "4.3",
+        title: "4.3 Transformational Thinking",
+        completed: false,
+        exercises: [
+          {
+            id: "4.3.1",
+            type: "textarea",
+            label: "The Wool Problem?",
+            description:
+              "What's the difference between the herder's thinking and what most people would do?",
+            answer: "",
+          },
+        ],
+      },
     ],
   },
   {
@@ -1025,7 +1040,9 @@ export function CourseProgressProvider({
                         exercise.id === exerciseId
                           ? {
                               ...exercise,
-                              steps: exercise.steps ? updateStepsRecursively(exercise.steps) : exercise.steps,
+                              steps: exercise.steps
+                                ? updateStepsRecursively(exercise.steps)
+                                : exercise.steps,
                             }
                           : exercise,
                       ),

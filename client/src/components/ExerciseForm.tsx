@@ -294,6 +294,21 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     value={step.answer as string || ''}
                     onChange={(e) => handleStepAnswerChange(step.id, e.target.value)}
                   />
+                ) : step.type === 'radio' ? (
+                  <RadioGroup
+                    value={step.answer as string || ''}
+                    onValueChange={(value) => handleStepAnswerChange(step.id, value)}
+                    className="mt-2 space-y-2"
+                  >
+                    {step.options?.map((option) => (
+                      <div key={option} className="flex items-center space-x-2">
+                        <RadioGroupItem value={option} id={`${step.id}-${option}`} />
+                        <Label htmlFor={`${step.id}-${option}`} className="text-sm font-normal">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
                 ) : (
                   <Input
                     value={step.answer as string || ''}

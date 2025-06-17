@@ -13,6 +13,7 @@ export interface Exercise {
   type:
     | "text"
     | "textarea"
+    | "date"
     | "radio"
     | "checkbox"
     | "multi-step"
@@ -970,7 +971,7 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.2",
-                type: "text",
+                type: "date",
                 label: "Exam Date",
                 description: "When do you plan to take the exam?",
                 answer: "",
@@ -1005,7 +1006,7 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.7",
-                type: "text",
+                type: "date",
                 label: "By When (Success Factor 1)",
                 description: "What is your deadline for this action?",
                 answer: "",
@@ -1026,7 +1027,7 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.10",
-                type: "text",
+                type: "date",
                 label: "By When (Success Factor 2)",
                 description: "What is your deadline for this action?",
                 answer: "",

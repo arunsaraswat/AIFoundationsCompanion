@@ -65,6 +65,16 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             rows={4}
           />
         );
+
+      case 'date':
+        return (
+          <Input
+            type="date"
+            value={exercise.answer as string || ''}
+            onChange={(e) => handleAnswerChange(e.target.value)}
+            className="mt-2"
+          />
+        );
       
       case 'radio':
         return (
@@ -277,6 +287,12 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                     placeholder="Enter your response..."
                     className="min-h-[80px]"
                     rows={3}
+                  />
+                ) : step.type === 'date' ? (
+                  <Input
+                    type="date"
+                    value={step.answer as string || ''}
+                    onChange={(e) => handleStepAnswerChange(step.id, e.target.value)}
                   />
                 ) : (
                   <Input

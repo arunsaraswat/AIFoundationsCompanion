@@ -145,7 +145,9 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                 </div>
               </Button>
               
-              <div className="pt-4 space-y-3">
+              <Separator className="my-4" />
+              
+              <div className="space-y-3">
                 <Button
                   variant="ghost"
                   size="sm"

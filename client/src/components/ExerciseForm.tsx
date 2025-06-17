@@ -43,69 +43,82 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         <style>
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            line-height: 1.3;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px 15px;
             background-color: #fafafa;
             color: #333;
+            font-size: 13px;
           }
           .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #2563eb;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2563eb;
           }
           .header h1 {
             color: #1e40af;
-            font-size: 2.5em;
+            font-size: 1.8em;
             margin: 0;
             font-weight: 700;
           }
           .header p {
             color: #6b7280;
-            font-size: 1.2em;
-            margin: 10px 0 0 0;
+            font-size: 0.9em;
+            margin: 5px 0 0 0;
+          }
+          .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
           }
           .section {
             background: white;
-            margin: 30px 0;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #2563eb;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 3px solid #2563eb;
+            break-inside: avoid;
+            margin-bottom: 15px;
           }
           .section-title {
             color: #1e40af;
-            font-size: 1.4em;
+            font-size: 0.95em;
             font-weight: 600;
-            margin: 0 0 15px 0;
+            margin: 0 0 8px 0;
             display: flex;
             align-items: center;
+            line-height: 1.2;
           }
           .success-badge {
             background: #10b981;
             color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.7em;
-            margin-right: 10px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.6em;
+            margin-right: 6px;
             font-weight: 500;
+            flex-shrink: 0;
           }
           .question {
             color: #4b5563;
-            font-size: 1em;
-            margin: 8px 0;
+            font-size: 0.8em;
+            margin: 4px 0;
             font-weight: 500;
+            line-height: 1.2;
           }
           .answer {
             background: #f8fafc;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0 20px 0;
-            border-left: 3px solid #e5e7eb;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 6px 0 0 0;
+            border-left: 2px solid #e5e7eb;
             color: #1f2937;
-            font-size: 1em;
+            font-size: 0.85em;
+            word-wrap: break-word;
+            line-height: 1.3;
           }
           .empty-answer {
             color: #9ca3af;
@@ -117,14 +130,38 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           }
           .footer {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #e5e7eb;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
             color: #6b7280;
+            font-size: 0.8em;
+            grid-column: 1 / -1;
           }
           @media print {
-            body { background-color: white; }
-            .section { box-shadow: none; border: 1px solid #e5e7eb; }
+            body { 
+              background-color: white;
+              font-size: 11px;
+              padding: 10px;
+            }
+            .section { 
+              box-shadow: none; 
+              border: 1px solid #e5e7eb;
+              padding: 8px;
+              margin-bottom: 10px;
+            }
+            .content-grid {
+              gap: 10px;
+            }
+          }
+          @media (max-width: 900px) {
+            .content-grid {
+              grid-template-columns: 1fr 1fr;
+            }
+          }
+          @media (max-width: 600px) {
+            .content-grid {
+              grid-template-columns: 1fr;
+            }
           }
         </style>
       </head>
@@ -134,6 +171,7 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           <p>Your personalized roadmap to AI mastery</p>
         </div>
         
+        <div class="content-grid">
         ${exercise.steps.map(step => {
           const answer = step.answer || '';
           const answerStr = Array.isArray(answer) ? answer.join(', ') : String(answer);
@@ -166,15 +204,16 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           `;
         }).join('')}
         
-        <div class="footer">
-          <p>Generated on ${new Date().toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit'
-          })}</p>
+          <div class="footer">
+            <p>Generated on ${new Date().toLocaleDateString('en-US', { 
+              weekday: 'long', 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit'
+            })}</p>
+          </div>
         </div>
       </body>
       </html>

@@ -903,6 +903,14 @@ const initialLessons: Lesson[] = [
             description: "Generate a custom transformation prompt for ChatGPT",
             component: "TransformationPrompt",
           },
+          {
+            id: "4.3.4",
+            type: "textarea",
+            label: "Journal",
+            description:
+              'Think of a routine business process in your organization that everyone accepts as "just how we do things." Write down: What is the real problem this process is trying to solve? If you could ignore all current constraints and reimagine the solution from scratch, what would be possible? What assumptions about "how work gets done" might be limiting your thinking?',
+            answer: "",
+          },
         ],
       },
     ],

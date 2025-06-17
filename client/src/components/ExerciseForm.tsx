@@ -68,11 +68,22 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             font-size: 0.9em;
             margin: 5px 0 0 0;
           }
+          .section-row {
+            margin-bottom: 25px;
+          }
+          .row-title {
+            color: #1e40af;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            padding: 8px 0;
+            border-bottom: 2px solid #e5e7eb;
+          }
           .content-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
           }
           .section {
             background: white;
@@ -176,49 +187,95 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           <p>Your personalized roadmap to AI mastery</p>
         </div>
         
-        <div class="content-grid">
-        ${exercise.steps.map(step => {
-          const answer = step.answer || '';
-          const answerStr = Array.isArray(answer) ? answer.join(', ') : String(answer);
-          const hasAnswer = answerStr.trim() !== '';
-          const isDateField = step.type === 'date';
-          const hasSuccessBadge = step.label?.includes('✅');
+        ${(() => {
+          const examSteps = exercise.steps.filter(step => 
+            step.label?.includes('Target Score') || 
+            step.label?.includes('Exam Date') || 
+            step.label?.includes('Potential Blocker') || 
+            step.label?.includes('My Workaround')
+          );
           
-          return `
-            <div class="section">
-              <div class="section-title">
-                ${hasSuccessBadge ? '<span class="success-badge">✅</span>' : ''}
-                ${step.label?.replace(/✅[^-]*-\s*/, '') || 'Untitled'}
-              </div>
-              ${step.description ? `<div class="question">${step.description}</div>` : ''}
-              <div class="answer ${!hasAnswer ? 'empty-answer' : ''} ${isDateField && hasAnswer ? 'date-answer' : ''}">
-                ${hasAnswer ? 
-                  (isDateField ? 
-                    new Date(answerStr).toLocaleDateString('en-US', { 
-                      weekday: 'long', 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    }) : 
-                    answerStr.replace(/\n/g, '<br>')
-                  ) : 
-                  'Not completed yet'
-                }
+          const successFactor1Steps = exercise.steps.filter(step => 
+            step.label?.includes('Success Factor 1') || 
+            step.label?.includes('My Action for Success Factor 1') || 
+            step.label?.includes('By When (Success Factor 1)')
+          );
+          
+          const successFactor2Steps = exercise.steps.filter(step => 
+            step.label?.includes('Success Factor 2') || 
+            step.label?.includes('My Action for Success Factor 2') || 
+            step.label?.includes('By When (Success Factor 2)')
+          );
+          
+          const workflow1Steps = exercise.steps.filter(step => 
+            step.label?.includes('Workflow #1') || 
+            step.label?.includes('Pain Points (Workflow #1)') || 
+            step.label?.includes('Potential AI Solution (Workflow #1)')
+          );
+          
+          const workflow2Steps = exercise.steps.filter(step => 
+            step.label?.includes('Workflow #2') || 
+            step.label?.includes('Friction Points (Workflow #2)') || 
+            step.label?.includes('Potential AI Solution (Workflow #2)')
+          );
+          
+          const renderSteps = (steps, title) => `
+            <div class="section-row">
+              <h2 class="row-title">${title}</h2>
+              <div class="content-grid">
+                ${steps.map(step => {
+                  const answer = step.answer || '';
+                  const answerStr = Array.isArray(answer) ? answer.join(', ') : String(answer);
+                  const hasAnswer = answerStr.trim() !== '';
+                  const isDateField = step.type === 'date';
+                  const hasSuccessBadge = step.label?.includes('✅');
+                  
+                  return `
+                    <div class="section">
+                      <div class="section-title">
+                        ${hasSuccessBadge ? '<span class="success-badge">✅</span>' : ''}
+                        ${step.label?.replace(/✅[^-]*-\s*/, '') || 'Untitled'}
+                      </div>
+                      ${step.description ? `<div class="question">${step.description}</div>` : ''}
+                      <div class="answer ${!hasAnswer ? 'empty-answer' : ''} ${isDateField && hasAnswer ? 'date-answer' : ''}">
+                        ${hasAnswer ? 
+                          (isDateField ? 
+                            new Date(answerStr).toLocaleDateString('en-US', { 
+                              weekday: 'long', 
+                              year: 'numeric', 
+                              month: 'long', 
+                              day: 'numeric' 
+                            }) : 
+                            answerStr.replace(/\n/g, '<br>')
+                          ) : 
+                          'Not completed yet'
+                        }
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
               </div>
             </div>
           `;
-        }).join('')}
+          
+          return [
+            renderSteps(examSteps, '📝 Exam Preparation'),
+            renderSteps(successFactor1Steps, '🎯 Success Factor 1'),
+            renderSteps(successFactor2Steps, '🎯 Success Factor 2'),
+            renderSteps(workflow1Steps, '⚙️ Workflow 1'),
+            renderSteps(workflow2Steps, '⚙️ Workflow 2')
+          ].join('');
+        })()}
         
-          <div class="footer">
-            <p>Generated on ${new Date().toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric',
-              hour: 'numeric',
-              minute: '2-digit'
-            })}</p>
-          </div>
+        <div class="footer">
+          <p>Generated on ${new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
+          })}</p>
         </div>
       </body>
       </html>

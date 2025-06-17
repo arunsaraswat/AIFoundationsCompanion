@@ -1443,6 +1443,13 @@ const initialLessons: Lesson[] = [
               },
             ],
           },
+          {
+            id: "5.1.5",
+            type: "textarea",
+            label: "Journal",
+            description: "What part of your action plan are you most proud of or excited to try? What specific commitment will you make today to ensure this knowledge becomes action rather than just another good idea?",
+            answer: "",
+          },
         ],
       },
     ],

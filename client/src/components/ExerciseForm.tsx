@@ -4,9 +4,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
-import { FileText, ExternalLink } from "lucide-react";
+import { FileText, ExternalLink, Download } from "lucide-react";
 
 import TokenPrediction from "./TokenPrediction";
 import PromptAnatomy from "./PromptAnatomy";
@@ -28,6 +29,171 @@ interface ExerciseFormProps {
 
 export default function ExerciseForm({ exercise, lessonId, subLessonId }: ExerciseFormProps) {
   const { updateExerciseAnswer, updateFollowUpAnswer, updateStepAnswer } = useCourseProgress();
+
+  const generateThirtyDayPlanHTML = (exercise: Exercise) => {
+    if (!exercise.steps) return '';
+
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>30 Day AI Foundation Plan</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fafafa;
+            color: #333;
+          }
+          .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2563eb;
+          }
+          .header h1 {
+            color: #1e40af;
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: 700;
+          }
+          .header p {
+            color: #6b7280;
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+          }
+          .section {
+            background: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #2563eb;
+          }
+          .section-title {
+            color: #1e40af;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+          }
+          .success-badge {
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7em;
+            margin-right: 10px;
+            font-weight: 500;
+          }
+          .question {
+            color: #4b5563;
+            font-size: 1em;
+            margin: 8px 0;
+            font-weight: 500;
+          }
+          .answer {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0 20px 0;
+            border-left: 3px solid #e5e7eb;
+            color: #1f2937;
+            font-size: 1em;
+          }
+          .empty-answer {
+            color: #9ca3af;
+            font-style: italic;
+          }
+          .date-answer {
+            color: #7c3aed;
+            font-weight: 500;
+          }
+          .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+          }
+          @media print {
+            body { background-color: white; }
+            .section { box-shadow: none; border: 1px solid #e5e7eb; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>🚀 30 Day AI Foundation Plan</h1>
+          <p>Your personalized roadmap to AI mastery</p>
+        </div>
+        
+        ${exercise.steps.map(step => {
+          const answer = step.answer || '';
+          const answerStr = Array.isArray(answer) ? answer.join(', ') : String(answer);
+          const hasAnswer = answerStr.trim() !== '';
+          const isDateField = step.type === 'date';
+          const hasSuccessBadge = step.label?.includes('✅');
+          
+          return `
+            <div class="section">
+              <div class="section-title">
+                ${hasSuccessBadge ? '<span class="success-badge">✅</span>' : ''}
+                ${step.label?.replace(/✅[^-]*-\s*/, '') || 'Untitled'}
+              </div>
+              ${step.description ? `<div class="question">${step.description}</div>` : ''}
+              <div class="answer ${!hasAnswer ? 'empty-answer' : ''} ${isDateField && hasAnswer ? 'date-answer' : ''}">
+                ${hasAnswer ? 
+                  (isDateField ? 
+                    new Date(answerStr).toLocaleDateString('en-US', { 
+                      weekday: 'long', 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    }) : 
+                    answerStr.replace(/\n/g, '<br>')
+                  ) : 
+                  'Not completed yet'
+                }
+              </div>
+            </div>
+          `;
+        }).join('')}
+        
+        <div class="footer">
+          <p>Generated on ${new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
+          })}</p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    return htmlContent;
+  };
+
+  const handleExportThirtyDayPlan = () => {
+    const htmlContent = generateThirtyDayPlanHTML(exercise);
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const newWindow = window.open(url, '_blank');
+    
+    // Clean up the object URL after a short delay
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+  };
 
   const handleAnswerChange = (value: string | string[]) => {
     updateExerciseAnswer(lessonId, subLessonId, exercise.id, value);
@@ -348,6 +514,22 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                 )}
               </div>
             ))}
+            
+            {/* Add export button for 30 Day Plan */}
+            {exercise.label === "30 Day Plan" && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <Button 
+                  onClick={handleExportThirtyDayPlan}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg shadow-md transition-colors duration-200"
+                >
+                  <Download className="h-5 w-5 mr-2" />
+                  Export 30 Day Plan (View & Print)
+                </Button>
+                <p className="text-sm text-gray-500 mt-2 text-center">
+                  Opens a beautifully formatted view of your plan in a new tab
+                </p>
+              </div>
+            )}
           </div>
         );
       

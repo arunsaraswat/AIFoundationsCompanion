@@ -1,8 +1,8 @@
-import { GraduationCap, BarChart3, Download, Upload, FileText, Moon, Sun, RefreshCw, Globe, Brain, Cog, Users, TrendingUp, Target } from "lucide-react";
+import { GraduationCap, BarChart3, Download, Upload, Moon, Sun, RefreshCw, Globe, Brain, Cog, Users, TrendingUp, Target } from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
-import { exportToPDF, downloadJSON, uploadJSON } from "../utils/fileIO";
+import { downloadJSON, uploadJSON } from "../utils/fileIO";
 import { clearCourseData } from "../utils/storage";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -31,9 +31,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
     });
   };
 
-  const handleExportPDF = () => {
-    exportToPDF("ai-native-foundations.pdf");
-  };
+
 
   const handleClearData = () => {
     if (confirm("Are you sure you want to clear all progress data? This action cannot be undone.")) {
@@ -146,86 +144,73 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                   <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 6: Taking Action</span>
                 </div>
               </Button>
+              
+              <div className="pt-4 space-y-3">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
+                  onClick={handleExportJSON}
+                >
+                  <div className="flex items-center min-w-0 w-full">
+                    <Download className="mr-3 flex-shrink-0" size={16} />
+                    <span className="text-left break-words whitespace-normal flex-1">Export → JSON</span>
+                  </div>
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
+                  onClick={handleImportJSON}
+                >
+                  <div className="flex items-center min-w-0 w-full">
+                    <Upload className="mr-3 flex-shrink-0" size={16} />
+                    <span className="text-left break-words whitespace-normal flex-1">Import ← JSON</span>
+                  </div>
+                </Button>
+                
+                <Separator className="my-3" />
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
+                  onClick={toggleTheme}
+                >
+                  <div className="flex items-center min-w-0 w-full">
+                    {theme === "light" ? (
+                      <>
+                        <Moon className="mr-3 flex-shrink-0" size={16} />
+                        <span className="text-left break-words whitespace-normal flex-1">Dark Mode</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sun className="mr-3 flex-shrink-0" size={16} />
+                        <span className="text-left break-words whitespace-normal flex-1">Light Mode</span>
+                      </>
+                    )}
+                  </div>
+                </Button>
+                
+                <Separator className="my-3" />
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-start text-sm h-auto py-2 min-h-[36px] text-destructive hover:text-destructive"
+                  onClick={handleClearData}
+                >
+                  <div className="flex items-center min-w-0 w-full">
+                    <RefreshCw className="mr-3 flex-shrink-0" size={16} />
+                    <span className="text-left break-words whitespace-normal flex-1">Clear All Data</span>
+                  </div>
+                </Button>
+              </div>
             </div>
           </div>
         </ul>
       </nav>
-
-      {/* Utilities */}
-      <div className="p-4 border-t border-sidebar-border space-y-3 flex-shrink-0">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
-          onClick={handleExportJSON}
-        >
-          <div className="flex items-center min-w-0 w-full">
-            <Download className="mr-3 flex-shrink-0" size={16} />
-            <span className="text-left break-words whitespace-normal flex-1">Export → JSON</span>
-          </div>
-        </Button>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
-          onClick={handleImportJSON}
-        >
-          <div className="flex items-center min-w-0 w-full">
-            <Upload className="mr-3 flex-shrink-0" size={16} />
-            <span className="text-left break-words whitespace-normal flex-1">Import ← JSON</span>
-          </div>
-        </Button>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
-          onClick={handleExportPDF}
-        >
-          <div className="flex items-center min-w-0 w-full">
-            <FileText className="mr-3 flex-shrink-0" size={16} />
-            <span className="text-left break-words whitespace-normal flex-1">Export as PDF</span>
-          </div>
-        </Button>
-        
-        <Separator className="my-3" />
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start text-sm h-auto py-2 min-h-[36px]"
-          onClick={toggleTheme}
-        >
-          <div className="flex items-center min-w-0 w-full">
-            {theme === "light" ? (
-              <>
-                <Moon className="mr-3 flex-shrink-0" size={16} />
-                <span className="text-left break-words whitespace-normal flex-1">Dark Mode</span>
-              </>
-            ) : (
-              <>
-                <Sun className="mr-3 flex-shrink-0" size={16} />
-                <span className="text-left break-words whitespace-normal flex-1">Light Mode</span>
-              </>
-            )}
-          </div>
-        </Button>
-        
-        <Separator className="my-3" />
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start text-sm h-auto py-2 min-h-[36px] text-destructive hover:text-destructive"
-          onClick={handleClearData}
-        >
-          <div className="flex items-center min-w-0 w-full">
-            <RefreshCw className="mr-3 flex-shrink-0" size={16} />
-            <span className="text-left break-words whitespace-normal flex-1">Clear All Data</span>
-          </div>
-        </Button>
-      </div>
     </div>
   );
 }

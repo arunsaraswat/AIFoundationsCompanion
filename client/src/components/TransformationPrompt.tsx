@@ -92,30 +92,32 @@ export default function TransformationPrompt({ lessonId, subLessonId, exerciseId
             />
           </div>
 
-          {prompt && (
-            <div className="space-y-2">
-              <Label>Generated Prompt</Label>
-              <div className="relative">
-                <Textarea
-                  value={prompt}
-                  readOnly
-                  className="min-h-[120px] pr-12"
-                  rows={5}
-                />
-                <Button
-                  onClick={copyToClipboard}
-                  variant="outline"
-                  size="sm"
-                  className="absolute top-2 right-2"
-                >
-                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                </Button>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Copy this prompt and paste it into ChatGPT to get your 3 alternative approaches.
-              </p>
+          <div className="space-y-2">
+            <Label>Generated Prompt</Label>
+            <div className="relative">
+              <Textarea
+                value={prompt || "Fill in both fields above to generate your custom prompt..."}
+                readOnly
+                className="min-h-[120px] pr-12 bg-gradient-to-br from-blue-50 to-indigo-50 border-dashed border-2 border-blue-200 text-blue-900 font-mono text-sm dark:from-blue-950/20 dark:to-indigo-950/20 dark:border-blue-800 dark:text-blue-100"
+                rows={5}
+              />
+              <Button
+                onClick={copyToClipboard}
+                variant="outline"
+                size="sm"
+                className="absolute top-2 right-2"
+                disabled={!prompt}
+              >
+                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              </Button>
             </div>
-          )}
+            <p className="text-sm text-muted-foreground">
+              {prompt 
+                ? "Copy this prompt and paste it into ChatGPT to get your 3 alternative approaches."
+                : "This prompt will update automatically as you fill in the fields above."
+              }
+            </p>
+          </div>
 
           <div className="space-y-2">
             <Label htmlFor="gpt-response">ChatGPT Response</Label>

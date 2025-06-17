@@ -2,6 +2,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCourseProgress, type Exercise } from "../contexts/CourseProgressContext";
@@ -74,6 +75,22 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             onChange={(e) => handleAnswerChange(e.target.value)}
             className="mt-2"
           />
+        );
+
+      case 'select':
+        return (
+          <Select value={exercise.answer as string || ''} onValueChange={(value) => handleAnswerChange(value)}>
+            <SelectTrigger className="mt-2">
+              <SelectValue placeholder="Select an option..." />
+            </SelectTrigger>
+            <SelectContent>
+              {exercise.options?.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         );
       
       case 'radio':
@@ -309,6 +326,19 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                       </div>
                     ))}
                   </RadioGroup>
+                ) : step.type === 'select' ? (
+                  <Select value={step.answer as string || ''} onValueChange={(value) => handleStepAnswerChange(step.id, value)}>
+                    <SelectTrigger className="mt-2">
+                      <SelectValue placeholder="Select an option..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {step.options?.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 ) : (
                   <Input
                     value={step.answer as string || ''}

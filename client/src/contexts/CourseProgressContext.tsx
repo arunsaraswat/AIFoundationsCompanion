@@ -15,6 +15,7 @@ export interface Exercise {
     | "textarea"
     | "date"
     | "radio"
+    | "select"
     | "checkbox"
     | "multi-step"
     | "radio-with-text"
@@ -992,7 +993,7 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.5",
-                type: "radio",
+                type: "select",
                 label: "✅ Applied 2 Success Factors - Success Factor 1",
                 description: "Choose your first AI-Native Success Factor to apply",
                 options: [
@@ -1022,7 +1023,7 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.8",
-                type: "radio",
+                type: "select",
                 label: "Success Factor 2",
                 description: "Choose your second AI-Native Success Factor to apply",
                 options: [

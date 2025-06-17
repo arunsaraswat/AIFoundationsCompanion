@@ -888,6 +888,14 @@ const initialLessons: Lesson[] = [
               "What's the difference between the herder's thinking and what most people would do?",
             answer: "",
           },
+          {
+            id: "4.3.2",
+            type: "textarea",
+            label: "The Wool Question Challenge",
+            description:
+              'Step 1: Find Your "Wool" - Look at your 4.1 workflow. Forget the process steps. Ask: "What is this workflow actually trying to accomplish?"\n\nExamples:\n• "Expense reporting" → "Spending visibility and compliance"\n• "Team meetings" → "Coordination and problem-solving"\n• "Customer emails" → "Customer success and issue resolution"\n\nWrite: "The real problem we\'re solving is..."',
+            answer: "",
+          },
         ],
       },
     ],

@@ -81,67 +81,67 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
             <div className="space-y-1">
               <Button
                 variant={location === "/lesson/1" ? "default" : "ghost"}
-                className="w-full justify-start text-sm h-auto py-3"
+                className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/1")}
               >
-                <div className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0 w-full">
                   <Globe className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 1: EDGE + AI-Native Foundations</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 1: EDGE + AI-Native Foundations</span>
                 </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/2" || location === "/exercise/agent-design" ? "default" : "ghost"}
-                className="w-full justify-start text-sm h-auto py-3"
+                className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/2")}
               >
-                <div className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0 w-full">
                   <Brain className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 2: AI Technical Literacy</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 2: AI Technical Literacy</span>
                 </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/3" ? "default" : "ghost"}
-                className="w-full justify-start text-sm h-auto py-3"
+                className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/3")}
               >
-                <div className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0 w-full">
                   <Cog className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 3: The AI-Native Success Factors</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 3: The AI-Native Success Factors</span>
                 </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/4" || location === "/exercise/workflow-enhancer" ? "default" : "ghost"}
-                className="w-full justify-start text-sm h-auto py-3"
+                className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/4")}
               >
-                <div className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0 w-full">
                   <Users className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 4: Improve My Workflow With AI</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 4: Improve My Workflow With AI</span>
                 </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/5" ? "default" : "ghost"}
-                className="w-full justify-start text-sm h-auto py-3"
+                className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/5")}
               >
-                <div className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0 w-full">
                   <TrendingUp className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 5: Change Management</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 5: Change Management</span>
                 </div>
               </Button>
               
               <Button
                 variant={location === "/lesson/6" ? "default" : "ghost"}
-                className="w-full justify-start text-sm h-auto py-3"
+                className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/6")}
               >
-                <div className="flex items-start min-w-0">
+                <div className="flex items-start min-w-0 w-full">
                   <Target className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-tight break-words whitespace-normal">Lesson 6: Taking Action</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 6: Taking Action</span>
                 </div>
               </Button>
             </div>

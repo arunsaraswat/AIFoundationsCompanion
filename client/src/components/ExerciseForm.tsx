@@ -30,8 +30,13 @@ interface ExerciseFormProps {
 export default function ExerciseForm({ exercise, lessonId, subLessonId }: ExerciseFormProps) {
   const { updateExerciseAnswer, updateFollowUpAnswer, updateStepAnswer } = useCourseProgress();
 
-  const generateThirtyDayPlanHTML = (exercise: Exercise) => {
+  const generatePlanHTML = (exercise: Exercise) => {
     if (!exercise.steps) return '';
+    
+    const isThirtyDayPlan = exercise.label === "30 Day Plan";
+    const isSixtyDayPlan = exercise.label === "60 Day Plan";
+    const planTitle = isThirtyDayPlan ? "30 Day AI Foundation Plan" : "60 Day AI Influence Plan";
+    const planSubtitle = isThirtyDayPlan ? "Your personalized roadmap to AI mastery" : "Grow your influence and expand AI adoption";
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -39,7 +44,7 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>30 Day AI Foundation Plan</title>
+        <title>${planTitle}</title>
         <style>
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -183,41 +188,90 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
       </head>
       <body>
         <div class="header">
-          <h1>🚀 30 Day AI Foundation Plan</h1>
-          <p>Your personalized roadmap to AI mastery</p>
+          <h1>🚀 ${planTitle}</h1>
+          <p>${planSubtitle}</p>
         </div>
         
         ${(() => {
-          const examSteps = exercise.steps.filter(step => 
-            step.label?.includes('Target Score') || 
-            step.label?.includes('Exam Date') || 
-            step.label?.includes('Potential Blocker') || 
-            step.label?.includes('My Workaround')
-          );
+          let sections = [];
           
-          const successFactor1Steps = exercise.steps.filter(step => 
-            step.label?.includes('Success Factor 1') || 
-            step.label?.includes('My Action for Success Factor 1') || 
-            step.label?.includes('By When (Success Factor 1)')
-          );
-          
-          const successFactor2Steps = exercise.steps.filter(step => 
-            step.label?.includes('Success Factor 2') || 
-            step.label?.includes('My Action for Success Factor 2') || 
-            step.label?.includes('By When (Success Factor 2)')
-          );
-          
-          const workflow1Steps = exercise.steps.filter(step => 
-            step.label?.includes('Workflow #1') || 
-            step.label?.includes('Pain Points (Workflow #1)') || 
-            step.label?.includes('Potential AI Solution (Workflow #1)')
-          );
-          
-          const workflow2Steps = exercise.steps.filter(step => 
-            step.label?.includes('Workflow #2') || 
-            step.label?.includes('Friction Points (Workflow #2)') || 
-            step.label?.includes('Potential AI Solution (Workflow #2)')
-          );
+          if (isThirtyDayPlan) {
+            const examSteps = exercise.steps.filter(step => 
+              step.label?.includes('Target Score') || 
+              step.label?.includes('Exam Date') || 
+              step.label?.includes('Potential Blocker') || 
+              step.label?.includes('My Workaround')
+            );
+            
+            const successFactor1Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 1') || 
+              step.label?.includes('My Action for Success Factor 1') || 
+              step.label?.includes('By When (Success Factor 1)')
+            );
+            
+            const successFactor2Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 2') || 
+              step.label?.includes('My Action for Success Factor 2') || 
+              step.label?.includes('By When (Success Factor 2)')
+            );
+            
+            const workflow1Steps = exercise.steps.filter(step => 
+              step.label?.includes('Workflow #1') || 
+              step.label?.includes('Pain Points (Workflow #1)') || 
+              step.label?.includes('Potential AI Solution (Workflow #1)')
+            );
+            
+            const workflow2Steps = exercise.steps.filter(step => 
+              step.label?.includes('Workflow #2') || 
+              step.label?.includes('Friction Points (Workflow #2)') || 
+              step.label?.includes('Potential AI Solution (Workflow #2)')
+            );
+            
+            sections = [
+              { steps: examSteps, title: '📝 Exam Preparation' },
+              { steps: successFactor1Steps, title: '🎯 Success Factor 1' },
+              { steps: successFactor2Steps, title: '🎯 Success Factor 2' },
+              { steps: workflow1Steps, title: '⚙️ Workflow 1' },
+              { steps: workflow2Steps, title: '⚙️ Workflow 2' }
+            ];
+          } else if (isSixtyDayPlan) {
+            const workflowSteps = exercise.steps.filter(step => 
+              step.label?.includes('Selected Workflow') || 
+              step.label?.includes('Measurable Improvement Target') || 
+              step.label?.includes('Quantitative Gain') || 
+              step.label?.includes('Validation Partner') || 
+              (step.label?.includes('Potential Blocker') && !step.label?.includes('EDGE')) || 
+              (step.label?.includes('My Workaround') && !step.label?.includes('EDGE'))
+            );
+            
+            const successFactor3Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 3') || 
+              step.label?.includes('My Action for Success Factor 3') || 
+              step.label?.includes('By When (Success Factor 3)')
+            );
+            
+            const successFactor4Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 4') || 
+              step.label?.includes('My Action for Success Factor 4') || 
+              step.label?.includes('By When (Success Factor 4)')
+            );
+            
+            const edgeSteps = exercise.steps.filter(step => 
+              step.label?.includes('Meeting Date') || 
+              step.label?.includes('Champion') || 
+              step.label?.includes('Decision Maker') || 
+              step.label?.includes('Skeptic') || 
+              (step.label?.includes('Potential Blocker') && step.label?.includes('EDGE')) || 
+              (step.label?.includes('My Workaround') && step.label?.includes('EDGE'))
+            );
+            
+            sections = [
+              { steps: workflowSteps, title: '⚙️ Workflow Redesign' },
+              { steps: successFactor3Steps, title: '🎯 Success Factor 3' },
+              { steps: successFactor4Steps, title: '🎯 Success Factor 4' },
+              { steps: edgeSteps, title: '🎤 EDGE™ Pitch Planning' }
+            ];
+          }
           
           const renderSteps = (steps, title) => `
             <div class="section-row">
@@ -258,13 +312,7 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             </div>
           `;
           
-          return [
-            renderSteps(examSteps, '📝 Exam Preparation'),
-            renderSteps(successFactor1Steps, '🎯 Success Factor 1'),
-            renderSteps(successFactor2Steps, '🎯 Success Factor 2'),
-            renderSteps(workflow1Steps, '⚙️ Workflow 1'),
-            renderSteps(workflow2Steps, '⚙️ Workflow 2')
-          ].join('');
+          return sections.map(section => renderSteps(section.steps, section.title)).join('');
         })()}
         
         <div class="footer">
@@ -284,8 +332,8 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
     return htmlContent;
   };
 
-  const handleExportThirtyDayPlan = () => {
-    const htmlContent = generateThirtyDayPlanHTML(exercise);
+  const handleExportPlan = () => {
+    const htmlContent = generatePlanHTML(exercise);
     const blob = new Blob([htmlContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const newWindow = window.open(url, '_blank');
@@ -616,15 +664,15 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               </div>
             ))}
             
-            {/* Add export button for 30 Day Plan */}
-            {exercise.label === "30 Day Plan" && (
+            {/* Add export button for both 30 Day and 60 Day Plans */}
+            {(exercise.label === "30 Day Plan" || exercise.label === "60 Day Plan") && (
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <Button 
-                  onClick={handleExportThirtyDayPlan}
+                  onClick={handleExportPlan}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg shadow-md transition-colors duration-200"
                 >
                   <Download className="h-5 w-5 mr-2" />
-                  Export 30 Day Plan (View & Print)
+                  Export {exercise.label} (View & Print)
                 </Button>
                 <p className="text-sm text-gray-500 mt-2 text-center">
                   Opens a beautifully formatted view of your plan in a new tab

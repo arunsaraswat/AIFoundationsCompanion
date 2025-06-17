@@ -906,10 +906,10 @@ const initialLessons: Lesson[] = [
           },
           {
             id: "4.3.3",
-            type: "component",
+            type: "link",
             label: "What's Your Pattern?",
-            description: "Generate a custom transformation prompt for ChatGPT",
-            component: "TransformationPrompt",
+            description: "Interactive transformational thinking exercise to explore new approaches to business problems",
+            link: "https://transformational-thinking.replit.app/",
           },
           {
             id: "4.3.4",

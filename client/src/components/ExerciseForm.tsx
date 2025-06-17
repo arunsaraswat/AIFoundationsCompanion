@@ -35,8 +35,13 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
     
     const isThirtyDayPlan = exercise.label === "30 Day Plan";
     const isSixtyDayPlan = exercise.label === "60 Day Plan";
-    const planTitle = isThirtyDayPlan ? "30 Day AI Foundation Plan" : "60 Day AI Influence Plan";
-    const planSubtitle = isThirtyDayPlan ? "Your personalized roadmap to AI mastery" : "Grow your influence and expand AI adoption";
+    const isNinetyDayPlan = exercise.label === "90 Day Plan";
+    const planTitle = isThirtyDayPlan ? "30 Day AI Foundation Plan" : 
+                     isSixtyDayPlan ? "60 Day AI Influence Plan" : 
+                     "90 Day Organizational Impact Plan";
+    const planSubtitle = isThirtyDayPlan ? "Your personalized roadmap to AI mastery" : 
+                        isSixtyDayPlan ? "Grow your influence and expand AI adoption" :
+                        "Impact the organization and demonstrate business value";
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -270,6 +275,52 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               { steps: successFactor3Steps, title: '🎯 Success Factor 3' },
               { steps: successFactor4Steps, title: '🎯 Success Factor 4' },
               { steps: edgeSteps, title: '🎤 EDGE™ Pitch Planning' }
+            ];
+          } else if (isNinetyDayPlan) {
+            const edgePitchSteps = exercise.steps.filter(step => 
+              step.label?.includes('Presentation Date') || 
+              step.label?.includes('Exponential') || 
+              step.label?.includes('Disruptive') || 
+              step.label?.includes('Generative') || 
+              step.label?.includes('Emergent') || 
+              step.label?.includes('Follow-up Tracker Update') || 
+              step.label?.includes('Expected Reaction') || 
+              step.label?.includes('Next Steps')
+            );
+            
+            const successFactor5Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 5') || 
+              step.label?.includes('My Action for Success Factor 5') || 
+              step.label?.includes('By When (Success Factor 5)')
+            );
+            
+            const successFactor6Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 6') || 
+              step.label?.includes('My Action for Success Factor 6') || 
+              step.label?.includes('By When (Success Factor 6)')
+            );
+            
+            const successFactor7Steps = exercise.steps.filter(step => 
+              step.label?.includes('Success Factor 7') || 
+              step.label?.includes('My Action for Success Factor 7') || 
+              step.label?.includes('By When (Success Factor 7)')
+            );
+            
+            const businessImpactSteps = exercise.steps.filter(step => 
+              step.label?.includes('Time Saved From') || 
+              step.label?.includes('Time Saved To') || 
+              step.label?.includes('Quality Gains') || 
+              step.label?.includes('Cost Reduction') || 
+              step.label?.includes('Report Format') || 
+              step.label?.includes('Present To')
+            );
+            
+            sections = [
+              { steps: edgePitchSteps, title: '🎤 EDGE™ Pitch Delivery' },
+              { steps: successFactor5Steps, title: '🎯 Success Factor 5' },
+              { steps: successFactor6Steps, title: '🎯 Success Factor 6' },
+              { steps: successFactor7Steps, title: '🎯 Success Factor 7' },
+              { steps: businessImpactSteps, title: '📊 Business Impact Demonstration' }
             ];
           }
           
@@ -664,8 +715,8 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               </div>
             ))}
             
-            {/* Add export button for both 30 Day and 60 Day Plans */}
-            {(exercise.label === "30 Day Plan" || exercise.label === "60 Day Plan") && (
+            {/* Add export button for all Day Plans */}
+            {(exercise.label === "30 Day Plan" || exercise.label === "60 Day Plan" || exercise.label === "90 Day Plan") && (
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <Button 
                   onClick={handleExportPlan}

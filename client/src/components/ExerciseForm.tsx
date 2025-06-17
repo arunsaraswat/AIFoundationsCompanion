@@ -17,6 +17,7 @@ import RagTestQuestions from "./RagTestQuestions";
 import AgentDesignStep1 from "./AgentDesignStep1";
 import AgentDesignStep2 from "./AgentDesignStep2";
 import ModelComparison from "./ModelComparison";
+import TransformationPrompt from "./TransformationPrompt";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -27,7 +28,7 @@ interface ExerciseFormProps {
 export default function ExerciseForm({ exercise, lessonId, subLessonId }: ExerciseFormProps) {
   const { updateExerciseAnswer, updateFollowUpAnswer, updateStepAnswer } = useCourseProgress();
 
-  const handleAnswerChange = (value: string) => {
+  const handleAnswerChange = (value: string | string[]) => {
     updateExerciseAnswer(lessonId, subLessonId, exercise.id, value);
   };
 
@@ -69,7 +70,7 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         return (
           <RadioGroup
             value={exercise.answer as string || ''}
-            onValueChange={handleAnswerChange}
+            onValueChange={(value) => handleAnswerChange(value)}
             className="mt-2 space-y-3"
           >
             {exercise.options?.map((option, index) => (
@@ -124,7 +125,7 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           <div className="mt-2 space-y-4">
             <RadioGroup
               value={exercise.answer as string || ''}
-              onValueChange={handleAnswerChange}
+              onValueChange={(value) => handleAnswerChange(value)}
               className="space-y-3"
             >
               {exercise.options?.map((option, index) => (
@@ -292,6 +293,14 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
       case 'component':
         if (exercise.component === 'TokenPrediction') {
           return <TokenPrediction />;
+        }
+        if (exercise.component === 'TransformationPrompt') {
+          return <TransformationPrompt 
+            lessonId={lessonId} 
+            subLessonId={subLessonId} 
+            exerciseId={exercise.id} 
+            stepId="" 
+          />;
         }
         return null;
 

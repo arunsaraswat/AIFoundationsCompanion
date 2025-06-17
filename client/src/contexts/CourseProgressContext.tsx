@@ -965,7 +965,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "5.1.2.1",
                 type: "text",
-                label: "Target Score: 80%+",
+                label: "✅ Exam passed with 80%+ - Target Score: 80%+",
                 description: "What score are you targeting for the AI Foundations exam?",
                 answer: "",
               },
@@ -993,7 +993,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "5.1.2.5",
                 type: "text",
-                label: "Success Factor 1",
+                label: "✅ Applied 2 Success Factors - Success Factor 1",
                 description: "Choose your first AI-Native Success Factor to apply",
                 answer: "",
               },
@@ -1035,7 +1035,7 @@ const initialLessons: Lesson[] = [
               {
                 id: "5.1.2.11",
                 type: "text",
-                label: "Workflow #1",
+                label: "✅ 2 workflows identified for redesign - Workflow #1",
                 description: "Name the first workflow you want to redesign",
                 answer: "",
               },

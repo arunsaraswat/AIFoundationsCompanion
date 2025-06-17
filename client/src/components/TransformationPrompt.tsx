@@ -17,6 +17,7 @@ interface TransformationPromptProps {
 export default function TransformationPrompt({ lessonId, subLessonId, exerciseId, stepId }: TransformationPromptProps) {
   const [realProblem, setRealProblem] = useState("");
   const [currentProcess, setCurrentProcess] = useState("");
+  const [gptResponse, setGptResponse] = useState("");
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
@@ -115,6 +116,21 @@ export default function TransformationPrompt({ lessonId, subLessonId, exerciseId
               </p>
             </div>
           )}
+
+          <div className="space-y-2">
+            <Label htmlFor="gpt-response">ChatGPT Response</Label>
+            <Textarea
+              id="gpt-response"
+              value={gptResponse}
+              onChange={(e) => setGptResponse(e.target.value)}
+              placeholder="Paste the response you received from ChatGPT here..."
+              className="min-h-[150px]"
+              rows={6}
+            />
+            <p className="text-sm text-muted-foreground">
+              After getting your response from ChatGPT, paste it here to complete the exercise.
+            </p>
+          </div>
         </CardContent>
       </Card>
     </div>

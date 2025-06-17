@@ -908,7 +908,8 @@ const initialLessons: Lesson[] = [
             id: "4.3.3",
             type: "link",
             label: "What's Your Pattern?",
-            description: "Interactive transformational thinking exercise to explore new approaches to business problems",
+            description:
+              "Interactive transformational thinking exercise to explore new approaches to business problems",
             link: "https://transformational-thinking.replit.app/",
           },
           {
@@ -927,7 +928,35 @@ const initialLessons: Lesson[] = [
     id: 5,
     title: "Roadmap to AI-Native",
     subLessons: [
-      { id: "5.1", title: "5.2 30-60-90 Roadmap", completed: false },
+      {
+        id: "5.1",
+        title: "5.1 30-60-90 Roadmap",
+        completed: false,
+        exercises: [
+          {
+            id: "5.1.1",
+            type: "multi-step",
+            label: "From knowledge to Action",
+            description: "Group Discussion - knowledge is Great. A Plan is Better.",
+            steps: [
+              {
+                id: "5.1.1.1",
+                type: "textarea",
+                label: "What's one thing you've learned so far that you're most excited to actually apply?",
+                description: "Reflect on your key learnings from the course and identify what you want to implement first.",
+                answer: "",
+              },
+              {
+                id: "5.1.1.2",
+                type: "textarea",
+                label: "What usually gets in the way of putting a good idea into action?",
+                description: "Think about common barriers and obstacles that prevent implementation of new ideas.",
+                answer: "",
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {

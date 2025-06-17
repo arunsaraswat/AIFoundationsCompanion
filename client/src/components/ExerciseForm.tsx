@@ -70,8 +70,8 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
           }
           .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
             margin-bottom: 20px;
           }
           .section {
@@ -153,12 +153,17 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
               gap: 10px;
             }
           }
-          @media (max-width: 900px) {
+          @media (max-width: 1100px) {
+            .content-grid {
+              grid-template-columns: 1fr 1fr 1fr;
+            }
+          }
+          @media (max-width: 800px) {
             .content-grid {
               grid-template-columns: 1fr 1fr;
             }
           }
-          @media (max-width: 600px) {
+          @media (max-width: 500px) {
             .content-grid {
               grid-template-columns: 1fr;
             }

@@ -740,13 +740,13 @@ const initialLessons: Lesson[] = [
                 description:
                   "Review the 7 AI-Native Success Factors. Which one feels most within your control to start living out in your day-to-day work?",
                 options: [
+                  "Anchor AI to Business Value",
                   "Upskill Relentlessly",
+                  "Move Fast, Learn Fast",
+                  "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Leadership Buy-in",
-                  "Experimentation Culture",
-                  "Cross-functional Collaboration",
-                  "Continuous Learning Mindset",
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 component: "ModelComparison",
               },

@@ -893,7 +893,15 @@ const initialLessons: Lesson[] = [
             type: "textarea",
             label: "The Wool Question Challenge",
             description:
-              'Step 1: Find Your "Wool" - Look at your 4.1 workflow. Forget the process steps. Ask: "What is this workflow actually trying to accomplish?"\n\nExamples:\n• "Expense reporting" → "Spending visibility and compliance"\n• "Team meetings" → "Coordination and problem-solving"\n• "Customer emails" → "Customer success and issue resolution"\n\nWrite: "The real problem we\'re solving is..."',
+              'Step 1: Find Your "Wool" - Look at your 4.1 workflow. Forget the process steps. <br>Ask: "What is this workflow actually trying to accomplish?"<br>Examples:<br />"Expense reporting" → "Spending visibility and compliance"<br /> "Team meetings" → "Coordination and problem-solving"<br /> "Customer emails" → "Customer success and issue resolution"<br /><br />Write: "The real problem we\'re solving is..."',
+            answer: "",
+          },
+          {
+            id: "4.3.3",
+            type: "textarea",
+            label: "What's Your Pattern?",
+            description:
+              'Step 2: Transformation Prompt (5 min) Use this with ChatGPT:<br><br>"I need to solve this business problem: [YOUR REAL PROBLEM]. Currently we solve it by [CURRENT PROCESS], but what if I ignored all constraints? Assume I have AI that can understand context, communicate, analyze patterns, and coordinate systems. Give me 3 completely different approaches that might make the current process unnecessary."<br><br>Paste your prompt and the AI response below:',
             answer: "",
           },
         ],

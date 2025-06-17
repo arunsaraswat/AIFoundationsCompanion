@@ -866,6 +866,14 @@ const initialLessons: Lesson[] = [
             answer: [],
           },
           {
+            id: "4.2.workflow-tool",
+            type: "link",
+            label: "AI Workflow Enhancement Tool",
+            description:
+              "Interactive workflow redesign activity using the AI Workflow Enhancer tool to identify and enhance your processes with AI integration points.",
+            link: "/exercise/workflow-enhancer",
+          },
+          {
             id: "journal-4-2",
             type: "textarea",
             label: "Journal",

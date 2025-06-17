@@ -992,9 +992,18 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.5",
-                type: "text",
+                type: "radio",
                 label: "✅ Applied 2 Success Factors - Success Factor 1",
                 description: "Choose your first AI-Native Success Factor to apply",
+                options: [
+                  "Anchor AI to Business Value",
+                  "Upskill Relentlessly",
+                  "Move Fast, Learn Fast",
+                  "Start Smart: Include AI Early",
+                  "Tell the Full Story",
+                  "Embed AI into the Everyday",
+                  "Innovate Boldly, Govern Wisely"
+                ],
                 answer: "",
               },
               {
@@ -1013,9 +1022,18 @@ const initialLessons: Lesson[] = [
               },
               {
                 id: "5.1.2.8",
-                type: "text",
+                type: "radio",
                 label: "Success Factor 2",
                 description: "Choose your second AI-Native Success Factor to apply",
+                options: [
+                  "Anchor AI to Business Value",
+                  "Upskill Relentlessly",
+                  "Move Fast, Learn Fast",
+                  "Start Smart: Include AI Early",
+                  "Tell the Full Story",
+                  "Embed AI into the Everyday",
+                  "Innovate Boldly, Govern Wisely"
+                ],
                 answer: "",
               },
               {

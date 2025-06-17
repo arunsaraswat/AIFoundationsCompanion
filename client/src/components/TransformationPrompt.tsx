@@ -87,7 +87,7 @@ export default function TransformationPrompt({ lessonId, subLessonId, exerciseId
               value={currentProcess}
               onChange={(e) => setCurrentProcess(e.target.value)}
               placeholder="e.g., Manual expense reporting with receipts, approval workflows, and monthly reconciliation"
-              className="min-h-[100px]"
+              className="min-h-[100px] w-full"
               rows={4}
             />
           </div>

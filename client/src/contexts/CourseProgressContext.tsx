@@ -1459,36 +1459,8 @@ const initialLessons: Lesson[] = [
           {
             id: "6.1.1",
             type: "textarea",
-            label: "Leadership Learning Reflection",
+            label: "Class Discussion",
             description: "If your CEO or team leader asked, 'What did you actually learn this week?' What would you say first?",
-            answer: "",
-          },
-          {
-            id: "6.1.2",
-            type: "textarea",
-            label: "Key AI Insights",
-            description: "What are the top 3 most important AI insights you've gained from this course?",
-            answer: "",
-          },
-          {
-            id: "6.1.3",
-            type: "textarea",
-            label: "Practical Applications",
-            description: "How will you apply these learnings in your current role or projects?",
-            answer: "",
-          },
-          {
-            id: "6.1.4",
-            type: "textarea",
-            label: "Leadership Transition",
-            description: "How has your perspective shifted from being an AI learner to becoming an AI leader?",
-            answer: "",
-          },
-          {
-            id: "6.1.5",
-            type: "textarea",
-            label: "Next Steps Action Plan",
-            description: "What concrete steps will you take in the next 7 days to demonstrate your AI leadership?",
             answer: "",
           }
         ],

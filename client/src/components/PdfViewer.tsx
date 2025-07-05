@@ -85,7 +85,7 @@ export default function PdfViewer({ isOpen, onClose, title, pdfPath }: PdfViewer
         <div className="flex-1 overflow-auto p-6 bg-gray-50 dark:bg-gray-900">
           <div className="flex justify-center">
             <iframe
-              src={pdfPath}
+              src={`${pdfPath}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
               className="w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg border-0"
               style={{
                 height: '70vh',

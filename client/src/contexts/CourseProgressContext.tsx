@@ -86,7 +86,7 @@ const CourseProgressContext = createContext<
 const initialLessons: Lesson[] = [
   {
     id: 1,
-    title: "EDGE+ AI-Native Foundations",
+    title: "EDGE & AI-Native",
     subLessons: [
       {
         id: "1.1",
@@ -939,20 +939,25 @@ const initialLessons: Lesson[] = [
             id: "5.1.1",
             type: "multi-step",
             label: "From knowledge to Action",
-            description: "Group Discussion - knowledge is Great. A Plan is Better.",
+            description:
+              "Group Discussion - knowledge is Great. A Plan is Better.",
             steps: [
               {
                 id: "5.1.1.1",
                 type: "textarea",
-                label: "What's one thing you've learned so far that you're most excited to actually apply?",
-                description: "Reflect on your key learnings from the course and identify what you want to implement first.",
+                label:
+                  "What's one thing you've learned so far that you're most excited to actually apply?",
+                description:
+                  "Reflect on your key learnings from the course and identify what you want to implement first.",
                 answer: "",
               },
               {
                 id: "5.1.1.2",
                 type: "textarea",
-                label: "What usually gets in the way of putting a good idea into action?",
-                description: "Think about common barriers and obstacles that prevent implementation of new ideas.",
+                label:
+                  "What usually gets in the way of putting a good idea into action?",
+                description:
+                  "Think about common barriers and obstacles that prevent implementation of new ideas.",
                 answer: "",
               },
             ],
@@ -967,7 +972,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.2.1",
                 type: "text",
                 label: "✅ Exam passed with 80%+ - Target Score: 80%+",
-                description: "What score are you targeting for the AI Foundations exam?",
+                description:
+                  "What score are you targeting for the AI Foundations exam?",
                 answer: "",
               },
               {
@@ -995,7 +1001,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.2.5",
                 type: "select",
                 label: "✅ Applied 2 Success Factors - Success Factor 1",
-                description: "Choose your first AI-Native Success Factor to apply",
+                description:
+                  "Choose your first AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1003,7 +1010,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1025,7 +1032,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.2.8",
                 type: "select",
                 label: "Success Factor 2",
-                description: "Choose your second AI-Native Success Factor to apply",
+                description:
+                  "Choose your second AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1033,7 +1041,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1062,7 +1070,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.2.12",
                 type: "textarea",
                 label: "Pain Points (Workflow #1)",
-                description: "What are the current pain points in this workflow?",
+                description:
+                  "What are the current pain points in this workflow?",
                 answer: "",
               },
               {
@@ -1083,7 +1092,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.2.15",
                 type: "textarea",
                 label: "Friction Points (Workflow #2)",
-                description: "What are the current friction points in this workflow?",
+                description:
+                  "What are the current friction points in this workflow?",
                 answer: "",
               },
               {
@@ -1119,7 +1129,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.3.3",
                 type: "textarea",
                 label: "Quantitative Gain",
-                description: "What quantitative gain (time/quality/cost/risk) do you expect?",
+                description:
+                  "What quantitative gain (time/quality/cost/risk) do you expect?",
                 answer: "",
               },
               {
@@ -1133,7 +1144,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.3.5",
                 type: "textarea",
                 label: "Potential Blocker",
-                description: "What might prevent you from redesigning this workflow?",
+                description:
+                  "What might prevent you from redesigning this workflow?",
                 answer: "",
               },
               {
@@ -1147,7 +1159,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.3.7",
                 type: "select",
                 label: "✅ Apply Next 2 Success Factors - Success Factor 3",
-                description: "Choose your third AI-Native Success Factor to apply",
+                description:
+                  "Choose your third AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1155,7 +1168,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1177,7 +1190,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.3.10",
                 type: "select",
                 label: "Success Factor 4",
-                description: "Choose your fourth AI-Native Success Factor to apply",
+                description:
+                  "Choose your fourth AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1185,7 +1199,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1235,7 +1249,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.3.17",
                 type: "textarea",
                 label: "Potential Blocker",
-                description: "What might prevent you from booking your EDGE pitch?",
+                description:
+                  "What might prevent you from booking your EDGE pitch?",
                 answer: "",
               },
               {
@@ -1257,7 +1272,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.1",
                 type: "date",
                 label: "✅ Deliver Your EDGE™ Pitch - Presentation Date",
-                description: "When will you deliver your EDGE pitch presentation?",
+                description:
+                  "When will you deliver your EDGE pitch presentation?",
                 answer: "",
               },
               {
@@ -1292,7 +1308,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.6",
                 type: "textarea",
                 label: "Follow-up Tracker Update",
-                description: "Within 48 hours - what will you track and update?",
+                description:
+                  "Within 48 hours - what will you track and update?",
                 answer: "",
               },
               {
@@ -1306,14 +1323,16 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.8",
                 type: "textarea",
                 label: "Next Steps",
-                description: "What are your planned next steps after the pitch?",
+                description:
+                  "What are your planned next steps after the pitch?",
                 answer: "",
               },
               {
                 id: "5.1.4.9",
                 type: "select",
                 label: "✅ Apply the Last Success Factors - Success Factor 5",
-                description: "Choose your fifth AI-Native Success Factor to apply",
+                description:
+                  "Choose your fifth AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1321,7 +1340,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1343,7 +1362,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.12",
                 type: "select",
                 label: "Success Factor 6",
-                description: "Choose your sixth AI-Native Success Factor to apply",
+                description:
+                  "Choose your sixth AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1351,7 +1371,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1373,7 +1393,8 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.15",
                 type: "select",
                 label: "Success Factor 7",
-                description: "Choose your seventh AI-Native Success Factor to apply",
+                description:
+                  "Choose your seventh AI-Native Success Factor to apply",
                 options: [
                   "Anchor AI to Business Value",
                   "Upskill Relentlessly",
@@ -1381,7 +1402,7 @@ const initialLessons: Lesson[] = [
                   "Start Smart: Include AI Early",
                   "Tell the Full Story",
                   "Embed AI into the Everyday",
-                  "Innovate Boldly, Govern Wisely"
+                  "Innovate Boldly, Govern Wisely",
                 ],
                 answer: "",
               },
@@ -1403,14 +1424,16 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.18",
                 type: "text",
                 label: "✅ Demonstrate Business Impact - Time Saved From",
-                description: "How many hours/week were you spending before? (starting point)",
+                description:
+                  "How many hours/week were you spending before? (starting point)",
                 answer: "",
               },
               {
                 id: "5.1.4.19",
                 type: "text",
                 label: "Time Saved To",
-                description: "How many hours/week do you spend now? (ending point)",
+                description:
+                  "How many hours/week do you spend now? (ending point)",
                 answer: "",
               },
               {
@@ -1431,14 +1454,16 @@ const initialLessons: Lesson[] = [
                 id: "5.1.4.22",
                 type: "text",
                 label: "Report Format",
-                description: "What format will you use to report these results?",
+                description:
+                  "What format will you use to report these results?",
                 answer: "",
               },
               {
                 id: "5.1.4.23",
                 type: "text",
                 label: "Present To",
-                description: "Who will you present these results to? (manager/team/org)",
+                description:
+                  "Who will you present these results to? (manager/team/org)",
                 answer: "",
               },
             ],
@@ -1447,7 +1472,8 @@ const initialLessons: Lesson[] = [
             id: "5.1.5",
             type: "textarea",
             label: "Journal",
-            description: "What part of your action plan are you most proud of or excited to try? What specific commitment will you make today to ensure this knowledge becomes action rather than just another good idea?",
+            description:
+              "What part of your action plan are you most proud of or excited to try? What specific commitment will you make today to ensure this knowledge becomes action rather than just another good idea?",
             answer: "",
           },
         ],
@@ -1467,16 +1493,18 @@ const initialLessons: Lesson[] = [
             id: "6.1.1",
             type: "textarea",
             label: "Class Discussion",
-            description: "If your CEO or team leader asked, 'What did you actually learn this week?' What would you say first?",
+            description:
+              "If your CEO or team leader asked, 'What did you actually learn this week?' What would you say first?",
             answer: "",
           },
           {
             id: "6.1.2",
             type: "textarea",
             label: "Journal",
-            description: "Think of a time you failed to convince someone at work to try something new. What would you do differently now, knowing that the pitch must match the audience's specific pain points and motivations?",
+            description:
+              "Think of a time you failed to convince someone at work to try something new. What would you do differently now, knowing that the pitch must match the audience's specific pain points and motivations?",
             answer: "",
-          }
+          },
         ],
       },
     ],

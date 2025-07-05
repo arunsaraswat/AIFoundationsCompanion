@@ -1,4 +1,18 @@
-import { GraduationCap, BarChart3, Download, Upload, Moon, Sun, RefreshCw, Globe, Brain, Cog, Users, TrendingUp, Target } from "lucide-react";
+import {
+  GraduationCap,
+  BarChart3,
+  Download,
+  Upload,
+  Moon,
+  Sun,
+  RefreshCw,
+  Globe,
+  Brain,
+  Cog,
+  Users,
+  TrendingUp,
+  Target,
+} from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "../contexts/ThemeContext";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
@@ -31,10 +45,12 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
     });
   };
 
-
-
   const handleClearData = () => {
-    if (confirm("Are you sure you want to clear all progress data? This action cannot be undone.")) {
+    if (
+      confirm(
+        "Are you sure you want to clear all progress data? This action cannot be undone.",
+      )
+    ) {
       clearCourseData();
       window.location.reload();
     }
@@ -51,10 +67,15 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
       <div className="p-6 border-b border-sidebar-border flex-shrink-0">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <GraduationCap className="text-primary-foreground text-lg" size={20} />
+            <GraduationCap
+              className="text-primary-foreground text-lg"
+              size={20}
+            />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-sidebar-foreground">AI Native Foundations</h1>
+            <h1 className="text-lg font-semibold text-sidebar-foreground">
+              AI-Native Foundations
+            </h1>
             <p className="text-xs text-muted-foreground">Class Companion</p>
           </div>
         </div>
@@ -71,13 +92,17 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
             >
               <div className="flex items-center min-w-0 w-full">
                 <BarChart3 className="mr-3 flex-shrink-0" size={16} />
-                <span className="text-left break-words whitespace-normal flex-1">Dashboard</span>
+                <span className="text-left break-words whitespace-normal flex-1">
+                  Dashboard
+                </span>
               </div>
             </Button>
           </li>
-          
+
           <div className="py-2">
-            <div className="text-xs font-medium text-muted-foreground mb-2">Lessons</div>
+            <div className="text-xs font-medium text-muted-foreground mb-2">
+              Lessons
+            </div>
             <div className="space-y-1">
               <Button
                 variant={location === "/lesson/1" ? "default" : "ghost"}
@@ -86,21 +111,30 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               >
                 <div className="flex items-start min-w-0 w-full">
                   <Globe className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 1: EDGE + AI-Native Foundations</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
+                    Lesson 1: EDGE<sup>™</sup> & AI-Native
+                  </span>
                 </div>
               </Button>
-              
+
               <Button
-                variant={location === "/lesson/2" || location === "/exercise/agent-design" ? "default" : "ghost"}
+                variant={
+                  location === "/lesson/2" ||
+                  location === "/exercise/agent-design"
+                    ? "default"
+                    : "ghost"
+                }
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/2")}
               >
                 <div className="flex items-start min-w-0 w-full">
                   <Brain className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 2: AI Technical Literacy</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
+                    Lesson 2: AI Technical Literacy
+                  </span>
                 </div>
               </Button>
-              
+
               <Button
                 variant={location === "/lesson/3" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
@@ -108,21 +142,30 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               >
                 <div className="flex items-start min-w-0 w-full">
                   <Cog className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 3: The AI-Native Success Factors</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
+                    Lesson 3: The AI-Native Success Factors
+                  </span>
                 </div>
               </Button>
-              
+
               <Button
-                variant={location === "/lesson/4" || location === "/exercise/workflow-enhancer" ? "default" : "ghost"}
+                variant={
+                  location === "/lesson/4" ||
+                  location === "/exercise/workflow-enhancer"
+                    ? "default"
+                    : "ghost"
+                }
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/4")}
               >
                 <div className="flex items-start min-w-0 w-full">
                   <Users className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 4: Improve My Workflow With AI</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
+                    Lesson 4: Improve My Workflow With AI
+                  </span>
                 </div>
               </Button>
-              
+
               <Button
                 variant={location === "/lesson/5" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
@@ -130,10 +173,12 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               >
                 <div className="flex items-start min-w-0 w-full">
                   <TrendingUp className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 5: Change Management</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
+                    Lesson 5: Change Management
+                  </span>
                 </div>
               </Button>
-              
+
               <Button
                 variant={location === "/lesson/6" ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
@@ -141,12 +186,14 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               >
                 <div className="flex items-start min-w-0 w-full">
                   <Target className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">Lesson 6: Taking Action</span>
+                  <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
+                    Lesson 6: Taking Action
+                  </span>
                 </div>
               </Button>
-              
+
               <Separator className="my-4" />
-              
+
               <div className="space-y-3">
                 <Button
                   variant="ghost"
@@ -156,10 +203,12 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                 >
                   <div className="flex items-center min-w-0 w-full">
                     <Download className="mr-3 flex-shrink-0" size={16} />
-                    <span className="text-left break-words whitespace-normal flex-1">Export → JSON</span>
+                    <span className="text-left break-words whitespace-normal flex-1">
+                      Export → JSON
+                    </span>
                   </div>
                 </Button>
-                
+
                 <Button
                   variant="ghost"
                   size="sm"
@@ -168,12 +217,14 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                 >
                   <div className="flex items-center min-w-0 w-full">
                     <Upload className="mr-3 flex-shrink-0" size={16} />
-                    <span className="text-left break-words whitespace-normal flex-1">Import ← JSON</span>
+                    <span className="text-left break-words whitespace-normal flex-1">
+                      Import ← JSON
+                    </span>
                   </div>
                 </Button>
-                
+
                 <Separator className="my-3" />
-                
+
                 <Button
                   variant="ghost"
                   size="sm"
@@ -184,19 +235,23 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                     {theme === "light" ? (
                       <>
                         <Moon className="mr-3 flex-shrink-0" size={16} />
-                        <span className="text-left break-words whitespace-normal flex-1">Dark Mode</span>
+                        <span className="text-left break-words whitespace-normal flex-1">
+                          Dark Mode
+                        </span>
                       </>
                     ) : (
                       <>
                         <Sun className="mr-3 flex-shrink-0" size={16} />
-                        <span className="text-left break-words whitespace-normal flex-1">Light Mode</span>
+                        <span className="text-left break-words whitespace-normal flex-1">
+                          Light Mode
+                        </span>
                       </>
                     )}
                   </div>
                 </Button>
-                
+
                 <Separator className="my-3" />
-                
+
                 <Button
                   variant="ghost"
                   size="sm"
@@ -205,7 +260,9 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                 >
                   <div className="flex items-center min-w-0 w-full">
                     <RefreshCw className="mr-3 flex-shrink-0" size={16} />
-                    <span className="text-left break-words whitespace-normal flex-1">Clear All Data</span>
+                    <span className="text-left break-words whitespace-normal flex-1">
+                      Clear All Data
+                    </span>
                   </div>
                 </Button>
               </div>

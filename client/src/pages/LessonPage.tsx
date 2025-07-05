@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
 import ExerciseForm from "../components/ExerciseForm";
-import { Check, Clock, ChevronDown, ChevronRight } from "lucide-react";
+import PdfViewer from "../components/PdfViewer";
+import { Check, Clock, ChevronDown, ChevronRight, FileText } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 interface LessonPageProps {
   lessonId: number;
@@ -13,6 +15,7 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
   const { lessons, getLessonProgress, updateSubLessonStatus } = useCourseProgress();
   const lesson = lessons.find(l => l.id === lessonId);
   const [openSubLessons, setOpenSubLessons] = useState<string[]>([]);
+  const [isPdfViewerOpen, setIsPdfViewerOpen] = useState(false);
   
   if (!lesson) {
     return (
@@ -50,6 +53,19 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
             style={{ width: `${(progress.completed / progress.total) * 100}%` }}
           />
         </div>
+        
+        {/* View Lesson Content Button for Lesson 1 */}
+        {lesson.id === 1 && (
+          <div className="mt-6">
+            <Button 
+              onClick={() => setIsPdfViewerOpen(true)}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              <FileText className="h-4 w-4" />
+              View Lesson Content
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="space-y-4">
@@ -106,6 +122,16 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
           );
         })}
       </div>
+      
+      {/* PDF Viewer Modal */}
+      {lesson.id === 1 && (
+        <PdfViewer
+          isOpen={isPdfViewerOpen}
+          onClose={() => setIsPdfViewerOpen(false)}
+          title={`Lesson ${lesson.id}: ${lesson.title}`}
+          pdfPath="/assets/lesson1.pdf"
+        />
+      )}
     </div>
   );
 }

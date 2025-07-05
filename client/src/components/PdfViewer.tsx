@@ -86,7 +86,7 @@ export default function PdfViewer({ isOpen, onClose, title, pdfPath }: PdfViewer
           <div className="flex justify-center">
             <iframe
               src={pdfPath}
-              className="w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+              className="w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg border-0"
               style={{
                 height: '70vh',
                 transform: `scale(${zoom / 100}) rotate(${rotation}deg)`,

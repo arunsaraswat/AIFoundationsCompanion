@@ -17,12 +17,28 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
-      <Route path="/lesson/:id">
-        {(params) => <LessonPage lessonId={parseInt(params.id)} />}
+      <Route path="/lesson/:id/:subLessonId?">
+        {(params) => <LessonPage lessonId={parseInt(params.id)} subLessonId={params.subLessonId} />}
       </Route>
-      <Route path="/exercise/model-match-up" component={ModelMatchUpPage} />
-      <Route path="/exercise/agent-design" component={AgentDesignPage} />
-      <Route path="/exercise/workflow-enhancer" component={WorkflowEnhancerPage} />
+      <Route path="/exercise/model-match-up/:lessonId?/:subLessonId?">
+        {(params) => <ModelMatchUpPage lessonId={params.lessonId ? parseInt(params.lessonId) : undefined} subLessonId={params.subLessonId} />}
+      </Route>
+      <Route path="/exercise/agent-design/:lessonId?/:subLessonId?">
+        {(params) => <AgentDesignPage lessonId={params.lessonId ? parseInt(params.lessonId) : undefined} subLessonId={params.subLessonId} />}
+      </Route>
+      <Route path="/exercise/workflow-enhancer/:lessonId?/:subLessonId?">
+        {(params) => <WorkflowEnhancerPage lessonId={params.lessonId ? parseInt(params.lessonId) : undefined} subLessonId={params.subLessonId} />}
+      </Route>
+      {/* Backward compatibility routes */}
+      <Route path="/exercise/model-match-up">
+        {() => <ModelMatchUpPage />}
+      </Route>
+      <Route path="/exercise/agent-design">
+        {() => <AgentDesignPage />}
+      </Route>
+      <Route path="/exercise/workflow-enhancer">
+        {() => <WorkflowEnhancerPage />}
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );

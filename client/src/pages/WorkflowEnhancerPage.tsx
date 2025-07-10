@@ -1,7 +1,12 @@
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function WorkflowEnhancerPage() {
+interface WorkflowEnhancerPageProps {
+  lessonId?: number;
+  subLessonId?: string;
+}
+
+export default function WorkflowEnhancerPage({ lessonId, subLessonId }: WorkflowEnhancerPageProps = {}) {
   const handleOpenTool = () => {
     window.open("https://ai-workflow-enhancer.replit.app/", "_blank");
   };
@@ -16,13 +21,20 @@ export default function WorkflowEnhancerPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                asChild
+                onClick={() => {
+                  // If we have lesson context, navigate back to specific sub-lesson
+                  if (lessonId && subLessonId) {
+                    window.location.href = `/lesson/${lessonId}/${subLessonId}`;
+                  } else if (lessonId) {
+                    window.location.href = `/lesson/${lessonId}`;
+                  } else {
+                    window.location.href = "/lesson/4";
+                  }
+                }}
                 className="text-muted-foreground hover:text-foreground"
               >
-                <a href="/lesson/4">
-                  <ArrowLeft className="mr-2" size={16} />
-                  Back to Lesson
-                </a>
+                <ArrowLeft className="mr-2" size={16} />
+                Back to Lesson
               </Button>
             </div>
 

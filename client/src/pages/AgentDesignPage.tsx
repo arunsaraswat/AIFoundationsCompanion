@@ -6,7 +6,12 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-export default function AgentDesignPage() {
+interface AgentDesignPageProps {
+  lessonId?: number;
+  subLessonId?: string;
+}
+
+export default function AgentDesignPage({ lessonId, subLessonId }: AgentDesignPageProps = {}) {
   const [currentStep, setCurrentStep] = useState(1);
 
   return (
@@ -15,7 +20,16 @@ export default function AgentDesignPage() {
       <div className="mb-6">
         <Button 
           variant="ghost" 
-          onClick={() => window.history.back()}
+          onClick={() => {
+            // If we have lesson context, navigate back to specific sub-lesson
+            if (lessonId && subLessonId) {
+              window.location.href = `/lesson/${lessonId}/${subLessonId}`;
+            } else if (lessonId) {
+              window.location.href = `/lesson/${lessonId}`;
+            } else {
+              window.history.back();
+            }
+          }}
           className="mb-4"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -71,8 +85,8 @@ export default function AgentDesignPage() {
       <div className="min-h-[600px]">
         {currentStep === 1 && (
           <AgentDesignStep1
-            lessonId={2}
-            subLessonId="2.6"
+            lessonId={lessonId || 2}
+            subLessonId={subLessonId || "2.6"}
             exerciseId="exercise-15"
             stepId="step-1"
           />
@@ -80,8 +94,8 @@ export default function AgentDesignPage() {
         
         {currentStep === 2 && (
           <AgentDesignStep2
-            lessonId={2}
-            subLessonId="2.6"
+            lessonId={lessonId || 2}
+            subLessonId={subLessonId || "2.6"}
             exerciseId="exercise-15"
             stepId="step-2"
           />

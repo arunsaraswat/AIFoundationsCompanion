@@ -751,10 +751,18 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         // Check if it's a PDF file or external URL
         const isPDF = exercise.link?.endsWith('.pdf');
         const isExternal = exercise.link?.startsWith('http');
+        const isInternalExercise = exercise.link?.startsWith('/exercise/');
+        
+        // For internal exercise links, append lesson and sub-lesson context
+        let linkHref = exercise.link;
+        if (isInternalExercise && lessonId && subLessonId) {
+          linkHref = `${exercise.link}/${lessonId}/${subLessonId}`;
+        }
+        
         return (
           <div className="p-4 border border-primary/20 rounded-lg bg-primary/5">
             <a 
-              href={exercise.link}
+              href={linkHref}
               target={isPDF || isExternal ? "_blank" : "_self"}
               rel={isPDF || isExternal ? "noopener noreferrer" : undefined}
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"

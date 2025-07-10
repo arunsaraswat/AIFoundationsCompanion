@@ -12,9 +12,9 @@ export const lesson2: Lesson = {
         {
           id: "2.1.1",
           type: "textarea",
-          label: "Explain It to Someone's Grandparent",
+          label: "Explain to Someone Who Doesn't Know About AI",
           description:
-            "How would you explain what AI is to someone's grandparent?",
+            "Pair Share: Discuss and Get Feedback (5 min)<br><br><strong>Scenario:</strong> How would you explain AI to someone who doesn't know what it is?<br><br><strong>Instructions:</strong><br>• Pair up with someone near you<br>• Each person gets 1-2 minutes to explain<br>• Make it as simple and clear as possible<br>• Your listener notes anything confusing or overly technical<br>• Give your partner feedback",
           component: "ModelComparison",
         },
         {

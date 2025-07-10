@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
+import { useLocation } from "wouter";
 import ExerciseForm from "../components/ExerciseForm";
 import PdfViewer from "../components/PdfViewer";
 import { Check, Clock, ChevronDown, ChevronRight, FileText } from "lucide-react";
@@ -9,13 +10,15 @@ import { Button } from "@/components/ui/button";
 
 interface LessonPageProps {
   lessonId: number;
+  subLessonId?: string;
 }
 
-export default function LessonPage({ lessonId }: LessonPageProps) {
+export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
   const { lessons, getLessonProgress, updateSubLessonStatus } = useCourseProgress();
   const lesson = lessons.find(l => l.id === lessonId);
   const [openSubLessons, setOpenSubLessons] = useState<string[]>([]);
   const [isPdfViewerOpen, setIsPdfViewerOpen] = useState(false);
+  const [, setLocation] = useLocation();
   
   if (!lesson) {
     return (
@@ -28,12 +31,29 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
 
   const progress = getLessonProgress(lesson.id);
 
+  // Auto-expand sub-lesson if specified in URL
+  useEffect(() => {
+    if (subLessonId && lesson) {
+      // Check if the sub-lesson exists in this lesson
+      const subLessonExists = lesson.subLessons.some(sl => sl.id === subLessonId);
+      if (subLessonExists && !openSubLessons.includes(subLessonId)) {
+        setOpenSubLessons(prev => [...prev, subLessonId]);
+      }
+    }
+  }, [subLessonId, lesson, openSubLessons]);
+
   const toggleSubLesson = (subLessonId: string) => {
-    setOpenSubLessons(prev => 
-      prev.includes(subLessonId) 
-        ? prev.filter(id => id !== subLessonId)
-        : [...prev, subLessonId]
-    );
+    const isCurrentlyOpen = openSubLessons.includes(subLessonId);
+    
+    if (isCurrentlyOpen) {
+      // Closing - remove from openSubLessons and update URL to remove subLessonId
+      setOpenSubLessons(prev => prev.filter(id => id !== subLessonId));
+      setLocation(`/lesson/${lessonId}`);
+    } else {
+      // Opening - add to openSubLessons and update URL to include subLessonId
+      setOpenSubLessons(prev => [...prev, subLessonId]);
+      setLocation(`/lesson/${lessonId}/${subLessonId}`);
+    }
   };
 
 

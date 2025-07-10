@@ -105,7 +105,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
             </div>
             <div className="space-y-1">
               <Button
-                variant={location === "/lesson/1" ? "default" : "ghost"}
+                variant={location.startsWith("/lesson/1") ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/1")}
               >
@@ -119,8 +119,8 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
 
               <Button
                 variant={
-                  location === "/lesson/2" ||
-                  location === "/exercise/agent-design"
+                  location.startsWith("/lesson/2") ||
+                  location.includes("/exercise/agent-design")
                     ? "default"
                     : "ghost"
                 }
@@ -136,7 +136,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               </Button>
 
               <Button
-                variant={location === "/lesson/3" ? "default" : "ghost"}
+                variant={location.startsWith("/lesson/3") ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/3")}
               >
@@ -150,8 +150,8 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
 
               <Button
                 variant={
-                  location === "/lesson/4" ||
-                  location === "/exercise/workflow-enhancer"
+                  location.startsWith("/lesson/4") ||
+                  location.includes("/exercise/workflow-enhancer")
                     ? "default"
                     : "ghost"
                 }
@@ -167,7 +167,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               </Button>
 
               <Button
-                variant={location === "/lesson/5" ? "default" : "ghost"}
+                variant={location.startsWith("/lesson/5") ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/5")}
               >
@@ -180,7 +180,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
               </Button>
 
               <Button
-                variant={location === "/lesson/6" ? "default" : "ghost"}
+                variant={location.startsWith("/lesson/6") ? "default" : "ghost"}
                 className="w-full justify-start text-sm h-auto py-3 min-h-[48px]"
                 onClick={() => handleNavigation("/lesson/6")}
               >

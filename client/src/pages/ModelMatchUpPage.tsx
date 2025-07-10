@@ -79,7 +79,12 @@ const USE_CASES_DATA = [
 
 const TAGS = ["AI", "ML", "DL", "Gen AI"];
 
-export default function ModelMatchUpPage() {
+interface ModelMatchUpPageProps {
+  lessonId?: number;
+  subLessonId?: string;
+}
+
+export default function ModelMatchUpPage({ lessonId, subLessonId }: ModelMatchUpPageProps = {}) {
   const [useCases, setUseCases] = useState<UseCase[]>([]);
   const [task1Complete, setTask1Complete] = useState(true);
   const [task2Complete, setTask2Complete] = useState(false);
@@ -162,7 +167,16 @@ export default function ModelMatchUpPage() {
       <div className="mb-6">
         <Button 
           variant="ghost" 
-          onClick={() => window.history.back()}
+          onClick={() => {
+            // If we have lesson context, navigate back to specific sub-lesson
+            if (lessonId && subLessonId) {
+              window.location.href = `/lesson/${lessonId}/${subLessonId}`;
+            } else if (lessonId) {
+              window.location.href = `/lesson/${lessonId}`;
+            } else {
+              window.history.back();
+            }
+          }}
           className="mb-4"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />

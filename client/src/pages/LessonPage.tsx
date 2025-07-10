@@ -54,8 +54,8 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
           />
         </div>
         
-        {/* View Lesson Content Button for Lesson 1 */}
-        {lesson.id === 1 && (
+        {/* View Lesson Content Button for Lesson 1 and 2 */}
+        {(lesson.id === 1 || lesson.id === 2) && (
           <div className="mt-6">
             <Button 
               onClick={() => setIsPdfViewerOpen(true)}
@@ -124,12 +124,12 @@ export default function LessonPage({ lessonId }: LessonPageProps) {
       </div>
       
       {/* PDF Viewer Modal */}
-      {lesson.id === 1 && (
+      {(lesson.id === 1 || lesson.id === 2) && (
         <PdfViewer
           isOpen={isPdfViewerOpen}
           onClose={() => setIsPdfViewerOpen(false)}
           title={`Lesson ${lesson.id}: ${lesson.title}`}
-          pdfPath="/assets/lesson1.pdf"
+          pdfPath={`/assets/lesson${lesson.id}.pdf`}
         />
       )}
     </div>

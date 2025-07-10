@@ -14,7 +14,7 @@ export const lesson1: Lesson = {
           type: "textarea",
           label: "What Kind of Change Are You Feeling?",
           description:
-            'Go around table with introductions. Share: Name, role, location. Complete: "Ever since ChatGPT went viral, the world is..."',
+            'Group Discussion: Quick Introductions\n\nGo around your table and introduce yourself using your: Name, role, where you\'re based, and complete this sentence:\n\n"Ever since ChatGPT went viral ..."',
           component: "ModelComparison",
         },
         {

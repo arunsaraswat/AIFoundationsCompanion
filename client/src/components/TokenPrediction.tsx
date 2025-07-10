@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Copy } from "lucide-react";
 
 interface TokenPredictionState {
   userTokens: string[];
@@ -148,6 +149,15 @@ export default function TokenPrediction() {
     }
   };
 
+  const copyPromptToClipboard = async () => {
+    const prompt = "Finish the sentence with 6-8 words. Keep the original sentence and just append 6-8 workds. Do not modify the original in any way. Repond with the fully formed sentence. --- 'The CEO stormed in... The meeting was ''";
+    try {
+      await navigator.clipboard.writeText(prompt);
+    } catch (err) {
+      console.error('Failed to copy prompt: ', err);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <Card className="mb-4">
@@ -266,18 +276,28 @@ export default function TokenPrediction() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    <Button
-                      onClick={fetchAICompletion}
-                      variant="outline"
-                      className="w-full"
-                      disabled={state.isLoadingAI}
-                    >
-                      {state.isLoadingAI
-                        ? "Getting AI Response..."
-                        : state.aiCompletion
-                          ? "Get Another AI Response"
-                          : "Get AI Completion"}
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={fetchAICompletion}
+                        variant="outline"
+                        className="flex-1"
+                        disabled={state.isLoadingAI}
+                      >
+                        {state.isLoadingAI
+                          ? "Getting AI Response..."
+                          : state.aiCompletion
+                            ? "Get Another AI Response"
+                            : "Get AI Completion"}
+                      </Button>
+                      <Button
+                        onClick={copyPromptToClipboard}
+                        variant="outline"
+                        className="flex items-center gap-2"
+                      >
+                        <Copy className="h-4 w-4" />
+                        Copy Prompt to Clipboard
+                      </Button>
+                    </div>
 
                     {state.isLoadingAI && (
                       <div className="flex items-center justify-center p-4">

@@ -125,6 +125,16 @@ The application contains 6 main lessons:
 - Follow the established context patterns for state management
 - Maintain the local-first data approach with localStorage
 
+### Git Commit Workflow
+- **IMPORTANT**: After every successful commit and push, update `commit-history.md` with:
+  - Commit hash and date
+  - Brief description of changes
+  - Key features delivered (3-5 bullet points)
+  - Any breaking changes or migration notes
+- Use conventional commit format: `feat:`, `fix:`, `refactor:`, `docs:`, etc.
+- Include detailed commit messages with context and reasoning
+- Always append the Claude Code signature to commit messages
+
 ### Data Persistence
 - All course progress stored in localStorage
 - Exercise-specific data (ModelMatchUp, TokenPrediction) have separate storage keys

@@ -64,7 +64,7 @@ export const ChatHelper: React.FC = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[600px] h-[80vh] flex flex-col p-0">
+      <DialogContent className="max-w-[900px] h-[80vh] flex flex-col p-0">
         <DialogHeader className="px-6 py-4 border-b">
           <DialogTitle>AI-Native Foundations - LLM Chat Helper</DialogTitle>
           <DialogDescription>

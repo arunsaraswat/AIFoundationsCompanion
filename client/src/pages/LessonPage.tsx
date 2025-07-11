@@ -90,8 +90,8 @@ export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
           />
         </div>
         
-        {/* View Lesson Content Button for Lesson 1 and 2 */}
-        {(lesson.id === 1 || lesson.id === 2) && (
+        {/* View Lesson Content Button for Lesson 1, 2, and 3 */}
+        {(lesson.id === 1 || lesson.id === 2 || lesson.id === 3) && (
           <div className="mt-6">
             <Button 
               onClick={() => openPdf(`Lesson ${lesson.id}: ${lesson.title}`, `/assets/lesson${lesson.id}.pdf`)}

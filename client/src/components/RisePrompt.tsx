@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Copy } from "lucide-react";
 
 interface RisePromptProps {
   lessonId: number;
@@ -157,6 +158,22 @@ Output format: ${fields.outputFormat}`;
     }
   };
 
+  const copyPromptToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(fullPrompt);
+    } catch (err) {
+      console.error('Failed to copy prompt: ', err);
+    }
+  };
+
+  const copyRisePromptToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(aiState.aiResponse);
+    } catch (err) {
+      console.error('Failed to copy RISE prompt: ', err);
+    }
+  };
+
   const executeRisePrompt = async () => {
     if (!aiState.aiResponse) {
       return; // Need a generated RISE prompt first
@@ -235,16 +252,26 @@ Output format: ${fields.outputFormat}`;
           
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">AI Model Response</CardTitle>
+              <CardTitle className="text-lg">Create the RISE formatted prompt</CardTitle>
             </CardHeader>
             <CardContent>
               {!aiState.aiResponse && !aiState.isLoadingAI && (
-                <Button 
-                  onClick={fetchAIResponse}
-                  className="w-full"
-                >
-                  Get AI Response
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={fetchAIResponse}
+                    className="flex-1"
+                  >
+                    Get AI Response
+                  </Button>
+                  <Button
+                    onClick={copyPromptToClipboard}
+                    variant="outline"
+                    className="flex items-center gap-2"
+                  >
+                    <Copy className="h-4 w-4" />
+                    Copy Prompt to Clipboard
+                  </Button>
+                </div>
               )}
               
               {aiState.isLoadingAI && (
@@ -256,13 +283,23 @@ Output format: ${fields.outputFormat}`;
               
               {aiState.aiResponse && !aiState.isLoadingAI && (
                 <div>
-                  <Button 
-                    onClick={fetchAIResponse}
-                    variant="outline"
-                    className="w-full mb-4"
-                  >
-                    Get Another AI Response
-                  </Button>
+                  <div className="flex gap-2 mb-4">
+                    <Button 
+                      onClick={fetchAIResponse}
+                      variant="outline"
+                      className="flex-1"
+                    >
+                      Get Another AI Response
+                    </Button>
+                    <Button
+                      onClick={copyPromptToClipboard}
+                      variant="outline"
+                      className="flex items-center gap-2"
+                    >
+                      <Copy className="h-4 w-4" />
+                      Copy Prompt to Clipboard
+                    </Button>
+                  </div>
                   
                   <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm max-h-96 overflow-y-auto">
                     <div className="text-amber-400 mb-2">&gt; AI MODEL OUTPUT</div>
@@ -285,13 +322,23 @@ Output format: ${fields.outputFormat}`;
               </CardHeader>
               <CardContent>
                 {!riseExecutionState.aiResponse && !riseExecutionState.isLoadingAI && (
-                  <Button 
-                    onClick={executeRisePrompt}
-                    className="w-full"
-                    variant="secondary"
-                  >
-                    Send RISE Prompt to AI Model
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button 
+                      onClick={executeRisePrompt}
+                      className="flex-1"
+                      variant="secondary"
+                    >
+                      Send RISE Prompt to AI Model
+                    </Button>
+                    <Button
+                      onClick={copyRisePromptToClipboard}
+                      variant="outline"
+                      className="flex items-center gap-2"
+                    >
+                      <Copy className="h-4 w-4" />
+                      Copy to Clipboard
+                    </Button>
+                  </div>
                 )}
                 
                 {riseExecutionState.isLoadingAI && (
@@ -303,13 +350,23 @@ Output format: ${fields.outputFormat}`;
                 
                 {riseExecutionState.aiResponse && !riseExecutionState.isLoadingAI && (
                   <div>
-                    <Button 
-                      onClick={executeRisePrompt}
-                      variant="outline"
-                      className="w-full mb-4"
-                    >
-                      Execute RISE Prompt Again
-                    </Button>
+                    <div className="flex gap-2 mb-4">
+                      <Button 
+                        onClick={executeRisePrompt}
+                        variant="outline"
+                        className="flex-1"
+                      >
+                        Execute RISE Prompt Again
+                      </Button>
+                      <Button
+                        onClick={copyRisePromptToClipboard}
+                        variant="outline"
+                        className="flex items-center gap-2"
+                      >
+                        <Copy className="h-4 w-4" />
+                        Copy to Clipboard
+                      </Button>
+                    </div>
                     
                     <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm max-h-96 overflow-y-auto">
                       <div className="text-amber-400 mb-2">&gt; RISE PROMPT EXECUTION OUTPUT</div>

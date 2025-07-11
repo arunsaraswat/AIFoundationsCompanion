@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Copy } from "lucide-react";
 
 interface QuickDecisionPromptProps {
   lessonId: number;
@@ -130,6 +131,15 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
     }
   };
 
+  const copyPromptToClipboard = async () => {
+    const prompt = `I'm a ${fields.role}. I need to make a decision about ${fields.issue}. What are 3 options I should consider, and what are the trade-offs of each from my point of view?`;
+    try {
+      await navigator.clipboard.writeText(prompt);
+    } catch (err) {
+      console.error('Failed to copy prompt: ', err);
+    }
+  };
+
   const isComplete = fields.role.trim() !== "" && fields.issue.trim() !== "";
 
   // Save checkbox state to localStorage
@@ -206,14 +216,25 @@ export default function QuickDecisionPrompt({ lessonId, subLessonId, exerciseId,
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <Button 
-                  onClick={fetchAIResponse}
-                  variant="outline"
-                  className="w-full"
-                  disabled={aiState.isLoadingAI}
-                >
-                  {aiState.isLoadingAI ? "Getting AI Response..." : aiState.aiResponse ? "Get Another AI Response" : "Get AI Response"}
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={fetchAIResponse}
+                    variant="outline"
+                    className="flex-1"
+                    disabled={aiState.isLoadingAI}
+                  >
+                    {aiState.isLoadingAI ? "Getting AI Response..." : aiState.aiResponse ? "Get Another AI Response" : "Get AI Response"}
+                  </Button>
+                  <Button
+                    onClick={copyPromptToClipboard}
+                    variant="outline"
+                    className="flex items-center gap-2"
+                    disabled={!isComplete}
+                  >
+                    <Copy className="h-4 w-4" />
+                    Copy Prompt to Clipboard
+                  </Button>
+                </div>
                 
                 {aiState.isLoadingAI && (
                   <div className="flex items-center justify-center p-4">

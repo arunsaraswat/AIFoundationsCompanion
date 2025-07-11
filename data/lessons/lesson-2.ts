@@ -242,11 +242,13 @@ export const lesson2: Lesson = {
             },
             {
               id: "handbook-link",
-              type: "link",
+              type: "component",
               label: "Venue Network, Inc. Employee Policy Manual",
               description: "Reference document for the RAG exercise",
-              link: "/src/assets/venue-network-employee-handbook.pdf",
-              component: "ModelComparison",
+              component: "PDFViewerButton",
+              title: "Venue Network, Inc. Employee Policy Manual",
+              pdfPath: "/assets/venue-network-employee-handbook.pdf",
+              buttonText: "Venue Network, Inc. Employee Policy Manual",
             },
             {
               id: "step-3",

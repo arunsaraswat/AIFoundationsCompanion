@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useCourseProgress } from "../contexts/CourseProgressContext";
+import { Copy } from "lucide-react";
 
 interface RagStep1Props {
   lessonId: number;
@@ -102,6 +103,14 @@ export default function RagStep1({ lessonId, subLessonId, exerciseId, stepId }: 
     }
   };
 
+  const copyPromptToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(ragPrompt);
+    } catch (err) {
+      console.error('Failed to copy prompt: ', err);
+    }
+  };
+
   // Save observations and update course progress
   useEffect(() => {
     localStorage.setItem(`ragStep1_${lessonId}_${subLessonId}_${exerciseId}_${stepId}`, userObservations);
@@ -123,13 +132,24 @@ export default function RagStep1({ lessonId, subLessonId, exerciseId, stepId }: 
           </div>
 
           <div className="space-y-2">
-            <Button 
-              onClick={fetchAIResponse}
-              disabled={aiState.isLoadingAI}
-              className="w-full"
-            >
-              {aiState.isLoadingAI ? "Getting AI Response..." : "Send Prompt to AI Model"}
-            </Button>
+            {!aiState.aiResponse && !aiState.isLoadingAI && (
+              <div className="flex gap-2">
+                <Button 
+                  onClick={fetchAIResponse}
+                  className="flex-1"
+                >
+                  Send Prompt to AI Model
+                </Button>
+                <Button
+                  onClick={copyPromptToClipboard}
+                  variant="outline"
+                  className="flex items-center gap-2"
+                >
+                  <Copy className="h-4 w-4" />
+                  Copy to Clipboard
+                </Button>
+              </div>
+            )}
             
             {aiState.isLoadingAI && (
               <div className="text-center py-4">
@@ -140,13 +160,23 @@ export default function RagStep1({ lessonId, subLessonId, exerciseId, stepId }: 
             
             {aiState.aiResponse && !aiState.isLoadingAI && (
               <div>
-                <Button 
-                  onClick={fetchAIResponse}
-                  variant="outline"
-                  className="w-full mb-4"
-                >
-                  Get Another AI Response
-                </Button>
+                <div className="flex gap-2 mb-4">
+                  <Button 
+                    onClick={fetchAIResponse}
+                    variant="outline"
+                    className="flex-1"
+                  >
+                    Get Another AI Response
+                  </Button>
+                  <Button
+                    onClick={copyPromptToClipboard}
+                    variant="outline"
+                    className="flex items-center gap-2"
+                  >
+                    <Copy className="h-4 w-4" />
+                    Copy to Clipboard
+                  </Button>
+                </div>
                 
                 <div className="bg-amber-900 text-amber-100 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap max-h-96 overflow-y-auto">
                   <div className="text-amber-400 mb-2">&gt; AI MODEL OUTPUT (WITHOUT RAG)</div>

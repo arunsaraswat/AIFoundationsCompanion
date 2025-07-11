@@ -66,12 +66,13 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
               content: risePrompt
             }
           ],
-          model: 'meta-llama/llama-3.3-8b-instruct:free'
+          model: 'mistralai/mistral-nemo:free'
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get AI response');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`API Error: ${response.status} - ${errorData.error || 'Unknown error'}`);
       }
 
       const data = await response.json();
@@ -90,7 +91,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
         ...prev,
         isLoadingAI: false,
       }));
-      alert('Error getting AI response. Please try again.');
+      alert(`Error getting AI response: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
     }
   };
 
@@ -121,7 +122,8 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get AI response');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`API Error: ${response.status} - ${errorData.error || 'Unknown error'}`);
       }
 
       const data = await response.json();
@@ -140,7 +142,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
         ...prev,
         isLoadingAI: false,
       }));
-      alert('Error getting AI response. Please try again.');
+      alert(`Error getting AI response: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
     }
   };
 
@@ -148,7 +150,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Meta: Llama 3.3 8B Instruct</CardTitle>
+          <CardTitle className="text-lg">Mistral Nemo 12B</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Button 
@@ -156,7 +158,7 @@ export default function ModelComparison({ lessonId, subLessonId, exerciseId, ste
             disabled={llamaState.isLoadingAI}
             className="w-full"
           >
-            {llamaState.isLoadingAI ? "Running..." : "Run on Meta: Llama 3.3 8B Instruct"}
+            {llamaState.isLoadingAI ? "Running..." : "Run on Mistral Nemo 12B"}
           </Button>
           
           {llamaState.aiResponse && (

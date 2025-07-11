@@ -127,7 +127,7 @@ The application contains 6 main lessons:
 
 ### Git Commit Workflow
 - **IMPORTANT**: After every successful commit and push, update `commit-history.md` with:
-  - Commit hash and date
+  - Commit hash and date with time
   - Brief description of changes
   - Key features delivered (3-5 bullet points)
   - Any breaking changes or migration notes

@@ -52,7 +52,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
       )
     ) {
       clearCourseData();
-      window.location.reload();
+      window.location.href = "/";
     }
   };
 

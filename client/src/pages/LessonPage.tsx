@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
 import { useLocation } from "wouter";
 import ExerciseForm from "../components/ExerciseForm";
@@ -14,11 +14,21 @@ interface LessonPageProps {
 }
 
 export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
-  const { lessons, getLessonProgress, updateSubLessonStatus } = useCourseProgress();
+  const { lessons, isLoading, getLessonProgress, updateSubLessonStatus } = useCourseProgress();
   const lesson = lessons.find(l => l.id === lessonId);
   const [openSubLessons, setOpenSubLessons] = useState<string[]>([]);
   const [isPdfViewerOpen, setIsPdfViewerOpen] = useState(false);
   const [, setLocation] = useLocation();
+  const hasExpandedSubLesson = useRef(false);
+  
+  if (isLoading) {
+    return (
+      <div className="max-w-4xl mx-auto p-4 md:p-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Loading...</h1>
+        <p className="text-muted-foreground">Please wait while the lesson loads.</p>
+      </div>
+    );
+  }
   
   if (!lesson) {
     return (
@@ -31,16 +41,22 @@ export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
 
   const progress = getLessonProgress(lesson.id);
 
+  // Reset expansion flag when subLessonId changes
+  useEffect(() => {
+    hasExpandedSubLesson.current = false;
+  }, [subLessonId]);
+
   // Auto-expand sub-lesson if specified in URL
   useEffect(() => {
-    if (subLessonId && lesson) {
+    if (subLessonId && lesson && !hasExpandedSubLesson.current) {
       // Check if the sub-lesson exists in this lesson
       const subLessonExists = lesson.subLessons.some(sl => sl.id === subLessonId);
-      if (subLessonExists && !openSubLessons.includes(subLessonId)) {
+      if (subLessonExists) {
         setOpenSubLessons(prev => [...prev, subLessonId]);
+        hasExpandedSubLesson.current = true;
       }
     }
-  }, [subLessonId, lesson, openSubLessons]);
+  }, [subLessonId, lesson]);
 
   const toggleSubLesson = (subLessonId: string) => {
     const isCurrentlyOpen = openSubLessons.includes(subLessonId);

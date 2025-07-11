@@ -42,6 +42,7 @@ export interface Lesson {
 
 interface CourseProgressContextType {
   lessons: Lesson[];
+  isLoading: boolean;
   updateSubLessonStatus: (
     lessonId: number,
     subLessonId: string,
@@ -96,16 +97,20 @@ export function CourseProgressProvider({
     // Initialize with empty array, will be loaded asynchronously
     return [];
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   // Load course content on mount
   useEffect(() => {
     if (lessons.length === 0) {
+      setIsLoading(true);
       ContentService.loadCourse()
         .then((courseData) => {
           setLessons(courseData);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.error('Failed to load course content:', error);
+          setIsLoading(false);
           // Fallback to empty lessons array or handle error as needed
         });
     }
@@ -336,6 +341,7 @@ export function CourseProgressProvider({
     <CourseProgressContext.Provider
       value={{
         lessons,
+        isLoading,
         updateSubLessonStatus,
         updateExerciseAnswer,
         updateFollowUpAnswer,

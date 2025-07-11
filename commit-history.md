@@ -37,4 +37,26 @@ This file tracks key features and changes delivered in each commit to the AI Nat
 
 ---
 
+## 2025-07-11
+
+### Commit: ff4bda2 - fix: Standardize PDF viewing to use modal instead of new tabs
+
+**Key Features Delivered:**
+- ✅ **Unified PDF Viewing Experience**: All PDFs now open in the same modal viewer component
+- ✅ **Fixed Venue Network Handbook**: Resolved issue where handbook was opening in new tab instead of modal
+- ✅ **Reusable PDFLink Component**: Created centralized component for consistent PDF handling
+- ✅ **Eliminated Double Popups**: Fixed issue where clicking lesson PDFs showed multiple popups
+- ✅ **Smart Link Detection**: Automatically detects PDF files and routes them to modal viewer
+
+**Technical Changes:**
+- Created new PDFLink.tsx component that wraps all PDF viewing logic
+- Updated ExerciseForm.tsx to use PDFLink for all PDF references
+- Replaced all `target="_blank"` PDF behaviors with modal viewer
+- Maintained external non-PDF links opening in new tabs
+- Fixed TypeScript errors in PDFViewerButton component
+
+**Impact:** Provides a consistent, professional PDF viewing experience within the application without spawning multiple browser tabs or confusing popup behaviors.
+
+---
+
 *Note: This commit history file was created on 2025-07-10. Previous commits may be added retroactively for historical context.*

@@ -1,6 +1,4 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
 
 interface PdfViewerProps {
   isOpen: boolean;
@@ -10,23 +8,15 @@ interface PdfViewerProps {
 }
 
 export default function PdfViewer({ isOpen, onClose, title, pdfPath }: PdfViewerProps) {
+  if (!isOpen) return null;
+  
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl w-full h-[90vh] p-0 overflow-hidden">
-        <DialogHeader className="px-6 py-4 border-b">
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-lg font-semibold">{title}</DialogTitle>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="h-8 w-8 p-0"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
+      <DialogContent className="max-w-5xl w-full h-[90vh] flex flex-col" style={{ zIndex: 100 }}>
+        <DialogHeader className="px-6 py-4 border-b flex-shrink-0">
+          <DialogTitle className="text-lg font-semibold">{title}</DialogTitle>
         </DialogHeader>
-        <div className="flex-1 w-full h-full">
+        <div className="flex-1 overflow-hidden p-0">
           <iframe
             src={pdfPath}
             className="w-full h-full border-0"

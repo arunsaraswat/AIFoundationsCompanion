@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useCourseProgress, type Lesson } from "../contexts/CourseProgressContext";
 import { useLocation } from "wouter";
 import ExerciseForm from "../components/ExerciseForm";
-import PdfViewer from "../components/PdfViewer";
+import { usePdfViewer } from "../contexts/PdfViewerContext";
 import { Check, Clock, ChevronDown, ChevronRight, FileText } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -17,7 +17,7 @@ export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
   const { lessons, isLoading, getLessonProgress, updateSubLessonStatus } = useCourseProgress();
   const lesson = lessons.find(l => l.id === lessonId);
   const [openSubLessons, setOpenSubLessons] = useState<string[]>([]);
-  const [isPdfViewerOpen, setIsPdfViewerOpen] = useState(false);
+  const { openPdf } = usePdfViewer();
   const [, setLocation] = useLocation();
   const hasExpandedSubLesson = useRef(false);
   
@@ -94,7 +94,7 @@ export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
         {(lesson.id === 1 || lesson.id === 2) && (
           <div className="mt-6">
             <Button 
-              onClick={() => setIsPdfViewerOpen(true)}
+              onClick={() => openPdf(`Lesson ${lesson.id}: ${lesson.title}`, `/assets/lesson${lesson.id}.pdf`)}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
             >
               <FileText className="h-4 w-4" />
@@ -158,16 +158,6 @@ export default function LessonPage({ lessonId, subLessonId }: LessonPageProps) {
           );
         })}
       </div>
-      
-      {/* PDF Viewer Modal */}
-      {(lesson.id === 1 || lesson.id === 2) && (
-        <PdfViewer
-          isOpen={isPdfViewerOpen}
-          onClose={() => setIsPdfViewerOpen(false)}
-          title={`Lesson ${lesson.id}: ${lesson.title}`}
-          pdfPath={`/assets/lesson${lesson.id}.pdf`}
-        />
-      )}
     </div>
   );
 }

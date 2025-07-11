@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CourseProgressProvider } from "./contexts/CourseProgressContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { PdfViewerProvider } from "./contexts/PdfViewerContext";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import LessonPage from "./pages/LessonPage";
@@ -50,10 +51,12 @@ function App() {
       <TooltipProvider>
         <ThemeProvider>
           <CourseProgressProvider>
-            <Layout>
-              <Toaster />
-              <Router />
-            </Layout>
+            <PdfViewerProvider>
+              <Layout>
+                <Toaster />
+                <Router />
+              </Layout>
+            </PdfViewerProvider>
           </CourseProgressProvider>
         </ThemeProvider>
       </TooltipProvider>

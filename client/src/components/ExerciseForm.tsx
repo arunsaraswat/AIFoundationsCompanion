@@ -20,7 +20,6 @@ import AgentDesignStep1 from "./AgentDesignStep1";
 import AgentDesignStep2 from "./AgentDesignStep2";
 import ModelComparison from "./ModelComparison";
 import TransformationPrompt from "./TransformationPrompt";
-import PDFViewerButton from "./PDFViewerButton";
 import PDFLink from "./PDFLink";
 
 interface ExerciseFormProps {
@@ -632,25 +631,24 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
                         <Label className="text-xs font-medium text-foreground mb-1 block">{subStep.label}</Label>
                         {subStep.type === 'link' ? (
                           <div className="p-2 border border-primary/20 rounded bg-primary/5">
-                            <PDFLink
-                              href={subStep.link || ''}
-                              title={subStep.label}
-                              variant="button"
-                              className="inline-flex items-center gap-2 px-3 py-1 bg-primary text-primary-foreground rounded text-xs hover:bg-primary/90 transition-colors"
-                            >
-                              {subStep.label}
-                            </PDFLink>
+                            {subStep.link?.endsWith('.pdf') ? (
+                              <PDFLink
+                                href={subStep.link}
+                                title={subStep.label}
+                                variant="link"
+                              />
+                            ) : (
+                              <a 
+                                href={subStep.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-3 py-1 bg-primary text-primary-foreground rounded text-xs hover:bg-primary/90 transition-colors"
+                              >
+                                <FileText className="h-3 w-3" />
+                                {subStep.label}
+                              </a>
+                            )}
                           </div>
-                        ) : subStep.type === 'component' && subStep.component === 'PDFViewerButton' ? (
-                          <PDFViewerButton 
-                            lessonId={lessonId} 
-                            subLessonId={subLessonId} 
-                            exerciseId={exercise.id} 
-                            stepId={subStep.id}
-                            title={subStep.title}
-                            pdfPath={subStep.pdfPath}
-                            buttonText={subStep.buttonText}
-                          />
                         ) : (
                           <Input
                             value={subStep.answer as string || ''}
@@ -755,16 +753,6 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             stepId="" 
           />;
         }
-        if (exercise.component === 'PDFViewerButton') {
-          return <PDFViewerButton 
-            lessonId={lessonId} 
-            subLessonId={subLessonId} 
-            exerciseId={exercise.id} 
-            stepId="" 
-            title="PDF Document"
-            pdfPath="/assets/document.pdf"
-          />;
-        }
         return null;
 
       case 'link':
@@ -781,14 +769,23 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
         
         return (
           <div className="p-4 border border-primary/20 rounded-lg bg-primary/5">
-            <PDFLink
-              href={linkHref || ''}
-              title={exercise.label || 'Document'}
-              variant="button"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-            >
-              {isPDF ? exercise.label : "Start Exercise"}
-            </PDFLink>
+            {isPDF ? (
+              <PDFLink
+                href={linkHref || ''}
+                title={exercise.label || 'Document'}
+                variant="link"
+              />
+            ) : (
+              <a 
+                href={linkHref}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+              >
+                {isExternal ? <ExternalLink className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
+                {isInternalExercise ? "Start Exercise" : exercise.label}
+              </a>
+            )}
           </div>
         );
 

@@ -24,7 +24,6 @@ export const lesson4: Lesson = {
           description:
             "Interactive workflow redesign activity using the AI Workflow Enhancer tool to identify and enhance your processes with AI integration points.",
           link: "/exercise/workflow-enhancer",
-          component: "ModelComparison",
         },
         {
           id: "exercise-23",

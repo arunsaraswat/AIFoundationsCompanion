@@ -11,7 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import LessonPage from "./pages/LessonPage";
 import ModelMatchUpPage from "./pages/ModelMatchUpPage";
 import AgentDesignPage from "./pages/AgentDesignPage";
-import WorkflowEnhancerPage from "./pages/WorkflowEnhancerPage";
+import WorkflowRedesignPage from "./pages/WorkflowRedesignPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,7 +28,7 @@ function Router() {
         {(params) => <AgentDesignPage lessonId={params.lessonId ? parseInt(params.lessonId) : undefined} subLessonId={params.subLessonId} />}
       </Route>
       <Route path="/exercise/workflow-enhancer/:lessonId?/:subLessonId?">
-        {(params) => <WorkflowEnhancerPage lessonId={params.lessonId ? parseInt(params.lessonId) : undefined} subLessonId={params.subLessonId} />}
+        {() => <WorkflowRedesignPage />}
       </Route>
       {/* Backward compatibility routes */}
       <Route path="/exercise/model-match-up">
@@ -38,7 +38,7 @@ function Router() {
         {() => <AgentDesignPage />}
       </Route>
       <Route path="/exercise/workflow-enhancer">
-        {() => <WorkflowEnhancerPage />}
+        {() => <WorkflowRedesignPage />}
       </Route>
       <Route component={NotFound} />
     </Switch>

@@ -21,6 +21,7 @@ import AgentDesignStep2 from "./AgentDesignStep2";
 import ModelComparison from "./ModelComparison";
 import TransformationPrompt from "./TransformationPrompt";
 import PDFLink from "./PDFLink";
+import { WorkflowRedesignWizard } from "./WorkflowRedesignWizard";
 
 interface ExerciseFormProps {
   exercise: Exercise;
@@ -751,6 +752,12 @@ export default function ExerciseForm({ exercise, lessonId, subLessonId }: Exerci
             subLessonId={subLessonId} 
             exerciseId={exercise.id} 
             stepId="" 
+          />;
+        }
+        if (exercise.component === 'WorkflowRedesignWizard') {
+          return <WorkflowRedesignWizard 
+            lessonId={lessonId.toString()} 
+            subLessonId={subLessonId} 
           />;
         }
         return null;

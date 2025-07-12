@@ -18,6 +18,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_KEY}`,
           "Content-Type": "application/json",
+          "HTTP-Referer": "http://localhost:5000",
+          "X-Title": "AI Foundations Companion"
         },
         body: JSON.stringify({
           model: "openai/gpt-4o-mini",
@@ -212,6 +214,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_KEY}`,
           "Content-Type": "application/json",
+          "HTTP-Referer": "http://localhost:5000",
+          "X-Title": "AI Foundations Companion"
         },
         body: JSON.stringify({
           model: "openai/gpt-4o-mini",
@@ -253,12 +257,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Messages array is required" });
       }
 
+      if (!process.env.OPENROUTER_KEY) {
+        console.error("OPENROUTER_KEY is not set in environment variables");
+        return res.status(500).json({ error: "OpenRouter API key not configured" });
+      }
+
+      console.log("Making request to OpenRouter with model:", model || "openai/gpt-4o-mini");
+
       // Use OpenRouter for the specified models
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_KEY}`,
           "Content-Type": "application/json",
+          "HTTP-Referer": "http://localhost:5000",
+          "X-Title": "AI Foundations Companion"
         },
         body: JSON.stringify({
           model: model || "openai/gpt-4o-mini",
@@ -269,7 +282,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       if (!response.ok) {
-        throw new Error(`OpenRouter API error: ${response.status}`);
+        const errorData = await response.text();
+        console.error(`OpenRouter API error: ${response.status}`, errorData);
+        throw new Error(`OpenRouter API error: ${response.status} - ${errorData}`);
       }
 
       const data = await response.json();

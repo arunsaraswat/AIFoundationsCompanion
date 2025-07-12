@@ -2,7 +2,7 @@ import type { Lesson } from '../../../client/src/contexts/CourseProgressContext'
 
 export const lesson3: Lesson = {
   id: 3,
-  title: "The AI-Native Operating Model",
+  title: "The AI-Native Success Factors",
   subLessons: [
     {
       id: "3.1",

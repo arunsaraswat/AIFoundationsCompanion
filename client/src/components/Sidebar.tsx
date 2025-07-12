@@ -174,7 +174,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                 <div className="flex items-start min-w-0 w-full">
                   <TrendingUp className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
-                    Lesson 5: Change Management
+                    Lesson 5: Roadmap to AI-Native
                   </span>
                 </div>
               </Button>
@@ -187,7 +187,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
                 <div className="flex items-start min-w-0 w-full">
                   <Target className="mr-3 mt-0.5 flex-shrink-0" size={16} />
                   <span className="text-left leading-relaxed break-words whitespace-normal flex-1">
-                    Lesson 6: Taking Action
+                    Lesson 6: The AI-Native Pitch
                   </span>
                 </div>
               </Button>
